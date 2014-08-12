@@ -1,0 +1,69 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:com.google.gwt.user.datepicker.client">
+	<g:HTMLPanel ui:field="mainPanel">
+		
+		<div class="institution">
+			<div class="inst-sn">
+				<g:Label ui:field="indexLb" styleName="inst"></g:Label>
+			</div>
+			<div class="inst-dtl">
+			    <div class="header">
+					<g:Label ui:field="nameLb" styleName="name"></g:Label>
+					<g:Image ui:field="updateImg" url="images/note.png" styleName="menu-img"/>
+					<g:Image ui:field="deleteImg" url="images/delete.png" styleName="menu-img"/>
+				</div>
+				<div class="left">
+					<div class="inst-subinfo-icon">
+						<img src="images/building.png" class="contact-img"/>
+					</div>
+					<div class="inst-subinfo-content">
+						<g:Label ui:field="addressLb"></g:Label>
+					</div>
+					<div class="inst-subinfo-icon">
+						<img src="images/phone.png" class="contact-img"/>
+					</div>
+					<div class="inst-subinfo-content">
+						<g:Label ui:field="telephoneLb"></g:Label>
+					</div>
+					<div class="inst-subinfo-icon">
+						<img src="images/mail.png" class="contact-img"/>
+					</div>
+					<div class="inst-subinfo-content">
+						<g:Label ui:field="emailLb"></g:Label>
+					</div>
+				</div>
+				<div class="right">
+					<g:HTMLPanel ui:field="distancePanel">
+						<div class="inst-subinfo-icon">
+							<img src="images/sign.png" class="contact-img"/>
+						</div>
+						<div class="inst-subinfo-content">
+							<g:Label ui:field="distanceLb"></g:Label>	
+						</div>
+					</g:HTMLPanel>
+					<div class="inst-subinfo-icon">
+						<img src="images/case.png" class="contact-img"/>
+					</div>
+					<div class="inst-subinfo-content">
+						<g:Label ui:field="typeDescriptionLb"></g:Label>	
+					</div>
+					<div class="inst-subinfo-icon">
+						<img src="images/calendar.png" class="contact-img"/>
+					</div>
+					<div class="inst-subinfo-content">
+						<g:HTML ui:field="opInfoLb"></g:HTML>
+					</div>
+					<div class="inst-subinfo-icon">&nbsp;</div>
+					<div class="inst-subinfo-content">
+						<div class="rating">
+							<g:Label ui:field="viewCountLb" styleName="rating-info"></g:Label> <g:Image ui:field="viewCountImg" url="images/view.png" styleName="rating-img"></g:Image>
+							<g:Label ui:field="likeCountLb" styleName="rating-info-link"></g:Label> <g:Image ui:field="likeCountImg" url="images/like.png" styleName="rating-img-link"></g:Image>
+							<g:Label ui:field="commentCountLb" styleName="rating-info-link"></g:Label> <g:Image ui:field="commentCountImg" url="images/comment.png" styleName="rating-img-link"></g:Image>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+				
+	</g:HTMLPanel>
+</ui:UiBinder> 

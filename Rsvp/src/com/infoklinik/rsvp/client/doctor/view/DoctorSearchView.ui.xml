@@ -1,0 +1,43 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:com.google.gwt.user.datepicker.client">
+	<g:HTMLPanel ui:field="contentPanel">
+
+		<div id="search-content">
+			<div id="search-info">
+				<table id="table-search">
+					<tr>
+						<td id="search-cbox">
+							<g:RadioButton ui:field="searchNameRb" name="search" text="Nama"></g:RadioButton>
+							<g:RadioButton ui:field="searchStreetRb" name="search" text="Jalan"></g:RadioButton>
+							<g:RadioButton ui:field="searchRegionRb" name="search" text="Wilayah"></g:RadioButton>
+							<g:RadioButton ui:field="searchDistanceRb" name="search" text="Jarak"></g:RadioButton>
+						</td>
+					</tr>
+					<tr>
+						<td class="search-field">
+							<g:SuggestBox ui:field="searchSb" styleName="search-field"></g:SuggestBox>
+							<g:Button ui:field="searchBtn" styleName="search" text="Cari"></g:Button>
+						</td>
+					</tr>
+				</table>
+				<table id="table-search-more">
+					<tr>
+						<td>Kota :</td>
+						<td>
+							<g:ListBox ui:field="cityLb"></g:ListBox>
+						</td>
+						<td>Spesialis :</td>
+						<td>
+							<g:ListBox ui:field="specialityLb"></g:ListBox>
+						</td>
+						<td>Hari :</td>
+						<td>
+							<g:ListBox ui:field="dayLb"></g:ListBox>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+
+	</g:HTMLPanel>
+</ui:UiBinder> 

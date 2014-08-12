@@ -1,0 +1,102 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+<g:HTMLPanel ui:field="mainPanel">
+
+<head>
+   <!--- Basic Page Needs
+   ================================================== -->
+	<meta charset="utf-8"/>
+	<title>Info Klinik</title>
+	<meta name="description" content="Portal Informasi Layanan Kesehatan"/>
+	<meta name="author" content="Radix Enggarmanah"/>
+
+	<!-- CSS
+   ================================================== -->
+	
+	<script src="js/browser.js"></script>
+	<link rel="stylesheet" href="css/style.css"/>
+	<link rel="stylesheet" href="css/ie.css"/>
+	<link rel="stylesheet" href="css/gwt.css"/>
+	<link rel="stylesheet" href="css/upload.css"/>
+	
+	<script></script>
+	
+</head>
+<body>
+	<div id="body-wrapper">
+		<div id="header-wrapper">
+			<div id="header">
+				<div id="triangle">&nbsp;</div>
+				<h1 id="logo-text">
+					info<span>klinik</span>
+				</h1>
+				<h1 id="logo-info">
+					Portal Informasi Layanan Kesehatan
+				</h1>
+				<div id="header-about-us">
+				<a class="header-link" href="#">Join Us</a> | <a class="header-link" href="#">About Us</a> | <a class="header-link" href="#">Contact Us</a>
+				</div>
+			</div>
+		</div>
+		<div id="content-wrapper">
+			<div id="content">
+				<div id="search-wrapper">
+	
+					<g:SimplePanel ui:field="menuPanel">
+					</g:SimplePanel>
+					
+					<g:SimplePanel ui:field="searchPanel">
+					</g:SimplePanel>	
+				
+				</div>
+			<div id="content-bottom-wrapper">
+				<div id="content-bottom">
+					<div id="content-bottom-left">
+						<g:SimplePanel ui:field="leftPanel">
+						</g:SimplePanel>
+					</div>
+	
+					<div id="content-bottom-right">
+						<g:SimplePanel ui:field="rightPanel">
+						</g:SimplePanel>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+		<div id="footer-wrapper">
+			<div id="footer">
+				<div id="footer-left">
+					<div id="copyright">
+					Copyright &copy; 2014 Info Klinik
+					</div>
+				</div>
+				<div id="footer-right">
+					<ul class="subscribe-stuff">
+					<li>
+						<a title="RSS" href="#" rel="nofollow">
+						<img alt="RSS" title="RSS" src="images/dribble.png" /></a>
+					</li>
+					<li>
+						<a title="Facebook" href="#" rel="nofollow">
+						<img alt="Facebook" title="Facebook" src="images/facebook.png" /></a>
+					</li>
+					<li>
+						<a title="Twitter" href="#" rel="nofollow">
+						<img alt="Twitter" title="Twitter" src="images/twitter.png" /></a>
+					</li>
+					<li>
+						<a title="Instagram" href="#" rel="nofollow">
+						<img alt="Instagram" title="Instagram" src="images/instagram.png" /></a>
+					</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+			
+</g:HTMLPanel>
+		
+</ui:UiBinder> 

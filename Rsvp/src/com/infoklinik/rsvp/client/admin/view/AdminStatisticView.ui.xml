@@ -1,0 +1,160 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:com.google.gwt.user.datepicker.client">
+	<g:HTMLPanel ui:field="contentPanel">
+
+		<div id="statistic-title">
+			Statistik :
+		</div>
+		<div id="statistic-info">
+			Statistik penggunaan layanan portal informasi kesehatan.
+		</div>
+		<div id="statistic">
+			<div class="title">
+				<img src="images/users.png" class="admin-stat-img" />
+				Total Kunjungan :
+			</div>
+			<div class="info">127</div>
+		</div>
+		<div id="statistic">
+			<div class="title">
+				<img src="images/search.png" class="admin-stat-img" />
+				Total Pencarian :
+			</div>
+			<div class="info">98</div>
+			<div id="sub-statistic-wrapper">
+				<div id="sub-statistic">
+					<div class="sub-title">Klinik :</div>
+					<div class="sub-info">23</div>
+				</div>
+				<div id="sub-statistic">
+					<div class="sub-title">Rumah Sakit :</div>
+					<div class="sub-info">12</div>
+				</div>
+				<div id="sub-statistic">
+					<div class="sub-title">Dokter :</div>
+					<div class="sub-info">15</div>
+				</div>
+				<br />
+				<div id="sub-statistic">
+					<div class="sub-title">Layanan :</div>
+					<div class="sub-info">11</div>
+				</div>
+				<div id="sub-statistic">
+					<div class="sub-title">Laboratorium :</div>
+					<div class="sub-info">21</div>
+				</div>
+				<div id="sub-statistic">
+					<div class="sub-title">Apotek :</div>
+					<div class="sub-info">34</div>
+				</div>
+				<div id="sub-statistic">
+					<div class="sub-title">Asuransi :</div>
+					<div class="sub-info">25</div>
+				</div>
+			</div>
+		</div>
+		<div id="statistic">
+			<div class="title">
+				<img src="images/case.png" class="admin-stat-img" />
+				Total Reservasi :
+			</div>
+			<div class="info">54</div>
+			<div id="sub-statistic-wrapper">
+				<div id="sub-statistic">
+					<div class="sub-title">Klinik :</div>
+					<div class="sub-info">13</div>
+				</div>
+				<div id="sub-statistic">
+					<div class="sub-title">Rumah Sakit :</div>
+					<div class="sub-info">2</div>
+				</div>
+				<div id="sub-statistic">
+					<div class="sub-title">Dokter :</div>
+					<div class="sub-info">5</div>
+				</div>
+				<br />
+				<div id="sub-statistic">
+					<div class="sub-title">Layanan :</div>
+					<div class="sub-info">11</div>
+				</div>
+				<div id="sub-statistic">
+					<div class="sub-title">Laboratorium :</div>
+					<div class="sub-info">21</div>
+				</div>
+				<div id="sub-statistic">
+					<div class="sub-title">Apotek :</div>
+					<div class="sub-info">14</div>
+				</div>
+				<div id="sub-statistic">
+					<div class="sub-title">Asuransi :</div>
+					<div class="sub-info">5</div>
+				</div>
+			</div>
+		</div>
+		<div id="statistic">
+			<div class="title">
+				<img src="images/calculator.png" class="admin-stat-img" />
+				Total Data :
+			</div>
+			<div class="info">1254</div>
+			<div id="sub-statistic-wrapper">
+				<div id="sub-statistic">
+					<div class="sub-title">Klinik :</div>
+					<div class="sub-info">613</div>
+				</div>
+				<div id="sub-statistic">
+					<div class="sub-title">Rumah Sakit :</div>
+					<div class="sub-info">24</div>
+				</div>
+				<div id="sub-statistic">
+					<div class="sub-title">Dokter :</div>
+					<div class="sub-info">51</div>
+				</div>
+				<br />
+				<div id="sub-statistic">
+					<div class="sub-title">Layanan :</div>
+					<div class="sub-info">112</div>
+				</div>
+				<div id="sub-statistic">
+					<div class="sub-title">Laboratorium :</div>
+					<div class="sub-info">212</div>
+				</div>
+				<div id="sub-statistic">
+					<div class="sub-title">Apotek :</div>
+					<div class="sub-info">149</div>
+				</div>
+				<div id="sub-statistic">
+					<div class="sub-title">Asuransi :</div>
+					<div class="sub-info">512</div>
+				</div>
+			</div>
+		</div>
+		<div id="statistic">
+			<div class="title">
+				<img src="images/sign.png" class="admin-stat-img" />
+				Metode Pencarian :
+			</div>
+			<div class="info">34</div>
+			<div id="sub-statistic-wrapper">
+				<div id="sub-statistic">
+					<div class="sub-title">Nama :</div>
+					<div class="sub-info">13</div>
+				</div>
+				<div id="sub-statistic">
+					<div class="sub-title">Jalan :</div>
+					<div class="sub-info">2</div>
+				</div>
+				<div id="sub-statistic">
+					<div class="sub-title">Lokasi :</div>
+					<div class="sub-info">5</div>
+				</div>
+				<br />
+				<div id="sub-statistic">
+					<div class="sub-title">Jarak :</div>
+					<div class="sub-info">11</div>
+				</div>
+			</div>
+		</div>
+
+	</g:HTMLPanel>
+</ui:UiBinder> 

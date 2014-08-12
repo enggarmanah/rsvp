@@ -1,0 +1,24 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:com.google.gwt.user.datepicker.client">
+	<g:HTMLPanel>
+		
+		<div id="popup-edit">
+			
+		    <g:SimplePanel styleName="doctor-wrapper">
+				<g:FlowPanel ui:field="doctorsPanel"></g:FlowPanel>
+			</g:SimplePanel>
+		    
+			<div class="doctor">
+			</div>
+			<div class="schedule">
+				<g:FocusPanel ui:field="addDoctorBtn">
+				    <g:FlowPanel styleName="info-add">
+				        <g:Image url="images/case.png" styleName="menu-img"></g:Image>
+				        <g:Label text="Tambah Dokter" styleName="menu-label"></g:Label>
+				    </g:FlowPanel>
+			    </g:FocusPanel>
+			</div>
+		</div>
+				
+	</g:HTMLPanel>
+</ui:UiBinder> 

@@ -1,0 +1,153 @@
+.gallery-upload, table.gallery-upload td {
+	font-family: Verdana, Arial;
+	font-size: 12px;
+}
+
+.gallery-upload form, 
+.gallery-upload .upld-form-elements {
+	padding: 0px;
+	vertical-align: top;
+}
+
+.gallery-upload .upld-status {
+	font-family: arial;
+	font-size: 12px;
+	font-weight: bold;
+}
+.gallery-upload .upld-status div.cancel {
+	background: url(images/cancel-upld.gif) no-repeat;
+	width: 12px;
+	height: 12px;
+	cursor: pointer;
+	margin-top: 1px;
+}
+
+* html .gallery-upload .upld-status div.cancel {
+	width: 14px;
+	height: 10px;
+	margin-top: 2px;
+}
+
+.gallery-upload .upld-status div.cancel:hover {
+	background: url(images/cancel-upld-hover.gif) no-repeat;
+}
+
+.gallery-upload .upld-status .filename {
+	overflow: hidden;
+	white-space: nowrap;
+	margin-left: 8px;
+	margin-right: 11px;
+	height: 100%;
+	font: bold 11px Tahoma;
+	padding: 0px 0px;
+	width: 100%;
+}
+.gallery-upload .upld-status .status {
+	padding-left: 8px;
+	white-space: nowrap;
+	height: 100%;
+	font-size: 12px;
+}
+.gallery-upload .upld-status .status-success {
+	color: green;
+}
+.gallery-upload .upld-status .status-error,
+.gallery-upload .upld-status .status-canceled {
+	color: red;
+}
+
+.gallery-upload .prgbar-back {
+	background: #ffffff none repeat scroll 0 0;
+	border: 1px solid #999999;
+	height: 13px;
+	overflow: hidden;
+	padding: 1px;
+	width: 100px;
+	float: left;
+}
+* html .gallery-upload .prgbar-back {
+	height: 12px;
+	margin-top: 2px;
+}
+.gallery-upload .prgbar-done {
+	background: #d4e4ff none repeat scroll 0 0;
+	font-size: 0;
+	height: 100%;
+	float: left;
+}
+.gallery-upload .prgbar-msg {
+	position: absolute;
+	z-index: 9;
+	font: bold 11px Tahoma;
+	margin-left: 3px;
+}
+
+* html .gallery-upload .prgbar-msg {
+	top: 0px;
+	left: 4px;
+	font: bold 11px Tahoma;
+}
+
+.gallery-upload .changed {
+	color: red;
+	font-weight: bold;  
+	text-decoration: blink;
+}
+.gwt-PopupPanel .gallery-upload {
+	border: 2px groove #F6A828;
+	padding: 10px;
+	background: #bf984c;
+  -moz-border-radius-bottomleft: 6px;
+  -moz-border-radius-bottomright: 6px;
+  -moz-border-radius-topleft: 6px;
+  -moz-border-radius-topright: 6px;
+	
+}
+
+.gallery-upload .DecoratedFileUpload {
+	margin-right: 5px;
+}
+
+.gallery-upload .DecoratedFileUpload .gwt-Button,
+.gallery-upload .DecoratedFileUpload .gwt-Anchor,
+.gallery-upload .DecoratedFileUpload .gwt-Label {
+	white-space: nowrap;
+	font-size: 10px;
+}
+
+.gallery-upload .gwt-Button, .gallery-upload .gwt-FileUpload {
+	font-size: 10px;
+	min-height: 15px;
+}
+
+.gallery-upload .DecoratedFileUpload .gwt-Anchor,
+.gallery-upload .DecoratedFileUpload .gwt-Label {
+	color: blue;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.gallery-upload .gwt-Button:HOVER,
+.gallery-upload .DecoratedFileUpload .gwt-Button-over,
+.gallery-upload .DecoratedFileUpload .gwt-Anchor-over,
+.gallery-upload .DecoratedFileUpload .gwt-Label-over {
+	color: #af6b29;
+}
+
+.gallery-upload .DecoratedFileUpload-disabled .gwt-Button,
+.gallery-upload .DecoratedFileUpload-disabled .gwt-Anchor,
+.gallery-upload .DecoratedFileUpload-disabled .gwt-Label {
+	color: grey;
+}
+
+.gwt-PopupPanelGlass {
+  background-color: #d4e4ff;
+  opacity: 0.3;
+  filter: alpha(opacity=30);
+}
+
+.gallery-upload input[type="file"] {
+	cursor: pointer;
+}
+    
+

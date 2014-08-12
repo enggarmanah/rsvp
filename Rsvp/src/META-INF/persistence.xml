@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+
+	<persistence-unit name="Demo">
+		
+	    <class>com.infoklinik.rsvp.server.model.Institution</class>
+		<class>com.infoklinik.rsvp.server.model.Doctor</class>
+		<class>com.infoklinik.rsvp.server.model.Service</class>
+		<class>com.infoklinik.rsvp.server.model.Schedule</class>
+		<class>com.infoklinik.rsvp.server.model.ServiceType</class>
+		<class>com.infoklinik.rsvp.server.model.ServiceCategory</class>
+		<class>com.infoklinik.rsvp.server.model.Speciality</class>
+		<class>com.infoklinik.rsvp.server.model.Insurance</class>
+		<class>com.infoklinik.rsvp.server.model.City</class>
+		<class>com.infoklinik.rsvp.server.model.Region</class>
+		<class>com.infoklinik.rsvp.server.model.Street</class>
+		<class>com.infoklinik.rsvp.server.model.Region</class>
+		<class>com.infoklinik.rsvp.server.model.Image</class>
+		<class>com.infoklinik.rsvp.server.model.Gallery</class>
+		<class>com.infoklinik.rsvp.server.model.Comment</class>
+		<class>com.infoklinik.rsvp.server.model.Like</class>
+		<class>com.infoklinik.rsvp.server.model.Branch</class>
+		<class>com.infoklinik.rsvp.server.model.MasterCode</class>
+		
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<properties>
+		    <property name="javax.persistence.jdbc.user" value="root"/>
+			<property name="javax.persistence.jdbc.password" value="enggar"/>
+		</properties>
+
+	</persistence-unit>
+
+</persistence>

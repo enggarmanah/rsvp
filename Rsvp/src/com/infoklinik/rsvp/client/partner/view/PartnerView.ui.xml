@@ -1,0 +1,24 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:com.google.gwt.user.datepicker.client">
+	<g:VerticalPanel>
+		
+		<g:HTMLPanel>
+			<div id="profile-title">
+				Portal Informasi Layanan Kesehatan:
+			</div>
+			<div id="profile-info">
+				Info dan reservasi klinik, rumah sakit, dokter, laboratorium dan apotek di Jakarta, Bandung, Surabaya dan kota-kota lainnya di Indonesia.
+				Melalui portal ini, anda dapat melakukan pencarian serta manjadwalkan appointment dengan klinik/rumah sakit
+				dan dokter yang telah menjadi partner kami. Appointment melalui portal ini akan mendapatkan layanan prima.
+				Anda tidak perlu mengantri dokter dan mendapatkan prioritas pelayanan.
+			</div>
+			<div id="partner-title">
+				Partner Kami:
+			</div>
+		</g:HTMLPanel>
+		
+		<g:VerticalPanel ui:field="partnerPanel" styleName="panel-fade-in">
+		</g:VerticalPanel>
+		
+	</g:VerticalPanel>
+</ui:UiBinder> 

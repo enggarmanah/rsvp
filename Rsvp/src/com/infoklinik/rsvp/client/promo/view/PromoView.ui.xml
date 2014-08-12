@@ -1,0 +1,20 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:com.google.gwt.user.datepicker.client">
+	<g:VerticalPanel>
+		
+		<g:HTMLPanel>		
+			<div id="promotion-title">
+				Promosi:
+			</div>
+			<div id="promotion-info">
+				Promosi layanan kesehatan yang disediakan oleh partner kami. Layanan berkualitas prima dengan harga yang terjangkau.
+			</div>
+		</g:HTMLPanel>
+		
+		<g:SimplePanel styleName="promotion-content">
+			<g:VerticalPanel ui:field="promoPanel" styleName="panel-fade-in">
+			</g:VerticalPanel>
+		</g:SimplePanel>
+		
+	</g:VerticalPanel>
+</ui:UiBinder> 

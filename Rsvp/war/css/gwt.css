@@ -1,0 +1,762 @@
+.gwt-FileUpload {
+	border: 1px solid #AAA;
+	padding: 10x 10px;
+}
+
+/* Confirmation Dialog */
+
+.form-wrap-confirm-dlg {
+	border-bottom: 0.5px dashed #DEDFE0;
+	margin: 0px 0px 10px 0px;
+	padding: 20px 20px 0px 20px;
+	min-width: 200px;
+	overflow: visible;
+	text-align: center;
+}
+
+.confirm-text-wrap {
+	padding: 0px 5px 0px 10px;
+	white-space: pre-wrap;
+}
+
+.confirm-text {
+	text-align: left;
+	vertical-align: middle;
+	position: relative;
+	z-index: 1;
+		
+	font: bold 11px 'Tahoma';
+	color: #555;
+	line-height: 17px;
+    text-shadow: -3px 0px 8px #A5C6D9;
+}
+
+.confirm-btn {
+	margin: 0px 0px 0px 0px;
+	padding: 10px 0px 0px 0px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.confirm-img {
+	vertical-align: middle;
+	position: relative;
+	top: 0px;
+	left: 0px;
+	overflow: visible;
+	width: 48px;
+	height: 48px;
+	background: transparent;
+	border: none;
+	padding: 0px 0px;
+	margin: 0px 0px 0px 0px;
+	
+	-moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;	
+}
+
+/* Notification */
+
+.form-wrap-notification-dlg {
+	border-bottom: 0.5px dashed #DEDFE0;
+	margin: 7px 0px 10px 0px;
+	padding: 15px 20px 0px 20px;
+	min-width: 250px;
+	overflow: visible;
+	text-align: center;
+	vertical-align: top;
+}
+
+.notification-text {
+	padding: 0px 0px 0px 5px;
+	text-align: left;
+	white-space: pre-wrap;
+	vertical-align: middle;
+	position: relative;
+	z-index: 1;
+	
+	font: bold 11px 'Tahoma';
+	color: #555;
+	line-height: 17px;
+    text-shadow: -3px 0px 8px #A5C6D9;
+}
+
+.notification-img {
+	overflow: visible;
+	width: 48px;
+	height: 48px;
+	background: transparent;
+	border: none;
+	padding: 0px 0px 0px 0px;
+	margin: 0px 5px -8px 0px;
+	
+	-moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;	
+}
+
+.notification-btn {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+/* Progress Bar */
+
+.form-wrap-progress-bar {
+	border-bottom: 0.5px dashed #DEDFE0;
+	margin: 20px 0px 10px 0px;
+	padding: 5px 20px 0px 20px;
+	min-width: 200px;
+	height: 70px;
+	overflow: visible;
+	float: left;
+	vertical-align: middle;
+}
+
+.progress-text {
+	padding: 0px 0px 0px 5px;
+	text-align: left;
+	white-space: pre-wrap;
+	vertical-align: middle;
+	position: relative;
+	z-index: 1;
+	
+	font: bold 11px 'Tahoma';
+	color: #555;
+	line-height: 12px;
+    text-shadow: -3px 0px 8px #A5C6D9;
+}
+
+.loading-img {
+	width: 48px;
+	height: 48px;
+	background: transparent;
+	border: none;
+	padding: 0px 0px;
+	margin: 0px 5px -5px 0px;
+	
+	-moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;	
+}
+
+.popupDialog {
+	
+	z-index: 2;
+	border: 3px solid #577CB3;
+	background: #fff;
+    min-width: 250px;
+    text-align: center;
+    
+    text-shadow: -1px 0px 0 rgba(40, 40, 40, 5);
+
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.popupDialog .Caption {
+	font-family: Arial, Helvetica, Sans-Serif;
+	font-size: 12px;
+	height: 25px;
+	font-weight: bold;
+	background: #577CB3;
+	color: #fff;
+	text-align: left;
+	text-shadow: -1px 0px 0 rgba(40, 40, 40, 5);
+	padding: 0px 0px 0px 5px;
+	margin: 0px 0px 0px 0px;
+	cursor: move;
+}
+
+.popupDialog .dialogContent {
+	border: none;
+	min-width: 250px;
+}
+
+.popupDialog .dialogMiddleCenter {
+	background: none;
+	border: none;
+}
+
+.popupDialog .dialogBottomCenter {
+	border: none;
+	background: #577CB3;
+}
+
+.popupDialog .dialogMiddleLeft {
+	border: none;
+	background: #577CB3;
+}
+
+.popupDialog .dialogMiddleRight {
+	border: none;
+	background: #577CB3;
+}
+
+.popupDialog .dialogTopLeftInner {
+	border: none;
+	background: #577CB3;
+}
+
+.popupDialog .dialogTopCenter {  
+	border: none;
+	background: #577CB3;
+}
+
+.popupDialog .dialogTopCenterInner { 
+	border: none;
+	background: #577CB3;
+}
+
+.popupDialog .dialogTopRightInner {
+	border: none;
+	background: #577CB3;
+}
+
+.popupDialog .dialogBottomLeftInner {
+	border: none;
+	background: #577CB3;
+}
+
+.popupDialog .dialogBottomRightInner {
+	border: none;
+	background: #577CB3;
+}
+
+.popupDialog .dialogTopLeft {
+	border: none;
+	background: #577CB3;
+}
+
+.popupDialog .dialogTopRight {
+	border: none;
+	background: #577CB3;
+}
+
+.popupDialog .dialogBottomLeft {
+	border: none;
+	background: #577CB3;
+}
+
+.popupDialog .dialogBottomRight {
+	border: none;
+	background: #577CB3;
+}
+
+* html .popupDialog .dialogTopLeftInner {
+	border: none;
+	background: #577CB3;
+}
+
+* html .popupDialog .dialogTopRightInner {
+	border: none;
+	background: #577CB3;
+}
+
+* html .popupDialog .dialogBottomLeftInner {
+	border: none;
+	background: #577CB3;
+}
+
+* html .popupDialog .dialogBottomRightInner {
+	border: none;
+	background: #577CB3;
+}
+
+/* Form Dialog */
+
+.formDialog {
+	z-index: 2;
+	border: 3px solid #577CB3;
+    min-width: 250px;
+    text-align: center;
+    
+    text-shadow: -1px 0px 0 rgba(40, 40, 40, 5);
+
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.formDialog .Caption {
+	font-family: Arial, Helvetica, Sans-Serif;
+	font-size: 12px;
+	text-align: left;
+	height: 25px;
+	font-weight: bold;
+	background: #577CB3;
+	color: #fff;
+	text-shadow: -1px 0px 0 rgba(40, 40, 40, 5);
+	padding: 0px 0px 0px 5px;
+	margin: 0px 0px 0px 0px;
+	cursor: move;
+}
+
+.formDialog .dialogContent {
+	border: none;
+}
+
+.formDialog .dialogMiddleCenter {
+	border: none;
+}
+
+.formDialog .dialogBottomCenter {
+	border: none;
+	background: #577CB3;
+}
+
+.formDialog .dialogMiddleLeft {
+	border: none;
+	background: #577CB3;
+}
+
+.formDialog .dialogMiddleRight {
+	border: none;
+	background: #577CB3;
+}
+
+.formDialog .dialogTopLeftInner {
+	border: none;
+	background: #577CB3;
+}
+
+.formDialog .dialogTopCenter {  
+	border: none;
+	background: #577CB3;
+}
+
+.formDialog .dialogTopCenterInner { 
+	border: none;
+	background: #577CB3;
+}
+
+.formDialog .dialogTopRightInner {
+	border: none;
+	background: #577CB3;
+}
+
+.formDialog .dialogBottomLeftInner {
+	border: none;
+	background: #577CB3;
+}
+
+.formDialog .dialogBottomRightInner {
+	border: none;
+	background: #577CB3;
+}
+
+.formDialog .dialogTopLeft {
+	border: none;
+	background: #577CB3;
+}
+
+.formDialog .dialogTopRight {
+	border: none;
+	background: #577CB3;
+}
+
+.formDialog .dialogBottomLeft {
+	border: none;
+	background: #577CB3;
+}
+
+.formDialog .dialogBottomRight {
+	border: none;
+	background: #577CB3;
+}
+
+* html .formDialog .dialogTopLeftInner {
+	border: none;
+	background: #577CB3;
+}
+
+* html .formDialog .dialogTopRightInner {
+	border: none;
+	background: #577CB3;
+}
+
+* html .formDialog .dialogBottomLeftInner {
+	border: none;
+	background: #577CB3;
+}
+
+* html .formDialog .dialogBottomRightInner {
+	border: none;
+	background: #577CB3;
+}
+
+
+/* Suggest Box */
+
+.gwt-SuggestBoxPopup {
+	
+	z-index: 2;
+	padding: 0px 0px; 
+	border: 1px solid #4E85A3;
+	margin: 0px 0px 0px 1px;
+	
+	box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.gwt-SuggestBoxPopup .div .table { border: 1px none #FFF; }
+
+.gwt-SuggestBox {
+	padding: 0px 0px;
+	border: none;
+}
+
+.gwt-SuggestBoxPopup .item { 
+	border: none;
+	background: #FFF;
+	font: 11px Tahoma;
+	/* font: 12px 'Comic Sans MS'; */
+	/* color: #505050; */
+	color: #333;
+	text-shadow: -3px 0px 8px #A5C6D9;
+	padding: 2px 6px;
+}
+
+.gwt-SuggestBoxPopup .item-selected {
+	border: none;
+	background: #D2EDF8;
+	text-shadow: -1px 0px 0 rgba(200, 200, 200, 3);
+}
+
+.gwt-SuggestBoxPopup .suggestPopupContent {
+	padding: 0px 0px;
+	border: none;
+	background: white;
+}
+
+.gwt-SuggestBoxPopup .suggestPopupTop, .gwt-SuggestBoxPopup .suggestPopupTopLeft, 
+.gwt-SuggestBoxPopup .suggestPopupTopCenter, .gwt-SuggestBoxPopup .suggestPopupTopRight {
+	border: none;
+	heigth: 0px;
+	padding: 0px 0px;
+}
+
+.gwt-SuggestBoxPopup .suggestPopupBottomCenter {
+	border: none;
+	padding: 0px 0px;
+	heigth: 0px;
+}
+
+.gwt-SuggestBoxPopup .suggestPopupTopCenterInner,.gwt-SuggestBoxPopup .suggestPopupBottomCenterInner
+{
+	height: 0px;
+	line-height: 0px;
+	padding: 0px 0px;
+	border: none;
+}
+
+.gwt-SuggestBoxPopup .suggestPopupMiddleLeft, 
+.gwt-SuggestBoxPopup .suggestPopupMiddleRight
+{
+	border: none;
+	padding: 0px 0px;
+	width: 0px;
+}
+
+.gwt-SuggestBoxPopup .suggestPopupCenter {
+	border: none;
+	padding: 0px 0px;
+}
+
+.gwt-SuggestBoxPopup .suggestPopupMiddle,
+.gwt-SuggestBoxPopup .suggestPopupMiddleCenter,
+.gwt-SuggestBoxPopup .suggestPopupMiddleCenterInner
+{
+	border: none;
+	padding: 0px 0px;
+}
+
+.gwt-SuggestBoxPopup .suggestPopupMiddleLeft {
+	border: none;
+	padding: 0px 0px;
+	width: 0px;
+}
+
+.gwt-SuggestBoxPopup .suggestPopupMiddleRight {
+	border: none;
+	padding: 0px 0px;
+	width: 0px;
+}
+
+.gwt-SuggestBoxPopup .suggestPopupMiddleLeftInner,.gwt-SuggestBoxPopup .suggestPopupMiddleRightInner
+{
+	width: 0px;
+	line-height: 0px;
+	border: none;
+	padding: 0px 0px;
+}
+
+.gwt-SuggestBoxPopup .suggestPopupTopLeftInner {
+	width: 0px;
+	height: 0px;
+	border: none;
+	padding: 0px 0px;
+}
+
+.gwt-SuggestBoxPopup .suggestPopupTopRightInner {
+	width: 0px;
+	height: 0px;
+	border: none;
+	padding: 0px 0px;
+}
+
+.gwt-SuggestBoxPopup .suggestPopupBottomLeftInner {
+	width: 0px;
+	height: 0px;
+	border: none;
+	padding: 0px 0px;
+}
+
+.gwt-SuggestBoxPopup .suggestPopupBottomRightInner {
+	width: 0px;
+	height: 0px;
+	border: none;
+	padding: 0px 0px;
+}
+
+.gwt-SuggestBoxPopup .suggestPopupTopLeft {
+	background: none;
+	border: none;
+	padding: 0px 0px;
+	height: 0px;
+	width: 0px;
+}
+
+.gwt-SuggestBoxPopup .suggestPopupTopRight {
+	background: none;
+	border: none;
+	padding: 0px 0px;
+	height: 0px;
+	width: 0px;
+}
+
+.gwt-SuggestBoxPopup .suggestPopupBottomLeft {
+	background: none;
+	border: none;
+	padding: 0px 0px;
+	height: 0px;
+	width: 0px;
+}
+
+.gwt-SuggestBoxPopup .suggestPopupBottomRight {
+	background: none;
+	border: none;
+	padding: 0px 0px;
+	height: 0px;
+	width: 0px;
+}
+
+* html .gwt-SuggestBoxPopup .suggestPopupTopLeftInner {
+	width: 0px;
+	height: 0px;
+	overflow: hidden;
+	border: none;
+	padding: 0px 0px;
+}
+
+* html .gwt-SuggestBoxPopup .suggestPopupTopRightInner {
+	width: 0px;
+	height: 0px;
+	overflow: hidden;
+	border: none;
+	padding: 0px 0px;
+}
+
+* html .gwt-SuggestBoxPopup .suggestPopupBottomLeftInner {
+	width: 0px;
+	height: 0px;
+	overflow: hidden;
+	border: none;
+	padding: 0px 0px;
+}
+
+* html .gwt-SuggestBoxPopup .suggestPopupBottomRightInner {
+	width: 0px;
+	height: 0px;
+	overflow: hidden;
+	border: none;
+	padding: 0px 0px;
+}
+
+/* Calendar*/
+
+.dateBoxPopup {
+	background: #EEF5F9;
+	z-index: 2;
+	padding: 0px 0px;
+	border: 2px solid #408DB8;
+	margin: 0px 0px 0px 1px;
+	
+	box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.popupContent td { border: none; background: #EEF5F9; }
+
+.gwt-DatePicker {
+	border: none;
+	cursor: default;
+}
+
+.datePickerMonthSelector {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+}
+
+.gwt-DatePicker td,.datePickerMonthSelector td:focus {
+	outline: none;
+}
+
+.datePickerDays {
+	width: 100%;
+	background: white;
+	border: none;
+}
+
+.datePickerDay {
+	text-align: center;
+	outline: none;
+	font-family: Georgia, 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Verdana, Sans-Serif;
+    font-weight: normal;
+    font-size: 11px;
+    color: #505050;
+    background: #FFF;
+    border-top: 1px solid #AAA;
+    border-right: 1px solid #AAA;
+}
+
+td.datePickerWeekdayLabel, td.datePickerWeekendLabel {
+	text-align: center;
+	outline: none;
+	font-family: Georgia, 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Verdana, Sans-Serif;
+    font-weight: normal;
+    font-size: 11px;
+    color: #505050;
+    background: #D2EDF8;
+    border-top: 1px solid #666;
+    border-right: 1px solid #AAA;
+    padding: 2px 6px;
+}
+.datePickerDay {
+	padding: 2px 6px;
+	cursor: hand;
+	cursor: pointer;
+}
+
+.datePickerDayIsWeekend {
+	background: #E1E1E1;
+}
+
+.datePickerDayIsToday {
+	padding: 2px 6px;
+	color: #666;
+	background: #D2EDF8;
+	border-top: 1px solid #AAA;
+    border-right: 1px solid #AAA;
+    border-bottom: 1px solid #D2EDF8;
+}
+
+.datePickerDayIsFiller {
+	color: #999;
+	font-weight: normal;
+}
+
+.datePickerDayIsValue {
+	background: #ADC3CC;
+	border-bottom: 1px solid #ADC3CC;
+}
+
+.datePickerDayIsDisabled {
+	color: #AAAAAA;
+	font-style: italic;
+}
+
+.datePickerDayIsHighlighted {
+	background: #D2EDF8;
+	border-bottom: 1px solid #D2EDF8;
+}
+
+.datePickerDayIsValueAndHighlighted {
+	background: #ADC3CC;
+	border-bottom: 1px solid #ADC3CC;
+}
+
+.datePickerMonthSelector {
+	width: 100%;
+	padding: 0px 0px 0px 0px;
+	background: #408DB8;
+	border: 0px;
+}
+
+td.datePickerMonth {
+	background: #408DB8;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	font-family: Georgia;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 0px 0px;
+	color: #FFF;
+	border: 0px;
+}
+
+.datePickerPreviousButton,.datePickerNextButton {
+	height: 25px;
+	font-size: 120%;
+	line-height: 1em;
+	color: #408DB8;
+	cursor: hand;
+	cursor: pointer;
+	font-weight: bold;
+	padding: 0px 0px;
+	outline: none;
+	border: 0px;
+}
+
+.datePickerPreviousButton .html-face, .datePickerNextButton .html-face {
+	color:transparent;
+}
+
+.datePickerPreviousButton {
+	width: 26px;
+	background: #408DB8 url(../../../images/cal-prev.png) no-repeat;
+	background-position:center;
+}
+
+.datePickerNextButton {
+	width: 26px;
+	background: #408DB8 url(../../../images/cal-next.png) no-repeat;
+	background-position:center;
+}

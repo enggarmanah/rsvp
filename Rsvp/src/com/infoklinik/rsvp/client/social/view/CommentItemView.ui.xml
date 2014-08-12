@@ -1,0 +1,29 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:com.google.gwt.user.datepicker.client">
+	<g:HTMLPanel>
+		
+		<div class="comment">
+			<div class="fb-image">
+				<g:Image ui:field="fbProfileImg"></g:Image>
+			</div>
+			<div class="comment-details">
+				<div class="fb-name">
+					<g:Label ui:field="fbNameLb"></g:Label>
+				</div>
+				<div class="date">
+					<g:Label ui:field="dateLb"></g:Label>
+				</div>
+				<div class="text">
+					<g:Label ui:field="textLb"></g:Label>
+				</div>
+				<g:FocusPanel ui:field="deletePanel">
+					<g:FlowPanel styleName="delete">
+						<g:Image url="images/delete.png" styleName="delete-image"></g:Image>
+						<g:Label text="Hapus" styleName="delete-text"></g:Label>
+					</g:FlowPanel>
+				</g:FocusPanel>
+			</div>
+		</div>
+				
+	</g:HTMLPanel>
+</ui:UiBinder> 

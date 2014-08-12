@@ -1,0 +1,53 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:com.google.gwt.user.datepicker.client">
+	<g:HTMLPanel>
+		
+		<div id="popup-edit">
+			<div class="title">Keterangan :</div>
+			<div class="info">
+				<g:TextArea ui:field="profileTa" styleName="textarea"></g:TextArea>
+			</div>
+			<div class="title">Jadwal :</div>
+			<div class="info">
+				<g:TextArea ui:field="scheduleTa" styleName="textarea"></g:TextArea>
+			</div>
+			<g:Label ui:field="residentialSrvLbl" text="Pesan Antar :" styleName="title"></g:Label>
+			<div class="info">
+				<g:ListBox ui:field="residentialSrvLb" styleName="select"></g:ListBox>
+			</div>
+			<div class="title">24 Jam :</div>
+			<div class="info">
+				<g:ListBox ui:field="op24HoursLb" styleName="select"></g:ListBox>
+			</div>
+			<div class="title">Jam Buka :</div>
+			<div class="info">
+				<g:ListBox ui:field="opHourStartLb" styleName="select"></g:ListBox>
+			</div>
+			<div class="title">Jam Tutup :</div>
+			<div class="info">
+				<g:ListBox ui:field="opHourEndLb" styleName="select"></g:ListBox>
+			</div>
+			<div class="title">Layanan :</div>
+			<div class="info">
+				<g:FlowPanel ui:field="servicePanel" styleName="info-wrapper"></g:FlowPanel>
+			    <g:FocusPanel ui:field="addServiceBtn">
+				    <g:FlowPanel styleName="info-add">
+				        <g:Image url="images/case.png" styleName="menu-img"></g:Image>
+				        <g:Label text="Tambah Layanan" styleName="menu-label"></g:Label>
+				    </g:FlowPanel>
+			    </g:FocusPanel>
+			</div>
+			<div class="title">Asuransi :</div>
+			<div class="info">
+			    <g:FlowPanel ui:field="insurancePanel" styleName="info-wrapper"></g:FlowPanel>
+			    <g:FocusPanel ui:field="addInsuranceBtn">
+				    <g:FlowPanel styleName="info-add">
+				        <g:Image url="images/case.png" styleName="menu-img"></g:Image>
+				        <g:Label text="Tambah Asuransi" styleName="menu-label"></g:Label>
+				    </g:FlowPanel>
+			    </g:FocusPanel>
+			</div>
+		</div>
+				
+	</g:HTMLPanel>
+</ui:UiBinder> 

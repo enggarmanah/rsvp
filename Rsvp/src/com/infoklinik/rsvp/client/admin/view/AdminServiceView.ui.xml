@@ -1,0 +1,50 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:com.google.gwt.user.datepicker.client">
+	<g:HTMLPanel ui:field="contentPanel">
+
+		<div id="popup-edit-wrapper">
+			<div id="popup-edit">
+				<div class="title">Layanan :</div>
+				<div class="info">
+					<g:TextBox ui:field="nameTb" styleName="text"></g:TextBox>
+				</div>
+				<div class="title">Kategori :</div>
+				<div class="info">
+					<g:ListBox ui:field="serviceTypeLb" styleName="select"></g:ListBox>
+				</div>
+				<div class="title">Harga :</div>
+				<div class="info">
+					<g:TextBox ui:field="priceTb" styleName="text"></g:TextBox>
+				</div>
+				<div class="title">Deskripsi :</div>
+				<div class="info">
+					<g:TextArea ui:field="descriptionTa" styleName="textarea"></g:TextArea>
+				</div>
+				<div class="title">Promosi :</div>
+				<div class="info">
+					<g:ListBox ui:field="isPromoLb" styleName="select"></g:ListBox>
+				</div>
+				<div class="title">Harga Promo :</div>
+				<div class="info">
+					<g:TextBox ui:field="promoPriceTb" styleName="text"></g:TextBox>
+				</div>
+				<div class="title">Tgl. Mulai :</div>
+				<div class="info">
+					<c:DateBox ui:field="promoStartDateDb" styleName="text"></c:DateBox>
+				</div>
+				<div class="title">Tgl. Akhir :</div>
+				<div class="info">
+					<c:DateBox ui:field="promoEndDateDb" styleName="text"></c:DateBox>
+				</div>
+				<div class="title">
+				</div>
+				<div class="info">
+					<g:Button ui:field="okBtn" text="OK" styleName="button"/>
+					<g:Button ui:field="cancelBtn" text="Batal" styleName="button"/>
+				</div>
+			</div>
+		</div>
+
+	</g:HTMLPanel>
+
+</ui:UiBinder> 

@@ -1,0 +1,63 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:com.google.gwt.user.datepicker.client">
+	<g:HTMLPanel ui:field="contentPanel">
+
+		<div id="admin-title">
+			Administrasi:
+		</div>
+		<div id="admin-info">
+			Menu administrasi portal informasi kesehatan.
+		</div>
+		<div id="admin-content">
+			<div>
+				<div id="admin-content-icon">
+					<img src="images/hospital.png" class="admin-menu-img" />
+				</div>
+				<div id="admin-content-menu">
+					<g:Label ui:field="institutionLb" styleName="link">Tambah Institusi</g:Label>
+					<a href="#" class="admin" onclick="additem()">Tambah Klinik</a>
+					<a href="#" class="admin" onclick="additem()">Tambah Rumah Sakit</a>
+					<a href="#" class="admin" onclick="adddokter()">Tambah Dokter</a>
+					<a href="#" class="admin" onclick="addlab()">Tambah Laboratorium</a>
+					<a href="#" class="admin" onclick="addapotek()">Tambah Apotek</a>
+				</div>
+			</div>
+			<div>
+				<div id="admin-content-icon">
+					<img src="images/graph.png" class="admin-menu-img" />
+				</div>
+				<div id="admin-content-menu">
+					<a href="#" class="admin" onclick="additem()">Statistik Klinik</a>
+					<a href="#" class="admin" onclick="additem()">Statistik Rumah Sakit</a>
+					<a href="#" class="admin" onclick="additem()">Statistik Dokter</a>
+					<a href="#" class="admin" onclick="additem()">Statistik Layanan</a>
+					<a href="#" class="admin" onclick="additem()">Statistik Laboratorium</a>
+					<a href="#" class="admin" onclick="additem()">Statistik Apotek</a>
+					<a href="#" class="admin" onclick="additem()">Statistik Asuransi</a>
+				</div>
+			</div>
+			<div>
+				<div id="admin-content-icon">
+					<img src="images/books.png" class="admin-menu-img" />
+				</div>
+				<div id="admin-content-menu">
+					<g:Label ui:field="serviceReferenceLb" styleName="link">Referensi Layanan</g:Label>
+					<a href="#" class="admin" onclick="addasuransi()">Referensi Asuransi</a>
+					<a href="#" class="admin" onclick="addkota()">Referensi Kota</a>
+					<a href="#" class="admin" onclick="addwilayah()">Referensi Wilayah</a>
+					<a href="#" class="admin" onclick="addjalan()">Referensi Jalan</a>
+				</div>
+			</div>
+			<div>
+				<div id="admin-content-icon">
+					<img src="images/exit.png" class="admin-menu-img" />
+				</div>
+				<div id="admin-content-menu">
+					<a href="#" class="admin" onclick="addlayanan()"><g:Label ui:field="logoutLb">Keluar</g:Label></a>
+				</div>
+			</div>
+		</div>
+
+	</g:HTMLPanel>
+
+</ui:UiBinder> 

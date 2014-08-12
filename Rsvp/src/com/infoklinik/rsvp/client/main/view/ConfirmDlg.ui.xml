@@ -1,0 +1,28 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:c="urn:import:com.google.gwt.user.datepicker.client">
+	<g:HTMLPanel ui:field="mainPanel">
+		
+		<div class="form-wrap-notification-dlg">
+		<table width="100%"><tr><td align="center">
+		
+		    	<table width="100%">
+				<tr>
+				    <td width="48px"><g:Image ui:field="notificationImg" url="images/confirm.png" styleName="notification-img"></g:Image></td>
+					<td class="notification-text"><g:Label ui:field="confirmText"></g:Label></td>
+				</tr>
+				<tr>
+					<td class="notification-btn" colspan="2">
+					    <g:Button ui:field="okBtn" text="OK" styleName="button-center"/>
+					    <g:Button ui:field="cancelBtn" text="Batal" styleName="button-center"/>
+					</td>
+				</tr>
+			</table>
+			
+		</td></tr></table>
+		</div>
+		
+	</g:HTMLPanel>
+
+</ui:UiBinder> 

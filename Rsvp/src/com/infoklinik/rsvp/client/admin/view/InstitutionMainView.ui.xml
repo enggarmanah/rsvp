@@ -1,0 +1,63 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:com.google.gwt.user.datepicker.client">
+	<g:HTMLPanel>
+		<div id="popup-edit">
+			<div class="title">Nama :</div>
+			<div class="info">
+				<g:TextBox ui:field="nameTb" styleName="text"></g:TextBox>
+			</div>
+			<div class="title">Kategori :</div>
+			<div class="info">
+				<g:ListBox ui:field="categoryLb" styleName="select"></g:ListBox>
+			</div>
+			<div class="title">Tipe :</div>
+			<div class="info">
+				<g:ListBox ui:field="typeLb" styleName="select"></g:ListBox>
+			</div>
+			<div class="title">Telephone :</div>
+			<div class="info">
+				<g:TextBox ui:field="telephoneTb" styleName="text"></g:TextBox>
+			</div>
+			<div class="title">Email :</div>
+			<div class="info">
+				<g:TextBox ui:field="emailTb" styleName="text"></g:TextBox>
+			</div>
+			<div class="title">Kota :</div>
+			<div class="info">
+				<g:SuggestBox ui:field="citySb" styleName="text"></g:SuggestBox>
+			</div>
+			<div class="title">Wilayah :</div>
+			<div class="info">
+				<g:SuggestBox ui:field="regionSb" styleName="text"></g:SuggestBox>
+			</div>
+			<div class="title">Jalan :</div>
+			<div class="info">
+				<g:SuggestBox ui:field="streetSb" styleName="text"></g:SuggestBox>
+			</div>
+			<div class="title">Alamat :</div>
+			<div class="info">
+				<g:TextArea ui:field="addressTa" styleName="textarea"></g:TextArea>
+			</div>
+			<div class="title">Koordinat :</div>
+			<div class="info">
+				<g:TextBox ui:field="coordinateTb" styleName="text"></g:TextBox>
+			</div>
+			<div class="title">Partnership :</div>
+			<div class="info">
+				<g:ListBox ui:field="partnerTypeLb" styleName="select"></g:ListBox>
+			</div>
+			<div class="title">Website :</div>
+			<div class="info">
+				<g:TextBox ui:field="websiteTb" styleName="text"></g:TextBox>
+			</div>
+			<div class="title">Facebook :</div>
+			<div class="info">
+				<g:TextBox ui:field="facebookTb" styleName="text"></g:TextBox>
+			</div>
+			<div class="title">Twitter :</div>
+			<div class="info">
+				<g:TextBox ui:field="twitterTb" styleName="text"></g:TextBox>
+			</div>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

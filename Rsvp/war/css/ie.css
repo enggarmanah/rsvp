@@ -1,0 +1,13 @@
+.chrome #partner {
+	color: 282828;
+	text-shadow: -3px 0px 8px #888;
+}
+
+.chrome #promotion-content {
+	color: 282828;
+	text-shadow: -3px 0px 8px #888;
+}
+
+.ie input[type=button].search, .ie form button.search {
+	top: -1px;
+}

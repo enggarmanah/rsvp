@@ -1,0 +1,82 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:com.google.gwt.user.datepicker.client">
+	<g:HTMLPanel>
+
+		<div id="profile-wrapper">
+			<div id="profile-content">
+				<div id="profile-inst-name">
+					<g:Label ui:field="instNameLb"></g:Label>
+				</div>
+				<div id="profile-inst-contact">
+					<div id="left">
+						<div class="inst-subinfo-icon">
+							<img src="images/building.png" class="contact-img"/>
+						</div>
+						<div class="inst-subinfo-content">
+							<g:Label ui:field="addressLb"></g:Label>
+						</div>
+						<div class="inst-subinfo-icon">
+							<img src="images/phone.png" class="contact-img"/>
+						</div>
+						<div class="inst-subinfo-content">
+							<g:Label ui:field="phoneLb"></g:Label>
+						</div>
+						<div class="inst-subinfo-icon">
+							<img src="images/mail.png" class="contact-img"/>
+						</div>
+						<div class="inst-subinfo-content">
+							<g:Label ui:field="emailLb"></g:Label>
+						</div>
+					</div>
+					<div id="right">
+						<div id="profile-inst-logo">
+							<g:Image ui:field="logoImg"></g:Image>
+						</div>
+					</div>
+				</div>
+				<div id="profile-inst-link">
+					<div class="icon">
+						<img src="images/laptop.png" class="contact-img"/>
+					</div>
+					<div class="content">
+						<g:Label ui:field="websiteLb"></g:Label>
+					</div>
+					<div class="icon">
+						<img src="images/facebook-small.png" class="contact-img"/>
+					</div>
+					<div class="content">
+						<g:Label ui:field="facebookLb" text="theclinic"></g:Label>
+					</div>
+					<div class="icon">
+						<img src="images/twitter-small.png" class="contact-img"/>
+					</div>
+					<div class="content">
+						<g:Label ui:field="twitterLb" text="theclinic"></g:Label>
+					</div>
+				</div>
+				
+				<div id="promo-info">
+					<div id="promo-info-title">
+						<g:Label ui:field="serviceNameLb" styleName="content"/>
+					</div>
+					<div id="promo-info-desc">
+						<g:Label ui:field="priceLb" styleName="content"/>
+					</div>
+					<div id="promo-info-desc">
+						<g:Label ui:field="descriptionLb" styleName="content"/>
+					</div>
+					<div id="promo-image">
+						<g:Image ui:field="serviceImg" width="360px"/>
+					</div>
+					<div id="promo-booking">
+						<g:Button ui:field="bookBtn" text="Book Appointment" styleName="button" width="140px"/>
+						<g:Button ui:field="okBtn" text="OK" styleName="button" width="75px"/>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+
+	</g:HTMLPanel>
+
+</ui:UiBinder> 
