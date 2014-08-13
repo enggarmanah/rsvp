@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
 
 import com.google.appengine.api.datastore.Blob;
+import com.infoklinik.rsvp.client.Message;
 import com.infoklinik.rsvp.server.dao.ImageDAO;
 import com.infoklinik.rsvp.shared.Constant;
 import com.infoklinik.rsvp.shared.ImageBean;
@@ -52,9 +53,9 @@ public class ImageUpload extends AppEngineUploadAction {
 					if (blob.getBytes().length <= Constant.FILE_UPLOAD_MAX_SIZE) {
 						ImageBean imageBean = new ImageBean();
 						imageBean.setBytes(blob.getBytes());
-						imageDao.addImage(imageBean);
+						imageBean = imageDao.addImage(imageBean);
 					} else {
-						throw new UploadActionException("File exceed maximum file size");
+						throw new UploadActionException(Message.ERR_FILE_UPLOAD_EXCEED_MAX_SIZE);
 					}
 				}
 			}

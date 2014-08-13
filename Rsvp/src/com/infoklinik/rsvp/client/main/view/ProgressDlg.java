@@ -28,6 +28,7 @@ public class ProgressDlg {
 	static Image progressImage;
 	
 	private static String INFO = "Sistem sedang memproses permintaan anda.";
+	private static String INFO_PERCENTAGE = "Sistem sedang memproses permintaan anda .... ";
 	private static String SUCCESS = "Sistem telah berhasil memproses permintaan anda.";
 	private static String FAIL = "Sistem gagal memproses permintaan anda.";
 	
@@ -162,12 +163,21 @@ public class ProgressDlg {
 		fadeIn();
 	}
 	
+	public static void showPercentage() {
+		
+		show();
+		
+		progressText.setText(INFO_PERCENTAGE + "0 %");
+		progressDlgBox.center();
+	}
+	
 	public static void success() {	
 		
 		isHideInProgress = true;
 		isSuccess = true;
 		
 		timer.schedule(Constant.DISPLAY_TIME);
+		center();
 	}
 	
 	public static void failure() {	
@@ -176,6 +186,7 @@ public class ProgressDlg {
 		isSuccess = false;
 		
 		timer.schedule(Constant.DISPLAY_TIME);
+		center();
 	}
 	
 	public static void failure(String message) {	
@@ -185,5 +196,19 @@ public class ProgressDlg {
 		progressText.setText(message);
 		
 		timer.schedule(Constant.DISPLAY_TIME);
+		center();
+	}
+	
+	public static void setPercentage(int percent) {
+		
+		progressText.setText(INFO_PERCENTAGE + percent + " %");
+		center();
+	}
+	
+	private static void center() {
+		
+		int top = progressDlgBox.getAbsoluteTop();
+		progressDlgBox.center();
+		progressDlgBox.setPopupPosition(progressDlgBox.getPopupLeft(), top);
 	}
 }

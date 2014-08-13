@@ -1,5 +1,6 @@
 package com.infoklinik.rsvp.client.admin.view;
 
+import gwtupload.client.BaseUploadStatus;
 import gwtupload.client.IUploader;
 import gwtupload.client.PreloadedImage;
 import gwtupload.client.IUploadStatus.Status;
@@ -15,7 +16,6 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
-import com.infoklinik.rsvp.client.main.view.NotificationDlg;
 import com.infoklinik.rsvp.client.main.view.ProgressDlg;
 import com.infoklinik.rsvp.shared.GalleryBean;
 
@@ -46,6 +46,7 @@ public class InstitutionGalleryView extends BaseView {
 		// Add a finish handler which will load the image once the upload finishes
 		defaultUploader.addOnFinishUploadHandler(onFinishUploaderHandler);
 		defaultUploader.addOnStartUploadHandler(onStartUploaderHandler);	
+		
 	}
 	
 	private IUploader.OnStartUploaderHandler onStartUploaderHandler = new IUploader.OnStartUploaderHandler() {
@@ -53,14 +54,32 @@ public class InstitutionGalleryView extends BaseView {
 		@Override
 		public void onStart(IUploader uploader) {
 			
-			//ProgressDlg.show();
+			uploader.setStatusWidget(new CustomUploadStatus());
+			ProgressDlg.show();
 		}
 	};
+	
+	private class CustomUploadStatus extends BaseUploadStatus {
+		
+		@Override
+		public void setError(String msg) {
+			setStatus(Status.ERROR);
+			ProgressDlg.failure(msg);
+		}
+		
+		@Override
+		public void setProgress(long done, long total) {
+			int percent =(int) (total > 0 ? done * 100 / total : 0);
+			ProgressDlg.setPercentage(percent);
+			super.setProgress(done, total);
+		}
+	}
 	
 	// Load the image in the document and in the case of success attach it to the viewer
 	private IUploader.OnFinishUploaderHandler onFinishUploaderHandler = new IUploader.OnFinishUploaderHandler() {
 		
 		public void onFinish(IUploader uploader) {
+			
 			if (uploader.getStatus() == Status.SUCCESS) {
 				
 				new PreloadedImage(uploader.fileUrl(), showImage);
@@ -74,18 +93,11 @@ public class InstitutionGalleryView extends BaseView {
 				// You can send any customized message and parse it
 				System.out.println("Server message " + info.message);
 				
-				//ProgressDlg.hide();
-			
-			} else if (uploader.getStatus() == Status.ERROR) {
-				
-				UploadedInfo info = uploader.getServerInfo();
-				
-				//ProgressDlg.hidePrompt();
-				//NotificationDlg.warning(info.message);
+				ProgressDlg.hide();
 			}
 		}
 	};
-
+	
 	// Attach an image to the pictures viewer
 	private OnLoadPreloadedImageHandler showImage = new OnLoadPreloadedImageHandler() {
 		public void onLoad(PreloadedImage image) {

@@ -26,4 +26,6 @@ public class Message {
 	public static String ERR_SERVICE_TYPE_EMPTY = "Kategori layanan harus dipilih.";
 	public static String ERR_SERVICE_PRICE_EMPTY = "Harga layanan tidak boleh kosong.";
 	public static String ERR_SERVICE_DESC_EMPTY = "Deskripsi layanan tidak boleh kosong.";
+	
+	public static String ERR_FILE_UPLOAD_EXCEED_MAX_SIZE = "Ukuran file melebihi besar maksimum (500 KB)";
 }
