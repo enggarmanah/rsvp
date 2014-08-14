@@ -16,8 +16,11 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
+import com.infoklinik.rsvp.client.Message;
+import com.infoklinik.rsvp.client.main.view.NotificationDlg;
 import com.infoklinik.rsvp.client.main.view.ProgressDlg;
 import com.infoklinik.rsvp.shared.GalleryBean;
+import com.infoklinik.rsvp.shared.InstitutionBean;
 
 public class InstitutionGalleryView extends BaseView {
 	
@@ -33,12 +36,16 @@ public class InstitutionGalleryView extends BaseView {
 	
 	List<GalleryBean> galleries;
 	
+	InstitutionBean institution;
+	
+	SingleUploader defaultUploader;
+	
 	public InstitutionGalleryView() {
 		
 		initWidget(uiBinder.createAndBindUi(this));
 		
 		// Create a new uploader panel and attach it to the document
-		SingleUploader defaultUploader = new SingleUploader();
+		defaultUploader = new SingleUploader();
 		defaultUploader.getWidget().setStyleName("gallery-upload");
 		
 		uploadPanel.add(defaultUploader);
@@ -46,7 +53,11 @@ public class InstitutionGalleryView extends BaseView {
 		// Add a finish handler which will load the image once the upload finishes
 		defaultUploader.addOnFinishUploadHandler(onFinishUploaderHandler);
 		defaultUploader.addOnStartUploadHandler(onStartUploaderHandler);	
+	}
+	
+	public void setInstitution(InstitutionBean institution) {
 		
+		this.institution = institution;
 	}
 	
 	private IUploader.OnStartUploaderHandler onStartUploaderHandler = new IUploader.OnStartUploaderHandler() {
@@ -64,7 +75,14 @@ public class InstitutionGalleryView extends BaseView {
 		@Override
 		public void setError(String msg) {
 			setStatus(Status.ERROR);
-			ProgressDlg.failure(msg);
+			
+			ProgressDlg.hidePrompt();
+			
+			if (msg.indexOf(Message.ERR_FILE_UPLOAD_EXCEED_MAX_SIZE) > -1) {
+				NotificationDlg.warning(Message.ERR_FILE_UPLOAD_EXCEED_MAX_SIZE);
+			} else {
+				NotificationDlg.warning(Message.ERR_FILE_UPLOAD);
+			}
 		}
 		
 		@Override
@@ -92,6 +110,9 @@ public class InstitutionGalleryView extends BaseView {
 
 				// You can send any customized message and parse it
 				System.out.println("Server message " + info.message);
+				String imageId = info.message;
+				
+				institution.setImageId(Long.valueOf(imageId));
 				
 				ProgressDlg.hide();
 			}

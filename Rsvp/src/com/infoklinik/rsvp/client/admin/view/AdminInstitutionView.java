@@ -115,6 +115,7 @@ public class AdminInstitutionView extends BaseView implements IAdminInstitutionV
 		
 		mainView.setInstitution(institution);
 		serviceView.setInstitution(institution);
+		galleryView.setInstitution(institution);
 		
 		if (institution.getId() == null) {
 			dialogBox.setText("Tambah Institusi Baru");

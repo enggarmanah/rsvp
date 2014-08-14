@@ -1342,6 +1342,12 @@ input.search-field:focus {
 	border: 0px solid #AAA;
 }
 
+#profile-inst-logo .gwt-Image {
+	max-width: 220px;
+	margin-left: auto;
+    margin-right: auto;
+}
+
 .profile-inst-section {
 	float: left;
 	text-align: left;
