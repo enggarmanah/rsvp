@@ -44,6 +44,7 @@ public class InstitutionBean extends BaseBean {
 	private List<ServiceBean> services;
 	private List<InsuranceBean> insurances;
 	private List<ScheduleBean> schedules;
+	private List<GalleryBean> galleries;
 	
 	public String getHtmlInfo() {
 		
@@ -301,6 +302,14 @@ public class InstitutionBean extends BaseBean {
 
 	public void setServices(List<ServiceBean> services) {
 		this.services = services;
+	}
+	
+	public List<GalleryBean> getGalleries() {
+		return galleries;
+	}
+
+	public void setGalleries(List<GalleryBean> galleries) {
+		this.galleries = galleries;
 	}
 
 	public List<InsuranceBean> getInsurances() {

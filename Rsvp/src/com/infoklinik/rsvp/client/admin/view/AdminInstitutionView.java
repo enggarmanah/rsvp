@@ -105,6 +105,7 @@ public class AdminInstitutionView extends BaseView implements IAdminInstitutionV
 		
 		institution = mainView.getInstitution();
 		institution = serviceView.getInstitution();
+		institution = galleryView.getInstitution();
 				
 		return institution;
 	}

@@ -1914,8 +1914,26 @@ input.search-field:focus {
 	float: left;
 	border: 1px solid #AAA;
 	padding: 5px 5px 5px 5px;
-	min-height: 60px;
+	min-height: 50px;
 	width: 315px;
+}
+
+#popup-edit .gallery-logo .gwt-Image {
+	max-width: 315px;
+	max-height: 40px;
+}
+
+#popup-edit .gallery-gallery {
+	float: left;
+	border: 1px solid #AAA;
+	padding: 5px 5px 5px 5px;
+	min-height: 175px;
+	width: 315px;
+	overflow: auto;
+}
+
+#popup-edit .gallery-gallery .gwt-Image {
+	max-height: 80px;
 }
 
 #popup-edit .gallery-upload {

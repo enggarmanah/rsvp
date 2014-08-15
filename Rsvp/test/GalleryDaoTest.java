@@ -11,7 +11,7 @@ public class GalleryDaoTest {
 		
 		GalleryBean galleryBean = new GalleryBean();
 		galleryBean.setInstitution(institution);
-		galleryBean.setImage_id(Long.valueOf(12));
+		galleryBean.setImageId(Long.valueOf(12));
 		galleryBean.setDescription("Lobby");
 		
 		GalleryDAO galleryDao = new GalleryDAO();

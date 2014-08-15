@@ -3,13 +3,21 @@
 	<g:HTMLPanel>
 		
 		<div id="popup-edit">
-			<div class="title">Galeri :</div>
+			<div class="title">Logo :</div>
 			<div class="info">
-				<g:SimplePanel ui:field="imagePanel" styleName="gallery-logo"/>
+				<g:SimplePanel ui:field="logoPanel" styleName="gallery-logo"/>
 			</div>
 			<div class="title"></div>
 			<div class="info">
-				<g:SimplePanel ui:field="uploadPanel"/>
+				<g:SimplePanel ui:field="uploadLogoPanel"/>
+			</div>
+			<div class="title">Galeri :</div>
+			<div class="info">
+				<g:FlowPanel ui:field="galleryPanel" styleName="gallery-gallery"/>
+			</div>
+			<div class="title"></div>
+			<div class="info">
+				<g:SimplePanel ui:field="uploadGalleryPanel"/>
 			</div>
 		</div>
 				

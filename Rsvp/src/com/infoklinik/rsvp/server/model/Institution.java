@@ -18,6 +18,7 @@ import javax.persistence.Transient;
 
 import com.infoklinik.rsvp.server.ServerUtil;
 import com.infoklinik.rsvp.shared.Constant;
+import com.infoklinik.rsvp.shared.GalleryBean;
 import com.infoklinik.rsvp.shared.InstitutionBean;
 import com.infoklinik.rsvp.shared.InsuranceBean;
 import com.infoklinik.rsvp.shared.ScheduleBean;
@@ -73,6 +74,9 @@ public class Institution extends Base {
 	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="institution", targetEntity=Schedule.class)
 	private List<Schedule> schedules;
 	
+	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="institution", targetEntity=Gallery.class)
+	private List<Gallery> galleries;
+	
 	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="institution", targetEntity=Service.class)
 	private List<Service> services;
 	
@@ -81,6 +85,9 @@ public class Institution extends Base {
 	
 	@Transient
 	private boolean isLoadServices = false;
+	
+	@Transient
+	private boolean isLoadGalleries = false;
 	
 	public String getName() {
 		return name;
@@ -372,6 +379,34 @@ public class Institution extends Base {
 			}
 		}
 		
+		if (instBean.getGalleries() != null) {
+			
+			HashMap<Long, Gallery> galleryMap = new HashMap<Long, Gallery>();
+			
+			for (Gallery gallery : galleries) {
+				galleryMap.put(gallery.getId(), gallery);
+			}
+			
+			for (GalleryBean galleryBean : instBean.getGalleries()) {
+				
+				Gallery gallery = galleryMap.remove(galleryBean.getId());
+				
+				if (gallery == null) {
+					gallery = new Gallery();
+					gallery.setBean(galleryBean, em);
+				} else {
+					gallery.setBean(galleryBean, em);
+				}
+				
+				galleries.add(gallery);
+			}
+			
+			for (Long key : galleryMap.keySet()) {
+				Gallery gallery = galleryMap.get(key);
+				galleries.remove(gallery);
+			}
+		}
+		
 		if (instBean.getInsurances() != null) {
 			
 			HashMap<Long, Insurance> insuranceMap = new HashMap<Long, Insurance>();
@@ -500,6 +535,16 @@ public class Institution extends Base {
 			instBean.setServices(list);
 		}
 		
+		if (isLoadGalleries && galleries != null) {
+			
+			List<GalleryBean> list = new ArrayList<GalleryBean>();
+			for (Gallery gallery : galleries) {
+				list.add(gallery.getBean());
+			}
+			
+			instBean.setGalleries(list);
+		}
+		
 		if (isLoadInsurances && insurances != null) {
 			
 			List<InsuranceBean> list = new ArrayList<InsuranceBean>();
@@ -524,6 +569,12 @@ public class Institution extends Base {
 	public Institution loadServices() {
 		
 		isLoadServices = true;
+		return this;
+	}
+	
+	public Institution loadGalleries() {
+		
+		isLoadGalleries = true;
 		return this;
 	}
 }

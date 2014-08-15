@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 import com.infoklinik.rsvp.shared.Constant;
 import com.infoklinik.rsvp.shared.GalleryBean;
@@ -12,7 +12,7 @@ import com.infoklinik.rsvp.shared.GalleryBean;
 @Entity
 public class Gallery extends Base {
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "inst_id")
 	private Institution institution;
 	
@@ -61,7 +61,7 @@ public class Gallery extends Base {
 			institution = em.find(Institution.class, galleryBean.getInstitution().getId());
 		}
 		
-		image_id = galleryBean.getImage_id();
+		image_id = galleryBean.getImageId();
 		is_main = galleryBean.isMain() ? Constant.YES : Constant.NO;
 		description = galleryBean.getDescription();
 		
@@ -78,7 +78,7 @@ public class Gallery extends Base {
 			galleryBean.setInstitution(institution.getBean());
 		}
 		
-		galleryBean.setImage_id(image_id);
+		galleryBean.setImageId(image_id);
 		galleryBean.setMain(Constant.YES.equals(is_main));
 		galleryBean.setDescription(description);
 		

@@ -2,6 +2,8 @@ package com.infoklinik.rsvp.shared;
 
 public class Constant {
 	
+	public static String IMAGE_URL = "/image?id=";
+	
 	public static String STATUS_ACTIVE = "A";
 	public static String STATUS_INACTIVE = "I";
 	

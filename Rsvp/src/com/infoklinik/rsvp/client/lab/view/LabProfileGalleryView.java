@@ -72,7 +72,7 @@ public class LabProfileGalleryView extends BaseView {
 			public void run() {
 
 				GalleryBean gallery = galleries.get(index);
-				galleryImg.setUrl("/image?id=" + gallery.getImage_id());
+				galleryImg.setUrl("/image?id=" + gallery.getImageId());
 				imagePanel.setStyleName(Constant.STYLE_FADE_IN);
 			}
 		};

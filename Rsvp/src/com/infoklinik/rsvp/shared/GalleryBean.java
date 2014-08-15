@@ -4,7 +4,7 @@ package com.infoklinik.rsvp.shared;
 public class GalleryBean extends BaseBean {
 
 	private InstitutionBean institution;
-	private Long image_id;
+	private Long imageId;
 	private boolean isMain;
 	private String description;
 	
@@ -16,12 +16,12 @@ public class GalleryBean extends BaseBean {
 		this.institution = institution;
 	}
 
-	public Long getImage_id() {
-		return image_id;
+	public Long getImageId() {
+		return imageId;
 	}
 
-	public void setImage_id(Long image_id) {
-		this.image_id = image_id;
+	public void setImageId(Long imageId) {
+		this.imageId = imageId;
 	}
 
 	public boolean isMain() {
