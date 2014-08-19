@@ -181,7 +181,7 @@ public class AdminInstitutionView extends BaseView implements IAdminInstitutionV
 		galleryView.setGalleries(galleries);
 	}
 	
-	public void setBranches(List<BranchBean> branches) {
+	public void setBranches(List<GenericBean<BranchBean>> branches) {
 		
 		branchView.setBranches(branches);
 	}

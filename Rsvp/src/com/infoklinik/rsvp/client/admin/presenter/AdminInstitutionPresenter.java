@@ -85,6 +85,7 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 	List<GenericBean<DoctorBean>> genDoctors;
 	List<GalleryBean> galleries;
 	List<BranchBean> branches;
+	List<GenericBean<BranchBean>> genBranches;
 	
 	private boolean isInitCategoryCompleted = false;
 	private boolean isInitTypesCompleted = false;
@@ -418,8 +419,19 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 						@Override
 						public void onSuccess(List<BranchBean> result) {
 							
+							genBranches = new ArrayList<GenericBean<BranchBean>>();
 							branches = result;
-							view.setBranches(branches);
+							
+							for (BranchBean branch : branches) {
+								
+								HandlerManager handlerMgr = new HandlerManager();
+								handlerMgr.setDeleteHandler(getBranchDeleteHandler(branch));
+								
+								GenericBean<BranchBean> genericBranch = new GenericBean<BranchBean>(branch, handlerMgr);
+								genBranches.add(genericBranch);
+							}
+							
+							view.setBranches(genBranches);
 							view.showBranch();
 							ProgressDlg.hide();
 						}
@@ -963,6 +975,25 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 					public void onClick(ClickEvent event) {
 						
 						eventBus.deleteInstDoctorSchedule(schedule);
+					}
+				});
+			}
+		};
+	}
+	
+	private ClickHandler getBranchDeleteHandler(final BranchBean branch) {
+		
+		return new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				
+				ConfirmDlg.confirm("Hapus cabang \"" + branch.getInstitution().getName() + "\" ?", new ClickHandler() {
+					
+					@Override
+					public void onClick(ClickEvent event) {
+						
+						//eventBus.deleteInstBranch(branch);
 					}
 				});
 			}

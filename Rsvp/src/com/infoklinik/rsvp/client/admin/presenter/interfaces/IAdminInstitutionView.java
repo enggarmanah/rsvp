@@ -65,7 +65,7 @@ public interface IAdminInstitutionView extends LazyView, IsWidget {
 	
 	void setGalleries(List<GalleryBean> galleries);
 	
-	void setBranches(List<BranchBean> branches);
+	void setBranches(List<GenericBean<BranchBean>> branches);
 	
 	void setLocationMenuClickHandler(ClickHandler handler);
 

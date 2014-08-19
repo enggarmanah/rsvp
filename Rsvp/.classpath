@@ -25,6 +25,6 @@
 	<classpathentry kind="lib" path="lib/gwtupload-0.6.6.jar"/>
 	<classpathentry kind="lib" path="lib/gwtupload-gae-0.6.6.jar"/>
 	<classpathentry kind="lib" path="lib/commons-io-2.4.jar"/>
-	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER/appengine-1.8.6"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER/App Engine"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

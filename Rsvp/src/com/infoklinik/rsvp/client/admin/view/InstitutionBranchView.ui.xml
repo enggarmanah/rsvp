@@ -2,13 +2,22 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:com.google.gwt.user.datepicker.client">
 	<g:HTMLPanel>
 		
-		<div id="profile-inst-title">
-			Cabang:
-		</div>
-		<div id="profile-inst-info">
-			<g:SimplePanel styleName="profile-inst-doctor-wrapper">
+		<div id="popup-edit">
+			
+		    <g:SimplePanel styleName="doctor-wrapper">
 				<g:FlowPanel ui:field="branchesPanel"></g:FlowPanel>
 			</g:SimplePanel>
+		    
+			<div class="doctor">
+			</div>
+			<div class="schedule">
+				<g:FocusPanel ui:field="addBranchBtn">
+				    <g:FlowPanel styleName="info-add">
+				        <g:Image url="images/case.png" styleName="menu-img"></g:Image>
+				        <g:Label text="Tambah Branch" styleName="menu-label"></g:Label>
+				    </g:FlowPanel>
+			    </g:FocusPanel>
+			</div>
 		</div>
 				
 	</g:HTMLPanel>

@@ -7,23 +7,8 @@
 				<g:Label ui:field="nameLb"></g:Label>
 			</div>
 			<div class="profile-inst-branch-contact">
-				<div class="inst-subinfo-icon">
-					<img src="images/building.png" class="contact-img"/>
-				</div>
 				<div class="inst-subinfo-content">
 					<g:Label ui:field="addressLb" styleName="contact-info"/>
-				</div>
-				<div class="inst-subinfo-icon">
-					<img src="images/phone.png" class="contact-img"/>
-				</div>
-				<div class="inst-subinfo-content">
-					<g:Label ui:field="telephoneLb"></g:Label>
-				</div>
-				<div class="inst-subinfo-icon">
-					<img src="images/mail.png" class="contact-img"/>
-				</div>
-				<div class="inst-subinfo-content">
-					<g:Label ui:field="emailLb"></g:Label>
 				</div>
 			</div>
 		</div>

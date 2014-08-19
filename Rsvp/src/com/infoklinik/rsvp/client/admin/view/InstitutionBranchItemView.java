@@ -20,23 +20,15 @@ public class InstitutionBranchItemView extends BaseView {
 	@UiField
 	Label addressLb;
 	
-	@UiField
-	Label telephoneLb;
-	
-	@UiField
-	Label emailLb;
-	
 	public InstitutionBranchItemView() {
 		
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 	
-	public void setInstitutionBean(InstitutionBean instBean) {
+	public void setInstitution(InstitutionBean instBean) {
 		
 		nameLb.setText(instBean.getName());
 		addressLb.setText(instBean.getAddress());
-		telephoneLb.setText(instBean.getTelephone());
-		emailLb.setText(instBean.getEmail());
 	}
 	
 	public Widget asWidget() {
