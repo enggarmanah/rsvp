@@ -18,7 +18,7 @@ public class SuggestionOracle extends SuggestOracle {
 	
 	public static String SEARCH_DOCTOR = "SEARCH_DOCTOR";
 	
-	public static String SEARCH_CLINIC = "SEARCH_CLINIC";
+	public static String SEARCH_INSTITUTION = "SEARCH_INSTITUTION";
 	
 	public static String SEARCH_MONTH = "SEARCH_MONTH";
 	
@@ -41,7 +41,14 @@ public class SuggestionOracle extends SuggestOracle {
 		
 		SuggestServiceAsync suggestService = (SuggestServiceAsync) GWT.create(SuggestService.class);
 		
-		if (SEARCH_PATIENT.equals(suggestParameter.getType())) {
+		if (SEARCH_INSTITUTION.equals(suggestParameter.getType())) {
+			
+			suggestParameter.setName(req.getQuery());
+			req.setQuery(suggestParameter.getSuggestQuery());
+			
+			suggestService.getInstitutions(req, new ItemRequestCallback(req, callback));
+			
+		} else if (SEARCH_PATIENT.equals(suggestParameter.getType())) {
 			
 			suggestService.getPatients(req, new ItemRequestCallback(req, callback));
 		

@@ -7,9 +7,11 @@ public class SuggestParameter {
 	private String type;
 	private String name;
 	private String cityId;
+	private String category;
 	
 	private static int nameIndex = 5;
 	private static int cityIdIndex = 7;
+	private static int categoryIndex = 9;
 	
 	public SuggestParameter() {}
 	
@@ -41,6 +43,14 @@ public class SuggestParameter {
 		this.cityId = cityId;
 	}
 	
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	public String getSuggestQuery() {
 		
 		StringBuffer query = new StringBuffer();
@@ -50,8 +60,12 @@ public class SuggestParameter {
 			params.add("name=" + name);
 		}
 		
-		if (!SharedUtil.isEmpty(name)) {
+		if (!SharedUtil.isEmpty(name) && !SharedUtil.isEmpty(cityId)) {
 			params.add("cityId=" + cityId);
+		}
+		
+		if (!SharedUtil.isEmpty(name) && !SharedUtil.isEmpty(category)) {
+			params.add("category=" + category);
 		}
 		
 		int i = 0;
@@ -75,6 +89,8 @@ public class SuggestParameter {
 				name = param.substring(nameIndex);
 			} else if (param.indexOf("cityId") != -1) {
 				cityId = param.substring(cityIdIndex);
+			} else if (param.indexOf("category") != -1) {
+				category = param.substring(categoryIndex);
 			} 
 		}
 	}

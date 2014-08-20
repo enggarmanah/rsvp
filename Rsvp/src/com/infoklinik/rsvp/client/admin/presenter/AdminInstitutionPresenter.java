@@ -116,6 +116,7 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 		initAddServiceBtnClickHandler();
 		initAddInsuranceBtnClickHandler();
 		initAddDoctorBtnClickHandler();
+		initAddBranchBtnClickHandler();
 		
 		initOkBtnClickHandler();
 		initCancelBtnClickHandler();
@@ -482,6 +483,22 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 				
 				eventBus.addInstitutionDoctor();
 				eventBus.setInstitutionExistingDoctors(doctors);
+			}
+		});
+	}
+	
+	private void initAddBranchBtnClickHandler() {
+		
+		view.setAddBranchBtnClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				
+				InstitutionBean inst = new InstitutionBean();
+				inst.setCategory(institution.getCategory());
+				
+				eventBus.addInstitutionBranch(inst);
+				eventBus.setInstitutionExistingBranches(branches);
 			}
 		});
 	}
@@ -993,7 +1010,7 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 					@Override
 					public void onClick(ClickEvent event) {
 						
-						//eventBus.deleteInstBranch(branch);
+						eventBus.deleteInstBranch(branch);
 					}
 				});
 			}
@@ -1062,5 +1079,29 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 		}
 		
 		return schedules;
+	}
+	
+	public void onAddInstBranch(BranchBean branch) {
+		
+		HandlerManager handlerMgr = new HandlerManager();
+		
+		handlerMgr.setDeleteHandler(getBranchDeleteHandler(branch));
+		
+		GenericBean<BranchBean> genBranch = new GenericBean<BranchBean>(branch, handlerMgr);
+		
+		branches.add(branch);
+		genBranches.add(genBranch);
+		
+		view.addBranch(genBranch);
+	}
+	
+	public void onDeleteInstBranch(BranchBean branch) {
+		
+		int index = branches.indexOf(branch);
+		
+		branches.remove(index);
+		GenericBean<BranchBean> genBranch = genBranches.remove(index);
+		
+		view.deleteBranch(genBranch);
 	}
 }

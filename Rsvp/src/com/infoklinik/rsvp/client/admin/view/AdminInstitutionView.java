@@ -186,6 +186,16 @@ public class AdminInstitutionView extends BaseView implements IAdminInstitutionV
 		branchView.setBranches(branches);
 	}
 	
+	public void addBranch(GenericBean<BranchBean> branch) {
+		
+		branchView.addBranch(branch);
+	}
+	
+	public void deleteBranch(GenericBean<BranchBean> branch) {
+		
+		branchView.deleteBranch(branch);
+	}
+	
 	public void setLocationMenuClickHandler(ClickHandler handler) {
 		
 		locationMenuLb.addClickHandler(handler);
@@ -224,6 +234,11 @@ public class AdminInstitutionView extends BaseView implements IAdminInstitutionV
 	public void setAddDoctorBtnClickHandler(ClickHandler handler) {
 		
 		doctorView.setAddDoctorBtnClickHandler(handler);
+	}
+	
+	public void setAddBranchBtnClickHandler(ClickHandler handler) {
+		
+		branchView.setAddBranchBtnClickHandler(handler);
 	}
 	
 	public void setOkBtnClickHandler(ClickHandler handler) {

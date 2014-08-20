@@ -14,7 +14,7 @@
 				<g:FocusPanel ui:field="addBranchBtn">
 				    <g:FlowPanel styleName="info-add">
 				        <g:Image url="images/case.png" styleName="menu-img"></g:Image>
-				        <g:Label text="Tambah Branch" styleName="menu-label"></g:Label>
+				        <g:Label text="Tambah Cabang" styleName="menu-label"></g:Label>
 				    </g:FlowPanel>
 			    </g:FocusPanel>
 			</div>

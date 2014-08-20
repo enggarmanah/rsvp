@@ -11,7 +11,7 @@ public interface SuggestService extends RemoteService {
 
 	public SuggestOracle.Response getDoctors(SuggestOracle.Request req);
 	
-	public SuggestOracle.Response getClinics(SuggestOracle.Request req);
+	public SuggestOracle.Response getInstitutions(SuggestOracle.Request req);
 	
 	public SuggestOracle.Response getCities(SuggestOracle.Request req);
 	

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.CustomLogger;
+import com.infoklinik.rsvp.client.admin.presenter.AdminInstitutionBranchPresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminInstitutionDoctorPresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminInstitutionDoctorSchedulePresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminInstitutionInsurancePresenter;
@@ -12,6 +13,7 @@ import com.infoklinik.rsvp.client.admin.presenter.AdminPresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminServicePresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminServiceTypeListPresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminServiceTypePresenter;
+import com.infoklinik.rsvp.shared.BranchBean;
 import com.infoklinik.rsvp.shared.DoctorBean;
 import com.infoklinik.rsvp.shared.InstitutionBean;
 import com.infoklinik.rsvp.shared.InsuranceBean;
@@ -114,4 +116,16 @@ public interface AdminEventBus extends EventBus {
 	
 	@Event(handlers = AdminInstitutionPresenter.class)
 	public void deleteInstDoctorSchedule(ScheduleBean schedule);
+	
+	@Event(handlers = AdminInstitutionBranchPresenter.class)
+	public void addInstitutionBranch(InstitutionBean institution);
+	
+	@Event(handlers = AdminInstitutionBranchPresenter.class)
+	public void setInstitutionExistingBranches(List<BranchBean> branches);
+	
+	@Event(handlers = AdminInstitutionPresenter.class)
+	public void addInstBranch(BranchBean institution);
+	
+	@Event(handlers = AdminInstitutionPresenter.class)
+	public void deleteInstBranch(BranchBean institution);
 }

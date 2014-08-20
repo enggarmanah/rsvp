@@ -9,7 +9,7 @@ public interface SuggestServiceAsync {
 	
 	public void getDoctors(SuggestOracle.Request req, AsyncCallback<SuggestOracle.Response> callback);
 	
-	public void getClinics(SuggestOracle.Request req, AsyncCallback<SuggestOracle.Response> callback);
+	public void getInstitutions(SuggestOracle.Request req, AsyncCallback<SuggestOracle.Response> callback);
 	
 	public void getCities(SuggestOracle.Request req, AsyncCallback<SuggestOracle.Response> callback);
 	

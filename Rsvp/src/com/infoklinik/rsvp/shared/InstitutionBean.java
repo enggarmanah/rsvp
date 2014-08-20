@@ -375,4 +375,44 @@ public class InstitutionBean extends BaseBean {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+	public void setBean(InstitutionBean instBean) {
+		
+		id = instBean.getId();
+		name = instBean.getName();
+		category = instBean.getCategory();
+		type = instBean.getType();
+		partnerType = instBean.getPartnerType();
+		telephone = instBean.getTelephone();
+		email = instBean.getEmail();
+		website= instBean.getWebsite();
+		facebook = instBean.getFacebook();
+		twitter = instBean.getTwitter();
+		
+		city = instBean.getCity();
+		region = instBean.getRegion();
+		street = instBean.getStreet();
+		services = instBean.getServices();
+		galleries = instBean.getGalleries();
+		insurances = instBean.getInsurances();
+		schedules = instBean.getSchedules();
+		address = instBean.getAddress();
+		
+		locationLat = instBean.getLocationLat();
+		locationLng = instBean.getLocationLng();
+		profile = instBean.getProfile();
+		opInfo = instBean.getOpInfo();
+		opHourStart = instBean.getOpHourStart();
+		opHourEnd = instBean.getOpHourEnd();
+		setOp24hours(instBean.isOp24hours());
+		residentialService = instBean.getResidentialService();
+		viewCount = instBean.getViewCount();
+		likeCount = instBean.getLikeCount();
+		commentCount = instBean.getCommentCount();
+		imageId = instBean.getImageId();
+		displayDate = instBean.getDisplayDate();
+		status = instBean.getStatus();
+		
+		setAuditBean(instBean.getAuditBean());
+	}
 }

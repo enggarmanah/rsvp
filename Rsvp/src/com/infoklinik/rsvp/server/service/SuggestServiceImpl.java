@@ -9,11 +9,14 @@ import com.infoklinik.rsvp.client.rpc.SuggestService;
 import com.infoklinik.rsvp.server.ReferenceUtil;
 import com.infoklinik.rsvp.server.dao.CityDAO;
 import com.infoklinik.rsvp.server.dao.DoctorDAO;
+import com.infoklinik.rsvp.server.dao.InstitutionDAO;
 import com.infoklinik.rsvp.server.dao.RegionDAO;
 import com.infoklinik.rsvp.server.dao.StreetDAO;
 import com.infoklinik.rsvp.shared.CityBean;
 import com.infoklinik.rsvp.shared.CitySearchBean;
 import com.infoklinik.rsvp.shared.DoctorBean;
+import com.infoklinik.rsvp.shared.InstitutionBean;
+import com.infoklinik.rsvp.shared.InstitutionSearchBean;
 import com.infoklinik.rsvp.shared.RegionBean;
 import com.infoklinik.rsvp.shared.RegionSearchBean;
 import com.infoklinik.rsvp.shared.SearchSuggestion;
@@ -64,11 +67,33 @@ public class SuggestServiceImpl extends BaseServiceServlet implements SuggestSer
 		return response;
 	}
 	
-	public SuggestOracle.Response getClinics(SuggestOracle.Request req) {
+	public SuggestOracle.Response getInstitutions(SuggestOracle.Request req) {
 
 		SuggestOracle.Response response = new SuggestOracle.Response();
+		InstitutionDAO institutionDao = new InstitutionDAO();
+		
+		SuggestParameter suggestParam = new SuggestParameter();
+		suggestParam.setSuggestQuery(req.getQuery());
+		
+		InstitutionSearchBean instSearch = new InstitutionSearchBean();
+		instSearch.setName(suggestParam.getName());
+		instSearch.setCategory(suggestParam.getCategory());
+		
+		String keyword = suggestParam.getName();
+		
+		List<InstitutionBean> institutions = institutionDao.getInstitutions(instSearch);
+		
 		List<SearchSuggestion> searchSuggestions = new ArrayList<SearchSuggestion>();
 		
+		for (int i = 0; i < institutions.size() && i < MAX_SUGGEST_LIMIT; i++) {
+			InstitutionBean instBean = institutions.get(i);
+			SearchSuggestion sg = new SearchSuggestion(instBean.getId().toString(), 
+					instBean.getName() + ", " + instBean.getAddress(), 
+					getHighlight(instBean.getName(), 
+					keyword) + ", " + instBean.getAddress());
+			searchSuggestions.add(sg);
+		}
+
 		response.setSuggestions(searchSuggestions);
 		
 		return response;
@@ -93,7 +118,10 @@ public class SuggestServiceImpl extends BaseServiceServlet implements SuggestSer
 		
 		for (int i = 0; i < cities.size() && i < MAX_SUGGEST_LIMIT; i++) {
 			CityBean cityBean = cities.get(i);
-			SearchSuggestion sg = new SearchSuggestion(cityBean.getId().toString(), cityBean.getName(), getHighlight(cityBean.getName(), keyword));
+			SearchSuggestion sg = new SearchSuggestion(cityBean.getId().toString(), 
+					cityBean.getName(), 
+					getHighlight(cityBean.getName(), 
+					keyword));
 			searchSuggestions.add(sg);
 		}
 
@@ -122,7 +150,10 @@ public class SuggestServiceImpl extends BaseServiceServlet implements SuggestSer
 		
 		for (int i = 0; i < regions.size() && i < MAX_SUGGEST_LIMIT; i++) {
 			RegionBean regionBean = regions.get(i);
-			SearchSuggestion sg = new SearchSuggestion(regionBean.getId().toString(), regionBean.getName(), getHighlight(regionBean.getName(), keyword));
+			SearchSuggestion sg = new SearchSuggestion(regionBean.getId().toString(), 
+					regionBean.getName(), 
+					getHighlight(regionBean.getName(), 
+					keyword));
 			searchSuggestions.add(sg);
 		}
 
@@ -151,7 +182,10 @@ public class SuggestServiceImpl extends BaseServiceServlet implements SuggestSer
 		
 		for (int i = 0; i < streets.size() && i < MAX_SUGGEST_LIMIT; i++) {
 			StreetBean streetBean = streets.get(i);
-			SearchSuggestion sg = new SearchSuggestion(streetBean.getId().toString(), streetBean.getName(), getHighlight(streetBean.getName(), keyword));
+			SearchSuggestion sg = new SearchSuggestion(streetBean.getId().toString(), 
+					streetBean.getName(), 
+					getHighlight(streetBean.getName(), 
+					keyword));
 			searchSuggestions.add(sg);
 		}
 

@@ -29,4 +29,7 @@ public class Message {
 	
 	public static String ERR_FILE_UPLOAD_EXCEED_MAX_SIZE = "Ukuran file melebihi besar maksimum (500 KB)";
 	public static String ERR_FILE_UPLOAD = "Gagal melaksanakan upload file ke server";
+	
+	public static String ERR_INST_EMPTY = "Institusi harus dipilih dari daftar institusi yang tersedia.";
+	public static String ERR_INST_EXIST = "Institusi telah terdaftar.";
 }
