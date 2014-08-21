@@ -1,7 +1,5 @@
 package com.infoklinik.rsvp.client.social.view;
 
-import java.util.Date;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -15,7 +13,6 @@ import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
 import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.social.presenter.interfaces.ICommentAddView;
-import com.infoklinik.rsvp.shared.AuditBean;
 import com.infoklinik.rsvp.shared.CommentBean;
 import com.infoklinik.rsvp.shared.Constant;
 import com.infoklinik.rsvp.shared.ServiceTypeSearchBean;
@@ -65,13 +62,7 @@ public class CommentAddView extends BaseView implements ICommentAddView {
 		comment.setFbName(socialUser.getName());
 		comment.setText(textTa.getText());
 		
-		AuditBean auditBean = new AuditBean();
-		auditBean.setCreateBy(Constant.SYSTEM_ID);
-		auditBean.setCreateDate(new Date());
-		auditBean.setUpdateBy(Constant.SYSTEM_ID);
-		auditBean.setUpdateDate(new Date());
-		
-		comment.setAuditBean(auditBean);
+		comment.setUpdateBy(ClientUtil.getUser().getName());
 		
 		return comment;
 	}

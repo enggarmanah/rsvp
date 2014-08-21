@@ -20,6 +20,7 @@ import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminInstitutionBr
 import com.infoklinik.rsvp.client.admin.view.AdminInstitutionBranchView;
 import com.infoklinik.rsvp.client.main.view.NotificationDlg;
 import com.infoklinik.rsvp.client.main.view.ProgressDlg;
+import com.infoklinik.rsvp.client.rpc.BranchServiceAsync;
 import com.infoklinik.rsvp.client.rpc.InstitutionServiceAsync;
 import com.infoklinik.rsvp.shared.BranchBean;
 import com.infoklinik.rsvp.shared.InstitutionBean;
@@ -34,7 +35,12 @@ public class AdminInstitutionBranchPresenter extends LazyPresenter<IAdminInstitu
 	@Inject
 	InstitutionServiceAsync institutionService;
 	
+	@Inject
+	BranchServiceAsync branchService;
+	
 	BranchBean branch;
+	boolean hasGroupId;
+	Long mainInstId;
 	
 	List<BranchBean> existingBranches;
 	List<String> errorMessages;
@@ -48,6 +54,9 @@ public class AdminInstitutionBranchPresenter extends LazyPresenter<IAdminInstitu
 	}
 	
 	public void onAddInstitutionBranch(InstitutionBean institution) {
+		
+		hasGroupId = false;
+		mainInstId = institution.getId();
 		
 		branch = new BranchBean();
 		branch.setInstitution(institution);
@@ -68,6 +77,8 @@ public class AdminInstitutionBranchPresenter extends LazyPresenter<IAdminInstitu
 			@Override
 			public void onSelection(SelectionEvent<Suggestion> event) {
 				
+				ProgressDlg.show();
+				
 				branch = view.getBranch();
 				
 				SearchSuggestion suggestion = (SearchSuggestion) event.getSelectedItem();
@@ -75,6 +86,22 @@ public class AdminInstitutionBranchPresenter extends LazyPresenter<IAdminInstitu
 				InstitutionBean institution = branch.getInstitution();
 				institution.setId(Long.valueOf(suggestion.getValue()));
 				institution.setName(suggestion.getReplacementString());
+				
+				branchService.getGroupId(branch.getInstitution().getId(), new AsyncCallback<Long>() {
+					
+					@Override
+					public void onSuccess(Long result) {
+						
+						branch.setGroupId(result);
+						ProgressDlg.hidePrompt();
+					}
+					
+					@Override
+					public void onFailure(Throwable caught) {
+						
+						ProgressDlg.failure();
+					}
+				});
 			}
 		});
 	}
@@ -97,12 +124,38 @@ public class AdminInstitutionBranchPresenter extends LazyPresenter<IAdminInstitu
 						@Override
 						public void onSuccess(InstitutionBean result) {
 							
-							branch.setInstitution(result);
+							InstitutionBean institution = result;
 							
+							branch.setInstitution(institution);
 							eventBus.addInstBranch(branch);
+							
+							if (hasGroupId) {
 								
-							view.hide();
-							ProgressDlg.hide();
+								view.hide();
+								ProgressDlg.hide();
+								
+							} else {
+								
+								branchService.getBranches(institution.getId(), new AsyncCallback<List<BranchBean>>() {
+									
+									@Override
+									public void onSuccess(List<BranchBean> result) {
+										
+										List<BranchBean> branches = result;
+										for (BranchBean branch : branches) {
+											eventBus.addInstBranch(branch);											
+										}
+										
+										view.hide();
+										ProgressDlg.hide();
+									}
+									
+									@Override
+									public void onFailure(Throwable caught) {
+										ProgressDlg.failure();
+									}
+								});
+							} 
 						}
 						
 						@Override
@@ -143,6 +196,11 @@ public class AdminInstitutionBranchPresenter extends LazyPresenter<IAdminInstitu
 			isValidated = false;
 			errorMessages.add(Message.ERR_INST_EMPTY);
 		
+		} else if (mainInstId == inst.getId()) { 
+			
+			isValidated = false;
+			errorMessages.add(Message.ERR_INST_BRANCH_CIRCULAR);
+			
 		} else if (!ClientUtil.isEmpty(inst.getName()) &&
 				!inst.getName().equals(branch.getInstitution().getName())) {
 			
@@ -156,8 +214,19 @@ public class AdminInstitutionBranchPresenter extends LazyPresenter<IAdminInstitu
 				if (existingBranch.getInstitution().getId().equals(branch.getInstitution().getId())) {
 					
 					isValidated = false;
-					errorMessages.add(Message.ERR_INST_DOCTOR_EXIST);
+					errorMessages.add(Message.ERR_INST_EXIST);
 					break;
+				
+				} else if (existingBranch.getGroupId() != null && branch.getGroupId() != null &&
+					!existingBranch.getGroupId().equals(branch.getGroupId())) {
+					
+					isValidated = false;
+					errorMessages.add(Message.ERR_INST_BRANCH_GRP_DIFF);
+					break;
+				}
+				
+				if (!hasGroupId && existingBranch.getGroupId() != null) {
+					hasGroupId = true;
 				}
 			}
 		}

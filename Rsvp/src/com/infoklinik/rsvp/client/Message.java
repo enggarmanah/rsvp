@@ -32,4 +32,7 @@ public class Message {
 	
 	public static String ERR_INST_EMPTY = "Institusi harus dipilih dari daftar institusi yang tersedia.";
 	public static String ERR_INST_EXIST = "Institusi telah terdaftar.";
+	
+	public static String ERR_INST_BRANCH_GRP_DIFF = "Institusi telah terdaftar di group cabang yang berbeda.";
+	public static String ERR_INST_BRANCH_CIRCULAR = "Institusi utama tidak dapat didaftarkan menjadi institusi cabang.";
 }

@@ -1,7 +1,9 @@
 package com.infoklinik.rsvp.server.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -64,6 +66,76 @@ public class BranchDAO {
 		return branchBean;
 	}
 	
+	public List<BranchBean> updateBranches(List<BranchBean> branchBeans) {
+
+		Map<Long, Branch> branchMap = new HashMap<Long, Branch>();
+		
+		EntityManager em = PersistenceManager.getEntityManager();
+		
+		Long groupId = null;
+		
+		for (BranchBean branchBean : branchBeans) {
+			
+			if (branchBean.getGroupId() != null) {
+				groupId = branchBean.getGroupId();
+				break;
+			}
+		}
+		
+		if (groupId != null) {
+			
+			String sql = "SELECT b FROM Branch b WHERE b.group_id = :groupId";
+			
+			TypedQuery<Branch> query = em.createQuery(sql, Branch.class);
+			
+			query.setParameter("groupId", groupId);
+			
+			List<Branch> result = query.getResultList();
+
+			for (Branch branch : result) {
+				branchMap.put(branch.getId(), branch);
+			}
+			
+		} else {
+			
+			String sql = "SELECT MAX(group_id) FROM Branch b";
+			
+			Long maxId = (Long) em.createQuery(sql).getSingleResult();
+			
+			if (maxId == null) {
+				maxId = Long.valueOf(0);
+			}
+			
+			groupId = maxId + 1;
+		} 
+		
+		for (BranchBean branchBean : branchBeans) {
+			
+			Branch branch = branchMap.remove(branchBean.getId());
+			
+			if (branch != null) {
+				branch.setBean(branchBean, em);
+			} else {
+				branch = new Branch();
+				branch.setBean(branchBean, em);
+				branch.setGroup_id(groupId);
+				
+				em.persist(branch);
+				
+				branchBean.setId(branch.getId());
+			}
+		}
+		
+		for (Long key : branchMap.keySet()) {
+			Branch branch = branchMap.get(key);
+			em.remove(branch);
+		}
+		
+		em.close();
+
+		return branchBeans;
+	}
+	
 	public List<BranchBean> getBranches(Long instId) {
 		
 		List<BranchBean> list = new ArrayList<BranchBean>();
@@ -85,5 +157,34 @@ public class BranchDAO {
 		em.close();
 
 		return list;
+	}
+	
+	public Long getGroupId(Long instId) {
+		
+		Long groupId = null;
+		
+		String sql = "SELECT b FROM Branch b JOIN b.institution i WHERE i.id = :instId";
+		
+		EntityManager em = PersistenceManager.getEntityManager();
+		
+		TypedQuery<Branch> query = em.createQuery(sql, Branch.class);
+		
+		query.setParameter("instId", instId);
+		
+		Branch branch = null;
+		
+		try {
+			branch = query.getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		em.close();
+		
+		if (branch != null) {
+			groupId = branch.getGroup_id();
+		}
+
+		return groupId;
 	}
 }

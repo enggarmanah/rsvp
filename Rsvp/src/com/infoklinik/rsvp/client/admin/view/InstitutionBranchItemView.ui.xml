@@ -3,14 +3,21 @@
 	<g:HTMLPanel>
 		
 		<div class="profile-inst-branch">
-			<div class="profile-inst-branch-name">
-				<g:Label ui:field="nameLb"></g:Label>
-			</div>
-			<div class="profile-inst-branch-contact">
-				<div class="inst-subinfo-content">
-					<g:Label ui:field="addressLb" styleName="contact-info"/>
+		    <div>
+		        <div class="branch-info">
+					<div class="profile-inst-branch-name-edit">
+						<g:Label ui:field="nameLb"></g:Label>
+					</div>
+					<div class="profile-inst-branch-contact-edit">
+						<div class="inst-subinfo-content">
+							<g:Label ui:field="addressLb" styleName="contact-info"/>
+						</div>
+					</div>
 				</div>
-			</div>
+				<div class="branch-delete">
+				    <g:Image ui:field="deleteImg" url="images/delete.png"/>
+				</div>
+			</div>			
 		</div>
 				
 	</g:HTMLPanel>

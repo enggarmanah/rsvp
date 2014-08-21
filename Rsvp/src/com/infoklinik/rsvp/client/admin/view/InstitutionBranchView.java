@@ -41,6 +41,7 @@ public class InstitutionBranchView extends BaseView {
 			
 			InstitutionBranchItemView branchItemView = new InstitutionBranchItemView();
 			branchItemView.setInstitution(branch.getBean().getInstitution());
+			branchItemView.setDeleteClickHandler(branch.getHandlerMgr().getDeleteHandler());
 			
 			branchesPanel.add(branchItemView);
 			branchViewMap.put(branch, branchItemView);
@@ -51,6 +52,7 @@ public class InstitutionBranchView extends BaseView {
 		
 		InstitutionBranchItemView branchItemView = new InstitutionBranchItemView();
 		branchItemView.setInstitution(branch.getBean().getInstitution());
+		branchItemView.setDeleteClickHandler(branch.getHandlerMgr().getDeleteHandler());
 		
 		branchesPanel.add(branchItemView);
 		branchViewMap.put(branch, branchItemView);
@@ -60,6 +62,7 @@ public class InstitutionBranchView extends BaseView {
 		
 		InstitutionBranchItemView branchItemView = branchViewMap.get(branch);
 		branchItemView.setInstitution(branch.getBean().getInstitution());
+		branchItemView.setDeleteClickHandler(branch.getHandlerMgr().getDeleteHandler());
 	}
 	
 	public void deleteBranch(GenericBean<BranchBean> branch) {

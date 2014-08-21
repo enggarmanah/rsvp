@@ -9,5 +9,9 @@ import com.infoklinik.rsvp.shared.BranchBean;
 @RemoteServiceRelativePath("branchService")
 public interface BranchService extends RemoteService {
 	
-	List<BranchBean> getBranches(Long instId);	
+	List<BranchBean> getBranches(Long instId);
+	
+	Long getGroupId(Long instId);
+	
+	List<BranchBean> updateBranches(List<BranchBean> branches);
 }

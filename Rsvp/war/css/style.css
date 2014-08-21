@@ -1523,7 +1523,15 @@ input.search-field:focus {
 
 .profile-inst-branch-name {
 	font: bold 13px 'Comic Sans MS';
-	color: #555;
+	color: #444;
+	width: 100%;
+	display: block;
+	float: left;
+}
+
+.profile-inst-branch-name-edit {
+	font: bold 11px 'Tahoma';
+	color: #444;
 	width: 100%;
 	display: block;
 	float: left;
@@ -1534,6 +1542,34 @@ input.search-field:focus {
 	border: 0px solid #999;
 	overflow: auto;
 	float: left;
+}
+
+.profile-inst-branch-contact-edit {
+	padding: 0px 0px 0px 0px;
+	border: 0px solid #999;
+	overflow: auto;
+	float: left;
+}
+
+.profile-inst-branch-contact-edit .inst-subinfo-content {
+	line-height: 14px;
+	padding: 0px 0px 7px 0px;
+	overflow: auto;
+	font: normal 11px 'Tahoma';
+}
+
+.profile-inst-branch .branch-info {
+	float: left;
+	vertical-align: top;
+	border: 0px solid #AAA;
+	width: 225px;
+}
+
+.profile-inst-branch .branch-delete {
+	float: left;
+	vertical-align: top;
+	border: 0px solid #AAA;
+	cursor: pointer;
 }
 
 .profile-inst-doctor-wrapper {
@@ -1919,6 +1955,10 @@ input.search-field:focus {
 	line-height: 16px;
 }
 
+#popup-edit .branch-wrapper {
+	padding: 5px 0px 0px 0px;
+}
+
 #popup-edit .gallery-logo {
 	float: left;
 	border: 1px solid #AAA;
@@ -2054,6 +2094,12 @@ input.search-field:focus {
 #popup-edit .schedule {
 	float: left;
 	width: 200px;
+	border: 0px solid #AAA;
+	padding: 2px 0px 2px 0px;
+}
+
+#popup-edit .branch-add {
+	float: right;
 	border: 0px solid #AAA;
 	padding: 2px 0px 2px 0px;
 }

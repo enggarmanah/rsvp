@@ -4,13 +4,11 @@
 		
 		<div id="popup-edit">
 			
-		    <g:SimplePanel styleName="doctor-wrapper">
+		    <g:SimplePanel styleName="branch-wrapper">
 				<g:FlowPanel ui:field="branchesPanel"></g:FlowPanel>
 			</g:SimplePanel>
 		    
-			<div class="doctor">
-			</div>
-			<div class="schedule">
+			<div class="branch-add">
 				<g:FocusPanel ui:field="addBranchBtn">
 				    <g:FlowPanel styleName="info-add">
 				        <g:Image url="images/case.png" styleName="menu-img"></g:Image>

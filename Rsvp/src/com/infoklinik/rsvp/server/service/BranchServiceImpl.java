@@ -16,4 +16,18 @@ public class BranchServiceImpl extends BaseServiceServlet implements BranchServi
 		
 		return branches;
 	}
+	
+	public Long getGroupId(Long instId) {
+		
+		BranchDAO branchDao = new BranchDAO();
+		return branchDao.getGroupId(instId);
+	}
+	
+	public List<BranchBean> updateBranches(List<BranchBean> branches) {
+		
+		BranchDAO branchDao = new BranchDAO();
+		branches = branchDao.updateBranches(branches);
+		
+		return branches;
+	}
 }

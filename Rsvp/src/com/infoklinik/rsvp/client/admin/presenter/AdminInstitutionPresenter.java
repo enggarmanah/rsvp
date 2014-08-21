@@ -495,6 +495,7 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 			public void onClick(ClickEvent event) {
 				
 				InstitutionBean inst = new InstitutionBean();
+				inst.setId(institution.getId());
 				inst.setCategory(institution.getCategory());
 				
 				eventBus.addInstitutionBranch(inst);
@@ -1028,8 +1029,7 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 			@Override
 			public void onSuccess(InstitutionBean result) {
 				institution = result;
-				ProgressDlg.hide();
-				view.hide();
+				updateBranches(branches);
 			}
 			
 			@Override
@@ -1050,12 +1050,30 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 			@Override
 			public void onSuccess(InstitutionBean result) {
 				institution = result;
+				updateBranches(branches);
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				ProgressDlg.failure();
+			}
+		});
+	}
+	
+	private void updateBranches(List<BranchBean> ranches) {
+		
+		branchService.updateBranches(branches, new AsyncCallback<List<BranchBean>>() {
+			
+			@Override
+			public void onSuccess(List<BranchBean> result) {
+				
 				ProgressDlg.hide();
 				view.hide();
 			}
 			
 			@Override
 			public void onFailure(Throwable caught) {
+				
 				ProgressDlg.failure();
 			}
 		});

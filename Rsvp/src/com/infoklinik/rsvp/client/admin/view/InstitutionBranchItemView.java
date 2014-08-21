@@ -1,8 +1,10 @@
 package com.infoklinik.rsvp.client.admin.view;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
@@ -20,6 +22,9 @@ public class InstitutionBranchItemView extends BaseView {
 	@UiField
 	Label addressLb;
 	
+	@UiField
+	Image deleteImg;
+	
 	public InstitutionBranchItemView() {
 		
 		initWidget(uiBinder.createAndBindUi(this));
@@ -29,6 +34,11 @@ public class InstitutionBranchItemView extends BaseView {
 		
 		nameLb.setText(instBean.getName());
 		addressLb.setText(instBean.getAddress());
+	}
+	
+	public void setDeleteClickHandler(ClickHandler handler) {
+		
+		deleteImg.addClickHandler(handler);
 	}
 	
 	public Widget asWidget() {
