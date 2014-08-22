@@ -350,6 +350,8 @@ public class Institution extends Base {
 			street = em.find(Street.class, instBean.getStreet().getId());
 		}
 		
+		// updating service
+		
 		if (instBean.getServices() != null) {
 			
 			HashMap<Long, Service> serviceMap = new HashMap<Long, Service>();
@@ -379,6 +381,8 @@ public class Institution extends Base {
 			}
 		}
 		
+		// updating gallery
+		
 		if (instBean.getGalleries() != null) {
 			
 			HashMap<Long, Gallery> galleryMap = new HashMap<Long, Gallery>();
@@ -404,8 +408,13 @@ public class Institution extends Base {
 			for (Long key : galleryMap.keySet()) {
 				Gallery gallery = galleryMap.get(key);
 				galleries.remove(gallery);
+				
+				Image image = em.find(Image.class, gallery.getImage_id());
+				em.remove(image);
 			}
 		}
+		
+		// updating insurance
 		
 		if (instBean.getInsurances() != null) {
 			
@@ -434,6 +443,8 @@ public class Institution extends Base {
 				insurances.remove(insurance);
 			}
 		}
+		
+		// updating schedule
 		
 		if (instBean.getSchedules() != null) {
 			
@@ -475,7 +486,14 @@ public class Institution extends Base {
 		view_count = instBean.getViewCount();
 		like_count = instBean.getLikeCount();
 		comment_count = instBean.getCommentCount();
+		
+		if (image_id != null && image_id != instBean.getImageId()) {
+			Image image = em.find(Image.class, image_id);
+			em.remove(image);
+		}
+		
 		image_id = instBean.getImageId();
+				
 		display_date = instBean.getDisplayDate();
 		status = instBean.getStatus();
 		

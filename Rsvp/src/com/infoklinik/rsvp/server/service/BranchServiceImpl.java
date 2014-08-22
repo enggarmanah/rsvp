@@ -5,6 +5,7 @@ import java.util.List;
 import com.infoklinik.rsvp.client.rpc.BranchService;
 import com.infoklinik.rsvp.server.dao.BranchDAO;
 import com.infoklinik.rsvp.shared.BranchBean;
+import com.infoklinik.rsvp.shared.InstitutionBean;
 
 @SuppressWarnings("serial")
 public class BranchServiceImpl extends BaseServiceServlet implements BranchService {
@@ -23,10 +24,10 @@ public class BranchServiceImpl extends BaseServiceServlet implements BranchServi
 		return branchDao.getGroupId(instId);
 	}
 	
-	public List<BranchBean> updateBranches(List<BranchBean> branches) {
+	public List<BranchBean> updateBranches(InstitutionBean institution, List<BranchBean> branches) {
 		
 		BranchDAO branchDao = new BranchDAO();
-		branches = branchDao.updateBranches(branches);
+		branches = branchDao.updateBranches(institution, branches);
 		
 		return branches;
 	}

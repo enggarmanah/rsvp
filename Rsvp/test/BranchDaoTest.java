@@ -29,10 +29,9 @@ public class BranchDaoTest {
 		b3.setInstitution(inst3);
 		
 		List<BranchBean> list = new ArrayList<BranchBean>();
-		list.add(b1);
 		list.add(b2);
 		list.add(b3);
 		
-		branchDao.updateBranches(list);
+		branchDao.updateBranches(inst1, list);
 	}
 }

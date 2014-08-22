@@ -5,6 +5,7 @@ import java.util.List;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 import com.infoklinik.rsvp.shared.BranchBean;
+import com.infoklinik.rsvp.shared.InstitutionBean;
 
 @RemoteServiceRelativePath("branchService")
 public interface BranchService extends RemoteService {
@@ -13,5 +14,5 @@ public interface BranchService extends RemoteService {
 	
 	Long getGroupId(Long instId);
 	
-	List<BranchBean> updateBranches(List<BranchBean> branches);
+	List<BranchBean> updateBranches(InstitutionBean institution, List<BranchBean> branches);
 }

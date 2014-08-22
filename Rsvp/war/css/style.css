@@ -1509,11 +1509,14 @@ input.search-field:focus {
 	font: normal 12px 'Tahoma';
 }
 
-.profile-inst-galery {
-	padding: 2px 2px;
-	border: 1px solid #BBB;
+.profile-inst-galery-wrapper {
 	overflow: hidden;
-	width: 422px;
+	padding: 2px 2px 0px 2px;
+	border: 1px solid #BBB;
+}
+
+.profile-inst-galery {
+	/*width: 422px;*/
 	height: 362px;
 }
 
@@ -1570,6 +1573,7 @@ input.search-field:focus {
 	vertical-align: top;
 	border: 0px solid #AAA;
 	cursor: pointer;
+	padding-top: 3px;
 }
 
 .profile-inst-doctor-wrapper {
@@ -1976,14 +1980,58 @@ input.search-field:focus {
 	float: left;
 	border: 1px solid #AAA;
 	padding: 5px 5px 5px 5px;
-	height: 165px;
+	height: 220px;
 	width: 315px;
 	overflow: auto;
 }
 
-#popup-edit .gallery-gallery .gwt-Image {
+#popup-edit .gallery-gallery .gallery-item {
+	float: left;
+	border: 1px solid #888;
+	margin: 0px 3px 3px 0px;
+	background: #EEE;
+}
+
+#popup-edit .gallery-gallery .gallery-item .gallery-image {
+	padding: 0px 0px;
+	margin: 0px 0px;
+}
+
+#popup-edit .gallery-gallery .gallery-item .gallery-image .gwt-Image {
 	max-height: 80px;
-	padding: 0px 5px 2px 0px;
+	padding: 2px 2px 0px 2px;
+	border: 0px solid #AAA;
+}
+
+#popup-edit .gallery-gallery .gallery-item .gallery-button-wrapper {
+	font: bold 11px Tahoma;
+	background: #EEF5F9;
+	border-top: 1px solid #AAA;
+	overflow: auto;
+	height: 21px;
+}
+
+#popup-edit .gallery-gallery .gallery-item .gallery-button-wrapper:hover {
+	background: #BCD5E3;
+	cursor: pointer;
+}
+
+#popup-edit .gallery-gallery .gallery-item .gallery-button {
+	margin-left: auto;
+	margin-right: auto;
+	border: 0px solid #AAA;
+	overflow: auto;
+	width: 70px;
+}
+
+#popup-edit .gallery-gallery .gallery-item .gallery-button .delete-icon {
+	float: left;
+	padding: 2px 5px 0px 5px;
+}
+
+#popup-edit .gallery-gallery .gallery-item .gallery-button .delete-text {
+	float: left;
+	padding: 3px 0px 0px 0px;
 }
 
 #popup-edit .gallery-upload {
@@ -1991,6 +2039,7 @@ input.search-field:focus {
 
 #popup-edit .gallery-upload .gwt-FileUpload {
 	font: normal 11px Tahoma;
+	color: #555;
 	width: 315px;
 }
 

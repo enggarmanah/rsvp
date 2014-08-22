@@ -11,6 +11,8 @@ import gwtupload.client.SingleUploader;
 import java.util.List;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -135,10 +137,26 @@ public class InstitutionGalleryView extends BaseView {
 				
 				String imageId = info.message;
 				
-				GalleryBean gallery = new GalleryBean();
+				final GalleryBean gallery = new GalleryBean();
 				gallery.setInstitution(institution);
 				gallery.setImageId(Long.valueOf(imageId));
 				galleries.add(gallery);
+				
+				Image galleryImg = new Image();
+				galleryImg.setUrl(Constant.IMAGE_URL + gallery.getImageId());
+				
+				final InstitutionGalleryItemView galleryItem = new InstitutionGalleryItemView();
+				galleryItem.setImage(galleryImg);
+				galleryItem.setDeleteBtnClickHandler(new ClickHandler() {
+					
+					@Override
+					public void onClick(ClickEvent event) {
+						galleryPanel.remove(galleryItem);
+						galleries.remove(gallery);
+					}
+				});
+				
+				galleryPanel.add(galleryItem);
 				
 				ProgressDlg.hide();
 			}
@@ -154,9 +172,7 @@ public class InstitutionGalleryView extends BaseView {
 	};
 	
 	private OnLoadPreloadedImageHandler showGallery = new OnLoadPreloadedImageHandler() {
-		public void onLoad(PreloadedImage image) {
-			galleryPanel.add(image);
-		}
+		public void onLoad(PreloadedImage image) {}
 	};
 	
 	public void setGalleries(final List<GalleryBean> galleries) {
@@ -164,11 +180,24 @@ public class InstitutionGalleryView extends BaseView {
 		this.galleries = galleries;
 		galleryPanel.clear();
 		
-		for (GalleryBean gallery : galleries) {
+		for (final GalleryBean gallery : galleries) {
 			
 			Image galleryImg = new Image();
 			galleryImg.setUrl(Constant.IMAGE_URL + gallery.getImageId());
-			galleryPanel.add(galleryImg);
+			
+			final InstitutionGalleryItemView galleryItem = new InstitutionGalleryItemView();
+			
+			galleryItem.setImage(galleryImg);
+			galleryItem.setDeleteBtnClickHandler(new ClickHandler() {
+				
+				@Override
+				public void onClick(ClickEvent event) {
+					galleryPanel.remove(galleryItem);
+					galleries.remove(gallery);
+				}
+			});
+			
+			galleryPanel.add(galleryItem);
 		}
 	}
 	

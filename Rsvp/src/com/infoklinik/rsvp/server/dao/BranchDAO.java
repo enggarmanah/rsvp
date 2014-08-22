@@ -4,15 +4,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import com.infoklinik.rsvp.server.PersistenceManager;
 import com.infoklinik.rsvp.server.model.Branch;
 import com.infoklinik.rsvp.shared.BranchBean;
+import com.infoklinik.rsvp.shared.InstitutionBean;
 
 public class BranchDAO {
+		
+	private static final Logger log = Logger.getLogger(BranchDAO.class.getName());
 	
 	public BranchBean getBranch(Long id) {
 
@@ -66,7 +71,7 @@ public class BranchDAO {
 		return branchBean;
 	}
 	
-	public List<BranchBean> updateBranches(List<BranchBean> branchBeans) {
+	public List<BranchBean> updateBranches(InstitutionBean institutionBean, List<BranchBean> branchBeans) {
 
 		Map<Long, Branch> branchMap = new HashMap<Long, Branch>();
 		
@@ -82,6 +87,21 @@ public class BranchDAO {
 			}
 		}
 		
+		if (groupId == null) {
+			
+			String sql = "SELECT DISTINCT group_id FROM Branch b JOIN b.institution i WHERE i.id = :instId";
+				
+			Query query = em.createQuery(sql);
+				
+			query.setParameter("instId", institutionBean.getId());
+				
+			try {
+				groupId =  (Long) query.getSingleResult();
+			} catch (Exception e) {
+				log.warning(e.getMessage());
+			}
+		}
+		
 		if (groupId != null) {
 			
 			String sql = "SELECT b FROM Branch b WHERE b.group_id = :groupId";
@@ -93,7 +113,7 @@ public class BranchDAO {
 			List<Branch> result = query.getResultList();
 
 			for (Branch branch : result) {
-				branchMap.put(branch.getId(), branch);
+				branchMap.put(branch.getInstitution().getId(), branch);
 			}
 			
 		} else {
@@ -111,7 +131,7 @@ public class BranchDAO {
 		
 		for (BranchBean branchBean : branchBeans) {
 			
-			Branch branch = branchMap.remove(branchBean.getId());
+			Branch branch = branchMap.remove(branchBean.getInstitution().getId());
 			
 			if (branch != null) {
 				branch.setBean(branchBean, em);
@@ -124,6 +144,19 @@ public class BranchDAO {
 				
 				branchBean.setId(branch.getId());
 			}
+		}
+		
+		Branch mainBranch = branchMap.remove(institutionBean.getId());
+		if (mainBranch == null) {
+			
+			BranchBean branchBean = new BranchBean();
+			branchBean.setInstitution(institutionBean);
+			branchBean.setGroupId(groupId);
+			branchBean.setUpdateBy(institutionBean.getUpdateBy());
+			
+			Branch branch = new Branch();
+			branch.setBean(branchBean, em);
+			em.persist(branch);
 		}
 		
 		for (Long key : branchMap.keySet()) {
@@ -176,7 +209,7 @@ public class BranchDAO {
 		try {
 			branch = query.getSingleResult();
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.warning(e.getMessage());
 		}
 		
 		em.close();

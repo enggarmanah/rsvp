@@ -1029,7 +1029,7 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 			@Override
 			public void onSuccess(InstitutionBean result) {
 				institution = result;
-				updateBranches(branches);
+				updateBranches(institution, branches);
 			}
 			
 			@Override
@@ -1050,7 +1050,7 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 			@Override
 			public void onSuccess(InstitutionBean result) {
 				institution = result;
-				updateBranches(branches);
+				updateBranches(institution, branches);
 			}
 			
 			@Override
@@ -1060,9 +1060,20 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 		});
 	}
 	
-	private void updateBranches(List<BranchBean> ranches) {
+	private void updateBranches(InstitutionBean institution, List<BranchBean> branches) {
 		
-		branchService.updateBranches(branches, new AsyncCallback<List<BranchBean>>() {
+		if (branches == null) {
+			
+			ProgressDlg.hide();
+			view.hide();
+			return;
+		}
+		
+		for (BranchBean branch : branches) {
+			branch.setUpdateBy(ClientUtil.getUser().getName());
+		}
+		
+		branchService.updateBranches(institution, branches, new AsyncCallback<List<BranchBean>>() {
 			
 			@Override
 			public void onSuccess(List<BranchBean> result) {

@@ -6,9 +6,11 @@
 			Galeri:
 		</div>
 		<div id="profile-inst-info">
-		    <g:SimplePanel ui:field="imagePanel">
-		    	<g:Image ui:field="galleryImg" styleName="profile-inst-galery"></g:Image>
-		    </g:SimplePanel>
+		    <div class="profile-inst-galery-wrapper">
+			    <g:SimplePanel ui:field="imagePanel">
+			    	<g:Image ui:field="galleryImg" styleName="profile-inst-galery"></g:Image>
+			    </g:SimplePanel>
+		    </div>
 		</div>
 				
 	</g:HTMLPanel>
