@@ -19,10 +19,8 @@ import com.mvp4g.client.event.EventBusWithLookup;
 import com.infoklinik.rsvp.client.CustomLogger;
 import com.infoklinik.rsvp.client.admin.AdminModule;
 import com.infoklinik.rsvp.client.admin.AdminStatisticModule;
-import com.infoklinik.rsvp.client.clinic.ClinicModule;
 import com.infoklinik.rsvp.client.doctor.DoctorModule;
-import com.infoklinik.rsvp.client.hospital.HospitalModule;
-import com.infoklinik.rsvp.client.lab.LabModule;
+import com.infoklinik.rsvp.client.inst.InstitutionModule;
 import com.infoklinik.rsvp.client.main.presenter.MainPresenter;
 import com.infoklinik.rsvp.client.partner.PartnerModule;
 import com.infoklinik.rsvp.client.promo.PromoModule;
@@ -37,9 +35,7 @@ import com.infoklinik.rsvp.shared.SocialUser;
 @Events(startPresenter = MainPresenter.class)
 @ChildModules({
 	@ChildModule(moduleClass = MenuModule.class),
-	@ChildModule(moduleClass = ClinicModule.class),
-	@ChildModule(moduleClass = HospitalModule.class),
-	@ChildModule(moduleClass = LabModule.class),
+	@ChildModule(moduleClass = InstitutionModule.class),
 	@ChildModule(moduleClass = DoctorModule.class), 
 	@ChildModule(moduleClass = ServiceModule.class), 
 	@ChildModule(moduleClass = AdminModule.class),
@@ -73,9 +69,7 @@ public interface MainEventBus extends EventBusWithLookup {
 	
 	@DisplayChildModuleView(
 			{AdminModule.class,
-			 ClinicModule.class,
-			 HospitalModule.class,
-			 LabModule.class,
+			 InstitutionModule.class,
 			 DoctorModule.class,
 			 ServiceModule.class,
 			 SocialModule.class})
@@ -104,19 +98,19 @@ public interface MainEventBus extends EventBusWithLookup {
 	@Event(forwardToModules=MenuModule.class) 
 	public void loadMenu();
 	
-	@Event(forwardToModules=ClinicModule.class) 
+	@Event(forwardToModules=InstitutionModule.class) 
 	public void loadClinicSearch();
 	
-	@Event(forwardToModules=ClinicModule.class) 
+	@Event(forwardToModules=InstitutionModule.class) 
 	public void removeClinicSearch();
 	
-	@Event(forwardToModules=HospitalModule.class) 
+	@Event(forwardToModules=InstitutionModule.class) 
 	public void loadHospitalSearch();
 	
-	@Event(forwardToModules=LabModule.class) 
+	@Event(forwardToModules=InstitutionModule.class) 
 	public void loadLabSearch();
 	
-	@Event(forwardToModules=HospitalModule.class) 
+	@Event(forwardToModules=InstitutionModule.class) 
 	public void removeHospitalSearch();
 	
 	@Event(forwardToModules=DoctorModule.class) 
@@ -137,14 +131,8 @@ public interface MainEventBus extends EventBusWithLookup {
 	@Event(forwardToModules=AdminModule.class)
 	public void updateInstitution(InstitutionBean institution);
 	
-	@Event(forwardToModules=ClinicModule.class) 
-	public void loadClinicProfile(InstitutionBean institution);
-	
-	@Event(forwardToModules=HospitalModule.class) 
-	public void loadHospitalProfile(InstitutionBean institution);
-	
-	@Event(forwardToModules=LabModule.class) 
-	public void loadLabProfile(InstitutionBean institution);
+	@Event(forwardToModules=InstitutionModule.class) 
+	public void loadInstitutionProfile(InstitutionBean institution);
 	
 	@Event(forwardToModules=DoctorModule.class) 
 	public void loadDoctorProfile(DoctorBean doctor);

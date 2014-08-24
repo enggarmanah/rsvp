@@ -27,13 +27,7 @@ public interface SearchEventBus extends EventBus {
 	public void updateInstitution(InstitutionBean institution);
 	
 	@Event(forwardToParent = true)
-	public void loadClinicProfile(InstitutionBean institution);
-	
-	@Event(forwardToParent = true)
-	public void loadHospitalProfile(InstitutionBean institution);
-	
-	@Event(forwardToParent = true)
-	public void loadLabProfile(InstitutionBean institution);
+	public void loadInstitutionProfile(InstitutionBean institution);
 	
 	@Event(forwardToParent = true)
 	public void loadDoctorProfile(DoctorBean doctor);

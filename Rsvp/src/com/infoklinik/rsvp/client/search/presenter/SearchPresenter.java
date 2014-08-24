@@ -177,13 +177,7 @@ public class SearchPresenter extends LazyPresenter<ISearchView, SearchEventBus> 
 			@Override
 			public void onClick(ClickEvent event) {
 				
-				if (InstitutionBean.CATEGORY_CLINIC.equals(institution.getCategory())) {
-					eventBus.loadClinicProfile(institution);
-				} else if (InstitutionBean.CATEGORY_HOSPITAL.equals(institution.getCategory())) {
-					eventBus.loadHospitalProfile(institution);
-				} else if (InstitutionBean.CATEGORY_LABORATORY.equals(institution.getCategory())) {
-					eventBus.loadLabProfile(institution);
-				}
+				eventBus.loadInstitutionProfile(institution);
 			}
 		};
 		
