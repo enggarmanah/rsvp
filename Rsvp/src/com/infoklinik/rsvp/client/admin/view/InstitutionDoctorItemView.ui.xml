@@ -21,8 +21,8 @@
 					<div class="divider"></div>
 					<g:FocusPanel ui:field="addScheduleBtn">
 					    <g:FlowPanel styleName="info-add">
-					        <g:Image url="images/upload.png" styleName="menu-img"></g:Image>
-					        <g:Label text="Upload" styleName="menu-label"></g:Label>
+					        <g:Image url="images/case.png" styleName="menu-img"></g:Image>
+					        <g:Label text="Tambah Jadwal" styleName="menu-label"></g:Label>
 					    </g:FlowPanel>
 				    </g:FocusPanel>
 				</div>

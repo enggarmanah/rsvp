@@ -15,11 +15,7 @@
 				</div>
 				<div id="admin-content-menu">
 					<g:Label ui:field="institutionLb" styleName="link">Tambah Institusi</g:Label>
-					<a href="#" class="admin" onclick="additem()">Tambah Klinik</a>
-					<a href="#" class="admin" onclick="additem()">Tambah Rumah Sakit</a>
-					<a href="#" class="admin" onclick="adddokter()">Tambah Dokter</a>
-					<a href="#" class="admin" onclick="addlab()">Tambah Laboratorium</a>
-					<a href="#" class="admin" onclick="addapotek()">Tambah Apotek</a>
+					<g:Label ui:field="doctorLb" styleName="link">Tambah Dokter</g:Label>
 				</div>
 			</div>
 			<div>

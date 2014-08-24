@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.CustomLogger;
+import com.infoklinik.rsvp.client.admin.presenter.AdminDoctorPresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminInstitutionBranchPresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminInstitutionDoctorPresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminInstitutionDoctorSchedulePresenter;
@@ -149,4 +150,11 @@ public interface AdminEventBus extends EventBus {
 	
 	@Event(handlers = AdminInstitutionLocationPresenter.class)
 	public void getInstitutionLocation(InstitutionBean institution);
+	
+	@Event(handlers = AdminDoctorPresenter.class)
+	public void addDoctor();
+	
+	@Event(handlers = AdminDoctorPresenter.class)
+	public void updateDoctor(DoctorBean doctor);
+	
 }

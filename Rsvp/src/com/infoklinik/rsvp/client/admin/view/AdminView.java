@@ -15,6 +15,9 @@ public class AdminView extends BaseView implements IAdminView {
 	Label institutionLb;
 	
 	@UiField
+	Label doctorLb;
+	
+	@UiField
 	Label serviceReferenceLb;
 	
 	@UiField
@@ -42,6 +45,11 @@ public class AdminView extends BaseView implements IAdminView {
 	public void setInstitutionLinkClickHandler(ClickHandler handler) {
 		
 		institutionLb.addClickHandler(handler);
+	}
+	
+	public void setDoctorLinkClickHandler(ClickHandler handler) {
+		
+		doctorLb.addClickHandler(handler);
 	}
 	
 	public void setServiceReferenceLinkClickHandler(ClickHandler handler) {

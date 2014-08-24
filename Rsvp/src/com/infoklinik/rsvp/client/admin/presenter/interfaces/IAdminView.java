@@ -9,7 +9,9 @@ public interface IAdminView  extends LazyView, IsWidget {
 	
 	Widget asWidget();
 	
-	public void setInstitutionLinkClickHandler(ClickHandler handler);
+	void setInstitutionLinkClickHandler(ClickHandler handler);
+	
+	void setDoctorLinkClickHandler(ClickHandler handler);
 	
 	void setServiceReferenceLinkClickHandler(ClickHandler handler);
 	

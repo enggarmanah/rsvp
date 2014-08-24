@@ -34,6 +34,14 @@ public class AdminPresenter extends LazyPresenter<IAdminView, AdminEventBus> {
 			}
 		});
 		
+		view.setDoctorLinkClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				eventBus.addDoctor();
+			}
+		});
+		
 		view.setServiceReferenceLinkClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				eventBus.loadServiceReference();
@@ -52,8 +60,6 @@ public class AdminPresenter extends LazyPresenter<IAdminView, AdminEventBus> {
 	public void onLoadAdmin() {
 		
 		eventBus.setRightPanel(view.asWidget());
-		//eventBus.addInstitution();
-		//eventBus.loadServiceReference();
 	}
 	
 	private void logout() {

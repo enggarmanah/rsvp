@@ -2127,6 +2127,19 @@ input.search-field:focus {
 	width: 320px;
 }
 
+#popup-edit .gallery-profile {
+	float: left;
+	width: 320px;
+	min-height: 150px;
+}
+
+#popup-edit .gallery-profile .image-profile {
+	float: left;
+	height: 150px;
+	border: 1px solid #AAA;
+	padding: 2px 2px 2px 2px;
+}
+
 #popup-edit .info-gallery {
 	float: left;
 	width: 315px;

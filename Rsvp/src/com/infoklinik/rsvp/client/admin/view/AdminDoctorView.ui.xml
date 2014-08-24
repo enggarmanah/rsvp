@@ -1,0 +1,61 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:com.google.gwt.user.datepicker.client">
+	<g:HTMLPanel>
+
+		<div id="popup-edit-wrapper">
+			<g:SimplePanel ui:field="editPanel">
+			    <g:HTMLPanel>
+					
+					<div id="popup-edit">
+						<div class="title">Foto :</div>
+						<div class="gallery-profile">
+							<g:Image ui:field="profileImg" styleName="image-profile"></g:Image>
+						</div>
+						<div class="title"></div>
+						<div class="info">
+							<g:SimplePanel ui:field="uploadProfileImgPanel"/>
+						</div>
+						<div class="title">Nama :</div>
+						<div class="info">
+							<g:TextBox ui:field="nameTb" styleName="text"></g:TextBox>
+						</div>
+						<div class="title">IDI Reg. No. :</div>
+						<div class="info">
+							<g:TextBox ui:field="regNoTb" styleName="text"></g:TextBox>
+						</div>
+						<div class="title">Speciality :</div>
+						<div class="info">
+							<g:ListBox ui:field="specialityLb" styleName="select"></g:ListBox>
+						</div>
+						<div class="title">No. HP. :</div>
+						<div class="info">
+							<g:TextBox ui:field="mobileTb" styleName="text"></g:TextBox>
+						</div>
+						<div class="title">Email :</div>
+						<div class="info">
+							<g:TextBox ui:field="emailTb" styleName="text"></g:TextBox>
+						</div>
+						<div class="title">Alamat :</div>
+						<div class="info">
+							<g:TextArea ui:field="addressTa" styleName="textarea"></g:TextArea>
+						</div>
+						<div class="title">Profil :</div>
+						<div class="info">
+							<g:TextArea ui:field="profileTa" styleName="textarea"></g:TextArea>
+						</div>
+					</div>
+							
+				</g:HTMLPanel>
+			</g:SimplePanel>
+			<div id="popup-edit-button">
+				<div class="title"></div>
+				<div class="info">
+					<g:Button ui:field="okBtn" text="OK" styleName="button" width="75px"/>
+					<g:Button ui:field="cancelBtn" text="Batal" styleName="button" width="75px"/>
+				</div>
+			</div>
+		</div>
+
+	</g:HTMLPanel>
+
+</ui:UiBinder> 

@@ -37,6 +37,27 @@ public class DoctorDAO {
 		return doctorBean;
 	}
 	
+	public DoctorBean addDoctor(DoctorBean doctorBean) {
+		
+		EntityManager em = PersistenceManager.getEntityManager();
+		
+		Doctor doctor = new Doctor();
+		doctor.setBean(doctorBean, em);
+		
+		doctor.setStatus(Constant.STATUS_ACTIVE);
+		doctor.setView_count(Long.valueOf(0));
+		doctor.setLike_count(Long.valueOf(0));
+		doctor.setComment_count(Long.valueOf(0));
+		
+		em.persist(doctor);
+				
+		doctorBean = doctor.getBean();
+		
+		em.close();
+		
+		return doctorBean;
+	}
+	
 	public DoctorBean updateDoctor(DoctorBean doctorBean) {
 
 		EntityManager em = PersistenceManager.getEntityManager();

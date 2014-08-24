@@ -75,22 +75,5 @@ public class InstitutionProfileLocationView extends BaseView {
 				infowindow.open(map, marker);
 			}
 		});
-		
-		map.addClickListener(new GoogleMap.ClickHandler() {
-			
-			@Override
-			public void handle(MouseEvent event) {
-				
-				MarkerOptions markerOpts = MarkerOptions.create();
-				markerOpts.setPosition(event.getLatLng());
-				markerOpts.setMap(map);
-				
-				final Marker marker = Marker.create(markerOpts);
-				InfoWindowOptions infowindowOpts = InfoWindowOptions.create();
-				infowindowOpts.setContent(event.getLatLng().toString() + ":" + map.getZoom());
-				final InfoWindow infowindow = InfoWindow.create(infowindowOpts);
-				infowindow.open(map, marker);
-			}
-		});
 	}
 }

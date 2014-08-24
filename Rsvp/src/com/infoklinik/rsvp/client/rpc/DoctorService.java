@@ -12,6 +12,10 @@ public interface DoctorService extends RemoteService {
 	
 	DoctorBean getDoctor(Long doctorId);
 	
+	DoctorBean addDoctor(DoctorBean doctor);
+	
+	DoctorBean updateDoctor(DoctorBean doctor);
+	
 	List<DoctorBean> getDoctors(Long instId);
 	
 	List<DoctorBean> getDoctors(DoctorSearchBean doctorSearch);

@@ -25,6 +25,22 @@ public class DoctorServiceImpl extends BaseServiceServlet implements DoctorServi
 		return doctor;
 	}
 	
+	public DoctorBean addDoctor(DoctorBean doctor) {
+		
+		DoctorDAO doctorDao = new DoctorDAO();
+		doctor = doctorDao.addDoctor(doctor);
+		
+		return doctor;
+	}
+	
+	public DoctorBean updateDoctor(DoctorBean doctor) {
+		
+		DoctorDAO doctorDao = new DoctorDAO();
+		doctor = doctorDao.updateDoctor(doctor);
+		
+		return doctor;
+	}
+	
 	public List<DoctorBean> getDoctors(Long instId) {
 		
 		DoctorDAO doctorDao = new DoctorDAO();

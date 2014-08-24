@@ -7,7 +7,6 @@ import gwtupload.client.IUploader.UploadedInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -18,7 +17,6 @@ import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminInstitutionGa
 import com.infoklinik.rsvp.client.admin.view.AdminInstitutionGalleryView;
 import com.infoklinik.rsvp.client.main.view.NotificationDlg;
 import com.infoklinik.rsvp.client.main.view.ProgressDlg;
-import com.infoklinik.rsvp.client.rpc.GalleryServiceAsync;
 import com.infoklinik.rsvp.shared.GalleryBean;
 import com.mvp4g.client.annotation.Presenter;
 import com.mvp4g.client.presenter.LazyPresenter;
@@ -26,9 +24,6 @@ import com.mvp4g.client.presenter.LazyPresenter;
 @Singleton
 @Presenter(view = AdminInstitutionGalleryView.class)
 public class AdminInstitutionGalleryPresenter extends LazyPresenter<IAdminInstitutionGalleryView, AdminEventBus> {
-	
-	@Inject
-	GalleryServiceAsync galleryService;
 	
 	boolean isAdd = true;
 	
@@ -51,7 +46,7 @@ public class AdminInstitutionGalleryPresenter extends LazyPresenter<IAdminInstit
 		isAdd = true;
 		orgGallery = null;
 		
-		this.gallery = new GalleryBean();
+		this.gallery = gallery;
 		
 		view.setGallery(gallery);
 		view.show();
@@ -63,7 +58,7 @@ public class AdminInstitutionGalleryPresenter extends LazyPresenter<IAdminInstit
 		orgGallery = gallery;
 		
 		this.gallery = new GalleryBean();
-		this.gallery.setBean(orgGallery);
+		this.gallery.setBean(gallery);
 		
 		view.setGallery(this.gallery);
 		view.show();
