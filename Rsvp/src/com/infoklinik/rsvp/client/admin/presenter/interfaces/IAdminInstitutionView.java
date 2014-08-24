@@ -63,7 +63,13 @@ public interface IAdminInstitutionView extends LazyView, IsWidget {
 	
 	void deleteDoctor(GenericBean<DoctorBean> doctor);
 	
-	void setGalleries(List<GalleryBean> galleries);
+	void setGalleries(List<GenericBean<GalleryBean>> galleries);
+	
+	void addGallery(GenericBean<GalleryBean> gallery);
+	
+	void updateGallery(GenericBean<GalleryBean> gallery);
+	
+	void deleteGallery(GenericBean<GalleryBean> gallery);
 	
 	void setBranches(List<GenericBean<BranchBean>> branches);
 	
@@ -87,7 +93,11 @@ public interface IAdminInstitutionView extends LazyView, IsWidget {
 	
 	void setAddDoctorBtnClickHandler(ClickHandler handler);
 	
+	void setAddGalleryBtnClickHandler(ClickHandler handler);
+	
 	void setAddBranchBtnClickHandler(ClickHandler handler);
+	
+	void setLocationClickHandler(ClickHandler handler);
 	
 	void setOkBtnClickHandler(ClickHandler handler);
 	

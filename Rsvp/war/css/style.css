@@ -1939,7 +1939,7 @@ input.search-field:focus {
 	text-align: left;
 	padding: 7px 0px 0px 0px;
 	border-top: 0px solid #AAA;
-	width: 427px;
+	width: 430px;
 	line-height: 16px;
 	overflow: auto;
 	
@@ -1952,6 +1952,18 @@ input.search-field:focus {
 	text-align: left;
 	padding: 0px 0px 5px 0px;
 	width: 427px;
+	line-height: 16px;
+	overflow: auto;
+	
+	font: 12px Tahoma;
+	line-height: 16px;
+}
+
+#popup-edit-button-right {
+	float: right;
+	text-align: right;
+	padding: 5px 20px 0px 0px;
+	width: 410px;
 	line-height: 16px;
 	overflow: auto;
 	
@@ -1983,12 +1995,13 @@ input.search-field:focus {
 	height: 220px;
 	width: 315px;
 	overflow: auto;
+	background: #FAFAFA;
 }
 
 #popup-edit .gallery-gallery .gallery-item {
 	float: left;
 	border: 1px solid #888;
-	margin: 0px 3px 3px 0px;
+	margin: 0px 4px 4px 0px;
 	background: #EEE;
 }
 
@@ -2001,6 +2014,7 @@ input.search-field:focus {
 	max-height: 80px;
 	padding: 2px 2px 0px 2px;
 	border: 0px solid #AAA;
+	cursor: pointer;
 }
 
 #popup-edit .gallery-gallery .gallery-item .gallery-button-wrapper {
@@ -2084,6 +2098,25 @@ input.search-field:focus {
 	width: 320px;
 	border: 0px solid #AAA;
 	padding: 2px 0px 2px 0px;
+}
+
+#popup-edit .map-location {
+	float: left;
+	min-width: 428px;
+	margin-top: -7px;
+}
+
+#popup-edit .gallery {
+	float: left;
+	width: 320px;
+	min-height: 150px;
+	border: 1px solid #AAA;
+	padding: 2px 2px 2px 2px;
+}
+
+#popup-edit .gallery .image {
+	float: left;
+	width: 320px;
 }
 
 #popup-edit .info-gallery {
@@ -2245,6 +2278,11 @@ input.search-field:focus {
 
 #popup-edit .text {
 	width: 315px;
+}
+
+#popup-edit .text-pointer {
+	width: 315px;
+	cursor: pointer;
 }
 
 #popup-edit .textarea {

@@ -17,7 +17,12 @@
 			</div>
 			<div class="title"></div>
 			<div class="info">
-				<g:SimplePanel ui:field="uploadGalleryPanel"/>
+				<g:FocusPanel ui:field="addGalleryBtn">
+				    <g:FlowPanel styleName="info-add">
+				        <g:Image url="images/case.png" styleName="menu-img"></g:Image>
+				        <g:Label text="Tambah Galeri" styleName="menu-label"></g:Label>
+				    </g:FlowPanel>
+			    </g:FocusPanel>
 			</div>
 		</div>
 				

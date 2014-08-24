@@ -9,6 +9,8 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
+import com.infoklinik.rsvp.shared.Constant;
+import com.infoklinik.rsvp.shared.GalleryBean;
 
 public class InstitutionGalleryItemView extends BaseView {
 	
@@ -16,8 +18,13 @@ public class InstitutionGalleryItemView extends BaseView {
 	
 	private static ModuleUiBinder uiBinder = GWT.create(ModuleUiBinder.class);
 	
+	GalleryBean gallery;
+	
 	@UiField
 	SimplePanel imagePanel;
+	
+	@UiField
+	FocusPanel updateBtn;
 	
 	@UiField
 	FocusPanel deleteBtn;
@@ -27,9 +34,27 @@ public class InstitutionGalleryItemView extends BaseView {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 	
-	public void setImage(Image image) {
+	public GalleryBean getGallery() {
 		
+		return gallery;
+	}
+
+	public void setGallery(GalleryBean gallery) {
+		
+		this.gallery = gallery;
+		Image image = new Image();
+		
+		if (gallery.getImageId() != null) {
+			image.setUrl(Constant.IMAGE_URL + gallery.getImageId());
+		}
+		
+		imagePanel.clear();
 		imagePanel.add(image);
+	}
+	
+	public void setUpdateBtnClickHandler(ClickHandler handler) {
+		
+		updateBtn.addClickHandler(handler);
 	}
 	
 	public void setDeleteBtnClickHandler(ClickHandler handler) {

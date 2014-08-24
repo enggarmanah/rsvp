@@ -38,9 +38,9 @@
 			<div class="info">
 				<g:TextArea ui:field="addressTa" styleName="textarea"></g:TextArea>
 			</div>
-			<div class="title">Koordinat :</div>
+			<div class="title">Lokasi :</div>
 			<div class="info">
-				<g:TextBox ui:field="coordinateTb" styleName="text"></g:TextBox>
+				<g:TextBox ui:field="locationTb" styleName="text-pointer"></g:TextBox>
 			</div>
 			<div class="title">Partnership :</div>
 			<div class="info">

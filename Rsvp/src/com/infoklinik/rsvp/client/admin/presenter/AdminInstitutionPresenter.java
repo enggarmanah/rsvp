@@ -84,6 +84,7 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 	List<DoctorBean> doctors;
 	List<GenericBean<DoctorBean>> genDoctors;
 	List<GalleryBean> galleries;
+	List<GenericBean<GalleryBean>> genGalleries;
 	List<BranchBean> branches;
 	List<GenericBean<BranchBean>> genBranches;
 	
@@ -113,9 +114,12 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 		initStreetSelectionHandler();
 		initOp24HoursChangeHandler();
 		
+		initLocationClickHandler();
+		
 		initAddServiceBtnClickHandler();
 		initAddInsuranceBtnClickHandler();
 		initAddDoctorBtnClickHandler();
+		initAddGalleryBtnClickHandler();
 		initAddBranchBtnClickHandler();
 		
 		initOkBtnClickHandler();
@@ -386,7 +390,20 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 						public void onSuccess(List<GalleryBean> result) {
 							
 							galleries = result;
-							view.setGalleries(galleries);
+							genGalleries = new ArrayList<GenericBean<GalleryBean>>();
+							
+							for (GalleryBean gallery : result) {
+								
+								HandlerManager handlerMgr = new HandlerManager();
+								handlerMgr.setUpdateHandler(getGalleryUpdateHandler(gallery));
+								handlerMgr.setDeleteHandler(getGalleryDeleteHandler(gallery));
+								
+								GenericBean<GalleryBean> genGallery = new GenericBean<GalleryBean>(gallery, handlerMgr);
+								
+								genGalleries.add(genGallery);
+							}
+							
+							view.setGalleries(genGalleries);
 							view.showGallery();
 							ProgressDlg.hide();
 						}
@@ -450,6 +467,18 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 		});
 	}
 	
+	private void initLocationClickHandler() {
+		
+		view.setLocationClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				
+				eventBus.getInstitutionLocation(institution);
+			}
+		});
+	}
+	
 	private void initAddServiceBtnClickHandler() {
 		
 		view.setAddServiceBtnClickHandler(new ClickHandler() {
@@ -483,6 +512,20 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 				
 				eventBus.addInstitutionDoctor();
 				eventBus.setInstitutionExistingDoctors(doctors);
+			}
+		});
+	}
+	
+	private void initAddGalleryBtnClickHandler() {
+			
+		view.setAddGalleryBtnClickHandler(new ClickHandler() {
+				
+			@Override
+			public void onClick(ClickEvent event) {
+				
+				GalleryBean gallery = new GalleryBean();
+				gallery.setInstitution(institution);
+				eventBus.addInstitutionGallery(gallery);
 			}
 		});
 	}
@@ -1018,11 +1061,43 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 		};
 	}
 	
+	private ClickHandler getGalleryUpdateHandler(final GalleryBean gallery) {
+		
+		return new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				
+				eventBus.updateInstitutionGallery(gallery);
+			}
+		};
+	}
+	
+	private ClickHandler getGalleryDeleteHandler(final GalleryBean gallery) {
+		
+		return new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				
+				ConfirmDlg.confirm("Hapus gallery \"" + gallery.getDescription() + "\" ?", new ClickHandler() {
+					
+					@Override
+					public void onClick(ClickEvent event) {
+						
+						eventBus.deleteInstGallery(gallery);
+					}
+				});
+			}
+		};
+	}
+	
 	private void addInstitution(InstitutionBean inst) {
 		
 		ProgressDlg.show();
 		
 		inst.setSchedules(getSchedules());
+		inst.setGalleries(galleries);
 		
 		institutionService.addInstitution(inst, new AsyncCallback<InstitutionBean>() {
 			
@@ -1044,6 +1119,7 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 		ProgressDlg.show();
 		
 		inst.setSchedules(getSchedules());
+		inst.setGalleries(galleries);
 		
 		institutionService.updateInstitution(inst, new AsyncCallback<InstitutionBean>() {
 			
@@ -1132,5 +1208,37 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 		GenericBean<BranchBean> genBranch = genBranches.remove(index);
 		
 		view.deleteBranch(genBranch);
+	}
+	
+	public void onAddInstGallery(GalleryBean gallery) {
+		
+		HandlerManager handlerMgr = new HandlerManager();
+		handlerMgr.setUpdateHandler(getGalleryUpdateHandler(gallery));
+		handlerMgr.setDeleteHandler(getGalleryDeleteHandler(gallery));
+		
+		GenericBean<GalleryBean> genGallery = new GenericBean<GalleryBean>(gallery, handlerMgr);
+		
+		galleries.add(gallery);
+		genGalleries.add(genGallery);
+		
+		view.addGallery(genGallery);
+	}
+	
+	public void onUpdateInstGallery(GalleryBean gallery) {
+		
+		int index = galleries.indexOf(gallery); 
+		GenericBean<GalleryBean> genGallery = genGalleries.get(index);
+		
+		view.updateGallery(genGallery);
+	}
+	
+	public void onDeleteInstGallery(GalleryBean gallery) {
+		
+		int index = galleries.indexOf(gallery);
+		
+		galleries.remove(index);
+		GenericBean<GalleryBean> genGallery = genGalleries.remove(index);
+		
+		view.deleteGallery(genGallery);
 	}
 }

@@ -1,6 +1,5 @@
 package com.infoklinik.rsvp.client.admin.view;
 
-import gwtupload.client.BaseUploadStatus;
 import gwtupload.client.IUploader;
 import gwtupload.client.PreloadedImage;
 import gwtupload.client.IUploadStatus.Status;
@@ -8,20 +7,23 @@ import gwtupload.client.IUploader.UploadedInfo;
 import gwtupload.client.PreloadedImage.OnLoadPreloadedImageHandler;
 import gwtupload.client.SingleUploader;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
-import com.infoklinik.rsvp.client.Message;
-import com.infoklinik.rsvp.client.main.view.NotificationDlg;
+import com.infoklinik.rsvp.client.CustomUploadStatus;
+import com.infoklinik.rsvp.client.GenericBean;
+import com.infoklinik.rsvp.client.HandlerManager;
 import com.infoklinik.rsvp.client.main.view.ProgressDlg;
 import com.infoklinik.rsvp.shared.Constant;
 import com.infoklinik.rsvp.shared.GalleryBean;
@@ -39,19 +41,18 @@ public class InstitutionGalleryView extends BaseView {
 	FlowPanel galleryPanel;
 	
 	@UiField
-	SimplePanel uploadGalleryPanel;
+	FocusPanel addGalleryBtn;
 	
 	interface ModuleUiBinder extends UiBinder<Widget, InstitutionGalleryView> {}
 	
 	private static ModuleUiBinder uiBinder = GWT.create(ModuleUiBinder.class);
 	
-	List<GalleryBean> galleries;
-	
 	InstitutionBean institution;
 	Long imageId;
 	
 	SingleUploader logoUploader;
-	SingleUploader galleryUploader;
+	
+	Map<GalleryBean, InstitutionGalleryItemView> galleryMap = new HashMap<GalleryBean, InstitutionGalleryItemView>();
 	
 	public InstitutionGalleryView() {
 		
@@ -66,21 +67,45 @@ public class InstitutionGalleryView extends BaseView {
 		// Add a finish handler which will load the image once the upload finishes
 		logoUploader.addOnFinishUploadHandler(onLogoFinishUploaderHandler);
 		logoUploader.addOnStartUploadHandler(onStartUploaderHandler);
+	}
+	
+	public void addGallery(GenericBean<GalleryBean> genGallery) {
 		
-		galleryUploader = new SingleUploader();
-		galleryUploader.getWidget().setStyleName("gallery-upload");
+		GalleryBean gallery = genGallery.getBean();
+		HandlerManager handlerMgr = genGallery.getHandlerMgr();
 		
-		uploadGalleryPanel.add(galleryUploader);
+		Image galleryImg = new Image();
+		galleryImg.setUrl(Constant.IMAGE_URL + gallery.getImageId());
 		
-		// Add a finish handler which will load the image once the upload finishes
-		galleryUploader.addOnFinishUploadHandler(onGalleryFinishUploaderHandler);
-		galleryUploader.addOnStartUploadHandler(onStartUploaderHandler);
+		InstitutionGalleryItemView galleryItem = new InstitutionGalleryItemView();
+		
+		galleryItem.setGallery(gallery);
+		galleryItem.setUpdateBtnClickHandler(handlerMgr.getUpdateHandler());
+		galleryItem.setDeleteBtnClickHandler(handlerMgr.getDeleteHandler());
+		
+		galleryPanel.add(galleryItem);
+		
+		galleryMap.put(gallery, galleryItem);
+	}
+	
+	public void updateGallery(GenericBean<GalleryBean> genGallery) {
+		
+		GalleryBean gallery = genGallery.getBean();
+	
+		InstitutionGalleryItemView galleryItem = galleryMap.get(gallery);
+		galleryItem.setGallery(gallery);
+	}
+	
+	public void deleteGallery(GenericBean<GalleryBean> genGallery) {
+		
+		GalleryBean gallery = genGallery.getBean();
+		InstitutionGalleryItemView galleryItem = galleryMap.remove(gallery);
+		galleryPanel.remove(galleryItem);
 	}
 	
 	public InstitutionBean getInstitution() {
 		
 		institution.setImageId(imageId);
-		institution.setGalleries(galleries);
 		
 		return institution;
 	}
@@ -94,6 +119,12 @@ public class InstitutionGalleryView extends BaseView {
 		logoPanel.clear();
 		logoPanel.add(logoImg);
 	}
+	
+	public void setAddGalleryBtnClickHandler(ClickHandler handler) {
+		
+		addGalleryBtn.addClickHandler(handler);
+	}
+	
 	
 	private IUploader.OnStartUploaderHandler onStartUploaderHandler = new IUploader.OnStartUploaderHandler() {
 		
@@ -125,44 +156,6 @@ public class InstitutionGalleryView extends BaseView {
 		}
 	};
 	
-	private IUploader.OnFinishUploaderHandler onGalleryFinishUploaderHandler = new IUploader.OnFinishUploaderHandler() {
-		
-		public void onFinish(IUploader uploader) {
-			
-			if (uploader.getStatus() == Status.SUCCESS) {
-				
-				new PreloadedImage(uploader.fileUrl(), showGallery);
-
-				UploadedInfo info = uploader.getServerInfo();
-				
-				String imageId = info.message;
-				
-				final GalleryBean gallery = new GalleryBean();
-				gallery.setInstitution(institution);
-				gallery.setImageId(Long.valueOf(imageId));
-				galleries.add(gallery);
-				
-				Image galleryImg = new Image();
-				galleryImg.setUrl(Constant.IMAGE_URL + gallery.getImageId());
-				
-				final InstitutionGalleryItemView galleryItem = new InstitutionGalleryItemView();
-				galleryItem.setImage(galleryImg);
-				galleryItem.setDeleteBtnClickHandler(new ClickHandler() {
-					
-					@Override
-					public void onClick(ClickEvent event) {
-						galleryPanel.remove(galleryItem);
-						galleries.remove(gallery);
-					}
-				});
-				
-				galleryPanel.add(galleryItem);
-				
-				ProgressDlg.hide();
-			}
-		}
-	};
-	
 	// Attach an image to the pictures viewer
 	private OnLoadPreloadedImageHandler showLogo = new OnLoadPreloadedImageHandler() {
 		public void onLoad(PreloadedImage image) {
@@ -171,33 +164,26 @@ public class InstitutionGalleryView extends BaseView {
 		}
 	};
 	
-	private OnLoadPreloadedImageHandler showGallery = new OnLoadPreloadedImageHandler() {
-		public void onLoad(PreloadedImage image) {}
-	};
-	
-	public void setGalleries(final List<GalleryBean> galleries) {
+	public void setGalleries(final List<GenericBean<GalleryBean>> galleries) {
 		
-		this.galleries = galleries;
 		galleryPanel.clear();
 		
-		for (final GalleryBean gallery : galleries) {
+		for (final GenericBean<GalleryBean> genGallery : galleries) {
+			
+			GalleryBean gallery = genGallery.getBean();
+			HandlerManager handlerMgr = genGallery.getHandlerMgr();
 			
 			Image galleryImg = new Image();
 			galleryImg.setUrl(Constant.IMAGE_URL + gallery.getImageId());
 			
 			final InstitutionGalleryItemView galleryItem = new InstitutionGalleryItemView();
 			
-			galleryItem.setImage(galleryImg);
-			galleryItem.setDeleteBtnClickHandler(new ClickHandler() {
-				
-				@Override
-				public void onClick(ClickEvent event) {
-					galleryPanel.remove(galleryItem);
-					galleries.remove(gallery);
-				}
-			});
+			galleryItem.setGallery(gallery);
+			galleryItem.setUpdateBtnClickHandler(handlerMgr.getUpdateHandler());
+			galleryItem.setDeleteBtnClickHandler(handlerMgr.getDeleteHandler());
 			
 			galleryPanel.add(galleryItem);
+			galleryMap.put(gallery, galleryItem);
 		}
 	}
 	
@@ -209,28 +195,5 @@ public class InstitutionGalleryView extends BaseView {
 	public Widget getRootWidget() {
 		
 		return this;
-	}
-	
-	private class CustomUploadStatus extends BaseUploadStatus {
-		
-		@Override
-		public void setError(String msg) {
-			setStatus(Status.ERROR);
-			
-			ProgressDlg.hidePrompt();
-			
-			if (msg.indexOf(Message.ERR_FILE_UPLOAD_EXCEED_MAX_SIZE) > -1) {
-				NotificationDlg.warning(Message.ERR_FILE_UPLOAD_EXCEED_MAX_SIZE);
-			} else {
-				NotificationDlg.warning(Message.ERR_FILE_UPLOAD);
-			}
-		}
-		
-		@Override
-		public void setProgress(long done, long total) {
-			int percent =(int) (total > 0 ? done * 100 / total : 0);
-			ProgressDlg.setPercentage(percent);
-			super.setProgress(done, total);
-		}
 	}
 }

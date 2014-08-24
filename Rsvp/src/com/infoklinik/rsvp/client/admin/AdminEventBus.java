@@ -7,7 +7,9 @@ import com.infoklinik.rsvp.client.CustomLogger;
 import com.infoklinik.rsvp.client.admin.presenter.AdminInstitutionBranchPresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminInstitutionDoctorPresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminInstitutionDoctorSchedulePresenter;
+import com.infoklinik.rsvp.client.admin.presenter.AdminInstitutionGalleryPresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminInstitutionInsurancePresenter;
+import com.infoklinik.rsvp.client.admin.presenter.AdminInstitutionLocationPresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminInstitutionPresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminPresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminServicePresenter;
@@ -15,6 +17,7 @@ import com.infoklinik.rsvp.client.admin.presenter.AdminServiceTypeListPresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminServiceTypePresenter;
 import com.infoklinik.rsvp.shared.BranchBean;
 import com.infoklinik.rsvp.shared.DoctorBean;
+import com.infoklinik.rsvp.shared.GalleryBean;
 import com.infoklinik.rsvp.shared.InstitutionBean;
 import com.infoklinik.rsvp.shared.InsuranceBean;
 import com.infoklinik.rsvp.shared.ScheduleBean;
@@ -124,8 +127,26 @@ public interface AdminEventBus extends EventBus {
 	public void setInstitutionExistingBranches(List<BranchBean> branches);
 	
 	@Event(handlers = AdminInstitutionPresenter.class)
-	public void addInstBranch(BranchBean institution);
+	public void addInstBranch(BranchBean gallery);
 	
 	@Event(handlers = AdminInstitutionPresenter.class)
-	public void deleteInstBranch(BranchBean institution);
+	public void deleteInstBranch(BranchBean gallery);
+	
+	@Event(handlers = AdminInstitutionGalleryPresenter.class)
+	public void addInstitutionGallery(GalleryBean gallery);
+	
+	@Event(handlers = AdminInstitutionGalleryPresenter.class)
+	public void updateInstitutionGallery(GalleryBean gallery);
+	
+	@Event(handlers = AdminInstitutionPresenter.class)
+	public void addInstGallery(GalleryBean gallery);
+	
+	@Event(handlers = AdminInstitutionPresenter.class)
+	public void updateInstGallery(GalleryBean gallery);
+	
+	@Event(handlers = AdminInstitutionPresenter.class)
+	public void deleteInstGallery(GalleryBean gallery);
+	
+	@Event(handlers = AdminInstitutionLocationPresenter.class)
+	public void getInstitutionLocation(InstitutionBean institution);
 }

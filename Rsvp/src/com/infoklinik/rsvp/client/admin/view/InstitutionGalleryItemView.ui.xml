@@ -3,7 +3,9 @@
 	<g:HTMLPanel>
 		
 		<g:VerticalPanel styleName="gallery-item">
-			<g:SimplePanel ui:field="imagePanel" styleName="gallery-image"/>
+		    <g:FocusPanel ui:field="updateBtn">
+				<g:SimplePanel ui:field="imagePanel" styleName="gallery-image"/>
+			</g:FocusPanel>
 			<g:FocusPanel ui:field="deleteBtn" styleName="gallery-button-wrapper">
 				<g:FlowPanel styleName="gallery-button">
 					<g:Image ui:field="deleteImg" url="images/delete.png" styleName="delete-icon"/>

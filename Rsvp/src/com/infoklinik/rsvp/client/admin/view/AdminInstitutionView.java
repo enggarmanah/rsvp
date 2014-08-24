@@ -176,9 +176,24 @@ public class AdminInstitutionView extends BaseView implements IAdminInstitutionV
 		doctorView.deleteDoctor(doctor);
 	}
 	
-	public void setGalleries(List<GalleryBean> galleries) {
+	public void setGalleries(List<GenericBean<GalleryBean>> galleries) {
 		
 		galleryView.setGalleries(galleries);
+	}
+	
+	public void addGallery(GenericBean<GalleryBean> gallery) {
+		
+		galleryView.addGallery(gallery);
+	}
+	
+	public void updateGallery(GenericBean<GalleryBean> gallery) {
+		
+		galleryView.updateGallery(gallery);
+	}
+	
+	public void deleteGallery(GenericBean<GalleryBean> gallery) {
+		
+		galleryView.deleteGallery(gallery);
 	}
 	
 	public void setBranches(List<GenericBean<BranchBean>> branches) {
@@ -221,6 +236,11 @@ public class AdminInstitutionView extends BaseView implements IAdminInstitutionV
 		branchMenuLb.addClickHandler(handler);
 	}
 	
+	public void setLocationClickHandler(ClickHandler handler) {
+		
+		mainView.setLocationClickHandler(handler);
+	}
+	
 	public void setAddServiceBtnClickHandler(ClickHandler handler) {
 		
 		serviceView.setAddServiceBtnClickHandler(handler);
@@ -234,6 +254,11 @@ public class AdminInstitutionView extends BaseView implements IAdminInstitutionV
 	public void setAddDoctorBtnClickHandler(ClickHandler handler) {
 		
 		doctorView.setAddDoctorBtnClickHandler(handler);
+	}
+	
+	public void setAddGalleryBtnClickHandler(ClickHandler handler) {
+		
+		galleryView.setAddGalleryBtnClickHandler(handler);
 	}
 	
 	public void setAddBranchBtnClickHandler(ClickHandler handler) {

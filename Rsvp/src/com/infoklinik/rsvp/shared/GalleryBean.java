@@ -39,4 +39,15 @@ public class GalleryBean extends BaseBean {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public void setBean(GalleryBean galleryBean) {
+		
+		id = galleryBean.getId();
+		institution = galleryBean.getInstitution();
+		imageId = galleryBean.getImageId();
+		isMain = galleryBean.isMain();
+		description = galleryBean.getDescription();
+		
+		setAuditBean(galleryBean.getAuditBean());
+	}
 }

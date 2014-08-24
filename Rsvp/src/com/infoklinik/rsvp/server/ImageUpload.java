@@ -51,11 +51,22 @@ public class ImageUpload extends AppEngineUploadAction {
 					Blob blob = new Blob(item.get());
 					
 					if (blob.getBytes().length <= Constant.FILE_UPLOAD_MAX_SIZE) {
+						
 						ImageBean imageBean = new ImageBean();
 						imageBean.setBytes(blob.getBytes());
 						imageBean.setUpdateBy("System");
-						imageBean = imageDao.addImage(imageBean);
+						
+						String imageId = request.getParameter("imageId");
+						
+						if (!ServerUtil.isEmpty(imageId)) {
+							imageBean.setId(Long.valueOf(imageId));
+							imageBean = imageDao.updateImage(imageBean);
+						} else {
+							imageBean = imageDao.addImage(imageBean);
+						}
+						
 						message = String.valueOf(imageBean.getId());
+						
 					} else {
 						throw new UploadActionException(Message.ERR_FILE_UPLOAD_EXCEED_MAX_SIZE);
 					}

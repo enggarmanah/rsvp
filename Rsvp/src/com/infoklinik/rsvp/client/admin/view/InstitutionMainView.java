@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -59,7 +60,7 @@ public class InstitutionMainView extends BaseView {
 	TextArea addressTa;
 	
 	@UiField
-	TextBox coordinateTb;
+	TextBox locationTb;
 	
 	@UiField
 	ListBox partnerTypeLb;
@@ -81,6 +82,8 @@ public class InstitutionMainView extends BaseView {
 		
 		regionSugParameter.setType(SuggestionOracle.SEARCH_REGION);
 		streetSugParameter.setType(SuggestionOracle.SEARCH_STREET);
+		
+		locationTb.setReadOnly(true);
 	}
 	
 	public InstitutionBean getInstitution() {
@@ -98,7 +101,7 @@ public class InstitutionMainView extends BaseView {
 		} 
 		
 		institution.setAddress(addressTa.getValue());
-		institution.setLocation(coordinateTb.getValue());
+		institution.setLocation(locationTb.getValue());
 		institution.setPartnerType(partnerTypeLb.getValue(partnerTypeLb.getSelectedIndex()));
 		institution.setWebsite(websiteTb.getValue());
 		institution.setFacebook(facebookTb.getValue());
@@ -145,7 +148,7 @@ public class InstitutionMainView extends BaseView {
 		}
 		
 		addressTa.setValue(institution.getAddress());
-		coordinateTb.setValue(institution.getLocation());
+		locationTb.setValue(institution.getLocation());
 		ClientUtil.setSelectedIndex(partnerTypeLb, institution.getPartnerType());
 		ClientUtil.setSelectedIndex(typeLb, institution.getType());
 	}
@@ -219,10 +222,9 @@ public class InstitutionMainView extends BaseView {
 		streetSb.addSelectionHandler(handler);
 	}
 	
-	@Override
-	public void loadContent() {
+	public void setLocationClickHandler(ClickHandler handler) {
 		
-		//initMap();
+		locationTb.addClickHandler(handler);
 	}
 	
 	public Widget asWidget() {
