@@ -194,5 +194,7 @@ public class AdminDoctorView extends BaseView implements IAdminDoctorView {
 		};
 		
 		timer.schedule(Constant.FADE_TIME);
+		
+		profileImg.setUrl("images/doctor.jpg");
 	}
 }
