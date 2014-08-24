@@ -1,4 +1,4 @@
-package com.infoklinik.rsvp.client.search.view;
+package com.infoklinik.rsvp.client.listing.view;
 
 import java.util.HashMap;
 import java.util.List;
@@ -14,15 +14,15 @@ import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
 import com.infoklinik.rsvp.client.GenericBean;
 import com.infoklinik.rsvp.client.HandlerManager;
-import com.infoklinik.rsvp.client.search.presenter.interfaces.ISearchView;
+import com.infoklinik.rsvp.client.listing.presenter.interfaces.ISearchResultView;
 import com.infoklinik.rsvp.shared.Constant;
 import com.infoklinik.rsvp.shared.DoctorBean;
 import com.infoklinik.rsvp.shared.InstitutionBean;
 import com.infoklinik.rsvp.shared.ServiceBean;
 
-public class SearchView extends BaseView implements ISearchView {
+public class SearchResultView extends BaseView implements ISearchResultView {
 	
-	interface ModuleUiBinder extends UiBinder<Widget, SearchView> {}
+	interface ModuleUiBinder extends UiBinder<Widget, SearchResultView> {}
 	
 	@UiField
 	VerticalPanel searchPanel;
@@ -165,7 +165,7 @@ public class SearchView extends BaseView implements ISearchView {
 				InstitutionBean institutionBean = genericBean.getBean();
 				HandlerManager handlerMgr = genericBean.getHandlerMgr();
 				
-				InstitutionView instView = new InstitutionView();
+				ResultInstitutionView instView = new ResultInstitutionView();
 				instView.setInstitution(index, institutionBean, handlerMgr);
 				
 				searchPanel.add(instView);
@@ -188,7 +188,7 @@ public class SearchView extends BaseView implements ISearchView {
 				HashMap<Long, HandlerManager> instHandlerMgrs = doctorInstHandlerMgrs.get(doctorBean.getId());
 				HashMap<Long, HashMap<Long, HandlerManager>> instScheduleHandlerMgrs = doctorInstScheduleHandlerMgrs.get(doctorBean.getId());
 				
-				DoctorView doctorView = new DoctorView();
+				ResultDoctorView doctorView = new ResultDoctorView();
 				doctorView.setDoctor(index, doctorBean, handlerMgr, instHandlerMgrs, instScheduleHandlerMgrs);
 				
 				searchPanel.add(doctorView);
@@ -204,7 +204,7 @@ public class SearchView extends BaseView implements ISearchView {
 			
 			for (GenericBean<ServiceBean> genericBean : sublist) {
 				
-				ServiceView serviceView = new ServiceView();
+				ResultServiceView serviceView = new ResultServiceView();
 				serviceView.setService(index, genericBean);
 				
 				searchPanel.add(serviceView);

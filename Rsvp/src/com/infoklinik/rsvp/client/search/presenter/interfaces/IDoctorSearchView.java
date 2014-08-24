@@ -1,4 +1,4 @@
-package com.infoklinik.rsvp.client.inst.presenter.interfaces;
+package com.infoklinik.rsvp.client.search.presenter.interfaces;
 
 import java.util.List;
 
@@ -8,25 +8,21 @@ import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.shared.CityBean;
-import com.infoklinik.rsvp.shared.InstitutionSearchBean;
-import com.infoklinik.rsvp.shared.InsuranceBean;
+import com.infoklinik.rsvp.shared.DoctorSearchBean;
 import com.infoklinik.rsvp.shared.LocationBean;
 import com.infoklinik.rsvp.shared.MasterCodeBean;
+import com.infoklinik.rsvp.shared.SpecialityBean;
 import com.mvp4g.client.view.LazyView;
 
-public interface IHospitalSearchView  extends LazyView, IsWidget {
+public interface IDoctorSearchView  extends LazyView, IsWidget {
 	
 	Widget asWidget();
 	
 	public void setCities(List<CityBean> citys);
 	
-	public void setCity(CityBean city);
+	public void setSpecialities(List<SpecialityBean> specialities);
 	
-	public void setInsurances(List<InsuranceBean> insurances);
-		
-	public void setInstitutionTypes(List<MasterCodeBean> masterCodes);
-	
-	public void setSearchBtnHandler(ClickHandler handler);
+	public void setDays(List<MasterCodeBean> masterCodes);
 	
 	public void setSearchOptionRbHandler(ClickHandler handler);
 	
@@ -34,7 +30,9 @@ public interface IHospitalSearchView  extends LazyView, IsWidget {
 	
 	public void setCityLbHandler(ChangeHandler handler);
 	
-	public InstitutionSearchBean getInstitutionSearch();
+	public void setSearchBtnHandler(ClickHandler handler);
+	
+	public DoctorSearchBean getDoctorSearch();
 	
 	public String getSearchOptionValue();
 	

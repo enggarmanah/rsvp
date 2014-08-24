@@ -11,7 +11,7 @@
 					<div class="name">
 						<g:Label ui:field="nameLb" styleName="doctor"></g:Label>
 					</div>
-					<div class="rating">
+					<div class="rating-right">
 						<g:Label ui:field="viewCountLb" styleName="rating-info"></g:Label> <g:Image ui:field="viewCountImg" url="images/view.png" styleName="rating-img"></g:Image>
 						<g:Label ui:field="likeCountLb" styleName="rating-info-link"></g:Label> <g:Image ui:field="likeCountImg" url="images/like.png" styleName="rating-img-link"></g:Image>
 						<g:Label ui:field="commentCountLb" styleName="rating-info-link"></g:Label> <g:Image ui:field="commentCountImg" url="images/comment.png" styleName="rating-img-link"></g:Image>

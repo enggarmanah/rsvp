@@ -1,4 +1,4 @@
-package com.infoklinik.rsvp.client.doctor.view;
+package com.infoklinik.rsvp.client.search.view;
 
 import java.util.List;
 
@@ -15,25 +15,21 @@ import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
 import com.infoklinik.rsvp.client.SuggestionOracle;
-import com.infoklinik.rsvp.client.doctor.presenter.interfaces.IDoctorSearchView;
+import com.infoklinik.rsvp.client.search.presenter.interfaces.IServiceSearchView;
 import com.infoklinik.rsvp.shared.CityBean;
 import com.infoklinik.rsvp.shared.Constant;
-import com.infoklinik.rsvp.shared.DoctorSearchBean;
+import com.infoklinik.rsvp.shared.ServiceSearchBean;
 import com.infoklinik.rsvp.shared.LocationBean;
-import com.infoklinik.rsvp.shared.MasterCodeBean;
-import com.infoklinik.rsvp.shared.SpecialityBean;
+import com.infoklinik.rsvp.shared.ServiceTypeBean;
 import com.infoklinik.rsvp.shared.SuggestParameter;
 
-public class DoctorSearchView extends BaseView implements IDoctorSearchView {
+public class ServiceSearchView extends BaseView implements IServiceSearchView {
 	
 	@UiField
 	ListBox cityLb;
 	
 	@UiField
-	ListBox specialityLb;
-	
-	@UiField
-	ListBox dayLb;
+	ListBox serviceTypeLb;
 	
 	@UiField
 	RadioButton searchNameRb;
@@ -55,7 +51,7 @@ public class DoctorSearchView extends BaseView implements IDoctorSearchView {
 	@UiField(provided = true)
 	SuggestBox searchSb = new SuggestBox(new SuggestionOracle(suggestParameter));
 	
-	interface ModuleUiBinder extends UiBinder<Widget, DoctorSearchView> {}
+	interface ModuleUiBinder extends UiBinder<Widget, ServiceSearchView> {}
 	
 	private static ModuleUiBinder uiBinder = GWT.create(ModuleUiBinder.class);
 	
@@ -64,7 +60,7 @@ public class DoctorSearchView extends BaseView implements IDoctorSearchView {
 	public void createView() {
 		
 		initWidget(uiBinder.createAndBindUi(this));
-		
+			
 		suggestParameter.setCityId(Constant.ZERO_STRING);
 		
 		searchNameRb.setValue(true);
@@ -80,6 +76,19 @@ public class DoctorSearchView extends BaseView implements IDoctorSearchView {
 		return this;
 	}
 	
+	public void setSearchOptionRbHandler(ClickHandler handler) {
+		
+		searchNameRb.addClickHandler(handler);
+		searchStreetRb.addClickHandler(handler);
+		searchRegionRb.addClickHandler(handler);
+		searchDistanceRb.addClickHandler(handler);
+	}
+	
+	public void setCityLbHandler(ChangeHandler handler) {
+		
+		cityLb.addChangeHandler(handler);
+	}
+	
 	public void setSearchBtnHandler(ClickHandler handler) {
 		searchBtn.addClickHandler(handler);
 	}
@@ -91,27 +100,18 @@ public class DoctorSearchView extends BaseView implements IDoctorSearchView {
 		}
 	}
 	
-	public void setSpecialities(List<SpecialityBean> specialityBeans) {
+	public void setServiceTypes(List<ServiceTypeBean> serviceTypes) {
 		
-		specialityLb.addItem(Constant.OPTION_PLS_SELECT_CODE_DESC, Constant.OPTION_PLS_SELECT_CODE);
+		serviceTypeLb.addItem(Constant.OPTION_PLS_SELECT_CODE_DESC, Constant.OPTION_PLS_SELECT_CODE);
 		
-		for (SpecialityBean specialityBean : specialityBeans) {
-			specialityLb.addItem(specialityBean.getDescription(), String.valueOf(specialityBean.getId()));
+		for (ServiceTypeBean serviceType : serviceTypes) {
+			serviceTypeLb.addItem(serviceType.getName(), String.valueOf(serviceType.getId()));
 		}
 	}
 	
-	public void setDays(List<MasterCodeBean> masterCodeBeans) {
+	public ServiceSearchBean getServiceSearch() {
 		
-		dayLb.addItem(Constant.OPTION_PLS_SELECT_CODE_DESC, Constant.OPTION_PLS_SELECT_CODE);
-		
-		for (MasterCodeBean masterCodeBean : masterCodeBeans) {
-			dayLb.addItem(masterCodeBean.getValue(), String.valueOf(masterCodeBean.getCode()));
-		}
-	}
-	
-	public DoctorSearchBean getDoctorSearch() {
-		
-		DoctorSearchBean docSearchBean = new DoctorSearchBean();
+		ServiceSearchBean docSearchBean = new ServiceSearchBean();
 		
 		if (searchNameRb.getValue()) {
 			docSearchBean.setName(searchSb.getText());
@@ -131,34 +131,17 @@ public class DoctorSearchView extends BaseView implements IDoctorSearchView {
 		
 		docSearchBean.setCityId(Long.valueOf(cityLb.getValue(cityLb.getSelectedIndex())));
 		
-		if (dayLb.getSelectedIndex() != 0) {
-			docSearchBean.setDay(Integer.valueOf(dayLb.getValue(dayLb.getSelectedIndex())));
-		}
-		
-		if (specialityLb.getSelectedIndex() != 0) {
-			docSearchBean.setSpecialityId(Long.valueOf(specialityLb.getValue(specialityLb.getSelectedIndex())));
+		if (serviceTypeLb.getSelectedIndex() != 0) {
+			docSearchBean.setServiceTypeId(Long.valueOf(serviceTypeLb.getValue(serviceTypeLb.getSelectedIndex())));
 		}
 		
 		return docSearchBean;
 	}
-	
-	public void setSearchOptionRbHandler(ClickHandler handler) {
-		
-		searchNameRb.addClickHandler(handler);
-		searchStreetRb.addClickHandler(handler);
-		searchRegionRb.addClickHandler(handler);
-		searchDistanceRb.addClickHandler(handler);
-	}
-	
+
 	@Override
 	public void setSearchSbHandler(ClickHandler handler) {
 		
 		searchSb.getValueBox().addClickHandler(handler);
-	}
-	
-	public void setCityLbHandler(ChangeHandler handler) {
-		
-		cityLb.addChangeHandler(handler);
 	}
 
 	@Override

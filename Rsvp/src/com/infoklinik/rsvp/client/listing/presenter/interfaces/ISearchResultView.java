@@ -1,4 +1,4 @@
-package com.infoklinik.rsvp.client.search.presenter.interfaces;
+package com.infoklinik.rsvp.client.listing.presenter.interfaces;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +13,7 @@ import com.infoklinik.rsvp.shared.InstitutionBean;
 import com.infoklinik.rsvp.shared.ServiceBean;
 import com.mvp4g.client.view.LazyView;
 
-public interface ISearchView  extends LazyView, IsWidget {
+public interface ISearchResultView  extends LazyView, IsWidget {
 	
 	Widget asWidget();
 	

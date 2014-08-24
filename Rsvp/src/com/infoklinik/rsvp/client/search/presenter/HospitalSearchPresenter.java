@@ -1,4 +1,4 @@
-package com.infoklinik.rsvp.client.inst.presenter;
+package com.infoklinik.rsvp.client.search.presenter;
 
 import java.util.List;
 
@@ -20,9 +20,6 @@ import com.google.maps.gwt.client.LatLng;
 import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.Message;
 import com.infoklinik.rsvp.client.SuggestionOracle;
-import com.infoklinik.rsvp.client.inst.InstitutionEventBus;
-import com.infoklinik.rsvp.client.inst.presenter.interfaces.IHospitalSearchView;
-import com.infoklinik.rsvp.client.inst.view.HospitalSearchView;
 import com.infoklinik.rsvp.client.main.presenter.LocationListener;
 import com.infoklinik.rsvp.client.main.view.LocationDlg;
 import com.infoklinik.rsvp.client.main.view.NotificationDlg;
@@ -32,6 +29,9 @@ import com.infoklinik.rsvp.client.rpc.InstitutionServiceAsync;
 import com.infoklinik.rsvp.client.rpc.InsuranceServiceAsync;
 import com.infoklinik.rsvp.client.rpc.MasterCodeServiceAsync;
 import com.infoklinik.rsvp.client.rpc.SpecialityServiceAsync;
+import com.infoklinik.rsvp.client.search.SearchEventBus;
+import com.infoklinik.rsvp.client.search.presenter.interfaces.IHospitalSearchView;
+import com.infoklinik.rsvp.client.search.view.HospitalSearchView;
 import com.infoklinik.rsvp.shared.CityBean;
 import com.infoklinik.rsvp.shared.CitySearchBean;
 import com.infoklinik.rsvp.shared.Constant;
@@ -45,7 +45,7 @@ import com.mvp4g.client.presenter.LazyPresenter;
 
 @Singleton
 @Presenter(view = HospitalSearchView.class)
-public class HospitalSearchPresenter extends LazyPresenter<IHospitalSearchView, InstitutionEventBus> implements LocationListener {
+public class HospitalSearchPresenter extends LazyPresenter<IHospitalSearchView, SearchEventBus> implements LocationListener {
 	
 	@Inject
 	CityServiceAsync cityService;

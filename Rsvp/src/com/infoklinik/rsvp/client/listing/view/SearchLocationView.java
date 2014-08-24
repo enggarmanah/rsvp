@@ -1,4 +1,4 @@
-package com.infoklinik.rsvp.client.search.view;
+package com.infoklinik.rsvp.client.listing.view;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ import com.google.maps.gwt.client.MarkerImage;
 import com.google.maps.gwt.client.MarkerOptions;
 import com.google.maps.gwt.client.MouseEvent;
 import com.infoklinik.rsvp.client.BaseView;
-import com.infoklinik.rsvp.client.search.presenter.interfaces.ISearchLocationView;
+import com.infoklinik.rsvp.client.listing.presenter.interfaces.ISearchLocationView;
 import com.infoklinik.rsvp.shared.Constant;
 import com.infoklinik.rsvp.shared.GisLatLng;
 import com.infoklinik.rsvp.shared.InstitutionBean;

@@ -1,4 +1,4 @@
-package com.infoklinik.rsvp.client.search.presenter;
+package com.infoklinik.rsvp.client.listing.presenter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,9 +12,9 @@ import com.google.gwt.user.client.Window;
 import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.GenericBean;
 import com.infoklinik.rsvp.client.HandlerManager;
-import com.infoklinik.rsvp.client.search.SearchEventBus;
-import com.infoklinik.rsvp.client.search.presenter.interfaces.ISearchView;
-import com.infoklinik.rsvp.client.search.view.SearchView;
+import com.infoklinik.rsvp.client.listing.SearchResultEventBus;
+import com.infoklinik.rsvp.client.listing.presenter.interfaces.ISearchResultView;
+import com.infoklinik.rsvp.client.listing.view.SearchResultView;
 import com.infoklinik.rsvp.shared.DoctorBean;
 import com.infoklinik.rsvp.shared.InstitutionBean;
 import com.infoklinik.rsvp.shared.ScheduleBean;
@@ -23,8 +23,8 @@ import com.mvp4g.client.annotation.Presenter;
 import com.mvp4g.client.presenter.LazyPresenter;
 
 @Singleton
-@Presenter(view = SearchView.class)
-public class SearchPresenter extends LazyPresenter<ISearchView, SearchEventBus> {
+@Presenter(view = SearchResultView.class)
+public class SearchResultPresenter extends LazyPresenter<ISearchResultView, SearchResultEventBus> {
 	
 	List<InstitutionBean> institutions;
 	List<DoctorBean> doctors;

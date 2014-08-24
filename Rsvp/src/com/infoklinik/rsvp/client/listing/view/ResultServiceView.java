@@ -1,5 +1,5 @@
 
-package com.infoklinik.rsvp.client.search.view;
+package com.infoklinik.rsvp.client.listing.view;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
@@ -11,31 +11,32 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
-import com.infoklinik.rsvp.client.ClientUtil;
+import com.infoklinik.rsvp.client.GenericBean;
 import com.infoklinik.rsvp.client.HandlerManager;
 import com.infoklinik.rsvp.shared.InstitutionBean;
+import com.infoklinik.rsvp.shared.ServiceBean;
 import com.infoklinik.rsvp.shared.SharedUtil;
 
-public class InstitutionView extends BaseView {
+public class ResultServiceView extends BaseView {
 	
-	interface ModuleUiBinder extends UiBinder<Widget, InstitutionView> {}
+	interface ModuleUiBinder extends UiBinder<Widget, ResultServiceView> {}
 	
 	private static ModuleUiBinder uiBinder = GWT.create(ModuleUiBinder.class);
 	
 	@UiField
-	HTMLPanel mainPanel;
+	Label serviceNameLb;
+	
+	@UiField
+	Label descriptionLb;
+	
+	@UiField
+	Label priceLb;
+	
+	@UiField
+	Label institutionLb;
 	
 	@UiField
 	Label indexLb;
-	
-	@UiField
-	Label nameLb;
-	
-	@UiField
-	Image updateImg;
-	
-	@UiField
-	Image deleteImg;
 	
 	@UiField
 	HTMLPanel distancePanel;
@@ -76,23 +77,26 @@ public class InstitutionView extends BaseView {
 	@UiField
 	Image commentCountImg;
 	
-	public InstitutionView() {
+	public ResultServiceView() {
 		
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 	
-	public void setInstitution(int index, InstitutionBean institution, HandlerManager handlerMgr) {
+	public void setService(int index, GenericBean<ServiceBean> genService) {
 		
-		if (ClientUtil.isAdminUser) {
-			mainPanel.addStyleName("admin");
-			updateImg.addClickHandler(handlerMgr.getUpdateHandler());
-		} else {
-			updateImg.setVisible(false);
-			deleteImg.setVisible(false);
-		}
+		ServiceBean service = genService.getBean();
+		HandlerManager handlerMgr = genService.getHandlerMgr();
+		
+		serviceNameLb.setText(service.getServiceType().getName() + " - " + service.getName());
+		//serviceNameLb.addClickHandler(handlerMgr.getShowHandler());
+		
+		InstitutionBean institution = service.getInstitution();
 		
 		indexLb.setText(index + ".");
-		nameLb.setText(institution.getName());
+		
+		descriptionLb.setText(service.getDescription());
+		priceLb.setText("Harga Promo : " + service.getPrice() + ". Harga Normal : " + service.getPromoPrice());
+		institutionLb.setText(service.getInstitution().getName());
 		
 		if (institution.getDistance() != null) {
 			distancePanel.setVisible(true);
@@ -108,11 +112,11 @@ public class InstitutionView extends BaseView {
 		
 		opInfoLb.setHTML(new SafeHtmlBuilder().appendEscapedLines(institution.getOpInfo()).toSafeHtml());
 		
-		viewCountLb.setText(String.valueOf(institution.getViewCount()));
-		likeCountLb.setText(String.valueOf(institution.getLikeCount()));
-		commentCountLb.setText(String.valueOf(institution.getCommentCount()));
+		viewCountLb.setText(String.valueOf(service.getViewCount()));
+		likeCountLb.setText(String.valueOf(service.getLikeCount()));
+		commentCountLb.setText(String.valueOf(service.getCommentCount()));
 		
-		nameLb.addClickHandler(handlerMgr.getShowHandler());
+		serviceNameLb.addClickHandler(handlerMgr.getShowHandler());
 		
 		commentCountLb.addClickHandler(handlerMgr.getCommentHandler());
 		commentCountImg.addClickHandler(handlerMgr.getCommentHandler());

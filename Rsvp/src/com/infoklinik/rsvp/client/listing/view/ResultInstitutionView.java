@@ -1,5 +1,5 @@
 
-package com.infoklinik.rsvp.client.search.view;
+package com.infoklinik.rsvp.client.listing.view;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
@@ -11,32 +11,31 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
-import com.infoklinik.rsvp.client.GenericBean;
+import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.HandlerManager;
 import com.infoklinik.rsvp.shared.InstitutionBean;
-import com.infoklinik.rsvp.shared.ServiceBean;
 import com.infoklinik.rsvp.shared.SharedUtil;
 
-public class ServiceView extends BaseView {
+public class ResultInstitutionView extends BaseView {
 	
-	interface ModuleUiBinder extends UiBinder<Widget, ServiceView> {}
+	interface ModuleUiBinder extends UiBinder<Widget, ResultInstitutionView> {}
 	
 	private static ModuleUiBinder uiBinder = GWT.create(ModuleUiBinder.class);
 	
 	@UiField
-	Label serviceNameLb;
-	
-	@UiField
-	Label descriptionLb;
-	
-	@UiField
-	Label priceLb;
-	
-	@UiField
-	Label institutionLb;
+	HTMLPanel mainPanel;
 	
 	@UiField
 	Label indexLb;
+	
+	@UiField
+	Label nameLb;
+	
+	@UiField
+	Image updateImg;
+	
+	@UiField
+	Image deleteImg;
 	
 	@UiField
 	HTMLPanel distancePanel;
@@ -77,26 +76,23 @@ public class ServiceView extends BaseView {
 	@UiField
 	Image commentCountImg;
 	
-	public ServiceView() {
+	public ResultInstitutionView() {
 		
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 	
-	public void setService(int index, GenericBean<ServiceBean> genService) {
+	public void setInstitution(int index, InstitutionBean institution, HandlerManager handlerMgr) {
 		
-		ServiceBean service = genService.getBean();
-		HandlerManager handlerMgr = genService.getHandlerMgr();
-		
-		serviceNameLb.setText(service.getServiceType().getName() + " - " + service.getName());
-		//serviceNameLb.addClickHandler(handlerMgr.getShowHandler());
-		
-		InstitutionBean institution = service.getInstitution();
+		if (ClientUtil.isAdminUser) {
+			mainPanel.addStyleName("admin");
+			updateImg.addClickHandler(handlerMgr.getUpdateHandler());
+		} else {
+			updateImg.setVisible(false);
+			deleteImg.setVisible(false);
+		}
 		
 		indexLb.setText(index + ".");
-		
-		descriptionLb.setText(service.getDescription());
-		priceLb.setText("Harga Promo : " + service.getPrice() + ". Harga Normal : " + service.getPromoPrice());
-		institutionLb.setText(service.getInstitution().getName());
+		nameLb.setText(institution.getName());
 		
 		if (institution.getDistance() != null) {
 			distancePanel.setVisible(true);
@@ -112,11 +108,11 @@ public class ServiceView extends BaseView {
 		
 		opInfoLb.setHTML(new SafeHtmlBuilder().appendEscapedLines(institution.getOpInfo()).toSafeHtml());
 		
-		viewCountLb.setText(String.valueOf(service.getViewCount()));
-		likeCountLb.setText(String.valueOf(service.getLikeCount()));
-		commentCountLb.setText(String.valueOf(service.getCommentCount()));
+		viewCountLb.setText(String.valueOf(institution.getViewCount()));
+		likeCountLb.setText(String.valueOf(institution.getLikeCount()));
+		commentCountLb.setText(String.valueOf(institution.getCommentCount()));
 		
-		serviceNameLb.addClickHandler(handlerMgr.getShowHandler());
+		nameLb.addClickHandler(handlerMgr.getShowHandler());
 		
 		commentCountLb.addClickHandler(handlerMgr.getCommentHandler());
 		commentCountImg.addClickHandler(handlerMgr.getCommentHandler());

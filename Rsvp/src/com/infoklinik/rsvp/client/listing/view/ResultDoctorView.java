@@ -1,5 +1,5 @@
 
-package com.infoklinik.rsvp.client.search.view;
+package com.infoklinik.rsvp.client.listing.view;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,9 +19,9 @@ import com.infoklinik.rsvp.shared.DoctorBean;
 import com.infoklinik.rsvp.shared.InstitutionBean;
 import com.infoklinik.rsvp.shared.ScheduleBean;
 
-public class DoctorView extends BaseView {
+public class ResultDoctorView extends BaseView {
 	
-	interface ModuleUiBinder extends UiBinder<Widget, DoctorView> {}
+	interface ModuleUiBinder extends UiBinder<Widget, ResultDoctorView> {}
 	
 	private static ModuleUiBinder uiBinder = GWT.create(ModuleUiBinder.class);
 	
@@ -55,7 +55,7 @@ public class DoctorView extends BaseView {
 	@UiField
 	VerticalPanel schedulesPanel;
 	
-	public DoctorView() {
+	public ResultDoctorView() {
 		
 		initWidget(uiBinder.createAndBindUi(this));
 	}
@@ -117,7 +117,7 @@ public class DoctorView extends BaseView {
 				genSchedules.add(genSchedule);
 			}
 			
-			DoctorInstitutionView docInstitutionView = new DoctorInstitutionView();
+			ResultDoctorInstitutionView docInstitutionView = new ResultDoctorInstitutionView();
 			docInstitutionView.setInstitution(genInstitution);
 			docInstitutionView.setSchedules(genSchedules);
 			

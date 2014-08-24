@@ -1,36 +1,43 @@
-package com.infoklinik.rsvp.client.doctor.presenter;
+package com.infoklinik.rsvp.client.search.presenter;
 
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import com.google.gwt.core.client.Callback;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.geolocation.client.Geolocation;
+import com.google.gwt.geolocation.client.Position;
+import com.google.gwt.geolocation.client.PositionError;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.maps.gwt.client.LatLng;
+import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.Message;
 import com.infoklinik.rsvp.client.SuggestionOracle;
-import com.infoklinik.rsvp.client.doctor.DoctorEventBus;
-import com.infoklinik.rsvp.client.doctor.presenter.interfaces.IDoctorSearchView;
-import com.infoklinik.rsvp.client.doctor.view.DoctorSearchView;
 import com.infoklinik.rsvp.client.main.presenter.LocationListener;
 import com.infoklinik.rsvp.client.main.view.LocationDlg;
 import com.infoklinik.rsvp.client.main.view.NotificationDlg;
 import com.infoklinik.rsvp.client.main.view.ProgressDlg;
 import com.infoklinik.rsvp.client.rpc.CityServiceAsync;
-import com.infoklinik.rsvp.client.rpc.DoctorServiceAsync;
+import com.infoklinik.rsvp.client.rpc.InstitutionServiceAsync;
+import com.infoklinik.rsvp.client.rpc.InsuranceServiceAsync;
 import com.infoklinik.rsvp.client.rpc.MasterCodeServiceAsync;
 import com.infoklinik.rsvp.client.rpc.SpecialityServiceAsync;
+import com.infoklinik.rsvp.client.search.SearchEventBus;
+import com.infoklinik.rsvp.client.search.presenter.interfaces.IClinicSearchView;
+import com.infoklinik.rsvp.client.search.view.ClinicSearchView;
 import com.infoklinik.rsvp.shared.CityBean;
 import com.infoklinik.rsvp.shared.CitySearchBean;
 import com.infoklinik.rsvp.shared.Constant;
-import com.infoklinik.rsvp.shared.DoctorBean;
-import com.infoklinik.rsvp.shared.DoctorSearchBean;
+import com.infoklinik.rsvp.shared.InstitutionBean;
+import com.infoklinik.rsvp.shared.InstitutionSearchBean;
+import com.infoklinik.rsvp.shared.InsuranceBean;
 import com.infoklinik.rsvp.shared.LocationBean;
 import com.infoklinik.rsvp.shared.MasterCodeBean;
 import com.infoklinik.rsvp.shared.SpecialityBean;
@@ -38,14 +45,17 @@ import com.mvp4g.client.annotation.Presenter;
 import com.mvp4g.client.presenter.LazyPresenter;
 
 @Singleton
-@Presenter(view = DoctorSearchView.class)
-public class DoctorSearchPresenter extends LazyPresenter<IDoctorSearchView, DoctorEventBus> implements LocationListener {
+@Presenter(view = ClinicSearchView.class)
+public class ClinicSearchPresenter extends LazyPresenter<IClinicSearchView, SearchEventBus> implements LocationListener {
 	
 	@Inject
 	CityServiceAsync cityService;
 	
 	@Inject
-	DoctorServiceAsync doctorService;
+	InstitutionServiceAsync institutionService;
+	
+	@Inject
+	InsuranceServiceAsync insuranceService;
 	
 	@Inject
 	SpecialityServiceAsync specialityService;
@@ -53,20 +63,23 @@ public class DoctorSearchPresenter extends LazyPresenter<IDoctorSearchView, Doct
 	@Inject
 	MasterCodeServiceAsync masterCodeService;
 	
-	private DoctorSearchPresenter doctorSearchPresenter;
+	LocationBean locationBean;
+	
+	private ClinicSearchPresenter clinicSearchPresenter;
 	
 	@Override
 	public void bindView() {
 		
-		doctorSearchPresenter = this;
+		clinicSearchPresenter = this;
 		
 		initCities();
+		initInsurances();
 		initSpecialities();
-		initDays();
+		initClinicTypes();
 		initSearchOptionRbHandler();
-		initSearchSbHandler();
 		initCityLbHandler();
-		initSearchBtnHandler();		
+		initSearchSbHandler();
+		initSearchBtnHandler();
 	}
 	
 	private void initCities() {
@@ -74,8 +87,56 @@ public class DoctorSearchPresenter extends LazyPresenter<IDoctorSearchView, Doct
 		cityService.getCities(new CitySearchBean(), new AsyncCallback<List<CityBean>>() {
 			
 			@Override
-			public void onSuccess(List<CityBean> cityBeans) {
-				view.setCities(cityBeans);
+			public void onSuccess(final List<CityBean> cities) {
+				
+				view.setCities(cities);
+				
+				CityBean nearestCity = ClientUtil.getNearestCity();
+				
+				if (nearestCity == null) {
+				
+					if (Geolocation.isSupported() && ClientUtil.isReqGeoLocation()) {
+						
+						ClientUtil.setReqGeoLocation(false);
+						
+						Geolocation.getIfSupported().getCurrentPosition(
+							new Callback<Position, PositionError>() {
+	
+								@Override
+								public void onSuccess(Position position) {
+									
+									CityBean city = ClientUtil.getNearestCity(cities, position);
+									
+									if (city != null) {
+										view.setCity(city);
+									}
+								}
+	
+								@Override
+								public void onFailure(PositionError reason) {
+								}
+							});
+					} 
+					
+				} else {
+					
+					view.setCity(nearestCity);
+				} 
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+			}
+		});
+	}
+	
+	private void initInsurances() {
+		
+		insuranceService.getInsurances(new AsyncCallback<List<InsuranceBean>>() {
+			
+			@Override
+			public void onSuccess(List<InsuranceBean> insuranceBeans) {
+				view.setInsurances(insuranceBeans);
 			}
 			
 			@Override
@@ -99,19 +160,20 @@ public class DoctorSearchPresenter extends LazyPresenter<IDoctorSearchView, Doct
 		});
 	}
 	
-	private void initDays() {
+	private void initClinicTypes() {
 		
-		masterCodeService.getMasterCodes(MasterCodeBean.DAY, new AsyncCallback<List<MasterCodeBean>>() {
+		masterCodeService.getMasterCodes(MasterCodeBean.CLINIC_TYPE, new AsyncCallback<List<MasterCodeBean>>() {
 			
 			@Override
 			public void onSuccess(List<MasterCodeBean> masterCodeBeans) {
-				view.setDays(masterCodeBeans);
+				view.setInstitutionTypes(masterCodeBeans);
 			}
 			
 			@Override
 			public void onFailure(Throwable caught) {
 			}
 		});
+		
 	}
 	
 	private void initSearchOptionRbHandler() {
@@ -152,6 +214,19 @@ public class DoctorSearchPresenter extends LazyPresenter<IDoctorSearchView, Doct
 		});
 	}
 	
+	private void initCityLbHandler() {
+		
+		view.setCityLbHandler(new ChangeHandler() {
+			
+			@Override
+			public void onChange(ChangeEvent event) {
+				
+				InstitutionSearchBean instSearch = view.getInstitutionSearch();
+				view.setSuggestCityId(instSearch.getCityId().toString());
+			}
+		});
+	}
+	
 	private void initSearchSbHandler() {
 		
 		view.setSearchSbHandler(new ClickHandler() {
@@ -162,21 +237,8 @@ public class DoctorSearchPresenter extends LazyPresenter<IDoctorSearchView, Doct
 				if (Constant.SEARCH_BY_DISTANCE.equals(view.getSearchOptionValue())) {
 					
 					LocationDlg.show();
-					LocationDlg.setLocationListener(doctorSearchPresenter);
+					LocationDlg.setLocationListener(clinicSearchPresenter);
 				}
-			}
-		});
-	}
-	
-	private void initCityLbHandler() {
-		
-		view.setCityLbHandler(new ChangeHandler() {
-			
-			@Override
-			public void onChange(ChangeEvent event) {
-				
-				DoctorSearchBean doctorSearch = view.getDoctorSearch();
-				view.setSuggestCityId(doctorSearch.getCityId().toString());
 			}
 		});
 	}
@@ -190,12 +252,12 @@ public class DoctorSearchPresenter extends LazyPresenter<IDoctorSearchView, Doct
 				
 				ProgressDlg.show();
 				
-				doctorService.getDoctors(view.getDoctorSearch(), new AsyncCallback<List<DoctorBean>>() {
+				institutionService.getInstitutions(view.getInstitutionSearch(), new AsyncCallback<List<InstitutionBean>>() {
 					
 					@Override
-					public void onSuccess(List<DoctorBean> doctors) {
+					public void onSuccess(List<InstitutionBean> institutions) {
 						
-						if (doctors.size() == 0) {
+						if (institutions.size() == 0) {
 							
 							ProgressDlg.hidePrompt();
 							NotificationDlg.warning(Message.SEARCH_RESULT_EMPTY);
@@ -204,7 +266,7 @@ public class DoctorSearchPresenter extends LazyPresenter<IDoctorSearchView, Doct
 							
 						} else {
 							
-							LocationBean location = view.getDoctorSearch().getLocation();
+							LocationBean location = view.getInstitutionSearch().getLocation();
 							LatLng latLng = null;
 							
 							if (location != null) {
@@ -212,9 +274,9 @@ public class DoctorSearchPresenter extends LazyPresenter<IDoctorSearchView, Doct
 							}
 							
 							eventBus.setSearchLocation(latLng);
-							eventBus.loadDoctorSearchResult(doctors);
+							eventBus.loadInstitutionSearchResult(institutions);
 							
-							if (doctors.size() == Constant.QUERY_MAX_RESULT) {
+							if (institutions.size() == Constant.QUERY_MAX_RESULT) {
 								ProgressDlg.hidePrompt();
 								NotificationDlg.info(Message.SEARCH_EXCEED_QUERY_MAX_RESULT);
 							} else {
@@ -233,7 +295,7 @@ public class DoctorSearchPresenter extends LazyPresenter<IDoctorSearchView, Doct
 		});
 	}
 	
-	public void onLoadDoctorSearch() {
+	public void onLoadClinicSearch() {
 		
 		Timer timer = new Timer() {
 			
@@ -249,7 +311,7 @@ public class DoctorSearchPresenter extends LazyPresenter<IDoctorSearchView, Doct
 		timer.schedule(Constant.FADE_TIME);
 	}
 	
-	public void onRemoveDoctorSearch() {
+	public void onRemoveClinicSearch() {
 		
 		view.fadeOut();
 	}

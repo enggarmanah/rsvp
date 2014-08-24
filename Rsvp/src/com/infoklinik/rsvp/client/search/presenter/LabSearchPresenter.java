@@ -1,71 +1,81 @@
-package com.infoklinik.rsvp.client.service.presenter;
+package com.infoklinik.rsvp.client.search.presenter;
 
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import com.google.gwt.core.client.Callback;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.geolocation.client.Geolocation;
+import com.google.gwt.geolocation.client.Position;
+import com.google.gwt.geolocation.client.PositionError;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.maps.gwt.client.LatLng;
+import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.Message;
 import com.infoklinik.rsvp.client.SuggestionOracle;
-import com.infoklinik.rsvp.client.service.ServiceEventBus;
-import com.infoklinik.rsvp.client.service.presenter.interfaces.IServiceSearchView;
-import com.infoklinik.rsvp.client.service.view.ServiceSearchView;
 import com.infoklinik.rsvp.client.main.presenter.LocationListener;
 import com.infoklinik.rsvp.client.main.view.LocationDlg;
 import com.infoklinik.rsvp.client.main.view.NotificationDlg;
 import com.infoklinik.rsvp.client.main.view.ProgressDlg;
 import com.infoklinik.rsvp.client.rpc.CityServiceAsync;
-import com.infoklinik.rsvp.client.rpc.ServiceServiceAsync;
-import com.infoklinik.rsvp.client.rpc.ServiceTypeServiceAsync;
+import com.infoklinik.rsvp.client.rpc.InstitutionServiceAsync;
+import com.infoklinik.rsvp.client.rpc.InsuranceServiceAsync;
+import com.infoklinik.rsvp.client.rpc.MasterCodeServiceAsync;
 import com.infoklinik.rsvp.client.rpc.SpecialityServiceAsync;
+import com.infoklinik.rsvp.client.search.SearchEventBus;
+import com.infoklinik.rsvp.client.search.presenter.interfaces.ILabSearchView;
+import com.infoklinik.rsvp.client.search.view.LabSearchView;
 import com.infoklinik.rsvp.shared.CityBean;
 import com.infoklinik.rsvp.shared.CitySearchBean;
 import com.infoklinik.rsvp.shared.Constant;
-import com.infoklinik.rsvp.shared.ServiceBean;
+import com.infoklinik.rsvp.shared.InstitutionBean;
+import com.infoklinik.rsvp.shared.InstitutionSearchBean;
 import com.infoklinik.rsvp.shared.LocationBean;
-import com.infoklinik.rsvp.shared.ServiceSearchBean;
-import com.infoklinik.rsvp.shared.ServiceTypeBean;
-import com.infoklinik.rsvp.shared.ServiceTypeSearchBean;
+import com.infoklinik.rsvp.shared.MasterCodeBean;
 import com.mvp4g.client.annotation.Presenter;
 import com.mvp4g.client.presenter.LazyPresenter;
 
 @Singleton
-@Presenter(view = ServiceSearchView.class)
-public class ServiceSearchPresenter extends LazyPresenter<IServiceSearchView, ServiceEventBus> implements LocationListener {
+@Presenter(view = LabSearchView.class)
+public class LabSearchPresenter extends LazyPresenter<ILabSearchView, SearchEventBus> implements LocationListener {
 	
 	@Inject
 	CityServiceAsync cityService;
 	
 	@Inject
-	ServiceServiceAsync serviceService;
+	InstitutionServiceAsync institutionService;
 	
 	@Inject
-	ServiceTypeServiceAsync serviceTypeService;
+	InsuranceServiceAsync insuranceService;
 	
 	@Inject
 	SpecialityServiceAsync specialityService;
 	
-	private ServiceSearchPresenter serviceSearchPresenter;
+	@Inject
+	MasterCodeServiceAsync masterCodeService;
+	
+	LocationBean locationBean;
+	
+	private LabSearchPresenter labSearchPresenter;
 	
 	@Override
 	public void bindView() {
 		
-		serviceSearchPresenter = this;
+		labSearchPresenter = this;
 		
 		initCities();
-		initServiceTypes();
+		initLabTypes();
 		initSearchOptionRbHandler();
-		initCityLbHandler();
 		initSearchSbHandler();
-		initSearchBtnHandler();		
+		initCityLbHandler();
+		initSearchBtnHandler();
 	}
 	
 	private void initCities() {
@@ -73,8 +83,41 @@ public class ServiceSearchPresenter extends LazyPresenter<IServiceSearchView, Se
 		cityService.getCities(new CitySearchBean(), new AsyncCallback<List<CityBean>>() {
 			
 			@Override
-			public void onSuccess(List<CityBean> cityBeans) {
-				view.setCities(cityBeans);
+			public void onSuccess(final List<CityBean> cities) {
+				
+				view.setCities(cities);
+				
+				CityBean nearestCity = ClientUtil.getNearestCity();
+				
+				if (nearestCity == null) {
+				
+					if (Geolocation.isSupported() && ClientUtil.isReqGeoLocation()) {
+						
+						ClientUtil.setReqGeoLocation(false);
+						
+						Geolocation.getIfSupported().getCurrentPosition(
+							new Callback<Position, PositionError>() {
+	
+								@Override
+								public void onSuccess(Position position) {
+									
+									CityBean city = ClientUtil.getNearestCity(cities, position);
+									
+									if (city != null) {
+										view.setCity(city);
+									}
+								}
+	
+								@Override
+								public void onFailure(PositionError reason) {
+								}
+							});
+					} 
+					
+				} else {
+					
+					view.setCity(nearestCity);
+				} 
 			}
 			
 			@Override
@@ -83,20 +126,20 @@ public class ServiceSearchPresenter extends LazyPresenter<IServiceSearchView, Se
 		});
 	}
 	
-	private void initServiceTypes() {
+	private void initLabTypes() {
 		
-		serviceTypeService.getServiceTypes(new ServiceTypeSearchBean(), new AsyncCallback<List<ServiceTypeBean>>() {
+		masterCodeService.getMasterCodes(MasterCodeBean.LAB_TYPE, new AsyncCallback<List<MasterCodeBean>>() {
 			
 			@Override
-			public void onSuccess(List<ServiceTypeBean> serviceTypes) {
-				view.setServiceTypes(serviceTypes);
+			public void onSuccess(List<MasterCodeBean> masterCodeBeans) {
+				view.setInstitutionTypes(masterCodeBeans);
 			}
 			
 			@Override
 			public void onFailure(Throwable caught) {
-				
 			}
 		});
+		
 	}
 	
 	private void initSearchOptionRbHandler() {
@@ -147,7 +190,7 @@ public class ServiceSearchPresenter extends LazyPresenter<IServiceSearchView, Se
 				if (Constant.SEARCH_BY_DISTANCE.equals(view.getSearchOptionValue())) {
 					
 					LocationDlg.show();
-					LocationDlg.setLocationListener(serviceSearchPresenter);
+					LocationDlg.setLocationListener(labSearchPresenter);
 				}
 			}
 		});
@@ -160,8 +203,8 @@ public class ServiceSearchPresenter extends LazyPresenter<IServiceSearchView, Se
 			@Override
 			public void onChange(ChangeEvent event) {
 				
-				ServiceSearchBean serviceSearch = view.getServiceSearch();
-				view.setSuggestCityId(serviceSearch.getCityId().toString());
+				InstitutionSearchBean instSearch = view.getInstitutionSearch();
+				view.setSuggestCityId(instSearch.getCityId().toString());
 			}
 		});
 	}
@@ -175,12 +218,12 @@ public class ServiceSearchPresenter extends LazyPresenter<IServiceSearchView, Se
 				
 				ProgressDlg.show();
 				
-				serviceService.getServices(view.getServiceSearch(), new AsyncCallback<List<ServiceBean>>() {
+				institutionService.getInstitutions(view.getInstitutionSearch(), new AsyncCallback<List<InstitutionBean>>() {
 					
 					@Override
-					public void onSuccess(List<ServiceBean> services) {
+					public void onSuccess(List<InstitutionBean> institutions) {
 						
-						if (services.size() == 0) {
+						if (institutions.size() == 0) {
 							
 							ProgressDlg.hidePrompt();
 							NotificationDlg.warning(Message.SEARCH_RESULT_EMPTY);
@@ -189,7 +232,7 @@ public class ServiceSearchPresenter extends LazyPresenter<IServiceSearchView, Se
 							
 						} else {
 							
-							LocationBean location = view.getServiceSearch().getLocation();
+							LocationBean location = view.getInstitutionSearch().getLocation();
 							LatLng latLng = null;
 							
 							if (location != null) {
@@ -197,9 +240,9 @@ public class ServiceSearchPresenter extends LazyPresenter<IServiceSearchView, Se
 							}
 							
 							eventBus.setSearchLocation(latLng);
-							eventBus.loadServiceSearchResult(services);
+							eventBus.loadInstitutionSearchResult(institutions);
 							
-							if (services.size() == Constant.QUERY_MAX_RESULT) {
+							if (institutions.size() == Constant.QUERY_MAX_RESULT) {
 								ProgressDlg.hidePrompt();
 								NotificationDlg.info(Message.SEARCH_EXCEED_QUERY_MAX_RESULT);
 							} else {
@@ -218,7 +261,7 @@ public class ServiceSearchPresenter extends LazyPresenter<IServiceSearchView, Se
 		});
 	}
 	
-	public void onLoadServiceSearch() {
+	public void onLoadLabSearch() {
 		
 		Timer timer = new Timer() {
 			
@@ -234,7 +277,7 @@ public class ServiceSearchPresenter extends LazyPresenter<IServiceSearchView, Se
 		timer.schedule(Constant.FADE_TIME);
 	}
 	
-	public void onRemoveServiceSearch() {
+	public void onRemoveLabSearch() {
 		
 		view.fadeOut();
 	}

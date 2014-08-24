@@ -1,4 +1,4 @@
-package com.infoklinik.rsvp.client.search.view;
+package com.infoklinik.rsvp.client.listing.view;
 
 import java.util.List;
 
@@ -17,9 +17,9 @@ import com.infoklinik.rsvp.client.HandlerManager;
 import com.infoklinik.rsvp.shared.InstitutionBean;
 import com.infoklinik.rsvp.shared.ScheduleBean;
 
-public class DoctorInstitutionView extends BaseView {
+public class ResultDoctorInstitutionView extends BaseView {
 	
-	interface ModuleUiBinder extends UiBinder<Widget, DoctorInstitutionView> {}
+	interface ModuleUiBinder extends UiBinder<Widget, ResultDoctorInstitutionView> {}
 	
 	private static ModuleUiBinder uiBinder = GWT.create(ModuleUiBinder.class);
 	
@@ -42,7 +42,7 @@ public class DoctorInstitutionView extends BaseView {
 	private static String STYLE_SCHEDULE_DAY = "day";
 	private static String STYLE_SCHEDULE_TIME = "time";
 	
-	public DoctorInstitutionView() {
+	public ResultDoctorInstitutionView() {
 		
 		initWidget(uiBinder.createAndBindUi(this));
 	}

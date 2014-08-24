@@ -1,4 +1,4 @@
-package com.infoklinik.rsvp.client.inst.view;
+package com.infoklinik.rsvp.client.search.view;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
 import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.SuggestionOracle;
-import com.infoklinik.rsvp.client.inst.presenter.interfaces.ILabSearchView;
+import com.infoklinik.rsvp.client.search.presenter.interfaces.ILabSearchView;
 import com.infoklinik.rsvp.shared.CityBean;
 import com.infoklinik.rsvp.shared.Constant;
 import com.infoklinik.rsvp.shared.InstitutionBean;

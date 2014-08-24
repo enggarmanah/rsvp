@@ -754,7 +754,8 @@ input.search-field:focus {
 
 #search-result-content .inst-dtl .header {
 	margin: 0px 0px 0px 0px;
-	width: 430px;
+	/* width: 430px; */
+	width: 367px;
 	border: 0px solid #555;
 	overflow: auto;
 }
@@ -784,7 +785,7 @@ input.search-field:focus {
 }
 
 #search-result-content .inst-dtl .header .name .doctor {
-	width: 180px;
+	min-width: 100px;
 }
 
 #search-result-content .inst-dtl .header .name:hover {
@@ -795,6 +796,13 @@ input.search-field:focus {
 	border: 0px solid #888;
 	padding: 2px 0px 0px 0px;
 	margin: 0px 0px 0px 0px;
+}
+
+#search-result-content .inst-dtl .header .rating-right {
+	border: 0px solid #888;
+	padding: 2px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+	float: right;
 }
 
 #search-result-content .inst-dtl .header .desc {
@@ -822,7 +830,7 @@ input.search-field:focus {
 #search-result-content .inst-dtl .header .underline {
 	border-top: 1px dashed #AAA;
 	float: left;
-	width: 380px;
+	width: 360px;
 	margin: 5px 0px 5px 0px;
 }
 

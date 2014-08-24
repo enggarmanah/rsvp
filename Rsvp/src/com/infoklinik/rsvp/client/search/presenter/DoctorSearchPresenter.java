@@ -1,59 +1,51 @@
-package com.infoklinik.rsvp.client.inst.presenter;
+package com.infoklinik.rsvp.client.search.presenter;
 
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import com.google.gwt.core.client.Callback;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.geolocation.client.Geolocation;
-import com.google.gwt.geolocation.client.Position;
-import com.google.gwt.geolocation.client.PositionError;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.maps.gwt.client.LatLng;
-import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.Message;
 import com.infoklinik.rsvp.client.SuggestionOracle;
-import com.infoklinik.rsvp.client.inst.InstitutionEventBus;
-import com.infoklinik.rsvp.client.inst.presenter.interfaces.ILabSearchView;
-import com.infoklinik.rsvp.client.inst.view.LabSearchView;
 import com.infoklinik.rsvp.client.main.presenter.LocationListener;
 import com.infoklinik.rsvp.client.main.view.LocationDlg;
 import com.infoklinik.rsvp.client.main.view.NotificationDlg;
 import com.infoklinik.rsvp.client.main.view.ProgressDlg;
 import com.infoklinik.rsvp.client.rpc.CityServiceAsync;
-import com.infoklinik.rsvp.client.rpc.InstitutionServiceAsync;
-import com.infoklinik.rsvp.client.rpc.InsuranceServiceAsync;
+import com.infoklinik.rsvp.client.rpc.DoctorServiceAsync;
 import com.infoklinik.rsvp.client.rpc.MasterCodeServiceAsync;
 import com.infoklinik.rsvp.client.rpc.SpecialityServiceAsync;
+import com.infoklinik.rsvp.client.search.SearchEventBus;
+import com.infoklinik.rsvp.client.search.presenter.interfaces.IDoctorSearchView;
+import com.infoklinik.rsvp.client.search.view.DoctorSearchView;
 import com.infoklinik.rsvp.shared.CityBean;
 import com.infoklinik.rsvp.shared.CitySearchBean;
 import com.infoklinik.rsvp.shared.Constant;
-import com.infoklinik.rsvp.shared.InstitutionBean;
-import com.infoklinik.rsvp.shared.InstitutionSearchBean;
+import com.infoklinik.rsvp.shared.DoctorBean;
+import com.infoklinik.rsvp.shared.DoctorSearchBean;
 import com.infoklinik.rsvp.shared.LocationBean;
 import com.infoklinik.rsvp.shared.MasterCodeBean;
+import com.infoklinik.rsvp.shared.SpecialityBean;
 import com.mvp4g.client.annotation.Presenter;
 import com.mvp4g.client.presenter.LazyPresenter;
 
 @Singleton
-@Presenter(view = LabSearchView.class)
-public class LabSearchPresenter extends LazyPresenter<ILabSearchView, InstitutionEventBus> implements LocationListener {
+@Presenter(view = DoctorSearchView.class)
+public class DoctorSearchPresenter extends LazyPresenter<IDoctorSearchView, SearchEventBus> implements LocationListener {
 	
 	@Inject
 	CityServiceAsync cityService;
 	
 	@Inject
-	InstitutionServiceAsync institutionService;
-	
-	@Inject
-	InsuranceServiceAsync insuranceService;
+	DoctorServiceAsync doctorService;
 	
 	@Inject
 	SpecialityServiceAsync specialityService;
@@ -61,21 +53,20 @@ public class LabSearchPresenter extends LazyPresenter<ILabSearchView, Institutio
 	@Inject
 	MasterCodeServiceAsync masterCodeService;
 	
-	LocationBean locationBean;
-	
-	private LabSearchPresenter labSearchPresenter;
+	private DoctorSearchPresenter doctorSearchPresenter;
 	
 	@Override
 	public void bindView() {
 		
-		labSearchPresenter = this;
+		doctorSearchPresenter = this;
 		
 		initCities();
-		initLabTypes();
+		initSpecialities();
+		initDays();
 		initSearchOptionRbHandler();
 		initSearchSbHandler();
 		initCityLbHandler();
-		initSearchBtnHandler();
+		initSearchBtnHandler();		
 	}
 	
 	private void initCities() {
@@ -83,41 +74,8 @@ public class LabSearchPresenter extends LazyPresenter<ILabSearchView, Institutio
 		cityService.getCities(new CitySearchBean(), new AsyncCallback<List<CityBean>>() {
 			
 			@Override
-			public void onSuccess(final List<CityBean> cities) {
-				
-				view.setCities(cities);
-				
-				CityBean nearestCity = ClientUtil.getNearestCity();
-				
-				if (nearestCity == null) {
-				
-					if (Geolocation.isSupported() && ClientUtil.isReqGeoLocation()) {
-						
-						ClientUtil.setReqGeoLocation(false);
-						
-						Geolocation.getIfSupported().getCurrentPosition(
-							new Callback<Position, PositionError>() {
-	
-								@Override
-								public void onSuccess(Position position) {
-									
-									CityBean city = ClientUtil.getNearestCity(cities, position);
-									
-									if (city != null) {
-										view.setCity(city);
-									}
-								}
-	
-								@Override
-								public void onFailure(PositionError reason) {
-								}
-							});
-					} 
-					
-				} else {
-					
-					view.setCity(nearestCity);
-				} 
+			public void onSuccess(List<CityBean> cityBeans) {
+				view.setCities(cityBeans);
 			}
 			
 			@Override
@@ -126,20 +84,34 @@ public class LabSearchPresenter extends LazyPresenter<ILabSearchView, Institutio
 		});
 	}
 	
-	private void initLabTypes() {
+	private void initSpecialities() {
 		
-		masterCodeService.getMasterCodes(MasterCodeBean.LAB_TYPE, new AsyncCallback<List<MasterCodeBean>>() {
+		specialityService.getSpecialities(new AsyncCallback<List<SpecialityBean>>() {
 			
 			@Override
-			public void onSuccess(List<MasterCodeBean> masterCodeBeans) {
-				view.setInstitutionTypes(masterCodeBeans);
+			public void onSuccess(List<SpecialityBean> specialityBeans) {
+				view.setSpecialities(specialityBeans);
 			}
 			
 			@Override
 			public void onFailure(Throwable caught) {
 			}
 		});
+	}
+	
+	private void initDays() {
 		
+		masterCodeService.getMasterCodes(MasterCodeBean.DAY, new AsyncCallback<List<MasterCodeBean>>() {
+			
+			@Override
+			public void onSuccess(List<MasterCodeBean> masterCodeBeans) {
+				view.setDays(masterCodeBeans);
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+			}
+		});
 	}
 	
 	private void initSearchOptionRbHandler() {
@@ -190,7 +162,7 @@ public class LabSearchPresenter extends LazyPresenter<ILabSearchView, Institutio
 				if (Constant.SEARCH_BY_DISTANCE.equals(view.getSearchOptionValue())) {
 					
 					LocationDlg.show();
-					LocationDlg.setLocationListener(labSearchPresenter);
+					LocationDlg.setLocationListener(doctorSearchPresenter);
 				}
 			}
 		});
@@ -203,8 +175,8 @@ public class LabSearchPresenter extends LazyPresenter<ILabSearchView, Institutio
 			@Override
 			public void onChange(ChangeEvent event) {
 				
-				InstitutionSearchBean instSearch = view.getInstitutionSearch();
-				view.setSuggestCityId(instSearch.getCityId().toString());
+				DoctorSearchBean doctorSearch = view.getDoctorSearch();
+				view.setSuggestCityId(doctorSearch.getCityId().toString());
 			}
 		});
 	}
@@ -218,12 +190,12 @@ public class LabSearchPresenter extends LazyPresenter<ILabSearchView, Institutio
 				
 				ProgressDlg.show();
 				
-				institutionService.getInstitutions(view.getInstitutionSearch(), new AsyncCallback<List<InstitutionBean>>() {
+				doctorService.getDoctors(view.getDoctorSearch(), new AsyncCallback<List<DoctorBean>>() {
 					
 					@Override
-					public void onSuccess(List<InstitutionBean> institutions) {
+					public void onSuccess(List<DoctorBean> doctors) {
 						
-						if (institutions.size() == 0) {
+						if (doctors.size() == 0) {
 							
 							ProgressDlg.hidePrompt();
 							NotificationDlg.warning(Message.SEARCH_RESULT_EMPTY);
@@ -232,7 +204,7 @@ public class LabSearchPresenter extends LazyPresenter<ILabSearchView, Institutio
 							
 						} else {
 							
-							LocationBean location = view.getInstitutionSearch().getLocation();
+							LocationBean location = view.getDoctorSearch().getLocation();
 							LatLng latLng = null;
 							
 							if (location != null) {
@@ -240,9 +212,9 @@ public class LabSearchPresenter extends LazyPresenter<ILabSearchView, Institutio
 							}
 							
 							eventBus.setSearchLocation(latLng);
-							eventBus.loadInstitutionSearchResult(institutions);
+							eventBus.loadDoctorSearchResult(doctors);
 							
-							if (institutions.size() == Constant.QUERY_MAX_RESULT) {
+							if (doctors.size() == Constant.QUERY_MAX_RESULT) {
 								ProgressDlg.hidePrompt();
 								NotificationDlg.info(Message.SEARCH_EXCEED_QUERY_MAX_RESULT);
 							} else {
@@ -261,7 +233,7 @@ public class LabSearchPresenter extends LazyPresenter<ILabSearchView, Institutio
 		});
 	}
 	
-	public void onLoadLabSearch() {
+	public void onLoadDoctorSearch() {
 		
 		Timer timer = new Timer() {
 			
@@ -277,7 +249,7 @@ public class LabSearchPresenter extends LazyPresenter<ILabSearchView, Institutio
 		timer.schedule(Constant.FADE_TIME);
 	}
 	
-	public void onRemoveLabSearch() {
+	public void onRemoveDoctorSearch() {
 		
 		view.fadeOut();
 	}

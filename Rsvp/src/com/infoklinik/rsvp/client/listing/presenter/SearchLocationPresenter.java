@@ -1,4 +1,4 @@
-package com.infoklinik.rsvp.client.search.presenter;
+package com.infoklinik.rsvp.client.listing.presenter;
 
 import java.util.List;
 
@@ -8,16 +8,16 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.maps.gwt.client.LatLng;
-import com.infoklinik.rsvp.client.search.SearchEventBus;
-import com.infoklinik.rsvp.client.search.presenter.interfaces.ISearchLocationView;
-import com.infoklinik.rsvp.client.search.view.SearchLocationView;
+import com.infoklinik.rsvp.client.listing.SearchResultEventBus;
+import com.infoklinik.rsvp.client.listing.presenter.interfaces.ISearchLocationView;
+import com.infoklinik.rsvp.client.listing.view.SearchLocationView;
 import com.infoklinik.rsvp.shared.InstitutionBean;
 import com.mvp4g.client.annotation.Presenter;
 import com.mvp4g.client.presenter.LazyPresenter;
 
 @Singleton
 @Presenter(view = SearchLocationView.class)
-public class SearchLocationPresenter extends LazyPresenter<ISearchLocationView, SearchEventBus> {
+public class SearchLocationPresenter extends LazyPresenter<ISearchLocationView, SearchResultEventBus> {
 	
 	List<InstitutionBean> institutions;
 	
