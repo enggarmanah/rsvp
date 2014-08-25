@@ -59,7 +59,7 @@ public class PartnerPresenter extends LazyPresenter<IPartnerView, PartnerEventBu
 							@Override
 							public void onClick(ClickEvent event) {
 								
-								eventBus.loadClinicProfile(institution);
+								eventBus.loadInstitutionProfile(institution);
 							}
 						});
 						

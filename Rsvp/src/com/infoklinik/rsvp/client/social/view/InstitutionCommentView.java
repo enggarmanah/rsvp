@@ -15,7 +15,6 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
-import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.GenericBean;
 import com.infoklinik.rsvp.client.social.presenter.interfaces.IInstitutionCommentView;
 import com.infoklinik.rsvp.shared.CommentBean;
@@ -139,6 +138,8 @@ public class InstitutionCommentView extends BaseView implements IInstitutionComm
 	
 	public void show() {
 		
+		goToTop();
+		
 		fadeOut();
 		
 		logoImg.setUrl("/image?id=" + institution.getImageId());
@@ -156,7 +157,7 @@ public class InstitutionCommentView extends BaseView implements IInstitutionComm
 			commentsPanel.add(commentItemView.asWidget());
 		}
 		
-		ClientUtil.goToTop();
+		goToTop();
 		
 		dialogBox.center();
 		dialogBox.setPopupPosition(dialogBox.getPopupLeft(), 70);

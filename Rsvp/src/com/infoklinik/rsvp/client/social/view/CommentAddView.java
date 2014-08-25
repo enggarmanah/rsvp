@@ -94,7 +94,7 @@ public class CommentAddView extends BaseView implements ICommentAddView {
 		
 		fbProfileImg.setUrl("http://graph.facebook.com/"+ socialUser.getId() +"/picture");
 		
-		ClientUtil.goToTop();
+		goToTop();
 		
 		dialogBox.center();
 		dialogBox.setPopupPosition(dialogBox.getPopupLeft() + 13, 110);

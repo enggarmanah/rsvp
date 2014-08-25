@@ -13,7 +13,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.SuggestOracle;
 import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
@@ -827,8 +826,6 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 		
 		reset();
 		
-		Window.scrollTo (0,0);
-			
 		this.institution = new InstitutionBean();
 		
 		view.setInstitution(institution);
@@ -840,8 +837,6 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 		
 		reset();
 		
-		Window.scrollTo (0,0);
-			
 		this.institution = institution;
 		
 		initTypes();

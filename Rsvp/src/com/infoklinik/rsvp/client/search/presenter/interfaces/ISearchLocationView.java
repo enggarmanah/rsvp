@@ -1,4 +1,4 @@
-package com.infoklinik.rsvp.client.listing.presenter.interfaces;
+package com.infoklinik.rsvp.client.search.presenter.interfaces;
 
 import java.util.List;
 

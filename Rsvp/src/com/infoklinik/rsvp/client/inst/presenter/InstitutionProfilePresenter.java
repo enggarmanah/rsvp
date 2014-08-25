@@ -8,7 +8,6 @@ import javax.inject.Singleton;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.GenericBean;
@@ -289,8 +288,6 @@ public class InstitutionProfilePresenter extends LazyPresenter<IInstitutionProfi
 		
 		reset();
 		
-		Window.scrollTo (0,0);
-			
 		this.institution = institution;
 		
 		view.setInstitution(institution);

@@ -88,6 +88,10 @@ public class SearchResultPresenter extends LazyPresenter<ISearchResultView, Sear
 			handlerMgr.setCommentHandler(getCommentHandler(doctor));
 			handlerMgr.setLikeHandler(getLikeHandler(doctor));
 			
+			if (ClientUtil.isAdminUser) {
+				handlerMgr.setUpdateHandler(getUpdateHandler(doctor));
+			}
+			
 			GenericBean<DoctorBean> genericBean = new GenericBean<DoctorBean>(doctor, handlerMgr);
 			list.add(genericBean);
 			
@@ -186,7 +190,7 @@ public class SearchResultPresenter extends LazyPresenter<ISearchResultView, Sear
 	
 	private ClickHandler getUpdateHandler(final InstitutionBean institution) {
 		
-		ClickHandler showHandler = new ClickHandler() {
+		ClickHandler updateHandler = new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
@@ -195,7 +199,7 @@ public class SearchResultPresenter extends LazyPresenter<ISearchResultView, Sear
 			}
 		};
 		
-		return showHandler;
+		return updateHandler;
 	}
 	
 	private ClickHandler getCommentHandler(final InstitutionBean institution) {
@@ -238,6 +242,20 @@ public class SearchResultPresenter extends LazyPresenter<ISearchResultView, Sear
 		};
 		
 		return showHandler;
+	}
+	
+	private ClickHandler getUpdateHandler(final DoctorBean doctor) {
+		
+		ClickHandler updateHandler = new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				
+				eventBus.updateDoctor(doctor);
+			}
+		};
+		
+		return updateHandler;
 	}
 	
 	private ClickHandler getCommentHandler(final DoctorBean doctor) {

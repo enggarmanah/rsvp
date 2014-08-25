@@ -10,9 +10,15 @@
 		    <div class="service-dtl">
 				<div class="service-header">
 					<g:Label ui:field="serviceNameLb" styleName="name"></g:Label>
-					<g:Label ui:field="priceLb" styleName="price"></g:Label>
+					<g:FlowPanel ui:field="ratingPanel" styleName="rating-right">
+						<g:Label ui:field="viewCountLb" styleName="rating-info"></g:Label> <g:Image ui:field="viewCountImg" url="images/view.png" styleName="rating-img"></g:Image>
+						<g:Label ui:field="likeCountLb" styleName="rating-info-link"></g:Label> <g:Image ui:field="likeCountImg" url="images/like.png" styleName="rating-img-link"></g:Image>
+						<g:Label ui:field="commentCountLb" styleName="rating-info-link"></g:Label> <g:Image ui:field="commentCountImg" url="images/comment.png" styleName="rating-img-link"></g:Image>
+					</g:FlowPanel>
+					<div class="underline"></div>
 				</div>
 				<div class="service-desc">
+				    <g:Label ui:field="priceLb" styleName="price"></g:Label>
 					<g:Label ui:field="descriptionLb"></g:Label>
 				</div>
 				<div class="service-partner">
@@ -64,14 +70,6 @@
 						</div>
 						<div class="inst-subinfo-content">
 							<g:HTML ui:field="opInfoLb"></g:HTML>
-						</div>
-						<div class="inst-subinfo-icon">&nbsp;</div>
-						<div class="inst-subinfo-content">
-							<div class="rating">
-								<g:Label ui:field="viewCountLb" styleName="rating-info"></g:Label> <g:Image ui:field="viewCountImg" url="images/view.png" styleName="rating-img"></g:Image>
-								<g:Label ui:field="likeCountLb" styleName="rating-info-link"></g:Label> <g:Image ui:field="likeCountImg" url="images/like.png" styleName="rating-img-link"></g:Image>
-								<g:Label ui:field="commentCountLb" styleName="rating-info-link"></g:Label> <g:Image ui:field="commentCountImg" url="images/comment.png" styleName="rating-img-link"></g:Image>
-							</div>
 						</div>
 					</div>
 				</div>

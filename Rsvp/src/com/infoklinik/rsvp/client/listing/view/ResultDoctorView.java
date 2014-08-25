@@ -8,11 +8,13 @@ import java.util.List;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
+import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.GenericBean;
 import com.infoklinik.rsvp.client.HandlerManager;
 import com.infoklinik.rsvp.shared.DoctorBean;
@@ -35,6 +37,12 @@ public class ResultDoctorView extends BaseView {
 	Label specialityLb;
 	
 	@UiField
+	Image updateImg;
+	
+	@UiField
+	Image deleteImg;
+	
+	@UiField
 	Label viewCountLb;
 	
 	@UiField
@@ -53,6 +61,12 @@ public class ResultDoctorView extends BaseView {
 	Image commentCountImg;
 	
 	@UiField
+	FlowPanel optionPanel;
+	
+	@UiField
+	FlowPanel ratingPanel;
+	
+	@UiField
 	VerticalPanel schedulesPanel;
 	
 	public ResultDoctorView() {
@@ -62,6 +76,15 @@ public class ResultDoctorView extends BaseView {
 	
 	public void setDoctor(int index, DoctorBean doctor, HandlerManager handlerMgr, HashMap<Long, HandlerManager> instHandlerMgrs,
 			HashMap<Long, HashMap<Long, HandlerManager>> instScheduleHandlerMgrs) {
+		
+		if (ClientUtil.isAdminUser) {
+			updateImg.addClickHandler(handlerMgr.getUpdateHandler());
+			optionPanel.setVisible(true);
+			ratingPanel.setVisible(false);
+		} else {
+			optionPanel.setVisible(false);
+			ratingPanel.setVisible(true);
+		}
 		
 		indexLb.setText(index + ".");
 		nameLb.setText(doctor.getName());

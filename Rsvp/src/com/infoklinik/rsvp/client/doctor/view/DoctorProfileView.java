@@ -114,6 +114,8 @@ public class DoctorProfileView extends BaseView implements IDoctorProfileView {
 	
 	public void show() {
 		
+		goToTop();
+		
 		fadeOut();
 		
 		if (doctor.getImageId() != null) {

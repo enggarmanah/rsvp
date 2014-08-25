@@ -660,13 +660,15 @@ input.search-field:focus {
 
 .rating-info {
 	float: left;
-	padding: 5px 5px 0px 0px;
+	font: normal 12px Tahoma;
+	padding: 4px 5px 0px 0px;
 	cursor: default;
 }
 
 .rating-info-link {
 	float: left;
-	padding: 5px 5px 0px 0px;
+	font: normal 12px Tahoma;
+	padding: 4px 5px 0px 0px;
 	cursor: pointer;
 }
 
@@ -736,6 +738,17 @@ input.search-field:focus {
 	float: left;
 }
 
+#search-result-content .doctor {
+	padding: 0px 0px 0px 0px;
+	border: 0px solid #AAA;
+	float: left;
+}
+
+#search-result-content .inst-subinfo-content-doctor-schedule {
+	padding: 0px 0px 0px 0px;
+	overflow: auto;
+}
+
 #search-result-content .inst-sn {
 	font: 12px Tahoma;
 	float: left;
@@ -750,12 +763,13 @@ input.search-field:focus {
 	width: 470px;
 	border: 0px solid #888;
 	overflow: auto;
+	padding: 0px 0px 5px 0px;
 }
 
 #search-result-content .inst-dtl .header {
 	margin: 0px 0px 0px 0px;
-	/* width: 430px; */
-	width: 367px;
+	width: 400px;
+	/* width: 367px; */
 	border: 0px solid #555;
 	overflow: auto;
 }
@@ -830,8 +844,16 @@ input.search-field:focus {
 #search-result-content .inst-dtl .header .underline {
 	border-top: 1px dashed #AAA;
 	float: left;
-	width: 360px;
+	/* width: 360px; */
+	width: 395px;
 	margin: 5px 0px 5px 0px;
+}
+
+#search-result-content .service-dtl .service-header .underline {
+	border-top: 1px dashed #AAA;
+	float: left;
+	width: 465px;
+	margin: 7px 0px 0px 0px;
 }
 
 #search-result-content .inst-dtl .left {
@@ -922,6 +944,7 @@ input.search-field:focus {
 	padding: 11px 0px 0px 0px;
 	width: 25px;
 	display: table-cell;
+	line-height: 18px;
 }
 
 #search-result-content .service .service-dtl {
@@ -939,6 +962,16 @@ input.search-field:focus {
 	text-decoration: none;
 	text-shadow: -3px 0px 8px #A5C6D9;
 	padding: 0px 0px 5px 0px;
+	border: 0px solid #AAA;
+	width: 470px;
+	overflow: auto;
+}
+
+#search-result-content .service .service-dtl .service-header .name {
+	max-width: 350px;
+	display: inline;
+	line-height: 20px;
+	border: 0px solid #AAA;
 }
 
 #search-result-content .service .service-dtl .service-header .name:hover {
@@ -946,16 +979,26 @@ input.search-field:focus {
 	cursor: pointer;
 }
 
-#search-result-content .service .service-dtl .service-header .price {
-	font: bold 11px 'Tahoma';
-	color: #666;
-	padding: 3px 0px 0px 0px;
+#search-result-content .service .service-dtl .service-header .rating-right {
+	float: right;
+	height: 16px;
+	line-height: 12px;
+	vertical-align: middle;
+	border: 0px solid #888;
+	padding: 0px 0px 0px 0px;
+	overflow: auto;
 }
 
 #search-result-content .service .service-dtl .service-desc{
-	padding: 5px 0px 7px 0px;
+	padding: 0px 0px 7px 0px;
 	font: normal 12px Tahoma;
 	line-height: 16px;
+}
+
+#search-result-content .service .service-dtl .service-desc .price {
+	font: bold 11px 'Tahoma';
+	color: #666;
+	padding: 3px 0px 7px 0px;
 }
 
 #search-result-content .service .service-dtl .service-partner {
@@ -986,7 +1029,7 @@ input.search-field:focus {
 	width: 100%;
 	border: 0px dashed #888;
 	overflow: auto;
-	padding: 5px 0px 0px 0px;
+	padding: 5px 0px 5px 0px;
 	text-align: left;
 	border: 0px solid #999;
 }
@@ -1424,7 +1467,7 @@ input.search-field:focus {
 
 #profile-inst-info .inst {
 	overflow: auto;
-	padding: 0px 0px 7px 0px;
+	padding: 2px 0px 5px 0px;
 }
 
 #profile-inst-info .inst-name {
@@ -2520,7 +2563,7 @@ input.search-field:focus {
 
 .button-detail {
 	text-align: center;
-	margin: 1px 2px -1px 0px;
+	margin: 0px 2px -1px 0px;
 	padding: 0px 0px;
 	background: url(../images/note.png) no-repeat;
     background-position:center; 

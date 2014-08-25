@@ -9,6 +9,7 @@ import com.infoklinik.rsvp.client.search.presenter.ClinicSearchPresenter;
 import com.infoklinik.rsvp.client.search.presenter.DoctorSearchPresenter;
 import com.infoklinik.rsvp.client.search.presenter.HospitalSearchPresenter;
 import com.infoklinik.rsvp.client.search.presenter.LabSearchPresenter;
+import com.infoklinik.rsvp.client.search.presenter.SearchLocationPresenter;
 import com.infoklinik.rsvp.client.search.presenter.ServiceSearchPresenter;
 import com.infoklinik.rsvp.shared.DoctorBean;
 import com.infoklinik.rsvp.shared.InstitutionBean;
@@ -28,9 +29,6 @@ public interface SearchEventBus extends EventBus {
 	
 	@Event(forwardToParent = true)
 	public void setSearchPanel(IsWidget widget);
-	
-	@Event(forwardToParent = true)
-	public void setSearchLocation(LatLng searchLocation);
 	
 	@Event(forwardToParent = true)
 	public void loadPartner();
@@ -73,4 +71,10 @@ public interface SearchEventBus extends EventBus {
 	
 	@Event(handlers = ServiceSearchPresenter.class)
 	public void removeServiceSearch();
+	
+	@Event(handlers = SearchLocationPresenter.class)
+	public void setSearchLocation(LatLng searchLocation);
+	
+	@Event(handlers = SearchLocationPresenter.class)
+	public void loadSearchLocations(List<InstitutionBean> institutions);
 }

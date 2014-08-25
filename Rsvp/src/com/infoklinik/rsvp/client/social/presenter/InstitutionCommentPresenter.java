@@ -8,7 +8,6 @@ import javax.inject.Singleton;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.infoklinik.rsvp.client.GenericBean;
 import com.infoklinik.rsvp.client.HandlerManager;
@@ -94,8 +93,6 @@ public class InstitutionCommentPresenter extends LazyPresenter<IInstitutionComme
 				
 				view.setInstitution(institution);
 				view.setComments(comments);
-				
-				Window.scrollTo (0,0);
 				
 				view.show();
 			}

@@ -47,6 +47,11 @@ public abstract class BaseView extends Composite {
 	
 	public void loadStyle() {}
 	
+	protected void goToTop() {
+		
+		Window.scrollTo(0,0);
+	}
+	
 	protected void loadEmptyResult(FlexTable flexTable) {
 
 		int rowCount = flexTable.getRowCount();
@@ -171,7 +176,7 @@ public abstract class BaseView extends Composite {
 			@Override
 			public void run() {
 				
-				Window.scrollTo (0,0);
+				Window.scrollTo(0,0);
 				
 				Label pageLabel = pageLabelMap.get(Long.valueOf(page));
 

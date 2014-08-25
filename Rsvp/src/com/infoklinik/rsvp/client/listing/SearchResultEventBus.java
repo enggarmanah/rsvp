@@ -3,9 +3,7 @@ package com.infoklinik.rsvp.client.listing;
 import java.util.List;
 
 import com.google.gwt.user.client.ui.Widget;
-import com.google.maps.gwt.client.LatLng;
 import com.infoklinik.rsvp.client.CustomLogger;
-import com.infoklinik.rsvp.client.listing.presenter.SearchLocationPresenter;
 import com.infoklinik.rsvp.client.listing.presenter.SearchResultPresenter;
 import com.infoklinik.rsvp.shared.DoctorBean;
 import com.infoklinik.rsvp.shared.InstitutionBean;
@@ -24,10 +22,16 @@ public interface SearchResultEventBus extends EventBus {
 	public void setLeftPanel(Widget widget);
 	
 	@Event(forwardToParent = true)
+	public void loadSearchLocations(List<InstitutionBean> institutions);
+	
+	@Event(forwardToParent = true)
 	public void updateInstitution(InstitutionBean institution);
 	
 	@Event(forwardToParent = true)
 	public void loadInstitutionProfile(InstitutionBean institution);
+	
+	@Event(forwardToParent = true)
+	public void updateDoctor(DoctorBean doctor);
 	
 	@Event(forwardToParent = true)
 	public void loadDoctorProfile(DoctorBean doctor);
@@ -61,10 +65,4 @@ public interface SearchResultEventBus extends EventBus {
 	
 	@Event(handlers = SearchResultPresenter.class)
 	public void loadServiceSearchResult(List<ServiceBean> services);
-	
-	@Event(handlers = SearchLocationPresenter.class)
-	public void setSearchLocation(LatLng searchLocation);
-	
-	@Event(handlers = SearchLocationPresenter.class)
-	public void loadSearchLocations(List<InstitutionBean> institutions);
 }

@@ -18,7 +18,7 @@ public interface PartnerEventBus extends EventBus {
 	public void setLeftPanel(Widget widget);
 	
 	@Event(forwardToParent = true) 
-	public void loadClinicProfile(InstitutionBean institution);
+	public void loadInstitutionProfile(InstitutionBean institution);
 	
 	@Event(handlers = PartnerPresenter.class)
 	public void loadPartner();

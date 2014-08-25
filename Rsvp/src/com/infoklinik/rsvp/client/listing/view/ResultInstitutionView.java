@@ -5,6 +5,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -76,6 +77,12 @@ public class ResultInstitutionView extends BaseView {
 	@UiField
 	Image commentCountImg;
 	
+	@UiField
+	FlowPanel optionPanel;
+	
+	@UiField
+	FlowPanel ratingPanel;
+	
 	public ResultInstitutionView() {
 		
 		initWidget(uiBinder.createAndBindUi(this));
@@ -86,9 +93,11 @@ public class ResultInstitutionView extends BaseView {
 		if (ClientUtil.isAdminUser) {
 			mainPanel.addStyleName("admin");
 			updateImg.addClickHandler(handlerMgr.getUpdateHandler());
+			optionPanel.setVisible(true);
+			ratingPanel.setVisible(false);
 		} else {
-			updateImg.setVisible(false);
-			deleteImg.setVisible(false);
+			optionPanel.setVisible(false);
+			ratingPanel.setVisible(true);
 		}
 		
 		indexLb.setText(index + ".");

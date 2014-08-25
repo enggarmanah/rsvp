@@ -10,7 +10,6 @@ import javax.inject.Singleton;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.doctor.DoctorEventBus;
@@ -159,8 +158,6 @@ public class DoctorProfilePresenter extends LazyPresenter<IDoctorProfileView, Do
 	public void onLoadDoctorProfile(DoctorBean doctor) {
 		
 		reset();
-		
-		Window.scrollTo (0,0);
 		
 		this.doctor = doctor;
 		

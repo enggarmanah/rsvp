@@ -167,6 +167,8 @@ public class InstitutionProfileView extends BaseView implements IInstitutionProf
 	
 	public void show() {
 		
+		goToTop();
+		
 		fadeOut();
 		
 		logoImg.setUrl("/image?id=" + institution.getImageId());

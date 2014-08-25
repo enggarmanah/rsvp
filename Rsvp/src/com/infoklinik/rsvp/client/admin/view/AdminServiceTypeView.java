@@ -61,6 +61,8 @@ public class AdminServiceTypeView extends BaseView implements IAdminServiceTypeV
 	
 	public void show() {
 		
+		goToTop();
+		
 		dlgFadeOut();
 		
 		dialogBox.setText("Tambah Referensi Layanan");

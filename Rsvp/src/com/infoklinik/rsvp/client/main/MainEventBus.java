@@ -3,7 +3,6 @@ package com.infoklinik.rsvp.client.main;
 import java.util.List;
 
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.maps.gwt.client.LatLng;
 import com.mvp4g.client.annotation.Debug;
 import com.mvp4g.client.annotation.Event;
 import com.mvp4g.client.annotation.Events;
@@ -131,11 +130,20 @@ public interface MainEventBus extends EventBusWithLookup {
 	@Event(forwardToModules=SearchModule.class) 
 	public void removeServiceSearch();
 	
+	@Event(forwardToModules=SearchModule.class)
+	public void loadSearchLocations(List<InstitutionBean> institutions);
+	
 	@Event(forwardToModules=AdminModule.class)
 	public void addInstitution();
 	
 	@Event(forwardToModules=AdminModule.class)
 	public void updateInstitution(InstitutionBean institution);
+	
+	@Event(forwardToModules=AdminModule.class)
+	public void addDoctor();
+	
+	@Event(forwardToModules=AdminModule.class)
+	public void updateDoctor(DoctorBean doctor);
 	
 	@Event(forwardToModules=InstitutionModule.class) 
 	public void loadInstitutionProfile(InstitutionBean institution);
@@ -196,9 +204,6 @@ public interface MainEventBus extends EventBusWithLookup {
 
 	@Event(forwardToModules=PromoModule.class) 
 	public void loadPromotion();
-	
-	@Event(forwardToModules=SearchResultModule.class)
-	public void setSearchLocation(LatLng searchLocation);
 	
 	@Event(forwardToModules=SearchResultModule.class)
 	public void loadInstitutionSearchResult(List<InstitutionBean> institutions);
