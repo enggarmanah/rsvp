@@ -9,26 +9,21 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
-import com.infoklinik.rsvp.client.ClientUtil;
-import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminServiceTypeView;
+import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminInsuranceView;
 import com.infoklinik.rsvp.shared.Constant;
-import com.infoklinik.rsvp.shared.ServiceTypeBean;
+import com.infoklinik.rsvp.shared.InsuranceBean;
 
-public class AdminServiceTypeView extends BaseView implements IAdminServiceTypeView {
+public class AdminInsuranceView extends BaseView implements IAdminInsuranceView {
 	
-	interface ModuleUiBinder extends UiBinder<Widget, AdminServiceTypeView> {}
+	interface ModuleUiBinder extends UiBinder<Widget, AdminInsuranceView> {}
 	
 	private static ModuleUiBinder uiBinder = GWT.create(ModuleUiBinder.class);
 	
 	@UiField
 	TextBox nameTb;
-	
-	@UiField
-	ListBox categoryLb;
 	
 	@UiField
 	Button okBtn;
@@ -38,9 +33,9 @@ public class AdminServiceTypeView extends BaseView implements IAdminServiceTypeV
 	
 	DialogBox dialogBox;
 	
-	List<ServiceTypeBean> list;
+	List<InsuranceBean> list;
 	
-	ServiceTypeBean serviceType;
+	InsuranceBean insurance;
 	
 	public void createView() {	
 		
@@ -65,7 +60,7 @@ public class AdminServiceTypeView extends BaseView implements IAdminServiceTypeV
 		
 		dlgFadeOut();
 		
-		dialogBox.setText("Tambah Referensi Layanan");
+		dialogBox.setText("Referensi Layanan");
 		dialogBox.center();
 		dialogBox.setPopupPosition(dialogBox.getPopupLeft() + Constant.POPUP_L2_LEFT, Constant.POPUP_L2_TOP);
 		dialogBox.show();
@@ -88,28 +83,24 @@ public class AdminServiceTypeView extends BaseView implements IAdminServiceTypeV
 		timer.schedule(Constant.FADE_TIME);
 	}
 
-	public void setCategories(List<String> list) {
+	public InsuranceBean getInsuranceBean() {
 		
-		categoryLb.clear();
-		for (String value : list) {
-			categoryLb.addItem(value, value);
+		insurance.setName(nameTb.getText());
+		
+		return insurance;
+	}
+	
+	public void setInsuranceBean(InsuranceBean insuranceBean) {
+		
+		this.insurance = insuranceBean;
+		
+		if (insuranceBean.getId() == null) {
+			dialogBox.setText("Tambah Institusi Baru");
+		} else {
+			dialogBox.setText("Perubahan Data Institusi");
 		}
-	}
-	
-	public ServiceTypeBean getServiceTypeBean() {
 		
-		serviceType.setName(nameTb.getText());
-		serviceType.setCategory(categoryLb.getValue(categoryLb.getSelectedIndex()));
-		
-		return serviceType;
-	}
-	
-	public void setServiceTypeBean(ServiceTypeBean serviceTypeBean) {
-		
-		this.serviceType = serviceTypeBean;
-		
-		nameTb.setText(serviceTypeBean.getName());
-		ClientUtil.setSelectedIndex(categoryLb, serviceTypeBean.getCategory());
+		nameTb.setText(insuranceBean.getName());
 	}
 	
 	public void setOkBtnClickHandler(ClickHandler handler) {

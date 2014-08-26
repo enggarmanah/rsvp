@@ -13,7 +13,9 @@ public interface IAdminView  extends LazyView, IsWidget {
 	
 	void setDoctorLinkClickHandler(ClickHandler handler);
 	
-	void setServiceReferenceLinkClickHandler(ClickHandler handler);
+	void setServiceTypeLinkClickHandler(ClickHandler handler);
+	
+	void setInsuranceLinkClickHandler(ClickHandler handler);
 	
 	void setLogoutLinkClickHandler(ClickHandler handler);
 }

@@ -153,10 +153,7 @@ public interface MainEventBus extends EventBusWithLookup {
 	
 	@Event(forwardToModules=ServiceModule.class) 
 	public void loadServiceInfo(ServiceBean service);
-	
-	@Event(forwardToModules=AdminModule.class) 
-	public void loadServiceReference();
-	
+		
 	@Event(forwardToModules=SocialModule.class) 
 	public void loadInstitutionComment(InstitutionBean institution);
 	

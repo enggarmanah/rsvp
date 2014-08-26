@@ -9,7 +9,6 @@ import javax.persistence.TypedQuery;
 
 import com.infoklinik.rsvp.server.PersistenceManager;
 import com.infoklinik.rsvp.server.ServerUtil;
-import com.infoklinik.rsvp.server.model.ServiceCategory;
 import com.infoklinik.rsvp.server.model.ServiceType;
 import com.infoklinik.rsvp.shared.ServiceTypeBean;
 import com.infoklinik.rsvp.shared.ServiceTypeSearchBean;
@@ -49,26 +48,6 @@ public class ServiceTypeDAO {
 
 		for (ServiceType serviceType : result) {
 			list.add(serviceType.getBean());
-		}
-
-		em.close();
-
-		return list;
-	}
-	
-	public List<String> getCategories() {
-
-		List<String> list = new ArrayList<String>();
-
-		EntityManager em = PersistenceManager.getEntityManager();
-		
-		String sql = "SELECT s FROM ServiceCategory s";
-		TypedQuery<ServiceCategory> query = em.createQuery(sql, ServiceCategory.class);
-
-		List<ServiceCategory> result = query.getResultList();
-
-		for (ServiceCategory serviceCategory : result) {
-			list.add(serviceCategory.getName());
 		}
 
 		em.close();

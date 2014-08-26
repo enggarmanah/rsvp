@@ -12,24 +12,24 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.infoklinik.rsvp.client.GenericBean;
 import com.infoklinik.rsvp.client.HandlerManager;
 import com.infoklinik.rsvp.client.admin.AdminEventBus;
-import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminServiceTypeListView;
-import com.infoklinik.rsvp.client.admin.view.AdminServiceTypeListView;
+import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminInsuranceListView;
+import com.infoklinik.rsvp.client.admin.view.AdminInsuranceListView;
 import com.infoklinik.rsvp.client.main.view.ConfirmDlg;
 import com.infoklinik.rsvp.client.main.view.ProgressDlg;
-import com.infoklinik.rsvp.client.rpc.ServiceTypeServiceAsync;
-import com.infoklinik.rsvp.shared.ServiceTypeBean;
-import com.infoklinik.rsvp.shared.ServiceTypeSearchBean;
+import com.infoklinik.rsvp.client.rpc.InsuranceServiceAsync;
+import com.infoklinik.rsvp.shared.InsuranceBean;
+import com.infoklinik.rsvp.shared.InsuranceSearchBean;
 import com.mvp4g.client.annotation.Presenter;
 import com.mvp4g.client.presenter.LazyPresenter;
 
 @Singleton
-@Presenter(view = AdminServiceTypeListView.class)
-public class AdminServiceTypeListPresenter extends LazyPresenter<IAdminServiceTypeListView, AdminEventBus> {
+@Presenter(view = AdminInsuranceListView.class)
+public class AdminInsuranceListPresenter extends LazyPresenter<IAdminInsuranceListView, AdminEventBus> {
 	
 	@Inject
-	private ServiceTypeServiceAsync serviceTypeServiceAsync;
+	private InsuranceServiceAsync insuranceServiceAsync;
 	
-	List<GenericBean<ServiceTypeBean>> genericBeans;
+	List<GenericBean<InsuranceBean>> genericBeans;
 	
 	@Override
 	public void bindView() {
@@ -39,7 +39,7 @@ public class AdminServiceTypeListPresenter extends LazyPresenter<IAdminServiceTy
 			@Override
 			public void onClick(ClickEvent event) {
 				
-				getServiceTypes();
+				getInsurances();
 			}
 		});
 		
@@ -48,7 +48,7 @@ public class AdminServiceTypeListPresenter extends LazyPresenter<IAdminServiceTy
 			@Override
 			public void onClick(ClickEvent event) {
 				
-				eventBus.addServiceType();
+				eventBus.addInsurance();
 			}
 		});
 		
@@ -62,33 +62,33 @@ public class AdminServiceTypeListPresenter extends LazyPresenter<IAdminServiceTy
 		});
 	}
 	
-	public void onLoadServiceType() {
+	public void onLoadInsurance() {
 		
 		view.show();
 	}
 	
-	public void onReloadServiceType() {
+	public void onReloadInsurance() {
 		
 		view.refresh();
 	}
 	
-	private void getServiceTypes() {
+	private void getInsurances() {
 		
-		ServiceTypeSearchBean serviceTypeSearchBean = view.getServiceTypeSearchBean();
+		InsuranceSearchBean insuranceSearchBean = view.getInsuranceSearchBean();
 		
 		ProgressDlg.show();
-		serviceTypeServiceAsync.getServiceTypes(serviceTypeSearchBean, new AsyncCallback<List<ServiceTypeBean>>() {
+		insuranceServiceAsync.getInsurances(insuranceSearchBean, new AsyncCallback<List<InsuranceBean>>() {
 			
 			@Override
-			public void onSuccess(List<ServiceTypeBean> result) {
+			public void onSuccess(List<InsuranceBean> result) {
 				
-				genericBeans = new ArrayList<GenericBean<ServiceTypeBean>>();
+				genericBeans = new ArrayList<GenericBean<InsuranceBean>>();
 				
-				for (ServiceTypeBean serviceTypeBean : result) {
+				for (InsuranceBean insuranceBean : result) {
 					
 					HandlerManager handlerMgr = new HandlerManager();
 					
-					GenericBean<ServiceTypeBean> genericBean = new GenericBean<ServiceTypeBean>(serviceTypeBean, handlerMgr);
+					GenericBean<InsuranceBean> genericBean = new GenericBean<InsuranceBean>(insuranceBean, handlerMgr);
 					
 					ClickHandler updateHandler = getUpdateHandler(genericBean);
 					ClickHandler deleteHandler = getDeleteHandler(genericBean);
@@ -111,37 +111,37 @@ public class AdminServiceTypeListPresenter extends LazyPresenter<IAdminServiceTy
 		});
 	}
 	
-	private ClickHandler getUpdateHandler(final GenericBean<ServiceTypeBean> genericBean) {
+	private ClickHandler getUpdateHandler(final GenericBean<InsuranceBean> genericBean) {
 		
 		ClickHandler detailHandler = new ClickHandler() {
 			
 			public void onClick(ClickEvent event) {
 				
-				ServiceTypeBean serviceTypeBean = genericBean.getBean();
+				InsuranceBean insuranceBean = genericBean.getBean();
 				
-				eventBus.updateServiceType(serviceTypeBean);
+				eventBus.updateInsurance(insuranceBean);
 			}
 		};
 		
 		return detailHandler;
 	}
 	
-	private ClickHandler getDeleteHandler(final GenericBean<ServiceTypeBean> genericBean) {
+	private ClickHandler getDeleteHandler(final GenericBean<InsuranceBean> genericBean) {
 		
 		ClickHandler deleteHandler = new ClickHandler() {
 			
 			public void onClick(ClickEvent event) {
 				
-				ServiceTypeBean serviceTypeBean = genericBean.getBean();
+				InsuranceBean insuranceBean = genericBean.getBean();
 				
-				String confirm = "Hapus referensi layanan \"" + serviceTypeBean.getName() + "\" ?";
+				String confirm = "Hapus referensi layanan \"" + insuranceBean.getName() + "\" ?";
 				
 				ConfirmDlg.confirm(confirm, new ClickHandler() {
 					
 					@Override
 					public void onClick(ClickEvent event) {
 						
-						deleteServiceType(genericBean);
+						deleteInsurance(genericBean);
 					}
 				});
 			}
@@ -150,15 +150,15 @@ public class AdminServiceTypeListPresenter extends LazyPresenter<IAdminServiceTy
 		return deleteHandler;
 	}
 	
-	private void deleteServiceType(final GenericBean<ServiceTypeBean> genericBean) {
+	private void deleteInsurance(final GenericBean<InsuranceBean> genericBean) {
 		
-		ServiceTypeBean serviceTypeBean = genericBean.getBean();
+		InsuranceBean insuranceBean = genericBean.getBean();
 		
 		ProgressDlg.show();
-		serviceTypeServiceAsync.deleteServiceType(serviceTypeBean, new AsyncCallback<ServiceTypeBean>() {
+		insuranceServiceAsync.deleteInsurance(insuranceBean, new AsyncCallback<InsuranceBean>() {
 			
 			@Override
-			public void onSuccess(ServiceTypeBean serviceTypeBean) {
+			public void onSuccess(InsuranceBean insuranceBean) {
 				
 				ProgressDlg.success();
 				view.remove(genericBean);

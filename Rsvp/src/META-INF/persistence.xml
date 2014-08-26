@@ -10,7 +10,6 @@
 		<class>com.infoklinik.rsvp.server.model.Service</class>
 		<class>com.infoklinik.rsvp.server.model.Schedule</class>
 		<class>com.infoklinik.rsvp.server.model.ServiceType</class>
-		<class>com.infoklinik.rsvp.server.model.ServiceCategory</class>
 		<class>com.infoklinik.rsvp.server.model.Speciality</class>
 		<class>com.infoklinik.rsvp.server.model.Insurance</class>
 		<class>com.infoklinik.rsvp.server.model.City</class>

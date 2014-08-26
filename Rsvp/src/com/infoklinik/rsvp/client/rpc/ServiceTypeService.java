@@ -16,7 +16,5 @@ public interface ServiceTypeService extends RemoteService {
 
 	ServiceTypeBean updateServiceType(ServiceTypeBean serviceTypeBean);
 	
-	ServiceTypeBean deleteServiceType(ServiceTypeBean serviceTypeBean);
-	
-	List<String> getCategories();	
+	ServiceTypeBean deleteServiceType(ServiceTypeBean serviceTypeBean);	
 }

@@ -15,6 +15,4 @@ public interface ServiceTypeServiceAsync {
 	public void updateServiceType(ServiceTypeBean serviceTypeBean, AsyncCallback<ServiceTypeBean> callback);
 	
 	public void deleteServiceType(ServiceTypeBean serviceTypeBean, AsyncCallback<ServiceTypeBean> callback);
-	
-	public void getCategories(AsyncCallback<List<String>> callback);
 }

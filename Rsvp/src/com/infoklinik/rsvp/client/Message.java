@@ -35,4 +35,6 @@ public class Message {
 	
 	public static String ERR_INST_BRANCH_GRP_DIFF = "Institusi telah terdaftar di group cabang yang berbeda.";
 	public static String ERR_INST_BRANCH_CIRCULAR = "Institusi utama tidak dapat didaftarkan menjadi institusi cabang.";
+	
+	public static String ERR_COMMON_LOAD_FAILED = "Gagal menerima data dari server."; 
 }

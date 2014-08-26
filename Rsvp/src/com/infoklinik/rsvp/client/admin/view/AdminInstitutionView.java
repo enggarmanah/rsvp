@@ -123,7 +123,6 @@ public class AdminInstitutionView extends BaseView implements IAdminInstitutionV
 		} else {
 			dialogBox.setText("Perubahan Data Institusi");
 		}
-		
 	}
 	
 	public void setCategories(List<MasterCodeBean> masterCodeBeans) {

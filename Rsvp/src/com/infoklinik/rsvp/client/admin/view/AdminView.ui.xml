@@ -23,8 +23,8 @@
 					<img src="images/books.png" class="admin-menu-img" />
 				</div>
 				<div id="admin-content-menu">
-					<g:Label ui:field="serviceReferenceLb" styleName="link">Referensi Layanan</g:Label>
-					<a href="#" class="admin" onclick="addasuransi()">Referensi Asuransi</a>
+					<g:Label ui:field="serviceTypeLb" styleName="link">Referensi Layanan</g:Label>
+					<g:Label ui:field="insuranceLb" styleName="link">Referensi Asuransi</g:Label>
 					<a href="#" class="admin" onclick="addkota()">Referensi Kota</a>
 					<a href="#" class="admin" onclick="addwilayah()">Referensi Wilayah</a>
 					<a href="#" class="admin" onclick="addjalan()">Referensi Jalan</a>

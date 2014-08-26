@@ -12,6 +12,8 @@ import com.infoklinik.rsvp.client.admin.presenter.AdminInstitutionGalleryPresent
 import com.infoklinik.rsvp.client.admin.presenter.AdminInstitutionInsurancePresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminInstitutionLocationPresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminInstitutionPresenter;
+import com.infoklinik.rsvp.client.admin.presenter.AdminInsuranceListPresenter;
+import com.infoklinik.rsvp.client.admin.presenter.AdminInsurancePresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminPresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminServicePresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminServiceTypeListPresenter;
@@ -38,16 +40,28 @@ public interface AdminEventBus extends EventBus {
 	public void setRightPanel(Widget widget);
 	
 	@Event(handlers = AdminServiceTypeListPresenter.class)
-	public void loadServiceReference();
+	public void loadServiceType();
 	
 	@Event(handlers = AdminServiceTypeListPresenter.class)
-	public void reloadServiceReference();
+	public void reloadServiceType();
 	
 	@Event(handlers = AdminServiceTypePresenter.class)
-	public void addServiceReference();
+	public void addServiceType();
 	
 	@Event(handlers = AdminServiceTypePresenter.class)
-	public void updateServiceReference(ServiceTypeBean serviceTypeBean);
+	public void updateServiceType(ServiceTypeBean serviceTypeBean);
+	
+	@Event(handlers = AdminInsuranceListPresenter.class)
+	public void loadInsurance();
+	
+	@Event(handlers = AdminInsuranceListPresenter.class)
+	public void reloadInsurance();
+	
+	@Event(handlers = AdminInsurancePresenter.class)
+	public void addInsurance();
+	
+	@Event(handlers = AdminInsurancePresenter.class)
+	public void updateInsurance(InsuranceBean insuranceBean);
 	
 	@Event(handlers = AdminPresenter.class)
 	public void loadAdmin();

@@ -41,12 +41,4 @@ public class ServiceTypeServiceImpl extends BaseServiceServlet implements Servic
 		
 		return serviceType;
 	}
-	
-	public List<String> getCategories() {
-		
-		ServiceTypeDAO serviceTypeDAO = new ServiceTypeDAO();
-		List<String> categories = serviceTypeDAO.getCategories();
-		
-		return categories;
-	}
 }

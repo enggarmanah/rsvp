@@ -10,6 +10,8 @@ public class MasterCodeBean extends BaseBean {
 	public static String HOSPITAL_TYPE = "HOSPITAL_TYPE";
 	public static String LAB_TYPE = "LAB_TYPE";
 	
+	public static String SERVICE_CATEGORY = "SERVICE_CATEGORY"; 
+	
 	public static String DAY = "DAY";
 	
 	private String code;

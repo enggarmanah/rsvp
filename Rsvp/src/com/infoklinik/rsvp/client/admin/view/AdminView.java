@@ -18,7 +18,10 @@ public class AdminView extends BaseView implements IAdminView {
 	Label doctorLb;
 	
 	@UiField
-	Label serviceReferenceLb;
+	Label serviceTypeLb;
+	
+	@UiField
+	Label insuranceLb;
 	
 	@UiField
 	Label logoutLb;
@@ -52,9 +55,14 @@ public class AdminView extends BaseView implements IAdminView {
 		doctorLb.addClickHandler(handler);
 	}
 	
-	public void setServiceReferenceLinkClickHandler(ClickHandler handler) {
+	public void setServiceTypeLinkClickHandler(ClickHandler handler) {
 		
-		serviceReferenceLb.addClickHandler(handler);
+		serviceTypeLb.addClickHandler(handler);
+	}
+	
+	public void setInsuranceLinkClickHandler(ClickHandler handler) {
+		
+		insuranceLb.addClickHandler(handler);
 	}
 	
 	public void setLogoutLinkClickHandler(ClickHandler handler) {
