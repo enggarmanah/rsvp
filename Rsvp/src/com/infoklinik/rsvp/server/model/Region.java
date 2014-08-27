@@ -39,8 +39,8 @@ public class Region extends Base {
 		id = regionBean.getId();
 		name = regionBean.getName();
 		
-		if (regionBean.getCityBean() != null) {
-			city = em.find(City.class, regionBean.getCityBean().getId());
+		if (regionBean.getCity() != null) {
+			city = em.find(City.class, regionBean.getCity().getId());
 		}
 		
 		setAuditBean(regionBean.getAuditBean());
@@ -54,7 +54,7 @@ public class Region extends Base {
 		regionBean.setName(name);
 		
 		if (city != null) {
-			regionBean.setCityBean(city.getBean());
+			regionBean.setCity(city.getBean());
 		}
 		
 		regionBean.setAuditBean(getAuditBean());

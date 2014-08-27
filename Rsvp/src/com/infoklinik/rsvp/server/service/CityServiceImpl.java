@@ -11,6 +11,30 @@ import com.infoklinik.rsvp.shared.CitySearchBean;
 @SuppressWarnings("serial")
 public class CityServiceImpl extends BaseServiceServlet implements CityService {
 	
+	public CityBean addCity(CityBean cityBean) {
+		
+		CityDAO cityDAO = new CityDAO();
+		CityBean city = cityDAO.addCity(cityBean);
+		
+		return city;
+	}
+	
+	public CityBean updateCity(CityBean cityBean) {
+		
+		CityDAO cityDAO = new CityDAO();
+		CityBean city = cityDAO.updateCity(cityBean);
+		
+		return city;
+	}
+	
+	public CityBean deleteCity(CityBean cityBean) {
+		
+		CityDAO cityDAO = new CityDAO();
+		CityBean city = cityDAO.deleteCity(cityBean);
+		
+		return city;
+	}
+	
 	public List<CityBean> getCities(CitySearchBean citySearch) {
 		
 		CityDAO cityDao = new CityDAO();

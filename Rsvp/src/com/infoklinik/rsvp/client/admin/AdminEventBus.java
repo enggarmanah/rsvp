@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.CustomLogger;
+import com.infoklinik.rsvp.client.admin.presenter.AdminCityListPresenter;
+import com.infoklinik.rsvp.client.admin.presenter.AdminCityPresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminDoctorPresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminInstitutionBranchPresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminInstitutionDoctorPresenter;
@@ -15,14 +17,18 @@ import com.infoklinik.rsvp.client.admin.presenter.AdminInstitutionPresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminInsuranceListPresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminInsurancePresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminPresenter;
+import com.infoklinik.rsvp.client.admin.presenter.AdminRegionListPresenter;
+import com.infoklinik.rsvp.client.admin.presenter.AdminRegionPresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminServicePresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminServiceTypeListPresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminServiceTypePresenter;
 import com.infoklinik.rsvp.shared.BranchBean;
+import com.infoklinik.rsvp.shared.CityBean;
 import com.infoklinik.rsvp.shared.DoctorBean;
 import com.infoklinik.rsvp.shared.GalleryBean;
 import com.infoklinik.rsvp.shared.InstitutionBean;
 import com.infoklinik.rsvp.shared.InsuranceBean;
+import com.infoklinik.rsvp.shared.RegionBean;
 import com.infoklinik.rsvp.shared.ScheduleBean;
 import com.infoklinik.rsvp.shared.ServiceBean;
 import com.infoklinik.rsvp.shared.ServiceTypeBean;
@@ -49,7 +55,7 @@ public interface AdminEventBus extends EventBus {
 	public void addServiceType();
 	
 	@Event(handlers = AdminServiceTypePresenter.class)
-	public void updateServiceType(ServiceTypeBean serviceTypeBean);
+	public void updateServiceType(ServiceTypeBean serviceType);
 	
 	@Event(handlers = AdminInsuranceListPresenter.class)
 	public void loadInsurance();
@@ -61,7 +67,31 @@ public interface AdminEventBus extends EventBus {
 	public void addInsurance();
 	
 	@Event(handlers = AdminInsurancePresenter.class)
-	public void updateInsurance(InsuranceBean insuranceBean);
+	public void updateInsurance(InsuranceBean insurance);
+	
+	@Event(handlers = AdminCityListPresenter.class)
+	public void loadCity();
+	
+	@Event(handlers = AdminCityListPresenter.class)
+	public void reloadCity();
+	
+	@Event(handlers = AdminCityPresenter.class)
+	public void addCity();
+	
+	@Event(handlers = AdminCityPresenter.class)
+	public void updateCity(CityBean city);
+	
+	@Event(handlers = AdminRegionListPresenter.class)
+	public void loadRegion();
+	
+	@Event(handlers = AdminRegionListPresenter.class)
+	public void reloadRegion();
+	
+	@Event(handlers = AdminRegionPresenter.class)
+	public void addRegion();
+	
+	@Event(handlers = AdminRegionPresenter.class)
+	public void updateRegion(RegionBean region);
 	
 	@Event(handlers = AdminPresenter.class)
 	public void loadAdmin();

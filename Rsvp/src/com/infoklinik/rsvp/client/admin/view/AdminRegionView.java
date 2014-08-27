@@ -4,26 +4,34 @@ import java.util.List;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.SuggestBox;
+import com.google.gwt.user.client.ui.SuggestOracle;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
-import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminInsuranceView;
+import com.infoklinik.rsvp.client.SuggestionOracle;
+import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminRegionView;
 import com.infoklinik.rsvp.shared.Constant;
-import com.infoklinik.rsvp.shared.InsuranceBean;
+import com.infoklinik.rsvp.shared.RegionBean;
+import com.infoklinik.rsvp.shared.SuggestParameter;
 
-public class AdminInsuranceView extends BaseView implements IAdminInsuranceView {
+public class AdminRegionView extends BaseView implements IAdminRegionView {
 	
-	interface ModuleUiBinder extends UiBinder<Widget, AdminInsuranceView> {}
+	interface ModuleUiBinder extends UiBinder<Widget, AdminRegionView> {}
 	
 	private static ModuleUiBinder uiBinder = GWT.create(ModuleUiBinder.class);
 	
 	@UiField
 	TextBox nameTb;
+	
+	@UiField(provided = true)
+	SuggestBox citySb = new SuggestBox(new SuggestionOracle(new SuggestParameter(SuggestionOracle.SEARCH_CITY)));
 	
 	@UiField
 	Button okBtn;
@@ -33,9 +41,9 @@ public class AdminInsuranceView extends BaseView implements IAdminInsuranceView 
 	
 	DialogBox dialogBox;
 	
-	List<InsuranceBean> list;
+	List<RegionBean> list;
 	
-	InsuranceBean insurance;
+	RegionBean region;
 	
 	public void createView() {	
 		
@@ -82,24 +90,39 @@ public class AdminInsuranceView extends BaseView implements IAdminInsuranceView 
 		timer.schedule(Constant.FADE_TIME);
 	}
 
-	public InsuranceBean getInsurance() {
+	public RegionBean getRegion() {
 		
-		insurance.setName(nameTb.getText());
+		region.setName(nameTb.getText());
 		
-		return insurance;
+		if (region.getCity() != null && 
+			!region.getCity().getName().equals(citySb.getValue())) {
+			region.setCity(null);
+		} 
+		
+		return region;
 	}
 	
-	public void setInsurance(InsuranceBean insurance) {
+	public void setRegion(RegionBean region) {
 		
-		this.insurance = insurance;
+		this.region = region;
 		
-		if (insurance.getId() == null) {
+		citySb.setValue(Constant.EMPTY_STRING);
+		if (region.getCity() != null) {
+			citySb.setValue(region.getCity().getName());
+		}
+		
+		if (region.getId() == null) {
 			dialogBox.setText("Tambah Asuransi Baru");
 		} else {
 			dialogBox.setText("Perubahan Data Asuransi");
 		}
 		
-		nameTb.setText(insurance.getName());
+		nameTb.setText(region.getName());
+	}
+	
+	public void setCitySelectionHandler(SelectionHandler<SuggestOracle.Suggestion> handler) {
+		
+		citySb.addSelectionHandler(handler);
 	}
 	
 	public void setOkBtnClickHandler(ClickHandler handler) {

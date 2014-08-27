@@ -12,23 +12,23 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.Message;
 import com.infoklinik.rsvp.client.admin.AdminEventBus;
-import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminInsuranceView;
-import com.infoklinik.rsvp.client.admin.view.AdminInsuranceView;
+import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminCityView;
+import com.infoklinik.rsvp.client.admin.view.AdminCityView;
 import com.infoklinik.rsvp.client.main.view.NotificationDlg;
 import com.infoklinik.rsvp.client.main.view.ProgressDlg;
-import com.infoklinik.rsvp.client.rpc.InsuranceServiceAsync;
-import com.infoklinik.rsvp.shared.InsuranceBean;
+import com.infoklinik.rsvp.client.rpc.CityServiceAsync;
+import com.infoklinik.rsvp.shared.CityBean;
 import com.mvp4g.client.annotation.Presenter;
 import com.mvp4g.client.presenter.LazyPresenter;
 
 @Singleton
-@Presenter(view = AdminInsuranceView.class)
-public class AdminInsurancePresenter extends LazyPresenter<IAdminInsuranceView, AdminEventBus> {
+@Presenter(view = AdminCityView.class)
+public class AdminCityPresenter extends LazyPresenter<IAdminCityView, AdminEventBus> {
 	
 	private boolean isAdd = true;
 	
 	@Inject
-	private InsuranceServiceAsync insuranceService;
+	private CityServiceAsync cityService;
 	
 	List<String> errorMessages;
 	
@@ -61,30 +61,30 @@ public class AdminInsurancePresenter extends LazyPresenter<IAdminInsuranceView, 
 		});
 	}
 	
-	public void onAddInsurance() {
+	public void onAddCity() {
 		
 		isAdd = true;
-		view.setInsurance(new InsuranceBean());
+		view.setCity(new CityBean());
 		view.show();
 	}
 	
-	public void onUpdateInsurance(InsuranceBean insuranceBean) {
+	public void onUpdateCity(CityBean cityBean) {
 		
 		isAdd = false;
-		view.setInsurance(insuranceBean);
+		view.setCity(cityBean);
 		view.show();
 	}
 	
 	private void addServiceReference() {
 		
-		InsuranceBean insurance = view.getInsurance();
-		insurance.setUpdateBy(ClientUtil.getUser().getName());
+		CityBean city = view.getCity();
+		city.setUpdateBy(ClientUtil.getUser().getName());
 		
 		ProgressDlg.show();
-		insuranceService.addInsurance(insurance, new AsyncCallback<InsuranceBean>() {
+		cityService.addCity(city, new AsyncCallback<CityBean>() {
 			
 			@Override
-			public void onSuccess(InsuranceBean result) {
+			public void onSuccess(CityBean result) {
 				view.hide();
 				ProgressDlg.success();
 			}
@@ -98,16 +98,16 @@ public class AdminInsurancePresenter extends LazyPresenter<IAdminInsuranceView, 
 	
 	private void updateServiceReference() {
 		
-		InsuranceBean insurance = view.getInsurance();
-		insurance.setUpdateBy(ClientUtil.getUser().getName());
+		CityBean city = view.getCity();
+		city.setUpdateBy(ClientUtil.getUser().getName());
 		
 		ProgressDlg.show();
-		insuranceService.updateInsurance(insurance, new AsyncCallback<InsuranceBean>() {
+		cityService.updateCity(city, new AsyncCallback<CityBean>() {
 			
 			@Override
-			public void onSuccess(InsuranceBean result) {
+			public void onSuccess(CityBean result) {
 				view.hide();
-				eventBus.reloadInsurance();
+				eventBus.reloadCity();
 				ProgressDlg.success();
 			}
 			
@@ -123,12 +123,12 @@ public class AdminInsurancePresenter extends LazyPresenter<IAdminInsuranceView, 
 		boolean isValidated = true;
 		errorMessages = new ArrayList<String>();
 		
-		InsuranceBean insurance = view.getInsurance();
+		CityBean city = view.getCity();
 		
-		if (ClientUtil.isEmpty(insurance.getName())) {
+		if (ClientUtil.isEmpty(city.getName())) {
 			
 			isValidated = false;
-			errorMessages.add(Message.ERR_INSURANCE_NAME_EMPTY);
+			errorMessages.add(Message.ERR_CITY_NAME_EMPTY);
 		}
 		
 		return isValidated;

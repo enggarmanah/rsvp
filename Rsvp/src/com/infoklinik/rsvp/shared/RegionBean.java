@@ -4,7 +4,7 @@ package com.infoklinik.rsvp.shared;
 public class RegionBean extends BaseBean {
 
 	private String name;
-	private CityBean cityBean;
+	private CityBean city;
 
 	public String getName() {
 		return name;
@@ -14,11 +14,11 @@ public class RegionBean extends BaseBean {
 		this.name = name;
 	}
 
-	public CityBean getCityBean() {
-		return cityBean;
+	public CityBean getCity() {
+		return city;
 	}
 
-	public void setCityBean(CityBean cityBean) {
-		this.cityBean = cityBean;
+	public void setCity(CityBean city) {
+		this.city = city;
 	}
 }

@@ -10,11 +10,49 @@ import javax.persistence.TypedQuery;
 import com.infoklinik.rsvp.server.PersistenceManager;
 import com.infoklinik.rsvp.server.ServerUtil;
 import com.infoklinik.rsvp.server.model.Region;
-import com.infoklinik.rsvp.shared.RegionSearchBean;
 import com.infoklinik.rsvp.shared.RegionBean;
+import com.infoklinik.rsvp.shared.RegionSearchBean;
 
 public class RegionDAO {
+	
+	public RegionBean addRegion(RegionBean regionBean) {
 
+		EntityManager em = PersistenceManager.getEntityManager();
+		
+		Region region = new Region();
+		region.setBean(regionBean, em);
+		
+		em.persist(region);
+
+		em.close();
+
+		return region.getBean();
+	}
+	
+	public RegionBean updateRegion(RegionBean regionBean) {
+
+		EntityManager em = PersistenceManager.getEntityManager();
+		
+		Region region = em.find(Region.class, regionBean.getId());
+		region.setBean(regionBean, em);
+
+		em.close();
+		
+		return regionBean;
+	}
+	
+	public RegionBean deleteRegion(RegionBean regionBean) {
+
+		EntityManager em = PersistenceManager.getEntityManager();
+		
+		Region region = em.find(Region.class, regionBean.getId());
+		em.remove(region);
+
+		em.close();
+		
+		return regionBean;
+	}
+	
 	public List<RegionBean> getRegions(RegionSearchBean regionSearch) {
 		
 		List<RegionBean> list = new ArrayList<RegionBean>();

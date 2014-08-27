@@ -12,13 +12,13 @@ import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
-import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminInsuranceView;
+import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminCityView;
 import com.infoklinik.rsvp.shared.Constant;
-import com.infoklinik.rsvp.shared.InsuranceBean;
+import com.infoklinik.rsvp.shared.CityBean;
 
-public class AdminInsuranceView extends BaseView implements IAdminInsuranceView {
+public class AdminCityView extends BaseView implements IAdminCityView {
 	
-	interface ModuleUiBinder extends UiBinder<Widget, AdminInsuranceView> {}
+	interface ModuleUiBinder extends UiBinder<Widget, AdminCityView> {}
 	
 	private static ModuleUiBinder uiBinder = GWT.create(ModuleUiBinder.class);
 	
@@ -33,9 +33,9 @@ public class AdminInsuranceView extends BaseView implements IAdminInsuranceView 
 	
 	DialogBox dialogBox;
 	
-	List<InsuranceBean> list;
+	List<CityBean> list;
 	
-	InsuranceBean insurance;
+	CityBean city;
 	
 	public void createView() {	
 		
@@ -82,24 +82,24 @@ public class AdminInsuranceView extends BaseView implements IAdminInsuranceView 
 		timer.schedule(Constant.FADE_TIME);
 	}
 
-	public InsuranceBean getInsurance() {
+	public CityBean getCity() {
 		
-		insurance.setName(nameTb.getText());
+		city.setName(nameTb.getText());
 		
-		return insurance;
+		return city;
 	}
 	
-	public void setInsurance(InsuranceBean insurance) {
+	public void setCity(CityBean city) {
 		
-		this.insurance = insurance;
+		this.city = city;
 		
-		if (insurance.getId() == null) {
-			dialogBox.setText("Tambah Asuransi Baru");
+		if (city.getId() == null) {
+			dialogBox.setText("Tambah Kota Baru");
 		} else {
-			dialogBox.setText("Perubahan Data Asuransi");
+			dialogBox.setText("Perubahan Data Kota");
 		}
 		
-		nameTb.setText(insurance.getName());
+		nameTb.setText(city.getName());
 	}
 	
 	public void setOkBtnClickHandler(ClickHandler handler) {

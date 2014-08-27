@@ -14,7 +14,45 @@ import com.infoklinik.rsvp.shared.CityBean;
 import com.infoklinik.rsvp.shared.CitySearchBean;
 
 public class CityDAO {
+	
+	public CityBean addCity(CityBean cityBean) {
 
+		EntityManager em = PersistenceManager.getEntityManager();
+		
+		City city = new City();
+		city.setBean(cityBean);
+		
+		em.persist(city);
+
+		em.close();
+
+		return city.getBean();
+	}
+	
+	public CityBean updateCity(CityBean cityBean) {
+
+		EntityManager em = PersistenceManager.getEntityManager();
+		
+		City city = em.find(City.class, cityBean.getId());
+		city.setBean(cityBean);
+
+		em.close();
+		
+		return cityBean;
+	}
+	
+	public CityBean deleteCity(CityBean cityBean) {
+
+		EntityManager em = PersistenceManager.getEntityManager();
+		
+		City city = em.find(City.class, cityBean.getId());
+		em.remove(city);
+
+		em.close();
+		
+		return cityBean;
+	}
+	
 	public List<CityBean> getCities(CitySearchBean citySearch) {
 
 		List<CityBean> list = new ArrayList<CityBean>();

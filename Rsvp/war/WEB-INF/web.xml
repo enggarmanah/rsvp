@@ -21,6 +21,10 @@
 		<servlet-class>com.infoklinik.rsvp.server.service.CityServiceImpl</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>regionServiceServlet</servlet-name>
+		<servlet-class>com.infoklinik.rsvp.server.service.RegionServiceImpl</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>insuranceServiceServlet</servlet-name>
 		<servlet-class>com.infoklinik.rsvp.server.service.InsuranceServiceImpl</servlet-class>
 	</servlet>
@@ -125,6 +129,10 @@
 	<servlet-mapping>
 		<servlet-name>cityServiceServlet</servlet-name>
 		<url-pattern>/rsvp/cityService</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>regionServiceServlet</servlet-name>
+		<url-pattern>/rsvp/regionService</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>commonServiceServlet</servlet-name>

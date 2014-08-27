@@ -54,6 +54,12 @@ public class AdminPresenter extends LazyPresenter<IAdminView, AdminEventBus> {
 			}
 		});
 		
+		view.setCityLinkClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				eventBus.loadCity();
+			}
+		});
+		
 		view.setLogoutLinkClickHandler(new ClickHandler() {
 			
 			@Override

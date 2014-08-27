@@ -12,24 +12,24 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.infoklinik.rsvp.client.GenericBean;
 import com.infoklinik.rsvp.client.HandlerManager;
 import com.infoklinik.rsvp.client.admin.AdminEventBus;
-import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminInsuranceListView;
-import com.infoklinik.rsvp.client.admin.view.AdminInsuranceListView;
+import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminCityListView;
+import com.infoklinik.rsvp.client.admin.view.AdminCityListView;
 import com.infoklinik.rsvp.client.main.view.ConfirmDlg;
 import com.infoklinik.rsvp.client.main.view.ProgressDlg;
-import com.infoklinik.rsvp.client.rpc.InsuranceServiceAsync;
-import com.infoklinik.rsvp.shared.InsuranceBean;
-import com.infoklinik.rsvp.shared.InsuranceSearchBean;
+import com.infoklinik.rsvp.client.rpc.CityServiceAsync;
+import com.infoklinik.rsvp.shared.CityBean;
+import com.infoklinik.rsvp.shared.CitySearchBean;
 import com.mvp4g.client.annotation.Presenter;
 import com.mvp4g.client.presenter.LazyPresenter;
 
 @Singleton
-@Presenter(view = AdminInsuranceListView.class)
-public class AdminInsuranceListPresenter extends LazyPresenter<IAdminInsuranceListView, AdminEventBus> {
+@Presenter(view = AdminCityListView.class)
+public class AdminCityListPresenter extends LazyPresenter<IAdminCityListView, AdminEventBus> {
 	
 	@Inject
-	private InsuranceServiceAsync insuranceServiceAsync;
+	private CityServiceAsync cityServiceAsync;
 	
-	List<GenericBean<InsuranceBean>> genericBeans;
+	List<GenericBean<CityBean>> genericBeans;
 	
 	@Override
 	public void bindView() {
@@ -39,7 +39,7 @@ public class AdminInsuranceListPresenter extends LazyPresenter<IAdminInsuranceLi
 			@Override
 			public void onClick(ClickEvent event) {
 				
-				getInsurances();
+				getCitys();
 			}
 		});
 		
@@ -48,7 +48,7 @@ public class AdminInsuranceListPresenter extends LazyPresenter<IAdminInsuranceLi
 			@Override
 			public void onClick(ClickEvent event) {
 				
-				eventBus.addInsurance();
+				eventBus.addCity();
 			}
 		});
 		
@@ -62,33 +62,33 @@ public class AdminInsuranceListPresenter extends LazyPresenter<IAdminInsuranceLi
 		});
 	}
 	
-	public void onLoadInsurance() {
+	public void onLoadCity() {
 		
 		view.show();
 	}
 	
-	public void onReloadInsurance() {
+	public void onReloadCity() {
 		
 		view.refresh();
 	}
 	
-	private void getInsurances() {
+	private void getCitys() {
 		
-		InsuranceSearchBean insuranceSearchBean = view.getInsuranceSearch();
+		CitySearchBean citySearchBean = view.getCitySearch();
 		
 		ProgressDlg.show();
-		insuranceServiceAsync.getInsurances(insuranceSearchBean, new AsyncCallback<List<InsuranceBean>>() {
+		cityServiceAsync.getCities(citySearchBean, new AsyncCallback<List<CityBean>>() {
 			
 			@Override
-			public void onSuccess(List<InsuranceBean> result) {
+			public void onSuccess(List<CityBean> result) {
 				
-				genericBeans = new ArrayList<GenericBean<InsuranceBean>>();
+				genericBeans = new ArrayList<GenericBean<CityBean>>();
 				
-				for (InsuranceBean insuranceBean : result) {
+				for (CityBean cityBean : result) {
 					
 					HandlerManager handlerMgr = new HandlerManager();
 					
-					GenericBean<InsuranceBean> genericBean = new GenericBean<InsuranceBean>(insuranceBean, handlerMgr);
+					GenericBean<CityBean> genericBean = new GenericBean<CityBean>(cityBean, handlerMgr);
 					
 					ClickHandler updateHandler = getUpdateHandler(genericBean);
 					ClickHandler deleteHandler = getDeleteHandler(genericBean);
@@ -111,37 +111,37 @@ public class AdminInsuranceListPresenter extends LazyPresenter<IAdminInsuranceLi
 		});
 	}
 	
-	private ClickHandler getUpdateHandler(final GenericBean<InsuranceBean> genericBean) {
+	private ClickHandler getUpdateHandler(final GenericBean<CityBean> genericBean) {
 		
 		ClickHandler detailHandler = new ClickHandler() {
 			
 			public void onClick(ClickEvent event) {
 				
-				InsuranceBean insuranceBean = genericBean.getBean();
+				CityBean cityBean = genericBean.getBean();
 				
-				eventBus.updateInsurance(insuranceBean);
+				eventBus.updateCity(cityBean);
 			}
 		};
 		
 		return detailHandler;
 	}
 	
-	private ClickHandler getDeleteHandler(final GenericBean<InsuranceBean> genericBean) {
+	private ClickHandler getDeleteHandler(final GenericBean<CityBean> genericBean) {
 		
 		ClickHandler deleteHandler = new ClickHandler() {
 			
 			public void onClick(ClickEvent event) {
 				
-				InsuranceBean insuranceBean = genericBean.getBean();
+				CityBean cityBean = genericBean.getBean();
 				
-				String confirm = "Hapus asuransi \"" + insuranceBean.getName() + "\" ?";
+				String confirm = "Hapus asuransi \"" + cityBean.getName() + "\" ?";
 				
 				ConfirmDlg.confirm(confirm, new ClickHandler() {
 					
 					@Override
 					public void onClick(ClickEvent event) {
 						
-						deleteInsurance(genericBean);
+						deleteCity(genericBean);
 					}
 				});
 			}
@@ -150,15 +150,15 @@ public class AdminInsuranceListPresenter extends LazyPresenter<IAdminInsuranceLi
 		return deleteHandler;
 	}
 	
-	private void deleteInsurance(final GenericBean<InsuranceBean> genericBean) {
+	private void deleteCity(final GenericBean<CityBean> genericBean) {
 		
-		InsuranceBean insuranceBean = genericBean.getBean();
+		CityBean cityBean = genericBean.getBean();
 		
 		ProgressDlg.show();
-		insuranceServiceAsync.deleteInsurance(insuranceBean, new AsyncCallback<InsuranceBean>() {
+		cityServiceAsync.deleteCity(cityBean, new AsyncCallback<CityBean>() {
 			
 			@Override
-			public void onSuccess(InsuranceBean insuranceBean) {
+			public void onSuccess(CityBean cityBean) {
 				
 				ProgressDlg.success();
 				view.remove(genericBean);

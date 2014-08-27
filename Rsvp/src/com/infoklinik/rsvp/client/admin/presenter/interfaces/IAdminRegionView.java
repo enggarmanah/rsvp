@@ -1,12 +1,14 @@
 package com.infoklinik.rsvp.client.admin.presenter.interfaces;
 
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.SuggestOracle;
 import com.google.gwt.user.client.ui.Widget;
-import com.infoklinik.rsvp.shared.InsuranceBean;
+import com.infoklinik.rsvp.shared.RegionBean;
 import com.mvp4g.client.view.LazyView;
 
-public interface IAdminInsuranceView  extends LazyView, IsWidget {
+public interface IAdminRegionView  extends LazyView, IsWidget {
 	
 	Widget asWidget();
 	
@@ -14,9 +16,11 @@ public interface IAdminInsuranceView  extends LazyView, IsWidget {
 	
 	void hide();
 	
-	InsuranceBean getInsurance();
+	RegionBean getRegion();
 	
-	void setInsurance(InsuranceBean insurance);
+	void setRegion(RegionBean regionBean);
+	
+	void setCitySelectionHandler(SelectionHandler<SuggestOracle.Suggestion> handler);
 	
 	void setOkBtnClickHandler(ClickHandler handler);
 	

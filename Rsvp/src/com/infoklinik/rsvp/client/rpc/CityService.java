@@ -10,5 +10,11 @@ import com.infoklinik.rsvp.shared.CitySearchBean;
 @RemoteServiceRelativePath("cityService")
 public interface CityService extends RemoteService {
 	
+	CityBean addCity(CityBean cityBean);
+
+	CityBean updateCity(CityBean cityBean);
+	
+	CityBean deleteCity(CityBean cityBean);
+	
 	List<CityBean> getCities(CitySearchBean citySearch);	
 }

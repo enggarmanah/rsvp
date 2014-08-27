@@ -6,11 +6,11 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.GenericBean;
-import com.infoklinik.rsvp.shared.InsuranceBean;
-import com.infoklinik.rsvp.shared.InsuranceSearchBean;
+import com.infoklinik.rsvp.shared.CityBean;
+import com.infoklinik.rsvp.shared.CitySearchBean;
 import com.mvp4g.client.view.LazyView;
 
-public interface IAdminInsuranceListView extends LazyView, IsWidget {
+public interface IAdminCityListView extends LazyView, IsWidget {
 	
 	Widget asWidget();
 	
@@ -18,13 +18,13 @@ public interface IAdminInsuranceListView extends LazyView, IsWidget {
 	
 	void hide();
 	
-	void setList(List<GenericBean<InsuranceBean>> list);
+	void setList(List<GenericBean<CityBean>> list);
 	
 	void refresh();
 	
-	InsuranceSearchBean getInsuranceSearch();
+	CitySearchBean getCitySearch();
 	
-	void remove(GenericBean<InsuranceBean> genericBean);
+	void remove(GenericBean<CityBean> genericBean);
 	
 	void setSearchBtnClickHandler(ClickHandler handler);	
 

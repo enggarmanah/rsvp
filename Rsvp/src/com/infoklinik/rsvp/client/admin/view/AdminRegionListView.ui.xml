@@ -1,0 +1,35 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:com.google.gwt.user.datepicker.client">
+	<g:HTMLPanel ui:field="contentPanel">
+
+		<div id="popup-edit-wrapper">
+			<div id="popup-edit">
+				<div class="title">
+				    Wilayah :
+				</div>
+				<div class="info">
+					<g:TextBox ui:field="nameTb" styleName="text"></g:TextBox>
+				</div>
+				<div class="title">
+				</div>
+				<div class="info">
+					<g:Button ui:field="searchBtn" text="Cari" styleName="button"/>
+					<g:Button ui:field="addBtn" text="Tambah" styleName="button"/>
+				</div>
+				<div class="table">
+					<g:FlexTable ui:field="searchResultFt" styleName="table-reference"></g:FlexTable>
+				</div>
+				<div class="navigation">
+					<div id="search-result-nav-bottom-pageinfo">
+						<g:FlowPanel ui:field="pagePanel"></g:FlowPanel>
+					</div>
+				</div>
+				<div class="panel-menu">
+					<g:Button ui:field="okBtn" text="OK" styleName="button"/>
+				</div>
+			</div>
+		</div>
+
+	</g:HTMLPanel>
+
+</ui:UiBinder> 

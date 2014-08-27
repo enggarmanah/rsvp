@@ -18,14 +18,14 @@ import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
 import com.infoklinik.rsvp.client.GenericBean;
 import com.infoklinik.rsvp.client.HandlerManager;
-import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminInsuranceListView;
+import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminCityListView;
 import com.infoklinik.rsvp.shared.Constant;
-import com.infoklinik.rsvp.shared.InsuranceBean;
-import com.infoklinik.rsvp.shared.InsuranceSearchBean;
+import com.infoklinik.rsvp.shared.CityBean;
+import com.infoklinik.rsvp.shared.CitySearchBean;
 
-public class AdminInsuranceListView extends BaseView implements IAdminInsuranceListView {
+public class AdminCityListView extends BaseView implements IAdminCityListView {
 	
-	interface ModuleUiBinder extends UiBinder<Widget, AdminInsuranceListView> {}
+	interface ModuleUiBinder extends UiBinder<Widget, AdminCityListView> {}
 	
 	private static ModuleUiBinder uiBinder = GWT.create(ModuleUiBinder.class);
 	
@@ -49,9 +49,9 @@ public class AdminInsuranceListView extends BaseView implements IAdminInsuranceL
 	
 	DialogBox dialogBox;
 	
-	List<GenericBean<InsuranceBean>> list;
+	List<GenericBean<CityBean>> list;
 	
-	InsuranceSearchBean insuranceSearch = new InsuranceSearchBean();
+	CitySearchBean citySearch = new CitySearchBean();
 	
 	public void createView() {	
 		
@@ -76,12 +76,12 @@ public class AdminInsuranceListView extends BaseView implements IAdminInsuranceL
 		
 		dlgFadeOut();
 		
-		dialogBox.setText("Referensi Asuransi");
+		dialogBox.setText("Referensi Kota");
 		dialogBox.center();
 		dialogBox.setPopupPosition(dialogBox.getPopupLeft(), Constant.POPUP_L1_TOP);
 		dialogBox.show();
 		
-		this.list = new ArrayList<GenericBean<InsuranceBean>>();
+		this.list = new ArrayList<GenericBean<CityBean>>();
 		this.size = list.size();
 		
 		clear();
@@ -108,7 +108,7 @@ public class AdminInsuranceListView extends BaseView implements IAdminInsuranceL
 		timer.schedule(Constant.FADE_TIME);
 	}
 
-	public void setList(List<GenericBean<InsuranceBean>> list) {
+	public void setList(List<GenericBean<CityBean>> list) {
 		
 		this.list = list;
 		this.size = list.size();
@@ -158,17 +158,17 @@ public class AdminInsuranceListView extends BaseView implements IAdminInsuranceL
 		int fromIndex = getFromIndex();
 		int toIndex = getToIndex();
 		
-		List<GenericBean<InsuranceBean>> sublist = list.subList(fromIndex, toIndex);
+		List<GenericBean<CityBean>> sublist = list.subList(fromIndex, toIndex);
 		
 		int i = fromIndex + 1;
 		
-		for (GenericBean<InsuranceBean> genericBean : sublist) {
+		for (GenericBean<CityBean> genericBean : sublist) {
 			
-			InsuranceBean insuranceBean = genericBean.getBean();
+			CityBean cityBean = genericBean.getBean();
 			HandlerManager handlerMgr = genericBean.getHandlerMgr();
 			
 			Label noLb = new Label(i + ".");
-			Label nameLb = new Label(insuranceBean.getName());
+			Label nameLb = new Label(cityBean.getName());
 			
 			Label updateLbl = createUpdateLabel();
 			updateLbl.addClickHandler(handlerMgr.getUpdateHandler());
@@ -193,13 +193,13 @@ public class AdminInsuranceListView extends BaseView implements IAdminInsuranceL
 		loadEmptyResult(searchResultFt);
 	}
 	
-	public InsuranceSearchBean getInsuranceSearch() {
+	public CitySearchBean getCitySearch() {
 		
-		insuranceSearch.setName(nameTb.getText());
-		return insuranceSearch;
+		citySearch.setName(nameTb.getText());
+		return citySearch;
 	}
 	
-	public void remove(GenericBean<InsuranceBean> genericBean) {
+	public void remove(GenericBean<CityBean> genericBean) {
 		
 		int curPage = this.page;
 		
