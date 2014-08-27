@@ -60,7 +60,6 @@ public class AdminInsuranceView extends BaseView implements IAdminInsuranceView 
 		
 		dlgFadeOut();
 		
-		dialogBox.setText("Referensi Layanan");
 		dialogBox.center();
 		dialogBox.setPopupPosition(dialogBox.getPopupLeft() + Constant.POPUP_L2_LEFT, Constant.POPUP_L2_TOP);
 		dialogBox.show();
@@ -95,9 +94,9 @@ public class AdminInsuranceView extends BaseView implements IAdminInsuranceView 
 		this.insurance = insuranceBean;
 		
 		if (insuranceBean.getId() == null) {
-			dialogBox.setText("Tambah Institusi Baru");
+			dialogBox.setText("Tambah Asuransi Baru");
 		} else {
-			dialogBox.setText("Perubahan Data Institusi");
+			dialogBox.setText("Perubahan Data Asuransi");
 		}
 		
 		nameTb.setText(insuranceBean.getName());

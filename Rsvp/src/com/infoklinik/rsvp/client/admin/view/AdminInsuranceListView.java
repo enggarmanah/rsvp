@@ -76,9 +76,9 @@ public class AdminInsuranceListView extends BaseView implements IAdminInsuranceL
 		
 		dlgFadeOut();
 		
-		dialogBox.setText("Referensi Layanan");
+		dialogBox.setText("Referensi Asuransi");
 		dialogBox.center();
-		dialogBox.setPopupPosition(dialogBox.getPopupLeft(), 70);
+		dialogBox.setPopupPosition(dialogBox.getPopupLeft(), Constant.POPUP_L1_TOP);
 		dialogBox.show();
 		
 		this.list = new ArrayList<GenericBean<InsuranceBean>>();
@@ -141,7 +141,7 @@ public class AdminInsuranceListView extends BaseView implements IAdminInsuranceL
 		Label noLb = new Label(LABEL_NO);
 		noLb.setWidth("20px");
 		Label nameLb = new Label(LABEL_NAME);
-		nameLb.setWidth("322px");
+		nameLb.setWidth("333px");
 		Label menuLb = new Label(LABEL_MENU);
 		menuLb.setWidth("40px");
 		

@@ -9,10 +9,12 @@ import javax.inject.Singleton;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.Message;
 import com.infoklinik.rsvp.client.admin.AdminEventBus;
 import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminServiceTypeView;
 import com.infoklinik.rsvp.client.admin.view.AdminServiceTypeView;
+import com.infoklinik.rsvp.client.main.view.NotificationDlg;
 import com.infoklinik.rsvp.client.main.view.ProgressDlg;
 import com.infoklinik.rsvp.client.rpc.MasterCodeServiceAsync;
 import com.infoklinik.rsvp.client.rpc.ServiceTypeServiceAsync;
@@ -33,6 +35,8 @@ public class AdminServiceTypePresenter extends LazyPresenter<IAdminServiceTypeVi
 	@Inject
 	private MasterCodeServiceAsync masterCodeService;
 	
+	List<String> errorMessages;
+	
 	@Override
 	public void bindView() {
 
@@ -43,10 +47,16 @@ public class AdminServiceTypePresenter extends LazyPresenter<IAdminServiceTypeVi
 			@Override
 			public void onClick(ClickEvent event) {
 				
-				if (isAdd) {
-					addServiceReference();
+				if (isValidated()) {
+					
+					if (isAdd) {
+						addServiceReference();
+					} else {
+						updateServiceReference();
+					}
+					
 				} else {
-					updateServiceReference();
+					NotificationDlg.error(errorMessages);
 				}
 			}
 		});
@@ -99,10 +109,11 @@ public class AdminServiceTypePresenter extends LazyPresenter<IAdminServiceTypeVi
 	
 	private void addServiceReference() {
 		
-		ServiceTypeBean serviceTypeBean = view.getServiceTypeBean();
+		ServiceTypeBean serviceType = view.getServiceTypeBean();
+		serviceType.setUpdateBy(ClientUtil.getUser().getName());
 		
 		ProgressDlg.show();
-		serviceTypeService.addServiceType(serviceTypeBean, new AsyncCallback<ServiceTypeBean>() {
+		serviceTypeService.addServiceType(serviceType, new AsyncCallback<ServiceTypeBean>() {
 			
 			@Override
 			public void onSuccess(ServiceTypeBean result) {
@@ -119,10 +130,11 @@ public class AdminServiceTypePresenter extends LazyPresenter<IAdminServiceTypeVi
 	
 	private void updateServiceReference() {
 		
-		ServiceTypeBean serviceTypeBean = view.getServiceTypeBean();
+		ServiceTypeBean serviceType = view.getServiceTypeBean();
+		serviceType.setUpdateBy(ClientUtil.getUser().getName());
 		
 		ProgressDlg.show();
-		serviceTypeService.updateServiceType(serviceTypeBean, new AsyncCallback<ServiceTypeBean>() {
+		serviceTypeService.updateServiceType(serviceType, new AsyncCallback<ServiceTypeBean>() {
 			
 			@Override
 			public void onSuccess(ServiceTypeBean result) {
@@ -136,5 +148,27 @@ public class AdminServiceTypePresenter extends LazyPresenter<IAdminServiceTypeVi
 				ProgressDlg.failure();
 			}
 		});
+	}
+	
+	private boolean isValidated() {
+		
+		boolean isValidated = true;
+		errorMessages = new ArrayList<String>();
+		
+		ServiceTypeBean serviceType = view.getServiceTypeBean();
+		
+		if (ClientUtil.isEmpty(serviceType.getName())) {
+			
+			isValidated = false;
+			errorMessages.add(Message.ERR_SERVICE_NAME_EMPTY);
+		}
+		
+		if (ClientUtil.isEmpty(serviceType.getCategory())) {
+			
+			isValidated = false;
+			errorMessages.add(Message.ERR_SERVICE_TYPE_EMPTY);
+		}
+		
+		return isValidated;
 	}
 }

@@ -1,14 +1,20 @@
 package com.infoklinik.rsvp.client.admin.presenter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.infoklinik.rsvp.client.ClientUtil;
+import com.infoklinik.rsvp.client.Message;
 import com.infoklinik.rsvp.client.admin.AdminEventBus;
 import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminInsuranceView;
 import com.infoklinik.rsvp.client.admin.view.AdminInsuranceView;
+import com.infoklinik.rsvp.client.main.view.NotificationDlg;
 import com.infoklinik.rsvp.client.main.view.ProgressDlg;
 import com.infoklinik.rsvp.client.rpc.InsuranceServiceAsync;
 import com.infoklinik.rsvp.shared.InsuranceBean;
@@ -24,6 +30,8 @@ public class AdminInsurancePresenter extends LazyPresenter<IAdminInsuranceView, 
 	@Inject
 	private InsuranceServiceAsync insuranceService;
 	
+	List<String> errorMessages;
+	
 	@Override
 	public void bindView() {
 
@@ -32,10 +40,14 @@ public class AdminInsurancePresenter extends LazyPresenter<IAdminInsuranceView, 
 			@Override
 			public void onClick(ClickEvent event) {
 				
-				if (isAdd) {
-					addServiceReference();
+				if (isValidated()) { 
+					if (isAdd) {
+						addServiceReference();
+					} else {
+						updateServiceReference();
+					}
 				} else {
-					updateServiceReference();
+					NotificationDlg.error(errorMessages);
 				}
 			}
 		});
@@ -65,10 +77,11 @@ public class AdminInsurancePresenter extends LazyPresenter<IAdminInsuranceView, 
 	
 	private void addServiceReference() {
 		
-		InsuranceBean insuranceBean = view.getInsuranceBean();
+		InsuranceBean insurance = view.getInsuranceBean();
+		insurance.setUpdateBy(ClientUtil.getUser().getName());
 		
 		ProgressDlg.show();
-		insuranceService.addInsurance(insuranceBean, new AsyncCallback<InsuranceBean>() {
+		insuranceService.addInsurance(insurance, new AsyncCallback<InsuranceBean>() {
 			
 			@Override
 			public void onSuccess(InsuranceBean result) {
@@ -85,10 +98,11 @@ public class AdminInsurancePresenter extends LazyPresenter<IAdminInsuranceView, 
 	
 	private void updateServiceReference() {
 		
-		InsuranceBean insuranceBean = view.getInsuranceBean();
+		InsuranceBean insurance = view.getInsuranceBean();
+		insurance.setUpdateBy(ClientUtil.getUser().getName());
 		
 		ProgressDlg.show();
-		insuranceService.updateInsurance(insuranceBean, new AsyncCallback<InsuranceBean>() {
+		insuranceService.updateInsurance(insurance, new AsyncCallback<InsuranceBean>() {
 			
 			@Override
 			public void onSuccess(InsuranceBean result) {
@@ -102,5 +116,21 @@ public class AdminInsurancePresenter extends LazyPresenter<IAdminInsuranceView, 
 				ProgressDlg.failure();
 			}
 		});
+	}
+	
+	private boolean isValidated() {
+		
+		boolean isValidated = true;
+		errorMessages = new ArrayList<String>();
+		
+		InsuranceBean insurance = view.getInsuranceBean();
+		
+		if (ClientUtil.isEmpty(insurance.getName())) {
+			
+			isValidated = false;
+			errorMessages.add(Message.ERR_INSURANCE_NAME_EMPTY);
+		}
+		
+		return isValidated;
 	}
 }

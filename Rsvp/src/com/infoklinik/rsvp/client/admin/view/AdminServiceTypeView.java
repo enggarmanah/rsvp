@@ -65,7 +65,6 @@ public class AdminServiceTypeView extends BaseView implements IAdminServiceTypeV
 		
 		dlgFadeOut();
 		
-		dialogBox.setText("Tambah Referensi Layanan");
 		dialogBox.center();
 		dialogBox.setPopupPosition(dialogBox.getPopupLeft() + Constant.POPUP_L2_LEFT, Constant.POPUP_L2_TOP);
 		dialogBox.show();
@@ -91,6 +90,8 @@ public class AdminServiceTypeView extends BaseView implements IAdminServiceTypeV
 	public void setCategories(List<String> list) {
 		
 		categoryLb.clear();
+		categoryLb.addItem(Constant.OPTION_PLS_SELECT_CODE_DESC, Constant.OPTION_PLS_SELECT_CODE);
+		
 		for (String value : list) {
 			categoryLb.addItem(value, value);
 		}
@@ -104,12 +105,18 @@ public class AdminServiceTypeView extends BaseView implements IAdminServiceTypeV
 		return serviceType;
 	}
 	
-	public void setServiceTypeBean(ServiceTypeBean serviceTypeBean) {
+	public void setServiceTypeBean(ServiceTypeBean serviceType) {
 		
-		this.serviceType = serviceTypeBean;
+		if (serviceType.getId() == null) {
+			dialogBox.setText("Tambah Layanan Baru");
+		} else {
+			dialogBox.setText("Perubahan Data Layanan");
+		}
 		
-		nameTb.setText(serviceTypeBean.getName());
-		ClientUtil.setSelectedIndex(categoryLb, serviceTypeBean.getCategory());
+		this.serviceType = serviceType;
+		
+		nameTb.setText(serviceType.getName());
+		ClientUtil.setSelectedIndex(categoryLb, serviceType.getCategory());
 	}
 	
 	public void setOkBtnClickHandler(ClickHandler handler) {

@@ -134,7 +134,7 @@ public class AdminInsuranceListPresenter extends LazyPresenter<IAdminInsuranceLi
 				
 				InsuranceBean insuranceBean = genericBean.getBean();
 				
-				String confirm = "Hapus referensi layanan \"" + insuranceBean.getName() + "\" ?";
+				String confirm = "Hapus asuransi \"" + insuranceBean.getName() + "\" ?";
 				
 				ConfirmDlg.confirm(confirm, new ClickHandler() {
 					
