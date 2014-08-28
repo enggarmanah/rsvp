@@ -11,25 +11,33 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.infoklinik.rsvp.client.GenericBean;
 import com.infoklinik.rsvp.client.HandlerManager;
+import com.infoklinik.rsvp.client.Message;
 import com.infoklinik.rsvp.client.admin.AdminEventBus;
-import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminInsuranceListView;
-import com.infoklinik.rsvp.client.admin.view.AdminInsuranceListView;
+import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminStreetListView;
+import com.infoklinik.rsvp.client.admin.view.AdminStreetListView;
 import com.infoklinik.rsvp.client.main.view.ConfirmDlg;
+import com.infoklinik.rsvp.client.main.view.NotificationDlg;
 import com.infoklinik.rsvp.client.main.view.ProgressDlg;
-import com.infoklinik.rsvp.client.rpc.InsuranceServiceAsync;
-import com.infoklinik.rsvp.shared.InsuranceBean;
-import com.infoklinik.rsvp.shared.InsuranceSearchBean;
+import com.infoklinik.rsvp.client.rpc.CityServiceAsync;
+import com.infoklinik.rsvp.client.rpc.StreetServiceAsync;
+import com.infoklinik.rsvp.shared.CityBean;
+import com.infoklinik.rsvp.shared.CitySearchBean;
+import com.infoklinik.rsvp.shared.StreetBean;
+import com.infoklinik.rsvp.shared.StreetSearchBean;
 import com.mvp4g.client.annotation.Presenter;
 import com.mvp4g.client.presenter.LazyPresenter;
 
 @Singleton
-@Presenter(view = AdminInsuranceListView.class)
-public class AdminInsuranceListPresenter extends LazyPresenter<IAdminInsuranceListView, AdminEventBus> {
+@Presenter(view = AdminStreetListView.class)
+public class AdminStreetListPresenter extends LazyPresenter<IAdminStreetListView, AdminEventBus> {
 	
 	@Inject
-	private InsuranceServiceAsync insuranceServiceAsync;
+	private StreetServiceAsync streetService;
 	
-	List<GenericBean<InsuranceBean>> genericBeans;
+	@Inject
+	private CityServiceAsync cityService;
+	
+	List<GenericBean<StreetBean>> genericBeans;
 	
 	@Override
 	public void bindView() {
@@ -39,7 +47,7 @@ public class AdminInsuranceListPresenter extends LazyPresenter<IAdminInsuranceLi
 			@Override
 			public void onClick(ClickEvent event) {
 				
-				getInsurances();
+				getStreets();
 			}
 		});
 		
@@ -48,7 +56,7 @@ public class AdminInsuranceListPresenter extends LazyPresenter<IAdminInsuranceLi
 			@Override
 			public void onClick(ClickEvent event) {
 				
-				eventBus.addInsurance();
+				eventBus.addStreet();
 			}
 		});
 		
@@ -60,35 +68,50 @@ public class AdminInsuranceListPresenter extends LazyPresenter<IAdminInsuranceLi
 				view.hide();
 			}
 		});
+		
+		cityService.getCities(new CitySearchBean(), new AsyncCallback<List<CityBean>>() {
+			
+			@Override
+			public void onSuccess(List<CityBean> result) {
+				
+				view.setCities(result);
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				
+				NotificationDlg.warning(Message.ERR_COMMON_LOAD_FAILED);
+			}
+		});
 	}
 	
-	public void onLoadInsurance() {
+	public void onLoadStreet() {
 		
 		view.show();
 	}
 	
-	public void onReloadInsurance() {
+	public void onReloadStreet() {
 		
 		view.refresh();
 	}
 	
-	private void getInsurances() {
+	private void getStreets() {
 		
-		InsuranceSearchBean insuranceSearch = view.getInsuranceSearch();
+		StreetSearchBean streetSearch = view.getStreetSearch();
 		
 		ProgressDlg.show();
-		insuranceServiceAsync.getInsurances(insuranceSearch, new AsyncCallback<List<InsuranceBean>>() {
+		streetService.getStreets(streetSearch, new AsyncCallback<List<StreetBean>>() {
 			
 			@Override
-			public void onSuccess(List<InsuranceBean> result) {
+			public void onSuccess(List<StreetBean> result) {
 				
-				genericBeans = new ArrayList<GenericBean<InsuranceBean>>();
+				genericBeans = new ArrayList<GenericBean<StreetBean>>();
 				
-				for (InsuranceBean insuranceBean : result) {
+				for (StreetBean streetBean : result) {
 					
 					HandlerManager handlerMgr = new HandlerManager();
 					
-					GenericBean<InsuranceBean> genericBean = new GenericBean<InsuranceBean>(insuranceBean, handlerMgr);
+					GenericBean<StreetBean> genericBean = new GenericBean<StreetBean>(streetBean, handlerMgr);
 					
 					ClickHandler updateHandler = getUpdateHandler(genericBean);
 					ClickHandler deleteHandler = getDeleteHandler(genericBean);
@@ -111,37 +134,37 @@ public class AdminInsuranceListPresenter extends LazyPresenter<IAdminInsuranceLi
 		});
 	}
 	
-	private ClickHandler getUpdateHandler(final GenericBean<InsuranceBean> genericBean) {
+	private ClickHandler getUpdateHandler(final GenericBean<StreetBean> genericBean) {
 		
 		ClickHandler updateHandler = new ClickHandler() {
 			
 			public void onClick(ClickEvent event) {
 				
-				InsuranceBean insurance = genericBean.getBean();
+				StreetBean streetBean = genericBean.getBean();
 				
-				eventBus.updateInsurance(insurance);
+				eventBus.updateStreet(streetBean);
 			}
 		};
 		
 		return updateHandler;
 	}
 	
-	private ClickHandler getDeleteHandler(final GenericBean<InsuranceBean> genericBean) {
+	private ClickHandler getDeleteHandler(final GenericBean<StreetBean> genericBean) {
 		
 		ClickHandler deleteHandler = new ClickHandler() {
 			
 			public void onClick(ClickEvent event) {
 				
-				InsuranceBean insuranceBean = genericBean.getBean();
+				StreetBean streetBean = genericBean.getBean();
 				
-				String confirm = "Hapus asuransi \"" + insuranceBean.getName() + "\" ?";
+				String confirm = "Hapus wilayah \"" + streetBean.getName() + "\" ?";
 				
 				ConfirmDlg.confirm(confirm, new ClickHandler() {
 					
 					@Override
 					public void onClick(ClickEvent event) {
 						
-						deleteInsurance(genericBean);
+						deleteStreet(genericBean);
 					}
 				});
 			}
@@ -150,15 +173,15 @@ public class AdminInsuranceListPresenter extends LazyPresenter<IAdminInsuranceLi
 		return deleteHandler;
 	}
 	
-	private void deleteInsurance(final GenericBean<InsuranceBean> genericBean) {
+	private void deleteStreet(final GenericBean<StreetBean> genericBean) {
 		
-		InsuranceBean insurance = genericBean.getBean();
+		StreetBean street = genericBean.getBean();
 		
 		ProgressDlg.show();
-		insuranceServiceAsync.deleteInsurance(insurance, new AsyncCallback<InsuranceBean>() {
+		streetService.deleteStreet(street, new AsyncCallback<StreetBean>() {
 			
 			@Override
-			public void onSuccess(InsuranceBean insuranceBean) {
+			public void onSuccess(StreetBean streetBean) {
 				
 				ProgressDlg.success();
 				view.remove(genericBean);

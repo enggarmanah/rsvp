@@ -50,9 +50,9 @@ public class AdminServiceTypePresenter extends LazyPresenter<IAdminServiceTypeVi
 				if (isValidated()) {
 					
 					if (isAdd) {
-						addServiceReference();
+						addServiceType();
 					} else {
-						updateServiceReference();
+						updateServiceType();
 					}
 					
 				} else {
@@ -73,14 +73,14 @@ public class AdminServiceTypePresenter extends LazyPresenter<IAdminServiceTypeVi
 	public void onAddServiceType() {
 		
 		isAdd = true;
-		view.setServiceTypeBean(new ServiceTypeBean());
+		view.setServiceType(new ServiceTypeBean());
 		view.show();
 	}
 	
-	public void onUpdateServiceType(ServiceTypeBean serviceTypeBean) {
+	public void onUpdateServiceType(ServiceTypeBean serviceType) {
 		
 		isAdd = false;
-		view.setServiceTypeBean(serviceTypeBean);
+		view.setServiceType(serviceType);
 		view.show();
 	}
 	
@@ -107,9 +107,9 @@ public class AdminServiceTypePresenter extends LazyPresenter<IAdminServiceTypeVi
 		});
 	}
 	
-	private void addServiceReference() {
+	private void addServiceType() {
 		
-		ServiceTypeBean serviceType = view.getServiceTypeBean();
+		ServiceTypeBean serviceType = view.getServiceType();
 		serviceType.setUpdateBy(ClientUtil.getUser().getName());
 		
 		ProgressDlg.show();
@@ -128,9 +128,9 @@ public class AdminServiceTypePresenter extends LazyPresenter<IAdminServiceTypeVi
 		});
 	}
 	
-	private void updateServiceReference() {
+	private void updateServiceType() {
 		
-		ServiceTypeBean serviceType = view.getServiceTypeBean();
+		ServiceTypeBean serviceType = view.getServiceType();
 		serviceType.setUpdateBy(ClientUtil.getUser().getName());
 		
 		ProgressDlg.show();
@@ -155,7 +155,7 @@ public class AdminServiceTypePresenter extends LazyPresenter<IAdminServiceTypeVi
 		boolean isValidated = true;
 		errorMessages = new ArrayList<String>();
 		
-		ServiceTypeBean serviceType = view.getServiceTypeBean();
+		ServiceTypeBean serviceType = view.getServiceType();
 		
 		if (ClientUtil.isEmpty(serviceType.getName())) {
 			

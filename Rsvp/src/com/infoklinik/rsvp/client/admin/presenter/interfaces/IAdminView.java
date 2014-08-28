@@ -19,7 +19,9 @@ public interface IAdminView  extends LazyView, IsWidget {
 	
 	void setCityLinkClickHandler(ClickHandler handler);
 	
-	public void setRegionLinkClickHandler(ClickHandler handler);
+	void setRegionLinkClickHandler(ClickHandler handler);
+	
+	void setStreetLinkClickHandler(ClickHandler handler);
 	
 	void setLogoutLinkClickHandler(ClickHandler handler);
 }

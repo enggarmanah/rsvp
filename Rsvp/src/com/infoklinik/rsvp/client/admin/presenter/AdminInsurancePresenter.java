@@ -42,9 +42,9 @@ public class AdminInsurancePresenter extends LazyPresenter<IAdminInsuranceView, 
 				
 				if (isValidated()) { 
 					if (isAdd) {
-						addServiceReference();
+						addInsurance();
 					} else {
-						updateServiceReference();
+						updateInsurance();
 					}
 				} else {
 					NotificationDlg.error(errorMessages);
@@ -75,7 +75,7 @@ public class AdminInsurancePresenter extends LazyPresenter<IAdminInsuranceView, 
 		view.show();
 	}
 	
-	private void addServiceReference() {
+	private void addInsurance() {
 		
 		InsuranceBean insurance = view.getInsurance();
 		insurance.setUpdateBy(ClientUtil.getUser().getName());
@@ -96,7 +96,7 @@ public class AdminInsurancePresenter extends LazyPresenter<IAdminInsuranceView, 
 		});
 	}
 	
-	private void updateServiceReference() {
+	private void updateInsurance() {
 		
 		InsuranceBean insurance = view.getInsurance();
 		insurance.setUpdateBy(ClientUtil.getUser().getName());

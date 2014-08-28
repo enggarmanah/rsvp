@@ -14,7 +14,45 @@ import com.infoklinik.rsvp.shared.StreetBean;
 import com.infoklinik.rsvp.shared.StreetSearchBean;
 
 public class StreetDAO {
+	
+	public StreetBean addStreet(StreetBean streetBean) {
 
+		EntityManager em = PersistenceManager.getEntityManager();
+		
+		Street street = new Street();
+		street.setBean(streetBean, em);
+		
+		em.persist(street);
+
+		em.close();
+
+		return street.getBean();
+	}
+	
+	public StreetBean updateStreet(StreetBean streetBean) {
+
+		EntityManager em = PersistenceManager.getEntityManager();
+		
+		Street street = em.find(Street.class, streetBean.getId());
+		street.setBean(streetBean, em);
+
+		em.close();
+		
+		return streetBean;
+	}
+	
+	public StreetBean deleteStreet(StreetBean streetBean) {
+
+		EntityManager em = PersistenceManager.getEntityManager();
+		
+		Street street = em.find(Street.class, streetBean.getId());
+		em.remove(street);
+
+		em.close();
+		
+		return streetBean;
+	}
+	
 	public List<StreetBean> getStreets(StreetSearchBean streetSearch) {
 
 		List<StreetBean> list = new ArrayList<StreetBean>();
@@ -24,7 +62,7 @@ public class StreetDAO {
 		ArrayList<String> filters = new ArrayList<String>();
 		HashMap<String, Object> parameters = new HashMap<String, Object>();
 		
-		StringBuffer sql = new StringBuffer("SELECT s FROM Street s");
+		StringBuffer sql = new StringBuffer("SELECT s FROM Street s JOIN s.city c");
 		
 		if (!ServerUtil.isEmpty(streetSearch.getName())) {
 			
@@ -39,6 +77,8 @@ public class StreetDAO {
 		}
 		
 		ServerUtil.setFilter(sql, filters);
+		
+		sql.append(" ORDER BY c.name, s.name");
 		
 		TypedQuery<Street> query = em.createQuery(sql.toString(), Street.class);
 		

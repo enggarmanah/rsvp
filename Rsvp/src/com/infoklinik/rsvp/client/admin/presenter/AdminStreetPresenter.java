@@ -16,30 +16,30 @@ import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.Message;
 import com.infoklinik.rsvp.client.admin.AdminEventBus;
-import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminRegionView;
-import com.infoklinik.rsvp.client.admin.view.AdminRegionView;
+import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminStreetView;
+import com.infoklinik.rsvp.client.admin.view.AdminStreetView;
 import com.infoklinik.rsvp.client.main.view.NotificationDlg;
 import com.infoklinik.rsvp.client.main.view.ProgressDlg;
-import com.infoklinik.rsvp.client.rpc.RegionServiceAsync;
+import com.infoklinik.rsvp.client.rpc.StreetServiceAsync;
 import com.infoklinik.rsvp.shared.CityBean;
-import com.infoklinik.rsvp.shared.RegionBean;
+import com.infoklinik.rsvp.shared.StreetBean;
 import com.infoklinik.rsvp.shared.SearchSuggestion;
 import com.mvp4g.client.annotation.Presenter;
 import com.mvp4g.client.presenter.LazyPresenter;
 
 @Singleton
-@Presenter(view = AdminRegionView.class)
-public class AdminRegionPresenter extends LazyPresenter<IAdminRegionView, AdminEventBus> {
+@Presenter(view = AdminStreetView.class)
+public class AdminStreetPresenter extends LazyPresenter<IAdminStreetView, AdminEventBus> {
 	
 	private boolean isAdd = true;
 	
 	@Inject
-	private RegionServiceAsync regionService;
+	private StreetServiceAsync streetService;
 	
 	List<String> errorMessages;
 	
-	RegionBean region;
-	RegionBean orgRegion;
+	StreetBean street;
+	StreetBean orgStreet;
 	
 	@Override
 	public void bindView() {
@@ -49,7 +49,7 @@ public class AdminRegionPresenter extends LazyPresenter<IAdminRegionView, AdminE
 			@Override
 			public void onSelection(SelectionEvent<Suggestion> event) {
 				
-				region = view.getRegion();
+				street = view.getStreet();
 				
 				SearchSuggestion suggestion = (SearchSuggestion) event.getSelectedItem();
 				
@@ -57,9 +57,9 @@ public class AdminRegionPresenter extends LazyPresenter<IAdminRegionView, AdminE
 				city.setId(Long.valueOf(suggestion.getValue()));
 				city.setName(suggestion.getReplacementString());
 				
-				region.setCity(city);
+				street.setCity(city);
 				
-				view.setRegion(region);
+				view.setStreet(street);
 			}
 		});
 		
@@ -70,9 +70,9 @@ public class AdminRegionPresenter extends LazyPresenter<IAdminRegionView, AdminE
 				
 				if (isValidated()) { 
 					if (isAdd) {
-						addRegion();
+						addStreet();
 					} else {
-						updateRegion();
+						updateStreet();
 					}
 				} else {
 					NotificationDlg.error(errorMessages);
@@ -89,38 +89,38 @@ public class AdminRegionPresenter extends LazyPresenter<IAdminRegionView, AdminE
 		});
 	}
 	
-	public void onAddRegion() {
+	public void onAddStreet() {
 		
-		orgRegion = new RegionBean();
-		region = new RegionBean();
+		orgStreet = new StreetBean();
+		street = new StreetBean();
 		
 		isAdd = true;
-		view.setRegion(new RegionBean());
+		view.setStreet(new StreetBean());
 		view.show();
 	}
 	
-	public void onUpdateRegion(RegionBean region) {
+	public void onUpdateStreet(StreetBean street) {
 		
-		orgRegion = region;
+		orgStreet = street;
 		
-		this.region = new RegionBean();
-		this.region.setBean(orgRegion);
+		this.street = new StreetBean();
+		this.street.setBean(orgStreet);
 		
 		isAdd = false;
-		view.setRegion(this.region);
+		view.setStreet(this.street);
 		view.show();
 	}
 	
-	private void addRegion() {
+	private void addStreet() {
 		
-		region = view.getRegion();
-		region.setUpdateBy(ClientUtil.getUser().getName());
+		street = view.getStreet();
+		street.setUpdateBy(ClientUtil.getUser().getName());
 		
 		ProgressDlg.show();
-		regionService.addRegion(region, new AsyncCallback<RegionBean>() {
+		streetService.addStreet(street, new AsyncCallback<StreetBean>() {
 			
 			@Override
-			public void onSuccess(RegionBean result) {
+			public void onSuccess(StreetBean result) {
 				view.hide();
 				ProgressDlg.success();
 			}
@@ -132,22 +132,22 @@ public class AdminRegionPresenter extends LazyPresenter<IAdminRegionView, AdminE
 		});
 	}
 	
-	private void updateRegion() {
+	private void updateStreet() {
 		
-		region = view.getRegion();
-		region.setUpdateBy(ClientUtil.getUser().getName());
+		street = view.getStreet();
+		street.setUpdateBy(ClientUtil.getUser().getName());
 		
 		ProgressDlg.show();
-		regionService.updateRegion(region, new AsyncCallback<RegionBean>() {
+		streetService.updateStreet(street, new AsyncCallback<StreetBean>() {
 			
 			@Override
-			public void onSuccess(RegionBean result) {
+			public void onSuccess(StreetBean result) {
 				
-				region = result;
-				orgRegion.setBean(region);
+				street = result;
+				orgStreet.setBean(street);
 				
 				view.hide();
-				eventBus.reloadRegion();
+				eventBus.reloadStreet();
 				
 				ProgressDlg.success();
 			}
@@ -164,15 +164,15 @@ public class AdminRegionPresenter extends LazyPresenter<IAdminRegionView, AdminE
 		boolean isValidated = true;
 		errorMessages = new ArrayList<String>();
 		
-		region = view.getRegion();
+		street = view.getStreet();
 		
-		if (ClientUtil.isEmpty(region.getName())) {
+		if (ClientUtil.isEmpty(street.getName())) {
 			
 			isValidated = false;
-			errorMessages.add(Message.ERR_REGION_NAME_EMPTY);
+			errorMessages.add(Message.ERR_STREET_NAME_EMPTY);
 		}
 		
-		if (region.getCity() == null) {
+		if (street.getCity() == null) {
 			
 			isValidated = false;
 			errorMessages.add(Message.ERR_CITY_EMPTY);

@@ -30,5 +30,14 @@ public class CityBean extends BaseBean {
 	public void setLocationLng(Double locationLng) {
 		this.locationLng = locationLng;
 	}
-
+	
+	public void setBean(CityBean cityBean) {
+		
+		id = cityBean.getId();
+		name = cityBean.getName();
+		locationLat = cityBean.getLocationLat();
+		locationLng = cityBean.getLocationLng();
+		
+		setAuditBean(cityBean.getAuditBean());
+	}
 }

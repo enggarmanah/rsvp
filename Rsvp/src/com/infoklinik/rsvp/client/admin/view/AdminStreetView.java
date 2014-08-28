@@ -4,31 +4,34 @@ import java.util.List;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.SuggestBox;
+import com.google.gwt.user.client.ui.SuggestOracle;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
-import com.infoklinik.rsvp.client.ClientUtil;
-import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminServiceTypeView;
+import com.infoklinik.rsvp.client.SuggestionOracle;
+import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminStreetView;
 import com.infoklinik.rsvp.shared.Constant;
-import com.infoklinik.rsvp.shared.ServiceTypeBean;
+import com.infoklinik.rsvp.shared.StreetBean;
+import com.infoklinik.rsvp.shared.SuggestParameter;
 
-public class AdminServiceTypeView extends BaseView implements IAdminServiceTypeView {
+public class AdminStreetView extends BaseView implements IAdminStreetView {
 	
-	interface ModuleUiBinder extends UiBinder<Widget, AdminServiceTypeView> {}
+	interface ModuleUiBinder extends UiBinder<Widget, AdminStreetView> {}
 	
 	private static ModuleUiBinder uiBinder = GWT.create(ModuleUiBinder.class);
 	
 	@UiField
 	TextBox nameTb;
 	
-	@UiField
-	ListBox categoryLb;
+	@UiField(provided = true)
+	SuggestBox citySb = new SuggestBox(new SuggestionOracle(new SuggestParameter(SuggestionOracle.SEARCH_CITY)));
 	
 	@UiField
 	Button okBtn;
@@ -38,9 +41,9 @@ public class AdminServiceTypeView extends BaseView implements IAdminServiceTypeV
 	
 	DialogBox dialogBox;
 	
-	List<ServiceTypeBean> list;
+	List<StreetBean> list;
 	
-	ServiceTypeBean serviceType;
+	StreetBean street;
 	
 	public void createView() {	
 		
@@ -87,36 +90,39 @@ public class AdminServiceTypeView extends BaseView implements IAdminServiceTypeV
 		timer.schedule(Constant.FADE_TIME);
 	}
 
-	public void setCategories(List<String> list) {
+	public StreetBean getStreet() {
 		
-		categoryLb.clear();
-		categoryLb.addItem(Constant.OPTION_PLS_SELECT_CODE_DESC, Constant.OPTION_PLS_SELECT_CODE);
+		street.setName(nameTb.getText());
 		
-		for (String value : list) {
-			categoryLb.addItem(value, value);
+		if (street.getCity() != null && 
+			!street.getCity().getName().equals(citySb.getValue())) {
+			street.setCity(null);
+		} 
+		
+		return street;
+	}
+	
+	public void setStreet(StreetBean street) {
+		
+		this.street = street;
+		
+		citySb.setValue(Constant.EMPTY_STRING);
+		if (street.getCity() != null) {
+			citySb.setValue(street.getCity().getName());
 		}
-	}
-	
-	public ServiceTypeBean getServiceType() {
 		
-		serviceType.setName(nameTb.getText());
-		serviceType.setCategory(categoryLb.getValue(categoryLb.getSelectedIndex()));
-		
-		return serviceType;
-	}
-	
-	public void setServiceType(ServiceTypeBean serviceType) {
-		
-		if (serviceType.getId() == null) {
-			dialogBox.setText("Tambah Layanan Baru");
+		if (street.getId() == null) {
+			dialogBox.setText("Tambah Jalan Baru");
 		} else {
-			dialogBox.setText("Perubahan Data Layanan");
+			dialogBox.setText("Perubahan Data Jalan");
 		}
 		
-		this.serviceType = serviceType;
+		nameTb.setText(street.getName());
+	}
+	
+	public void setCitySelectionHandler(SelectionHandler<SuggestOracle.Suggestion> handler) {
 		
-		nameTb.setText(serviceType.getName());
-		ClientUtil.setSelectedIndex(categoryLb, serviceType.getCategory());
+		citySb.addSelectionHandler(handler);
 	}
 	
 	public void setOkBtnClickHandler(ClickHandler handler) {

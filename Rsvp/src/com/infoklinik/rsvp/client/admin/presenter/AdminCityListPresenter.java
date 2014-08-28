@@ -39,7 +39,7 @@ public class AdminCityListPresenter extends LazyPresenter<IAdminCityListView, Ad
 			@Override
 			public void onClick(ClickEvent event) {
 				
-				getCitys();
+				getCities();
 			}
 		});
 		
@@ -72,12 +72,12 @@ public class AdminCityListPresenter extends LazyPresenter<IAdminCityListView, Ad
 		view.refresh();
 	}
 	
-	private void getCitys() {
+	private void getCities() {
 		
-		CitySearchBean citySearchBean = view.getCitySearch();
+		CitySearchBean citySearch = view.getCitySearch();
 		
 		ProgressDlg.show();
-		cityServiceAsync.getCities(citySearchBean, new AsyncCallback<List<CityBean>>() {
+		cityServiceAsync.getCities(citySearch, new AsyncCallback<List<CityBean>>() {
 			
 			@Override
 			public void onSuccess(List<CityBean> result) {
@@ -113,17 +113,17 @@ public class AdminCityListPresenter extends LazyPresenter<IAdminCityListView, Ad
 	
 	private ClickHandler getUpdateHandler(final GenericBean<CityBean> genericBean) {
 		
-		ClickHandler detailHandler = new ClickHandler() {
+		ClickHandler updateHandler = new ClickHandler() {
 			
 			public void onClick(ClickEvent event) {
 				
-				CityBean cityBean = genericBean.getBean();
+				CityBean city = genericBean.getBean();
 				
-				eventBus.updateCity(cityBean);
+				eventBus.updateCity(city);
 			}
 		};
 		
-		return detailHandler;
+		return updateHandler;
 	}
 	
 	private ClickHandler getDeleteHandler(final GenericBean<CityBean> genericBean) {
@@ -132,9 +132,9 @@ public class AdminCityListPresenter extends LazyPresenter<IAdminCityListView, Ad
 			
 			public void onClick(ClickEvent event) {
 				
-				CityBean cityBean = genericBean.getBean();
+				CityBean city = genericBean.getBean();
 				
-				String confirm = "Hapus asuransi \"" + cityBean.getName() + "\" ?";
+				String confirm = "Hapus kota \"" + city.getName() + "\" ?";
 				
 				ConfirmDlg.confirm(confirm, new ClickHandler() {
 					
@@ -158,7 +158,7 @@ public class AdminCityListPresenter extends LazyPresenter<IAdminCityListView, Ad
 		cityServiceAsync.deleteCity(cityBean, new AsyncCallback<CityBean>() {
 			
 			@Override
-			public void onSuccess(CityBean cityBean) {
+			public void onSuccess(CityBean result) {
 				
 				ProgressDlg.success();
 				view.remove(genericBean);

@@ -66,6 +66,12 @@ public class AdminPresenter extends LazyPresenter<IAdminView, AdminEventBus> {
 			}
 		});
 		
+		view.setStreetLinkClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				eventBus.loadStreet();
+			}
+		});
+		
 		view.setLogoutLinkClickHandler(new ClickHandler() {
 			
 			@Override

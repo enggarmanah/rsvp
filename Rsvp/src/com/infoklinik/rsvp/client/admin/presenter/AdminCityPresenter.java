@@ -42,9 +42,9 @@ public class AdminCityPresenter extends LazyPresenter<IAdminCityView, AdminEvent
 				
 				if (isValidated()) { 
 					if (isAdd) {
-						addServiceReference();
+						addCity();
 					} else {
-						updateServiceReference();
+						updateCity();
 					}
 				} else {
 					NotificationDlg.error(errorMessages);
@@ -68,14 +68,14 @@ public class AdminCityPresenter extends LazyPresenter<IAdminCityView, AdminEvent
 		view.show();
 	}
 	
-	public void onUpdateCity(CityBean cityBean) {
+	public void onUpdateCity(CityBean city) {
 		
 		isAdd = false;
-		view.setCity(cityBean);
+		view.setCity(city);
 		view.show();
 	}
 	
-	private void addServiceReference() {
+	private void addCity() {
 		
 		CityBean city = view.getCity();
 		city.setUpdateBy(ClientUtil.getUser().getName());
@@ -96,7 +96,7 @@ public class AdminCityPresenter extends LazyPresenter<IAdminCityView, AdminEvent
 		});
 	}
 	
-	private void updateServiceReference() {
+	private void updateCity() {
 		
 		CityBean city = view.getCity();
 		city.setUpdateBy(ClientUtil.getUser().getName());

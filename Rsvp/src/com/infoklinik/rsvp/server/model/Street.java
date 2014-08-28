@@ -2,6 +2,7 @@ package com.infoklinik.rsvp.server.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -33,14 +34,13 @@ public class Street extends Base {
 		this.city = city;
 	}
 
-	public void setBean(StreetBean streetBean) {
+	public void setBean(StreetBean streetBean, EntityManager em) {
 		
 		id = streetBean.getId();
 		name = streetBean.getName();
 		
-		if (streetBean.getCityBean() != null) {
-			city = new City();
-			city.setBean(streetBean.getCityBean());
+		if (streetBean.getCity() != null) {
+			city = em.find(City.class, streetBean.getCity().getId());
 		}
 		
 		setAuditBean(streetBean.getAuditBean());
@@ -54,7 +54,7 @@ public class Street extends Base {
 		streetBean.setName(name);
 		
 		if (city != null) {
-			streetBean.setCityBean(city.getBean());
+			streetBean.setCity(city.getBean());
 		}
 		
 		streetBean.setAuditBean(getAuditBean());

@@ -14,8 +14,12 @@
 					<img src="images/hospital.png" class="admin-menu-img" />
 				</div>
 				<div id="admin-content-menu">
-					<g:Label ui:field="institutionLb" styleName="link">Tambah Institusi</g:Label>
-					<g:Label ui:field="doctorLb" styleName="link">Tambah Dokter</g:Label>
+				    <div class="link-wrapper">
+						<g:Label ui:field="institutionLb" styleName="link">Tambah Institusi</g:Label>
+					</div>
+					<div class="link-wrapper">
+						<g:Label ui:field="doctorLb" styleName="link">Tambah Dokter</g:Label>
+					</div>
 				</div>
 			</div>
 			<div>
@@ -23,25 +27,21 @@
 					<img src="images/books.png" class="admin-menu-img" />
 				</div>
 				<div id="admin-content-menu">
-					<g:Label ui:field="serviceTypeLb" styleName="link">Referensi Layanan</g:Label>
-					<g:Label ui:field="insuranceLb" styleName="link">Referensi Asuransi</g:Label>
-					<g:Label ui:field="cityLb" styleName="link">Referensi Kota</g:Label>
-					<g:Label ui:field="regionLb" styleName="link">Referensi Wilayah</g:Label>
-					<a href="#" class="admin" onclick="addjalan()">Referensi Jalan</a>
-				</div>
-			</div>
-			<div>
-				<div id="admin-content-icon">
-					<img src="images/graph.png" class="admin-menu-img" />
-				</div>
-				<div id="admin-content-menu">
-					<a href="#" class="admin" onclick="additem()">Statistik Klinik</a>
-					<a href="#" class="admin" onclick="additem()">Statistik Rumah Sakit</a>
-					<a href="#" class="admin" onclick="additem()">Statistik Dokter</a>
-					<a href="#" class="admin" onclick="additem()">Statistik Layanan</a>
-					<a href="#" class="admin" onclick="additem()">Statistik Laboratorium</a>
-					<a href="#" class="admin" onclick="additem()">Statistik Apotek</a>
-					<a href="#" class="admin" onclick="additem()">Statistik Asuransi</a>
+					<div class="link-wrapper">
+						<g:Label ui:field="serviceTypeLb" styleName="link">Referensi Layanan</g:Label>
+					</div>
+					<div class="link-wrapper">
+						<g:Label ui:field="insuranceLb" styleName="link">Referensi Asuransi</g:Label>
+					</div>
+					<div class="link-wrapper">
+						<g:Label ui:field="cityLb" styleName="link">Referensi Kota</g:Label>
+					</div>
+					<div class="link-wrapper">
+						<g:Label ui:field="regionLb" styleName="link">Referensi Wilayah</g:Label>
+					</div>
+					<div class="link-wrapper">
+						<g:Label ui:field="streetLb" styleName="link">Referensi Jalan</g:Label>
+					</div>
 				</div>
 			</div>
 			<div>
@@ -49,7 +49,9 @@
 					<img src="images/exit.png" class="admin-menu-img" />
 				</div>
 				<div id="admin-content-menu">
-					<a href="#" class="admin" onclick="addlayanan()"><g:Label ui:field="logoutLb">Keluar</g:Label></a>
+				    <div class="link-wrapper">
+						<g:Label ui:field="logoutLb" styleName="link">Keluar</g:Label>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -97,10 +97,10 @@ public class AdminRegionListPresenter extends LazyPresenter<IAdminRegionListView
 	
 	private void getRegions() {
 		
-		RegionSearchBean regionSearchBean = view.getRegionSearch();
+		RegionSearchBean regionSearch = view.getRegionSearch();
 		
 		ProgressDlg.show();
-		regionService.getRegions(regionSearchBean, new AsyncCallback<List<RegionBean>>() {
+		regionService.getRegions(regionSearch, new AsyncCallback<List<RegionBean>>() {
 			
 			@Override
 			public void onSuccess(List<RegionBean> result) {
@@ -136,7 +136,7 @@ public class AdminRegionListPresenter extends LazyPresenter<IAdminRegionListView
 	
 	private ClickHandler getUpdateHandler(final GenericBean<RegionBean> genericBean) {
 		
-		ClickHandler detailHandler = new ClickHandler() {
+		ClickHandler updateHandler = new ClickHandler() {
 			
 			public void onClick(ClickEvent event) {
 				
@@ -146,7 +146,7 @@ public class AdminRegionListPresenter extends LazyPresenter<IAdminRegionListView
 			}
 		};
 		
-		return detailHandler;
+		return updateHandler;
 	}
 	
 	private ClickHandler getDeleteHandler(final GenericBean<RegionBean> genericBean) {
@@ -175,10 +175,10 @@ public class AdminRegionListPresenter extends LazyPresenter<IAdminRegionListView
 	
 	private void deleteRegion(final GenericBean<RegionBean> genericBean) {
 		
-		RegionBean regionBean = genericBean.getBean();
+		RegionBean region = genericBean.getBean();
 		
 		ProgressDlg.show();
-		regionService.deleteRegion(regionBean, new AsyncCallback<RegionBean>() {
+		regionService.deleteRegion(region, new AsyncCallback<RegionBean>() {
 			
 			@Override
 			public void onSuccess(RegionBean regionBean) {

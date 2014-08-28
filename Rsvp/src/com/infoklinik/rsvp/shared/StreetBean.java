@@ -4,7 +4,7 @@ package com.infoklinik.rsvp.shared;
 public class StreetBean extends BaseBean {
 
 	private String name;
-	private CityBean cityBean;
+	private CityBean city;
 
 	public String getName() {
 		return name;
@@ -14,11 +14,22 @@ public class StreetBean extends BaseBean {
 		this.name = name;
 	}
 
-	public CityBean getCityBean() {
-		return cityBean;
+	public CityBean getCity() {
+		return city;
 	}
 
-	public void setCityBean(CityBean cityBean) {
-		this.cityBean = cityBean;
+	public void setCity(CityBean city) {
+		this.city = city;
+	}
+	
+	public void setBean(StreetBean streetBean) {
+		
+		id = streetBean.getId();
+		name = streetBean.getName();
+		
+		city = new CityBean();
+		city.setBean(streetBean.getCity());
+		
+		setAuditBean(streetBean.getAuditBean());
 	}
 }

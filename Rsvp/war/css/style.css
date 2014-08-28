@@ -1939,8 +1939,13 @@ input.search-field:focus {
 #admin-content-menu {
 	float: left;
 	width: 300px;
-	padding: 3px 0px 10px 0px;
+	padding: 2px 0px 10px 0px;
 	border: 0px solid #999;
+}
+
+#admin-content-menu .link-wrapper  {
+	display: block;
+	overflow: auto;
 }
 
 #admin-content-menu .link  {
@@ -1949,7 +1954,7 @@ input.search-field:focus {
 	line-height: 16px;
 	text-decoration: none;
 	text-shadow: -3px 0px 8px #A5C6D9;
-	display: block;
+	display: inline;
 	cursor: pointer;
 	padding: 0px 0px 5px 0px;
 }

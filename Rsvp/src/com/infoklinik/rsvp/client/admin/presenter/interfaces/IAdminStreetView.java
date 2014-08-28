@@ -1,14 +1,14 @@
 package com.infoklinik.rsvp.client.admin.presenter.interfaces;
 
-import java.util.List;
-
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.SuggestOracle;
 import com.google.gwt.user.client.ui.Widget;
-import com.infoklinik.rsvp.shared.ServiceTypeBean;
+import com.infoklinik.rsvp.shared.StreetBean;
 import com.mvp4g.client.view.LazyView;
 
-public interface IAdminServiceTypeView  extends LazyView, IsWidget {
+public interface IAdminStreetView  extends LazyView, IsWidget {
 	
 	Widget asWidget();
 	
@@ -16,11 +16,11 @@ public interface IAdminServiceTypeView  extends LazyView, IsWidget {
 	
 	void hide();
 	
-	void setCategories(List<String> list);
+	StreetBean getStreet();
 	
-	ServiceTypeBean getServiceType();
+	void setStreet(StreetBean streetBean);
 	
-	void setServiceType(ServiceTypeBean serviceTypeBean);
+	void setCitySelectionHandler(SelectionHandler<SuggestOracle.Suggestion> handler);
 	
 	void setOkBtnClickHandler(ClickHandler handler);
 	

@@ -113,7 +113,7 @@ public class AdminServiceTypeListPresenter extends LazyPresenter<IAdminServiceTy
 	
 	private ClickHandler getUpdateHandler(final GenericBean<ServiceTypeBean> genericBean) {
 		
-		ClickHandler detailHandler = new ClickHandler() {
+		ClickHandler updateHandler = new ClickHandler() {
 			
 			public void onClick(ClickEvent event) {
 				
@@ -123,7 +123,7 @@ public class AdminServiceTypeListPresenter extends LazyPresenter<IAdminServiceTy
 			}
 		};
 		
-		return detailHandler;
+		return updateHandler;
 	}
 	
 	private ClickHandler getDeleteHandler(final GenericBean<ServiceTypeBean> genericBean) {
@@ -132,9 +132,9 @@ public class AdminServiceTypeListPresenter extends LazyPresenter<IAdminServiceTy
 			
 			public void onClick(ClickEvent event) {
 				
-				ServiceTypeBean serviceTypeBean = genericBean.getBean();
+				ServiceTypeBean serviceType = genericBean.getBean();
 				
-				String confirm = "Hapus referensi layanan \"" + serviceTypeBean.getName() + "\" ?";
+				String confirm = "Hapus referensi layanan \"" + serviceType.getName() + "\" ?";
 				
 				ConfirmDlg.confirm(confirm, new ClickHandler() {
 					
@@ -152,10 +152,10 @@ public class AdminServiceTypeListPresenter extends LazyPresenter<IAdminServiceTy
 	
 	private void deleteServiceType(final GenericBean<ServiceTypeBean> genericBean) {
 		
-		ServiceTypeBean serviceTypeBean = genericBean.getBean();
+		ServiceTypeBean serviceType = genericBean.getBean();
 		
 		ProgressDlg.show();
-		serviceTypeServiceAsync.deleteServiceType(serviceTypeBean, new AsyncCallback<ServiceTypeBean>() {
+		serviceTypeServiceAsync.deleteServiceType(serviceType, new AsyncCallback<ServiceTypeBean>() {
 			
 			@Override
 			public void onSuccess(ServiceTypeBean serviceTypeBean) {

@@ -21,4 +21,15 @@ public class RegionBean extends BaseBean {
 	public void setCity(CityBean city) {
 		this.city = city;
 	}
+	
+	public void setBean(RegionBean regionBean) {
+		
+		id = regionBean.getId();
+		name = regionBean.getName();
+		
+		city = new CityBean();
+		city.setBean(regionBean.getCity());
+		
+		setAuditBean(regionBean.getAuditBean());
+	}
 }
