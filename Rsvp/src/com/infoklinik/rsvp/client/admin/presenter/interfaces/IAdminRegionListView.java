@@ -6,6 +6,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.GenericBean;
+import com.infoklinik.rsvp.shared.CityBean;
 import com.infoklinik.rsvp.shared.RegionBean;
 import com.infoklinik.rsvp.shared.RegionSearchBean;
 import com.mvp4g.client.view.LazyView;
@@ -19,6 +20,8 @@ public interface IAdminRegionListView extends LazyView, IsWidget {
 	void hide();
 	
 	void setList(List<GenericBean<RegionBean>> list);
+	
+	void setCities(List<CityBean> cityBeans);
 	
 	void refresh();
 	

@@ -13,12 +13,14 @@ import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
 import com.infoklinik.rsvp.client.GenericBean;
 import com.infoklinik.rsvp.client.HandlerManager;
 import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminRegionListView;
+import com.infoklinik.rsvp.shared.CityBean;
 import com.infoklinik.rsvp.shared.Constant;
 import com.infoklinik.rsvp.shared.RegionBean;
 import com.infoklinik.rsvp.shared.RegionSearchBean;
@@ -31,6 +33,9 @@ public class AdminRegionListView extends BaseView implements IAdminRegionListVie
 	
 	@UiField
 	TextBox nameTb;
+	
+	@UiField
+	ListBox cityLb;
 	
 	@UiField 
 	FlexTable searchResultFt;
@@ -76,7 +81,7 @@ public class AdminRegionListView extends BaseView implements IAdminRegionListVie
 		
 		dlgFadeOut();
 		
-		dialogBox.setText("Referensi Asuransi");
+		dialogBox.setText("Referensi Wilayah");
 		dialogBox.center();
 		dialogBox.setPopupPosition(dialogBox.getPopupLeft(), Constant.POPUP_L1_TOP);
 		dialogBox.show();
@@ -118,6 +123,13 @@ public class AdminRegionListView extends BaseView implements IAdminRegionListVie
 		setPage(1);
 	}
 	
+	public void setCities(List<CityBean> cityBeans) {
+		
+		for (CityBean cityBean : cityBeans) {
+			cityLb.addItem(cityBean.getName(), String.valueOf(cityBean.getId()));
+		}
+	}
+	
 	public void refresh() {
 		
 		setPage(page);
@@ -141,13 +153,16 @@ public class AdminRegionListView extends BaseView implements IAdminRegionListVie
 		Label noLb = new Label(LABEL_NO);
 		noLb.setWidth("20px");
 		Label nameLb = new Label(LABEL_NAME);
-		nameLb.setWidth("333px");
+		nameLb.setWidth("205px");
+		Label cityLb = new Label(LABEL_CITY);
+		cityLb.setWidth("117px");
 		Label menuLb = new Label(LABEL_MENU);
 		menuLb.setWidth("40px");
 		
 		searchResultFt.setWidget(0, 0, noLb);
 		searchResultFt.setWidget(0, 1, nameLb);
-		searchResultFt.setWidget(0, 2, menuLb);
+		searchResultFt.setWidget(0, 2, cityLb);
+		searchResultFt.setWidget(0, 3, menuLb);
 		
 		setStyleName(searchResultFt);
 	}
@@ -169,6 +184,7 @@ public class AdminRegionListView extends BaseView implements IAdminRegionListVie
 			
 			Label noLb = new Label(i + ".");
 			Label nameLb = new Label(regionBean.getName());
+			Label cityLb = new Label(regionBean.getCity().getName());
 			
 			Label updateLbl = createUpdateLabel();
 			updateLbl.addClickHandler(handlerMgr.getUpdateHandler());
@@ -184,7 +200,8 @@ public class AdminRegionListView extends BaseView implements IAdminRegionListVie
 			
 			searchResultFt.setWidget(index, 0, noLb);
 			searchResultFt.setWidget(index, 1, nameLb);
-			searchResultFt.setWidget(index, 2, panel);
+			searchResultFt.setWidget(index, 2, cityLb);
+			searchResultFt.setWidget(index, 3, panel);
 			
 			setStyleName(searchResultFt);
 			i++;
@@ -196,6 +213,8 @@ public class AdminRegionListView extends BaseView implements IAdminRegionListVie
 	public RegionSearchBean getRegionSearch() {
 		
 		regionSearch.setName(nameTb.getText());
+		regionSearch.setCityId(Long.valueOf(cityLb.getValue(cityLb.getSelectedIndex())));
+		
 		return regionSearch;
 	}
 	

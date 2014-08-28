@@ -30,6 +30,7 @@ public class Message {
 	public static String ERR_INSURANCE_NAME_EMPTY = "Nama asuransi tidak boleh kosong.";
 	
 	public static String ERR_CITY_NAME_EMPTY = "Nama kota tidak boleh kosong.";
+	public static String ERR_CITY_EMPTY = "Kota harus dipilih dari daftar kota yang tersedia.";	
 	
 	public static String ERR_FILE_UPLOAD_EXCEED_MAX_SIZE = "Ukuran file melebihi besar maksimum (500 KB)";
 	public static String ERR_FILE_UPLOAD = "Gagal melaksanakan upload file ke server";

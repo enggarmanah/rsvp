@@ -112,9 +112,9 @@ public class AdminRegionView extends BaseView implements IAdminRegionView {
 		}
 		
 		if (region.getId() == null) {
-			dialogBox.setText("Tambah Asuransi Baru");
+			dialogBox.setText("Tambah Wilayah Baru");
 		} else {
-			dialogBox.setText("Perubahan Data Asuransi");
+			dialogBox.setText("Perubahan Data Wilayah");
 		}
 		
 		nameTb.setText(region.getName());

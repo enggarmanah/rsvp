@@ -158,6 +158,14 @@ public class AdminRegionPresenter extends LazyPresenter<IAdminRegionView, AdminE
 			errorMessages.add(Message.ERR_INSURANCE_NAME_EMPTY);
 		}
 		
+		if (region.getCity() == null) {
+			
+			isValidated = false;
+			errorMessages.add(Message.ERR_CITY_EMPTY);
+		} 
+		
 		return isValidated;
+		
+		
 	}
 }

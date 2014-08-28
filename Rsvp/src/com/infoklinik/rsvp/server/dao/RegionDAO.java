@@ -62,7 +62,7 @@ public class RegionDAO {
 		ArrayList<String> filters = new ArrayList<String>();
 		HashMap<String, Object> parameters = new HashMap<String, Object>();
 		
-		StringBuffer sql = new StringBuffer("SELECT r FROM Region r");
+		StringBuffer sql = new StringBuffer("SELECT r FROM Region r JOIN r.city c");
 		
 		if (!ServerUtil.isEmpty(regionSearch.getName())) {
 			
@@ -77,6 +77,8 @@ public class RegionDAO {
 		}
 		
 		ServerUtil.setFilter(sql, filters);
+		
+		sql.append(" ORDER BY c.name, r.name");
 		
 		TypedQuery<Region> query = em.createQuery(sql.toString(), Region.class);
 		

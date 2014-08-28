@@ -27,6 +27,9 @@ public class AdminView extends BaseView implements IAdminView {
 	Label cityLb;
 	
 	@UiField
+	Label regionLb;
+	
+	@UiField
 	Label logoutLb;
 	
 	interface ModuleUiBinder extends UiBinder<Widget, AdminView> {}
@@ -71,6 +74,11 @@ public class AdminView extends BaseView implements IAdminView {
 	public void setCityLinkClickHandler(ClickHandler handler) {
 		
 		cityLb.addClickHandler(handler);
+	}
+	
+	public void setRegionLinkClickHandler(ClickHandler handler) {
+		
+		regionLb.addClickHandler(handler);
 	}
 	
 	public void setLogoutLinkClickHandler(ClickHandler handler) {

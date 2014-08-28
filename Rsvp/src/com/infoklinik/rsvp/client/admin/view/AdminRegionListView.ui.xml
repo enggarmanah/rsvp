@@ -11,6 +11,12 @@
 					<g:TextBox ui:field="nameTb" styleName="text"></g:TextBox>
 				</div>
 				<div class="title">
+				    Kota :
+				</div>
+				<div class="info">
+					<g:ListBox ui:field="cityLb" styleName="select"></g:ListBox>
+				</div>
+				<div class="title">
 				</div>
 				<div class="info">
 					<g:Button ui:field="searchBtn" text="Cari" styleName="button"/>

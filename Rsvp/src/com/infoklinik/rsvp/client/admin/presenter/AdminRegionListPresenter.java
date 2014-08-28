@@ -11,12 +11,17 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.infoklinik.rsvp.client.GenericBean;
 import com.infoklinik.rsvp.client.HandlerManager;
+import com.infoklinik.rsvp.client.Message;
 import com.infoklinik.rsvp.client.admin.AdminEventBus;
 import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminRegionListView;
 import com.infoklinik.rsvp.client.admin.view.AdminRegionListView;
 import com.infoklinik.rsvp.client.main.view.ConfirmDlg;
+import com.infoklinik.rsvp.client.main.view.NotificationDlg;
 import com.infoklinik.rsvp.client.main.view.ProgressDlg;
+import com.infoklinik.rsvp.client.rpc.CityServiceAsync;
 import com.infoklinik.rsvp.client.rpc.RegionServiceAsync;
+import com.infoklinik.rsvp.shared.CityBean;
+import com.infoklinik.rsvp.shared.CitySearchBean;
 import com.infoklinik.rsvp.shared.RegionBean;
 import com.infoklinik.rsvp.shared.RegionSearchBean;
 import com.mvp4g.client.annotation.Presenter;
@@ -27,7 +32,10 @@ import com.mvp4g.client.presenter.LazyPresenter;
 public class AdminRegionListPresenter extends LazyPresenter<IAdminRegionListView, AdminEventBus> {
 	
 	@Inject
-	private RegionServiceAsync regionServiceAsync;
+	private RegionServiceAsync regionService;
+	
+	@Inject
+	private CityServiceAsync cityService;
 	
 	List<GenericBean<RegionBean>> genericBeans;
 	
@@ -60,6 +68,21 @@ public class AdminRegionListPresenter extends LazyPresenter<IAdminRegionListView
 				view.hide();
 			}
 		});
+		
+		cityService.getCities(new CitySearchBean(), new AsyncCallback<List<CityBean>>() {
+			
+			@Override
+			public void onSuccess(List<CityBean> result) {
+				
+				view.setCities(result);
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				
+				NotificationDlg.warning(Message.ERR_COMMON_LOAD_FAILED);
+			}
+		});
 	}
 	
 	public void onLoadRegion() {
@@ -77,7 +100,7 @@ public class AdminRegionListPresenter extends LazyPresenter<IAdminRegionListView
 		RegionSearchBean regionSearchBean = view.getRegionSearch();
 		
 		ProgressDlg.show();
-		regionServiceAsync.getRegions(regionSearchBean, new AsyncCallback<List<RegionBean>>() {
+		regionService.getRegions(regionSearchBean, new AsyncCallback<List<RegionBean>>() {
 			
 			@Override
 			public void onSuccess(List<RegionBean> result) {
@@ -134,7 +157,7 @@ public class AdminRegionListPresenter extends LazyPresenter<IAdminRegionListView
 				
 				RegionBean regionBean = genericBean.getBean();
 				
-				String confirm = "Hapus asuransi \"" + regionBean.getName() + "\" ?";
+				String confirm = "Hapus wilayah \"" + regionBean.getName() + "\" ?";
 				
 				ConfirmDlg.confirm(confirm, new ClickHandler() {
 					
@@ -155,7 +178,7 @@ public class AdminRegionListPresenter extends LazyPresenter<IAdminRegionListView
 		RegionBean regionBean = genericBean.getBean();
 		
 		ProgressDlg.show();
-		regionServiceAsync.deleteRegion(regionBean, new AsyncCallback<RegionBean>() {
+		regionService.deleteRegion(regionBean, new AsyncCallback<RegionBean>() {
 			
 			@Override
 			public void onSuccess(RegionBean regionBean) {
