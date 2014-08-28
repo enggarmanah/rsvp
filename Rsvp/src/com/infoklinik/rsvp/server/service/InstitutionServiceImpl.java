@@ -2,12 +2,14 @@ package com.infoklinik.rsvp.server.service;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 import com.infoklinik.rsvp.client.rpc.InstitutionService;
 import com.infoklinik.rsvp.server.dao.InstitutionDAO;
 import com.infoklinik.rsvp.server.dao.MasterCodeDAO;
+import com.infoklinik.rsvp.server.dao.SearchDAO;
 import com.infoklinik.rsvp.shared.Constant;
 import com.infoklinik.rsvp.shared.InstDistanceComparator;
 import com.infoklinik.rsvp.shared.GisLatLng;
@@ -15,6 +17,7 @@ import com.infoklinik.rsvp.shared.InstitutionBean;
 import com.infoklinik.rsvp.shared.InstitutionSearchBean;
 import com.infoklinik.rsvp.shared.LocationBean;
 import com.infoklinik.rsvp.shared.MasterCodeBean;
+import com.infoklinik.rsvp.shared.SearchBean;
 import com.infoklinik.rsvp.shared.SharedUtil;
 
 @SuppressWarnings("serial")
@@ -46,6 +49,8 @@ public class InstitutionServiceImpl extends BaseServiceServlet implements Instit
 	
 	public List<InstitutionBean> getInstitutions(InstitutionSearchBean instSearch) {
 		
+		SearchBean search = new SearchBean();
+		
 		InstitutionDAO institutionDao = new InstitutionDAO();
 		List<InstitutionBean> institutions = institutionDao.getInstitutions(instSearch);
 		
@@ -53,11 +58,32 @@ public class InstitutionServiceImpl extends BaseServiceServlet implements Instit
 		
 		if (InstitutionBean.CATEGORY_CLINIC.equals(instSearch.getCategory())) {
 			codeType = MasterCodeBean.CLINIC_TYPE;
+			search.setType(Constant.SEARCH_CLINIC);
+			
 		} else if (InstitutionBean.CATEGORY_HOSPITAL.equals(instSearch.getCategory())) {
 			codeType = MasterCodeBean.HOSPITAL_TYPE;
+			search.setType(Constant.SEARCH_HOSPITAL);
+			
 		} else if (InstitutionBean.CATEGORY_LABORATORY.equals(instSearch.getCategory())) {
 			codeType = MasterCodeBean.LAB_TYPE;
+			search.setType(Constant.SEARCH_LAB);
 		}
+		
+		search.setName(instSearch.getName());
+		search.setCityId(instSearch.getCityId());
+		search.setStreetName(instSearch.getStreetName());
+		search.setRegionName(instSearch.getRegionName());
+		
+		if (instSearch.getLocation() != null) {
+			search.setDistance(Long.valueOf(instSearch.getLocation().getDistance()));
+			search.setLat(instSearch.getLocation().getLat());		
+			search.setLng(instSearch.getLocation().getLng());
+		}
+		
+		search.setReqTime(new Date());
+		
+		SearchDAO searchDao = new SearchDAO();
+		searchDao.addSearch(search);
 		
 		MasterCodeDAO masterCodeDao = new MasterCodeDAO();
 	 	List<MasterCodeBean> masterCodes = masterCodeDao.getMasterCodes(codeType);

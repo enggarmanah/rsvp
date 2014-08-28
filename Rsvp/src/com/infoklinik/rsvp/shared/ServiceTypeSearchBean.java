@@ -1,7 +1,9 @@
 package com.infoklinik.rsvp.shared;
 
+import java.io.Serializable;
+
 @SuppressWarnings("serial")
-public class ServiceTypeSearchBean extends SearchBean {
+public class ServiceTypeSearchBean implements Serializable {
 	
 	private String name;
 

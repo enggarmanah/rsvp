@@ -72,6 +72,8 @@ public class CityDAO {
 		
 		ServerUtil.setFilter(sql, filters);
 		
+		sql.append(" ORDER BY c.name");
+		
 		TypedQuery<City> query = em.createQuery(sql.toString(), City.class);
 		
 		for (String parameter : parameters.keySet()) {

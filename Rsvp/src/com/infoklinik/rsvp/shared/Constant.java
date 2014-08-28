@@ -8,6 +8,10 @@ public class Constant {
 	public static String STATUS_INACTIVE = "I";
 	
 	public static String SEARCH_INSTITUTION = "SEARCH_INSTITUTION";
+	public static String SEARCH_CLINIC = "SEARCH_CLINIC";
+	public static String SEARCH_HOSPITAL = "SEARCH_HOSPITAL";
+	public static String SEARCH_LAB = "SEARCH_LAB";
+	public static String SEARCH_PHARMACY = "SEARCH_PHARMACY";
 	public static String SEARCH_DOCTOR = "SEARCH_DOCTOR";
 	public static String SEARCH_SERVICE = "SEARCH_SERVICE";
 	

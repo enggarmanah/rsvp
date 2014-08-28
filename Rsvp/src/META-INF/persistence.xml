@@ -22,6 +22,7 @@
 		<class>com.infoklinik.rsvp.server.model.Like</class>
 		<class>com.infoklinik.rsvp.server.model.Branch</class>
 		<class>com.infoklinik.rsvp.server.model.MasterCode</class>
+		<class>com.infoklinik.rsvp.server.model.Search</class>
 		
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>

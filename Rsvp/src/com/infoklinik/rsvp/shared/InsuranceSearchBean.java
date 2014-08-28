@@ -1,7 +1,9 @@
 package com.infoklinik.rsvp.shared;
 
+import java.io.Serializable;
+
 @SuppressWarnings("serial")
-public class InsuranceSearchBean extends SearchBean {
+public class InsuranceSearchBean implements Serializable {
 	
 	private String name;
 
