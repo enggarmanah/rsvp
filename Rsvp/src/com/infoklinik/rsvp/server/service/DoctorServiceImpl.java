@@ -1,10 +1,12 @@
 package com.infoklinik.rsvp.server.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.infoklinik.rsvp.client.rpc.DoctorService;
 import com.infoklinik.rsvp.server.dao.DoctorDAO;
+import com.infoklinik.rsvp.server.dao.SearchDAO;
 import com.infoklinik.rsvp.shared.Constant;
 import com.infoklinik.rsvp.shared.DoctorBean;
 import com.infoklinik.rsvp.shared.DoctorSearchBean;
@@ -12,6 +14,7 @@ import com.infoklinik.rsvp.shared.GisLatLng;
 import com.infoklinik.rsvp.shared.InstitutionBean;
 import com.infoklinik.rsvp.shared.LocationBean;
 import com.infoklinik.rsvp.shared.ScheduleBean;
+import com.infoklinik.rsvp.shared.SearchBean;
 import com.infoklinik.rsvp.shared.SharedUtil;
 
 @SuppressWarnings("serial")
@@ -50,6 +53,25 @@ public class DoctorServiceImpl extends BaseServiceServlet implements DoctorServi
 	}
 	
 	public List<DoctorBean> getDoctors(DoctorSearchBean doctorSearch) {
+		
+		SearchBean search = new SearchBean();
+		search.setType(Constant.SEARCH_DOCTOR);
+		
+		search.setName(doctorSearch.getName());
+		search.setCityId(doctorSearch.getCityId());
+		search.setStreetName(doctorSearch.getStreetName());
+		search.setRegionName(doctorSearch.getRegionName());
+		
+		if (doctorSearch.getLocation() != null) {
+			search.setDistance(Long.valueOf(doctorSearch.getLocation().getDistance()));
+			search.setLat(doctorSearch.getLocation().getLat());		
+			search.setLng(doctorSearch.getLocation().getLng());
+		}
+		
+		search.setReqTime(new Date());
+		
+		SearchDAO searchDao = new SearchDAO();
+		searchDao.addSearch(search);
 		
 		DoctorDAO doctorDao = new DoctorDAO();
 		List<DoctorBean> doctors = doctorDao.getDoctors(doctorSearch);
