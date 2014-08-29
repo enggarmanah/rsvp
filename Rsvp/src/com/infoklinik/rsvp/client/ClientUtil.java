@@ -345,6 +345,14 @@ public class ClientUtil {
 		return str;
 	}
 	
+	public static String numberToStr(Long number) {
+		
+		if (isEmpty(number)) {
+			return "";
+		} else {
+			return String.valueOf(number);
+		}
+	}	
 
 	public static void setSelectedIndex(ListBox listBox, String value) {
 		

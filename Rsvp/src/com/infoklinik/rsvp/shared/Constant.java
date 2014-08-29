@@ -2,6 +2,14 @@ package com.infoklinik.rsvp.shared;
 
 public class Constant {
 	
+	public static String CATEGORY_DOCTOR = "DOC";
+	public static String CATEGORY_SERVICE = "SRV";
+	public static String CATEGORY_CLINIC = "CLI";
+	public static String CATEGORY_HOSPITAL = "HSP";
+	public static String CATEGORY_LABORATORY = "LAB";
+	public static String CATEGORY_PHARMANCY = "PHM";
+	public static String CATEGORY_INSURANCE = "INS";
+	
 	public static String IMAGE_URL = "/image?id=";
 	
 	public static String STATUS_ACTIVE = "A";

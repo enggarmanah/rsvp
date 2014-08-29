@@ -88,6 +88,10 @@
 		<servlet-name>oAuthLoginServiceServlet</servlet-name>
 		<servlet-class>com.infoklinik.rsvp.server.service.OAuthLoginServiceImpl</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>statisticServiceServlet</servlet-name>
+		<servlet-class>com.infoklinik.rsvp.server.service.StatisticServiceImpl</servlet-class>
+	</servlet>
 	
 	<servlet>
 		<servlet-name>oAuthLoginJsp</servlet-name>
@@ -177,6 +181,10 @@
 	<servlet-mapping>
 		<servlet-name>likeServiceServlet</servlet-name>
 		<url-pattern>/rsvp/likeService</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>statisticServiceServlet</servlet-name>
+		<url-pattern>/rsvp/statisticService</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>oAuthLoginServiceServlet</servlet-name>

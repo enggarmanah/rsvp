@@ -21,7 +21,6 @@ import com.infoklinik.rsvp.client.SuggestionOracle;
 import com.infoklinik.rsvp.client.search.presenter.interfaces.IClinicSearchView;
 import com.infoklinik.rsvp.shared.CityBean;
 import com.infoklinik.rsvp.shared.Constant;
-import com.infoklinik.rsvp.shared.InstitutionBean;
 import com.infoklinik.rsvp.shared.InstitutionSearchBean;
 import com.infoklinik.rsvp.shared.InsuranceBean;
 import com.infoklinik.rsvp.shared.LocationBean;
@@ -165,7 +164,7 @@ public class ClinicSearchView extends BaseView implements IClinicSearchView {
 		
 		InstitutionSearchBean instSearchBean = new InstitutionSearchBean();
 		
-		instSearchBean.setCategory(InstitutionBean.CATEGORY_CLINIC);
+		instSearchBean.setCategory(Constant.CATEGORY_CLINIC);
 		
 		if (searchNameRb.getValue()) {
 			instSearchBean.setName(searchSb.getText());

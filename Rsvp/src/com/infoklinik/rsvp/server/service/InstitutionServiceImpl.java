@@ -56,15 +56,15 @@ public class InstitutionServiceImpl extends BaseServiceServlet implements Instit
 		
 		String codeType = MasterCodeBean.CLINIC_TYPE;
 		
-		if (InstitutionBean.CATEGORY_CLINIC.equals(instSearch.getCategory())) {
+		if (Constant.CATEGORY_CLINIC.equals(instSearch.getCategory())) {
 			codeType = MasterCodeBean.CLINIC_TYPE;
 			search.setType(Constant.SEARCH_CLINIC);
 			
-		} else if (InstitutionBean.CATEGORY_HOSPITAL.equals(instSearch.getCategory())) {
+		} else if (Constant.CATEGORY_HOSPITAL.equals(instSearch.getCategory())) {
 			codeType = MasterCodeBean.HOSPITAL_TYPE;
 			search.setType(Constant.SEARCH_HOSPITAL);
 			
-		} else if (InstitutionBean.CATEGORY_LABORATORY.equals(instSearch.getCategory())) {
+		} else if (Constant.CATEGORY_LABORATORY.equals(instSearch.getCategory())) {
 			codeType = MasterCodeBean.LAB_TYPE;
 			search.setType(Constant.SEARCH_LAB);
 		}

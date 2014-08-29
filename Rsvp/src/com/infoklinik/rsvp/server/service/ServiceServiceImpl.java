@@ -79,9 +79,9 @@ public class ServiceServiceImpl extends BaseServiceServlet implements ServiceSer
 	 		
 	 		InstitutionBean institution = service.getInstitution();
 	 		
-	 		if (InstitutionBean.CATEGORY_CLINIC.equals(institution.getCategory())) {
+	 		if (Constant.CATEGORY_CLINIC.equals(institution.getCategory())) {
 	 			institution.setTypeDescription(clinicInstTypes.get(institution.getType()));
-	 		} else if (InstitutionBean.CATEGORY_HOSPITAL.equals(institution.getCategory())) {
+	 		} else if (Constant.CATEGORY_HOSPITAL.equals(institution.getCategory())) {
 	 			institution.setTypeDescription(hospitalInstTypes.get(institution.getType()));
 	 		} 
 	 	}

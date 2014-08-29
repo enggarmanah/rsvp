@@ -118,15 +118,15 @@ public class InstitutionServiceView extends BaseView {
 		ClientUtil.setSelectedIndex(residentialSrvLb, institution.getResidentialService());
 		ClientUtil.setSelectedIndex(op24HoursLb, institution.isOp24hours() ? Constant.YES : Constant.NO);
 		
-		if (InstitutionBean.CATEGORY_CLINIC.equals(institution.getCategory()) || 
-			InstitutionBean.CATEGORY_HOSPITAL.equals(institution.getCategory())) {
+		if (Constant.CATEGORY_CLINIC.equals(institution.getCategory()) || 
+				Constant.CATEGORY_HOSPITAL.equals(institution.getCategory())) {
 			residentialSrvLb.setSelectedIndex(1);
 			residentialSrvLb.setEnabled(false);
 		} else {
 			residentialSrvLb.setEnabled(true);
 		}
 		
-		if (InstitutionBean.CATEGORY_HOSPITAL.equals(institution.getCategory())) {
+		if (Constant.CATEGORY_HOSPITAL.equals(institution.getCategory())) {
 			op24HoursLb.setSelectedIndex(0);
 			op24HoursLb.setEnabled(false);
 		} else {

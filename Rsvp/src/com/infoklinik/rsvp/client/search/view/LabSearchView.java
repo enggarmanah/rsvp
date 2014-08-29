@@ -20,7 +20,6 @@ import com.infoklinik.rsvp.client.SuggestionOracle;
 import com.infoklinik.rsvp.client.search.presenter.interfaces.ILabSearchView;
 import com.infoklinik.rsvp.shared.CityBean;
 import com.infoklinik.rsvp.shared.Constant;
-import com.infoklinik.rsvp.shared.InstitutionBean;
 import com.infoklinik.rsvp.shared.InstitutionSearchBean;
 import com.infoklinik.rsvp.shared.LocationBean;
 import com.infoklinik.rsvp.shared.MasterCodeBean;
@@ -138,7 +137,7 @@ public class LabSearchView extends BaseView implements ILabSearchView {
 		
 		InstitutionSearchBean instSearchBean = new InstitutionSearchBean();
 		
-		instSearchBean.setCategory(InstitutionBean.CATEGORY_LABORATORY);
+		instSearchBean.setCategory(Constant.CATEGORY_LABORATORY);
 		
 		if (searchNameRb.getValue()) {
 			instSearchBean.setName(searchSb.getText());

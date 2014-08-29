@@ -149,11 +149,11 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 		String codeType = Constant.EMPTY_STRING;
 		String category = institution.getCategory();
 		
-		if (InstitutionBean.CATEGORY_CLINIC.equals(category)) {
+		if (Constant.CATEGORY_CLINIC.equals(category)) {
 			codeType = MasterCodeBean.CLINIC_TYPE;
-		} else if (InstitutionBean.CATEGORY_HOSPITAL.equals(category)) {
+		} else if (Constant.CATEGORY_HOSPITAL.equals(category)) {
 			codeType = MasterCodeBean.HOSPITAL_TYPE;
-		} else if (InstitutionBean.CATEGORY_LABORATORY.equals(category)) {
+		} else if (Constant.CATEGORY_LABORATORY.equals(category)) {
 			codeType = MasterCodeBean.LAB_TYPE;
 		}
 		
@@ -876,7 +876,7 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 		
 		} else {
 			
-			if (!InstitutionBean.CATEGORY_PHARMANCY.equals(institution.getType()) && ClientUtil.isEmpty(institution.getType())) {
+			if (!Constant.CATEGORY_PHARMANCY.equals(institution.getType()) && ClientUtil.isEmpty(institution.getType())) {
 				
 				isValidated = false;
 				errorMessages.add(Message.ERR_INST_TYPE_EMPTY);

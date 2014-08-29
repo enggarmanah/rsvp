@@ -6,11 +6,6 @@ import java.util.List;
 @SuppressWarnings("serial")
 public class InstitutionBean extends BaseBean {
 	
-	public static String CATEGORY_CLINIC = "CLI";
-	public static String CATEGORY_HOSPITAL = "HSP";
-	public static String CATEGORY_LABORATORY = "LAB";
-	public static String CATEGORY_PHARMANCY = "PHM";
-
 	private String name;
 	private String category;
 	private String type;

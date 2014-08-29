@@ -20,7 +20,6 @@ import com.infoklinik.rsvp.client.SuggestionOracle;
 import com.infoklinik.rsvp.client.search.presenter.interfaces.IHospitalSearchView;
 import com.infoklinik.rsvp.shared.CityBean;
 import com.infoklinik.rsvp.shared.Constant;
-import com.infoklinik.rsvp.shared.InstitutionBean;
 import com.infoklinik.rsvp.shared.InstitutionSearchBean;
 import com.infoklinik.rsvp.shared.InsuranceBean;
 import com.infoklinik.rsvp.shared.LocationBean;
@@ -144,7 +143,7 @@ public class HospitalSearchView extends BaseView implements IHospitalSearchView 
 		
 		InstitutionSearchBean instSearchBean = new InstitutionSearchBean();
 		
-		instSearchBean.setCategory(InstitutionBean.CATEGORY_HOSPITAL);
+		instSearchBean.setCategory(Constant.CATEGORY_HOSPITAL);
 		
 		if (searchNameRb.getValue()) {
 			instSearchBean.setName(searchSb.getText());
