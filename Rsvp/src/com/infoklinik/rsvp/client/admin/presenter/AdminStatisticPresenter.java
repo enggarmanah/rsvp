@@ -26,8 +26,18 @@ public class AdminStatisticPresenter extends LazyPresenter<IAdminStatisticView, 
 	@Inject
 	StatisticServiceAsync statisticService;
 	
+	boolean isLoadFail = false;
+	
 	@Override
 	public void bindView() {
+	}
+	
+	private void displayErrOnLoad() {
+		
+		if (!isLoadFail) {
+			isLoadFail = true;
+			NotificationDlg.warning(Message.ERR_COMMON_LOAD_FAILED);
+		}
 	}
 	
 	public void onLoadStatistic() {
@@ -38,12 +48,38 @@ public class AdminStatisticPresenter extends LazyPresenter<IAdminStatisticView, 
 			
 			@Override
 			public void onSuccess(Map<String, Long> result) {
-				view.setDataCount(result);
+				view.setDataStatistic(result);
 			}
 			
 			@Override
 			public void onFailure(Throwable caught) {
-				NotificationDlg.warning(Message.ERR_COMMON_LOAD_FAILED);
+				displayErrOnLoad();
+			}
+		});
+		
+		statisticService.getSearchTypeStatistic(new AsyncCallback<Map<String,Long>>() {
+			
+			@Override
+			public void onSuccess(Map<String, Long> result) {
+				view.setSearchTypeStatistic(result);
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				displayErrOnLoad();
+			}
+		});
+		
+		statisticService.getSearchMethodStatistic(new AsyncCallback<Map<String,Long>>() {
+			
+			@Override
+			public void onSuccess(Map<String, Long> result) {
+				view.setSearchMethodStatistic(result);
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				displayErrOnLoad();
 			}
 		});
 	}

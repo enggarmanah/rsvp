@@ -1,0 +1,48 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:com.google.gwt.user.datepicker.client">
+	<g:HTMLPanel>
+
+		<div id="popup-edit-wrapper">
+			<g:SimplePanel ui:field="editPanel">
+			    <g:HTMLPanel>
+					
+					<div id="popup-edit">
+						<div class="paragraph">
+							Silahkan pilih hari kunjungan dokter.
+						</div>
+						<div class="title">Dokter :</div>
+						<div class="info">
+							<g:Label ui:field="doctorLb" styleName="label"></g:Label>
+						</div>
+						<div class="title">Spesialis :</div>
+						<div class="info">
+							<g:Label ui:field="specialityLb" styleName="label"></g:Label>
+						</div>
+						<div class="title">Lokasi :</div>
+						<div class="info">
+							<g:Label ui:field="institutionLb" styleName="label"></g:Label>
+						</div>
+						<div class="title">Tanggal :</div>
+						<div class="info">
+							<c:DateBox ui:field="apptDateDb" styleName="text"></c:DateBox>
+						</div>
+						<div class="title">Jam :</div>
+						<div class="info">
+							<g:ListBox ui:field="apptTimeLb" styleName="select"></g:ListBox>
+						</div>
+					</div>
+							
+				</g:HTMLPanel>
+			</g:SimplePanel>
+			<div id="popup-edit-button">
+				<div class="title"></div>
+				<div class="info">
+					<g:Button ui:field="okBtn" text="OK" styleName="button" width="75px"/>
+					<g:Button ui:field="cancelBtn" text="Batal" styleName="button" width="75px"/>
+				</div>
+			</div>
+		</div>
+
+	</g:HTMLPanel>
+
+</ui:UiBinder> 

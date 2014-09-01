@@ -876,7 +876,7 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 		
 		} else {
 			
-			if (!Constant.CATEGORY_PHARMANCY.equals(institution.getType()) && ClientUtil.isEmpty(institution.getType())) {
+			if (!Constant.CATEGORY_PHARMACY.equals(institution.getType()) && ClientUtil.isEmpty(institution.getType())) {
 				
 				isValidated = false;
 				errorMessages.add(Message.ERR_INST_TYPE_EMPTY);

@@ -33,4 +33,28 @@ public class ScheduleDAO {
 
 		return list;
 	}
+	
+	public List<ScheduleBean> getSchedules(Long doctorId, Long instId, Integer day) {
+
+		List<ScheduleBean> list = new ArrayList<ScheduleBean>();
+
+		EntityManager em = PersistenceManager.getEntityManager();
+		
+		Query query = em.createQuery("SELECT s FROM Schedule s WHERE s.doctor.id = :doctorId AND s.institution.id = :instId AND day = :day", Schedule.class);
+		
+		query.setParameter("doctorId", doctorId);
+		query.setParameter("instId", instId);
+		query.setParameter("day", day);
+		
+		@SuppressWarnings("unchecked")
+		List<Schedule> result = query.getResultList();
+		
+		for (Schedule schedule : result) {
+			list.add(schedule.loadInstitution().getBean());
+		}
+
+		em.close();
+
+		return list;
+	}
 }

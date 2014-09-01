@@ -9,4 +9,8 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 public interface StatisticService extends RemoteService {
 	
 	public Map<String, Long> getDataStatistic();
+	
+	public Map<String, Long> getSearchTypeStatistic();
+	
+	public Map<String, Long> getSearchMethodStatistic();
 }

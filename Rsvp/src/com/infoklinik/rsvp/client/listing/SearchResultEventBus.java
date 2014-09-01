@@ -7,6 +7,7 @@ import com.infoklinik.rsvp.client.CustomLogger;
 import com.infoklinik.rsvp.client.listing.presenter.SearchResultPresenter;
 import com.infoklinik.rsvp.shared.DoctorBean;
 import com.infoklinik.rsvp.shared.InstitutionBean;
+import com.infoklinik.rsvp.shared.ScheduleBean;
 import com.infoklinik.rsvp.shared.ServiceBean;
 import com.mvp4g.client.annotation.Debug;
 import com.mvp4g.client.annotation.Event;
@@ -56,6 +57,9 @@ public interface SearchResultEventBus extends EventBus {
 	
 	@Event(forwardToParent = true)
 	public void loadServiceLike(ServiceBean service);
+	
+	@Event(forwardToParent = true)
+	public void loadAppointment(ScheduleBean schedule);
 	
 	@Event(handlers = SearchResultPresenter.class)
 	public void loadInstitutionSearchResult(List<InstitutionBean> institutions);

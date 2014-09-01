@@ -10,4 +10,6 @@ import com.infoklinik.rsvp.shared.ScheduleBean;
 public interface ScheduleService extends RemoteService {
 	
 	List<ScheduleBean> getDoctorSchedules(Long doctorId);	
+	
+	List<ScheduleBean> getSchedules(Long doctorId, Long instId, Integer day);
 }

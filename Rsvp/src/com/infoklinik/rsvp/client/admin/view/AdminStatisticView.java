@@ -42,41 +42,134 @@ public class AdminStatisticView extends BaseView implements IAdminStatisticView 
 	@UiField
 	Label dataTotalLb;
 	
+	@UiField
+	Label searchClinicLb;
+	
+	@UiField
+	Label searchHospitalLb;
+	
+	@UiField
+	Label searchLabLb;
+	
+	@UiField
+	Label searchPharmacyLb;
+	
+	@UiField
+	Label searchDoctorLb;
+	
+	@UiField
+	Label searchServiceLb;
+	
+	@UiField
+	Label searchTotalLb;
+	
+	@UiField
+	Label searchMethodNameLb;
+	
+	@UiField
+	Label searchMethodStreetLb;
+	
+	@UiField
+	Label searchMethodRegionLb;
+	
+	@UiField
+	Label searchMethodDistanceLb;
+	
+	@UiField
+	Label searchMethodTotalLb;
+	
 	public void createView() {
 		
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 	
-	public void setDataCount(Map<String, Long> map) {
+	public void setDataStatistic(Map<String, Long> map) {
 		
 		Long total = Long.valueOf(0);
 		
 		Long count = map.get(Constant.CATEGORY_CLINIC);
 		dataClinicLb.setText(ClientUtil.numberToStr(count));
-		total += count;
+		total += ClientUtil.getNumber(count);
 		
 		count = map.get(Constant.CATEGORY_HOSPITAL);
 		dataHospitalLb.setText(ClientUtil.numberToStr(count));
+		total += ClientUtil.getNumber(count);
 		
 		count = map.get(Constant.CATEGORY_LABORATORY);
 		dataLabLb.setText(ClientUtil.numberToStr(count));
+		total += ClientUtil.getNumber(count);
 		
-		count = map.get(Constant.CATEGORY_HOSPITAL);
-		dataHospitalLb.setText(ClientUtil.numberToStr(count));
-		
-		count = map.get(Constant.CATEGORY_PHARMANCY);
+		count = map.get(Constant.CATEGORY_PHARMACY);
 		dataPharmacyLb.setText(ClientUtil.numberToStr(count));
+		total += ClientUtil.getNumber(count);
 		
 		count = map.get(Constant.CATEGORY_DOCTOR);
 		dataDoctorLb.setText(ClientUtil.numberToStr(count));
+		total += ClientUtil.getNumber(count);
 		
 		count = map.get(Constant.CATEGORY_SERVICE);
 		dataServiceLb.setText(ClientUtil.numberToStr(count));
+		total += ClientUtil.getNumber(count);
 		
 		count = map.get(Constant.CATEGORY_INSURANCE);
 		dataInsuranceLb.setText(ClientUtil.numberToStr(count));
+		total += ClientUtil.getNumber(count);
 		
-		dataTotalLb.setText(ClientUtil.numberToStr(count));
+		dataTotalLb.setText(ClientUtil.numberToStr(total));
+	}
+	
+	public void setSearchTypeStatistic(Map<String, Long> map) {
+		
+		Long total = Long.valueOf(0);
+		
+		Long count = map.get(Constant.SEARCH_CLINIC);
+		searchClinicLb.setText(ClientUtil.numberToStr(count));
+		total += ClientUtil.getNumber(count);
+		
+		count = map.get(Constant.SEARCH_HOSPITAL);
+		searchHospitalLb.setText(ClientUtil.numberToStr(count));
+		total += ClientUtil.getNumber(count);
+		
+		count = map.get(Constant.SEARCH_LAB);
+		searchLabLb.setText(ClientUtil.numberToStr(count));
+		total += ClientUtil.getNumber(count);
+		
+		count = map.get(Constant.SEARCH_PHARMACY);
+		searchPharmacyLb.setText(ClientUtil.numberToStr(count));
+		total += ClientUtil.getNumber(count);
+		
+		count = map.get(Constant.SEARCH_DOCTOR);
+		searchDoctorLb.setText(ClientUtil.numberToStr(count));
+		total += ClientUtil.getNumber(count);
+		
+		count = map.get(Constant.SEARCH_SERVICE);
+		searchServiceLb.setText(ClientUtil.numberToStr(count));
+		total += ClientUtil.getNumber(count);
+		
+		searchTotalLb.setText(ClientUtil.numberToStr(total));
+	}
+	
+	public void setSearchMethodStatistic(Map<String, Long> map) {
+		
+		Long total = Long.valueOf(0);
+		
+		Long count = map.get(Constant.SEARCH_BY_NAME);
+		searchMethodNameLb.setText(ClientUtil.numberToStr(count));
+		total += ClientUtil.getNumber(count);
+		
+		count = map.get(Constant.SEARCH_BY_STREET);
+		searchMethodStreetLb.setText(ClientUtil.numberToStr(count));
+		total += ClientUtil.getNumber(count);
+		
+		count = map.get(Constant.SEARCH_BY_REGION);
+		searchMethodRegionLb.setText(ClientUtil.numberToStr(count));
+		total += ClientUtil.getNumber(count);
+		
+		count = map.get(Constant.SEARCH_BY_DISTANCE);
+		searchMethodDistanceLb.setText(ClientUtil.numberToStr(count));
+		total += ClientUtil.getNumber(count);
+				
+		searchMethodTotalLb.setText(ClientUtil.numberToStr(total));
 	}
 	
 	public Widget asWidget() {

@@ -16,4 +16,12 @@ public class ScheduleServiceImpl extends BaseServiceServlet implements ScheduleS
 		
 		return schedules;
 	}
+	
+	public List<ScheduleBean> getSchedules(Long doctorId, Long instId, Integer day) {
+		
+		ScheduleDAO scheduleDao = new ScheduleDAO();
+		List<ScheduleBean> schedules = scheduleDao.getSchedules(doctorId, instId, day);
+		
+		return schedules;
+	}
 }

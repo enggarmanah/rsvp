@@ -10,45 +10,48 @@
 		</div>
 		<div id="statistic">
 			<div class="title">
-				<img src="images/users.png" class="admin-stat-img" />
-				Total Kunjungan :
-			</div>
-			<div class="info">127</div>
-		</div>
-		<div id="statistic">
-			<div class="title">
 				<img src="images/search.png" class="admin-stat-img" />
 				Total Pencarian :
 			</div>
-			<div class="info">98</div>
+			<div class="info">
+				<g:Label ui:field="searchTotalLb"/>
+			</div>
 			<div id="sub-statistic-wrapper">
 				<div class="sub-statistic">
 					<div class="sub-title">Klinik :</div>
-					<div class="sub-info">23</div>
+					<div class="sub-info">
+						<g:Label ui:field="searchClinicLb"/>
+					</div>
 				</div>
 				<div class="sub-statistic">
 					<div class="sub-title">Rumah Sakit :</div>
-					<div class="sub-info">12</div>
-				</div>
-				<div class="sub-statistic">
-					<div class="sub-title">Dokter :</div>
-					<div class="sub-info">15</div>
-				</div>
-				<div class="sub-statistic">
-					<div class="sub-title">Layanan :</div>
-					<div class="sub-info">11</div>
+					<div class="sub-info">
+						<g:Label ui:field="searchHospitalLb"/>
+					</div>
 				</div>
 				<div class="sub-statistic">
 					<div class="sub-title">Laboratorium :</div>
-					<div class="sub-info">21</div>
+					<div class="sub-info">
+						<g:Label ui:field="searchLabLb"/>
+					</div>
 				</div>
 				<div class="sub-statistic">
 					<div class="sub-title">Apotek :</div>
-					<div class="sub-info">34</div>
+					<div class="sub-info">
+						<g:Label ui:field="searchPharmacyLb"/>
+					</div>
 				</div>
 				<div class="sub-statistic">
-					<div class="sub-title">Asuransi :</div>
-					<div class="sub-info">25</div>
+					<div class="sub-title">Dokter :</div>
+					<div class="sub-info">
+						<g:Label ui:field="searchDoctorLb"/>
+					</div>
+				</div>
+				<div class="sub-statistic">
+					<div class="sub-title">Layanan :</div>
+					<div class="sub-info">
+						<g:Label ui:field="searchServiceLb"/>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -147,26 +150,35 @@
 				<img src="images/sign.png" class="admin-stat-img" />
 				Metode Pencarian :
 			</div>
-			<div class="info">34</div>
+			<div class="info">
+				<g:Label ui:field="searchMethodTotalLb"/>
+			</div>
 			<div id="sub-statistic-wrapper">
 				<div class="sub-statistic">
 					<div class="sub-title">Nama :</div>
-					<div class="sub-info">13</div>
+					<div class="sub-info">
+						<g:Label ui:field="searchMethodNameLb"/>
+					</div>
 				</div>
 				<div class="sub-statistic">
 					<div class="sub-title">Jalan :</div>
-					<div class="sub-info">2</div>
+					<div class="sub-info">
+						<g:Label ui:field="searchMethodStreetLb"/>
+					</div>
 				</div>
 				<div class="sub-statistic">
-					<div class="sub-title">Lokasi :</div>
-					<div class="sub-info">5</div>
+					<div class="sub-title">Wilayah :</div>
+					<div class="sub-info">
+						<g:Label ui:field="searchMethodRegionLb"/>
+					</div>
 				</div>
 				<div class="sub-statistic">
-					<div class="sub-title">Jarak :</div>
-					<div class="sub-info">11</div>
+					<div class="sub-title">Distance :</div>
+					<div class="sub-info">
+						<g:Label ui:field="searchMethodDistanceLb"/>
+					</div>
 				</div>
 			</div>
 		</div>
-
 	</g:HTMLPanel>
 </ui:UiBinder> 

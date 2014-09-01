@@ -7,7 +7,7 @@ public class Constant {
 	public static String CATEGORY_CLINIC = "CLI";
 	public static String CATEGORY_HOSPITAL = "HSP";
 	public static String CATEGORY_LABORATORY = "LAB";
-	public static String CATEGORY_PHARMANCY = "PHM";
+	public static String CATEGORY_PHARMACY = "PHM";
 	public static String CATEGORY_INSURANCE = "INS";
 	
 	public static String IMAGE_URL = "/image?id=";
@@ -88,6 +88,8 @@ public class Constant {
 	
 	public static int DAY_SUNDAY = 7;
 	public static String DAY_SUNDAY_DESC = "Minggu";
+	
+	public static int APPT_INTERVAL = 30 * 60 * 1000;
 	
 	public static int HOUR_SECS = 3600;
 	public static int MIN_SECS = 60;

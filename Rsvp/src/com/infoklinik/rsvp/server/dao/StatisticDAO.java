@@ -37,4 +37,45 @@ public class StatisticDAO {
 		
 		return map;
 	}
+	
+	public Map<String, Long> getSearchTypeStatistic() {
+
+		Map<String, Long> map = new HashMap<String, Long>();
+
+		EntityManager em = PersistenceManager.getEntityManager();
+		
+		@SuppressWarnings("unchecked")
+		List<Object[]> result = em.createQuery("SELECT s.type type, COUNT(s) AS total FROM Search s GROUP BY s.type ORDER BY s.type ASC").getResultList();
+
+		for (Object[] objects : result) {
+			map.put(objects[0].toString(), (Long)objects[1]);
+		}
+		
+		em.close();
+		
+		return map;
+	}
+	
+	public Map<String, Long> getSearchMethodStatistic() {
+
+		Map<String, Long> map = new HashMap<String, Long>();
+
+		EntityManager em = PersistenceManager.getEntityManager();
+		
+		Long count = (Long) em.createQuery("SELECT COUNT(s) AS total FROM Search s WHERE s.name IS NOT NULL").getSingleResult();
+		map.put(Constant.SEARCH_BY_NAME, count);
+		
+		count = (Long) em.createQuery("SELECT COUNT(s) AS total FROM Search s WHERE s.street_name IS NOT NULL").getSingleResult();
+		map.put(Constant.SEARCH_BY_STREET, count);
+		
+		count = (Long) em.createQuery("SELECT COUNT(s) AS total FROM Search s WHERE s.region_name IS NOT NULL").getSingleResult();
+		map.put(Constant.SEARCH_BY_REGION, count);
+		
+		count = (Long) em.createQuery("SELECT COUNT(s) AS total FROM Search s WHERE s.distance IS NOT NULL").getSingleResult();
+		map.put(Constant.SEARCH_BY_DISTANCE, count);
+
+		em.close();
+		
+		return map;
+	}
 }

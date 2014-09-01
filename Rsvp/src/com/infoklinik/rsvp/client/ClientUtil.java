@@ -20,13 +20,15 @@ public class ClientUtil {
 	private static DateTimeFormat timeDtf = DateTimeFormat.getFormat("kk:mm");
 	private static DateTimeFormat dateDtf = DateTimeFormat.getFormat("dd/MM/yyyy");
 	private static DateTimeFormat dateTimeDtf = DateTimeFormat.getFormat("dd/MM/yyyy kk:mm");
+	private static DateTimeFormat dayDateDtf = DateTimeFormat.getFormat("EEEE, dd/MM/yyyy");
 	private static DateTimeFormat monthStrDtf = DateTimeFormat.getFormat("MMMM");
 	private static DateTimeFormat monthIntDtf = DateTimeFormat.getFormat("M");
 	private static DateTimeFormat yearDtf = DateTimeFormat.getFormat("yyyy");
-	private static DateTimeFormat dayDtf = DateTimeFormat.getFormat("EEE");
+	private static DateTimeFormat dayDtf = DateTimeFormat.getFormat("c");
 		
 	public static String DATE_TIME_FORMAT_DATE = "DATE_TIME_FORMAT_DATE";
-	public static String DATE_TIME_FORMAT_DATETIME = "DATE_TIME_FORMAT_DATE_TIME";
+	public static String DATE_TIME_FORMAT_DATETIME = "DATE_TIME_FORMAT_DATETIME";
+	public static String DATE_TIME_FORMAT_DAYDATE = "DATE_TIME_FORMAT_DAYDATE";
 	
 	public static int MIN_SEARCH_CHAR_LENGTH = 3;
 	
@@ -92,6 +94,8 @@ public class ClientUtil {
 			return dateDtf;
 		} else if (DATE_TIME_FORMAT_DATETIME.equals(format)) {
 			return dateTimeDtf;
+		} else if (DATE_TIME_FORMAT_DAYDATE.equals(format)) {
+			return dayDateDtf;
 		} else {
 			return null;
 		}
@@ -232,26 +236,7 @@ public class ClientUtil {
 	public static int dateToDayOfWeek(Date date) {
 		
 		String day = dayDtf.format(date);
-			
-		int dayOfWeek = 0;
-			
-		if ("Sun".equals(day)) {
-			dayOfWeek = 1;
-		} else if ("Mon".equals(day)) {
-			dayOfWeek = 2;
-		} else if ("Tue".equals(day)) {
-			dayOfWeek = 3;
-		} else if ("Wed".equals(day)) {
-			dayOfWeek = 4;
-		} else if ("Thu".equals(day)) {
-			dayOfWeek = 5;
-		} else if ("Fri".equals(day)) {
-			dayOfWeek = 6;
-		} else if ("Sat".equals(day)) {
-			dayOfWeek = 7;
-		}
-			
-		return dayOfWeek;
+		return Integer.valueOf(day);
 	}
 	
 	public static String dateToDay(Date date) {
@@ -348,11 +333,20 @@ public class ClientUtil {
 	public static String numberToStr(Long number) {
 		
 		if (isEmpty(number)) {
-			return "";
+			return "0";
 		} else {
 			return String.valueOf(number);
 		}
-	}	
+	}
+	
+	public static Long getNumber(Long number) {
+		
+		if (isEmpty(number)) {
+			return Long.valueOf(0);
+		} else {
+			return number;
+		}
+	}
 
 	public static void setSelectedIndex(ListBox listBox, String value) {
 		

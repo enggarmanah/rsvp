@@ -15,4 +15,20 @@ public class StatisticServiceImpl extends BaseServiceServlet implements Statisti
 		
 		return statistic;
 	}
+	
+	public Map<String, Long> getSearchTypeStatistic() {
+		
+		StatisticDAO statisticDao = new StatisticDAO();
+		Map<String, Long> statistic = statisticDao.getSearchTypeStatistic();
+		
+		return statistic;
+	}
+	
+	public Map<String, Long> getSearchMethodStatistic() {
+		
+		StatisticDAO statisticDao = new StatisticDAO();
+		Map<String, Long> statistic = statisticDao.getSearchMethodStatistic();
+		
+		return statistic;
+	}
 }

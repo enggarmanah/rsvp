@@ -18,6 +18,7 @@ import com.mvp4g.client.event.EventBusWithLookup;
 import com.infoklinik.rsvp.client.CustomLogger;
 import com.infoklinik.rsvp.client.admin.AdminModule;
 import com.infoklinik.rsvp.client.admin.AdminStatisticModule;
+import com.infoklinik.rsvp.client.appt.AppointmentModule;
 import com.infoklinik.rsvp.client.doctor.DoctorModule;
 import com.infoklinik.rsvp.client.inst.InstitutionModule;
 import com.infoklinik.rsvp.client.listing.SearchResultModule;
@@ -29,12 +30,14 @@ import com.infoklinik.rsvp.client.service.ServiceModule;
 import com.infoklinik.rsvp.client.social.SocialModule;
 import com.infoklinik.rsvp.shared.DoctorBean;
 import com.infoklinik.rsvp.shared.InstitutionBean;
+import com.infoklinik.rsvp.shared.ScheduleBean;
 import com.infoklinik.rsvp.shared.ServiceBean;
 import com.infoklinik.rsvp.shared.SocialUser;
 
 @Events(startPresenter = MainPresenter.class)
 @ChildModules({
 	@ChildModule(moduleClass = MenuModule.class),
+	@ChildModule(moduleClass = AppointmentModule.class),
 	@ChildModule(moduleClass = InstitutionModule.class),
 	@ChildModule(moduleClass = DoctorModule.class), 
 	@ChildModule(moduleClass = ServiceModule.class), 
@@ -70,6 +73,7 @@ public interface MainEventBus extends EventBusWithLookup {
 	
 	@DisplayChildModuleView(
 			{AdminModule.class,
+			 AppointmentModule.class,
 			 SearchModule.class,
 			 InstitutionModule.class,
 			 DoctorModule.class,
@@ -132,6 +136,9 @@ public interface MainEventBus extends EventBusWithLookup {
 	
 	@Event(forwardToModules=SearchModule.class)
 	public void loadSearchLocations(List<InstitutionBean> institutions);
+	
+	@Event(forwardToModules=AppointmentModule.class)
+	public void loadAppointment(ScheduleBean schedule);
 	
 	@Event(forwardToModules=AdminModule.class)
 	public void addInstitution();

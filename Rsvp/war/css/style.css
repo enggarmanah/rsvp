@@ -2156,6 +2156,26 @@ input.search-field:focus {
 	padding: 2px 0px 2px 0px;
 }
 
+#popup-edit .info .label {
+	float: left;
+	text-align: left;
+	width: 320px;
+	border: 0px solid #AAA;
+	font: normal 12px Tahoma;
+	padding: 3px 0px 4px 5px;
+	color: #555;
+}
+
+#popup-edit .paragraph {
+	float: left;
+	text-align: left;
+	width: 415px;
+	border: 0px solid #AAA;
+	font: bold 11px Tahoma;
+	padding: 0px 0px 5px 5px;
+	color: #555;
+}
+
 #popup-edit .map-location {
 	float: left;
 	min-width: 428px;

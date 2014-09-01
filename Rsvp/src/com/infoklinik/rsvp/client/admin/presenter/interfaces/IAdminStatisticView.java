@@ -10,5 +10,9 @@ public interface IAdminStatisticView  extends LazyView, IsWidget {
 	
 	Widget asWidget();
 	
-	void setDataCount(Map<String, Long> map);
+	void setDataStatistic(Map<String, Long> map);
+	
+	void setSearchTypeStatistic(Map<String, Long> map);
+	
+	void setSearchMethodStatistic(Map<String, Long> map);
 }

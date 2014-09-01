@@ -8,7 +8,6 @@ import javax.inject.Singleton;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Window;
 import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.GenericBean;
 import com.infoklinik.rsvp.client.HandlerManager;
@@ -99,6 +98,8 @@ public class SearchResultPresenter extends LazyPresenter<ISearchResultView, Sear
 			HashMap<Long, HashMap<Long, HandlerManager>> scheduleMap = new HashMap<Long, HashMap<Long, HandlerManager>>();
 			
 			for (ScheduleBean schedule : doctor.getSchedules()) {
+				
+				schedule.setDoctor(doctor);
 				
 				InstitutionBean institution = schedule.getInstitutionBean();
 				HashMap<Long, HandlerManager> instScheduleHandlerMgrs =  scheduleMap.get(institution.getId());
@@ -293,7 +294,7 @@ public class SearchResultPresenter extends LazyPresenter<ISearchResultView, Sear
 			@Override
 			public void onClick(ClickEvent event) {
 				
-				Window.alert(schedule.toString());
+				eventBus.loadAppointment(schedule);
 			}
 		};
 		

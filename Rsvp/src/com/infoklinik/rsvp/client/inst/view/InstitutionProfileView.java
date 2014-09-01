@@ -121,7 +121,7 @@ public class InstitutionProfileView extends BaseView implements IInstitutionProf
 		this.institution = institution;
 		
 		if (Constant.CATEGORY_LABORATORY.equals(institution.getCategory()) ||
-				Constant.CATEGORY_PHARMANCY.equals(institution.getCategory())) {
+				Constant.CATEGORY_PHARMACY.equals(institution.getCategory())) {
 			doctorMenuLb.setVisible(false);
 		} else {
 			doctorMenuLb.setVisible(true);
