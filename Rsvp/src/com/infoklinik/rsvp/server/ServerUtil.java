@@ -13,6 +13,8 @@ public class ServerUtil {
 	public static String redirectUri = "http://www.infoklinik.com";
 	
 	private static SimpleDateFormat dateTimeDtf = new SimpleDateFormat("dd/MM/yyyy kk:mm");
+	
+	public static boolean isSmsActive = false;
 
 	public static boolean isEmpty(String string) {
 
@@ -113,7 +115,7 @@ public class ServerUtil {
 		
 		for (String filter : joins) {
 			
-			sql.append(" JOIN " + filter);
+			sql.append(" LEFT JOIN " + filter);
 		}
 	}
 	

@@ -47,6 +47,7 @@ public class AppointmentPresenter extends LazyPresenter<IAppointmentView, Appoin
 			@Override
 			public void onClick(ClickEvent event) {
 				view.hide();
+				eventBus.verifyPatientMobile(view.getAppointment());
 			}
 		});
 		

@@ -89,7 +89,7 @@ public class Constant {
 	public static int DAY_SUNDAY = 7;
 	public static String DAY_SUNDAY_DESC = "Minggu";
 	
-	public static int APPT_INTERVAL = 30 * 60 * 1000;
+	public static int APPT_INTERVAL_MINUTES = 30;
 	
 	public static int HOUR_SECS = 3600;
 	public static int MIN_SECS = 60;

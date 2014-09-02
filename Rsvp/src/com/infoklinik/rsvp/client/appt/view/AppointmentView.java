@@ -20,6 +20,7 @@ import com.google.gwt.user.datepicker.client.DateBox;
 import com.infoklinik.rsvp.client.BaseView;
 import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.appt.presenter.interfaces.IAppointmentView;
+import com.infoklinik.rsvp.shared.AppointmentBean;
 import com.infoklinik.rsvp.shared.Constant;
 import com.infoklinik.rsvp.shared.DoctorBean;
 import com.infoklinik.rsvp.shared.InstitutionBean;
@@ -103,7 +104,7 @@ public class AppointmentView extends BaseView implements IAppointmentView {
 		if (schedules.size() > 0) {
 			
 			ArrayList<Integer> apptTimes = new ArrayList<Integer>();
-			int apptInterval = Constant.APPT_INTERVAL * Constant.MIN_SECS;
+			int apptInterval = Constant.APPT_INTERVAL_MINUTES * Constant.MIN_SECS * Constant.MILISECS;
 			
 			for (ScheduleBean scheBean : schedules) {
 				
@@ -122,6 +123,19 @@ public class AppointmentView extends BaseView implements IAppointmentView {
 				apptTimeLb.addItem(time, String.valueOf(apptTime));
 			}
 		}
+	}
+	
+	public AppointmentBean getAppointment() {
+		
+		Date apptDate = apptDateDb.getValue();
+		apptDate.setTime(apptDate.getTime() + Long.valueOf(apptTimeLb.getValue(apptTimeLb.getSelectedIndex())));
+		
+		AppointmentBean appointment = new AppointmentBean();
+		appointment.setDoctor(doctor);
+		appointment.setInstitution(institution);
+		appointment.setApptDate(apptDate);
+		
+		return appointment;
 	}
 	
 	public void setOkBtnClickHandler(ClickHandler handler) {

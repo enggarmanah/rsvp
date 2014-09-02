@@ -27,6 +27,9 @@ public class Doctor extends Base {
 	
 	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy="doctor", targetEntity=Schedule.class)
 	private List<Schedule> schedules;
+	
+	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy="doctor", targetEntity=Schedule.class)
+	private List<Appointment> appointments;
 
 	private String mobile;
 	private String email;

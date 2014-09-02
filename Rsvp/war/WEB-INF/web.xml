@@ -92,6 +92,10 @@
 		<servlet-name>statisticServiceServlet</servlet-name>
 		<servlet-class>com.infoklinik.rsvp.server.service.StatisticServiceImpl</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>appointmentServiceServlet</servlet-name>
+		<servlet-class>com.infoklinik.rsvp.server.service.AppointmentServiceImpl</servlet-class>
+	</servlet>
 	
 	<servlet>
 		<servlet-name>oAuthLoginJsp</servlet-name>
@@ -185,6 +189,10 @@
 	<servlet-mapping>
 		<servlet-name>statisticServiceServlet</servlet-name>
 		<url-pattern>/rsvp/statisticService</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>appointmentServiceServlet</servlet-name>
+		<url-pattern>/rsvp/appointmentService</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>oAuthLoginServiceServlet</servlet-name>

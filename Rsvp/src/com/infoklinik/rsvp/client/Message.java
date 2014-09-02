@@ -46,4 +46,8 @@ public class Message {
 	public static String ERR_INST_BRANCH_CIRCULAR = "Institusi utama tidak dapat didaftarkan menjadi institusi cabang.";
 	
 	public static String ERR_COMMON_LOAD_FAILED = "Gagal menerima data dari server."; 
+	
+	public static String ERR_INVALID_VERIFICATION_CODE = "Kode verifikasi yang anda input salah!";
+	public static String ERR_APPT_NOT_AVAILABLE = "Maaf, hari & jam yang anda pilih tidak lagi tersedia. Silahkan pilih kembali jadwal kunjungan anda.";
+	
 }

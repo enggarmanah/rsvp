@@ -1,0 +1,32 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:c="urn:import:com.google.gwt.user.datepicker.client">
+	<g:HTMLPanel>
+
+		<div id="popup-edit-wrapper">
+			<g:SimplePanel ui:field="editPanel">
+			    <g:HTMLPanel>
+					
+					<div id="popup-edit">
+						<div class="paragraph">
+							Silahkan input No. Handphone, sistem akan mengirim SMS untuk proses verifikasi.
+						</div>
+						<div class="title">No. Handphone :</div>
+						<div class="info">
+							<g:TextBox ui:field="mobileTb" styleName="text"></g:TextBox>
+						</div>
+					</div>
+							
+				</g:HTMLPanel>
+			</g:SimplePanel>
+			<div id="popup-edit-button">
+				<div class="title"></div>
+				<div class="info">
+					<g:Button ui:field="okBtn" text="OK" styleName="button" width="75px"/>
+					<g:Button ui:field="cancelBtn" text="Batal" styleName="button" width="75px"/>
+				</div>
+			</div>
+		</div>
+
+	</g:HTMLPanel>
+
+</ui:UiBinder> 

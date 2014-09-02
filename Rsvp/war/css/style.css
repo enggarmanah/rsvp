@@ -2163,7 +2163,7 @@ input.search-field:focus {
 	border: 0px solid #AAA;
 	font: normal 12px Tahoma;
 	padding: 3px 0px 4px 5px;
-	color: #555;
+	color: #444;
 }
 
 #popup-edit .paragraph {
@@ -2172,7 +2172,7 @@ input.search-field:focus {
 	width: 415px;
 	border: 0px solid #AAA;
 	font: bold 11px Tahoma;
-	padding: 0px 0px 5px 5px;
+	padding: 0px 0px 12px 5px;
 	color: #555;
 }
 
