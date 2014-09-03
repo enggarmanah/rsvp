@@ -23,10 +23,11 @@ public class CityDAO {
 		city.setBean(cityBean);
 		
 		em.persist(city);
+		cityBean = city.getBean(); 
 
 		em.close();
 
-		return city.getBean();
+		return cityBean;
 	}
 	
 	public CityBean updateCity(CityBean cityBean) {

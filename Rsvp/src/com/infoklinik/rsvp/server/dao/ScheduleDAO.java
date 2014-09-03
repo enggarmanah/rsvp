@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import com.infoklinik.rsvp.server.PersistenceManager;
 import com.infoklinik.rsvp.server.model.Schedule;
 import com.infoklinik.rsvp.shared.ScheduleBean;
+import com.infoklinik.rsvp.shared.ScheduleSearchBean;
 
 public class ScheduleDAO {
 
@@ -34,7 +35,7 @@ public class ScheduleDAO {
 		return list;
 	}
 	
-	public List<ScheduleBean> getSchedules(Long doctorId, Long instId, Integer day) {
+	public List<ScheduleBean> getSchedules(ScheduleSearchBean scheduleSearch) {
 
 		List<ScheduleBean> list = new ArrayList<ScheduleBean>();
 
@@ -42,9 +43,9 @@ public class ScheduleDAO {
 		
 		Query query = em.createQuery("SELECT s FROM Schedule s WHERE s.doctor.id = :doctorId AND s.institution.id = :instId AND day = :day", Schedule.class);
 		
-		query.setParameter("doctorId", doctorId);
-		query.setParameter("instId", instId);
-		query.setParameter("day", day);
+		query.setParameter("doctorId", scheduleSearch.getDoctorId());
+		query.setParameter("instId", scheduleSearch.getInstId());
+		query.setParameter("day", scheduleSearch.getDay());
 		
 		@SuppressWarnings("unchecked")
 		List<Schedule> result = query.getResultList();

@@ -151,8 +151,8 @@ public class InstitutionDAO {
 
 		EntityManager em = PersistenceManager.getEntityManager();
 		
-		ArrayList<String> filters = new ArrayList<String>();
 		ArrayList<String> joins = new ArrayList<String>();
+		ArrayList<String> filters = new ArrayList<String>();
 		
 		HashMap<String, Object> parameters = new HashMap<String, Object>();
 		
@@ -212,15 +212,20 @@ public class InstitutionDAO {
 		
 		if (!ServerUtil.isEmpty(instSearch.getInsuranceId())) {
 			
-			joins.add("i.insurances ins");
+			joins.add("JOIN i.insurances ins");
 			filters.add("ins.id = :insuranceId");
+			
 			parameters.put("insuranceId", instSearch.getInsuranceId());
 		}
 		
 		if (!ServerUtil.isEmpty(instSearch.getSpecialityId())) {
 			
-			joins.add("i.schedules s");
-			filters.add("EXISTS (SELECT sc FROM Schedule sc JOIN sc.doctor d WHERE s = sc AND d.speciality.id = :specialityId)");
+			//joins.add("i.schedules s");
+			//filters.add("EXISTS (SELECT sc FROM Schedule sc JOIN sc.doctor d WHERE s = sc AND d.speciality.id = :specialityId)");
+			
+			filters.add("EXISTS (SELECT DISTINCT it FROM Institution it JOIN it.schedules s WHERE i = it AND "
+					+ "EXISTS (SELECT sc FROM Schedule sc JOIN sc.doctor d WHERE s = sc AND d.speciality.id = :specialityId))");
+						
 			parameters.put("specialityId", instSearch.getSpecialityId());
 		}
 		

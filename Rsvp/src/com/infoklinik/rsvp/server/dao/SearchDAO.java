@@ -16,9 +16,10 @@ public class SearchDAO {
 		search.setBean(searchBean);
 		
 		em.persist(search);
+		searchBean = search.getBean(); 
 
 		em.close();
 
-		return search.getBean();
+		return searchBean;
 	}
 }

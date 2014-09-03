@@ -3,6 +3,7 @@ package com.infoklinik.rsvp.client.appt.view;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import com.google.gwt.core.client.GWT;
@@ -22,8 +23,7 @@ import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.appt.presenter.interfaces.IAppointmentView;
 import com.infoklinik.rsvp.shared.AppointmentBean;
 import com.infoklinik.rsvp.shared.Constant;
-import com.infoklinik.rsvp.shared.DoctorBean;
-import com.infoklinik.rsvp.shared.InstitutionBean;
+import com.infoklinik.rsvp.shared.ScheduleAppointmentBean;
 import com.infoklinik.rsvp.shared.ScheduleBean;
 
 public class AppointmentView extends BaseView implements IAppointmentView {
@@ -55,8 +55,7 @@ public class AppointmentView extends BaseView implements IAppointmentView {
 	
 	private static ModuleUiBinder uiBinder = GWT.create(ModuleUiBinder.class);
 	
-	DoctorBean doctor;
-	InstitutionBean institution;
+	AppointmentBean appointment;
 	
 	public void createView() {	
 		
@@ -78,47 +77,43 @@ public class AppointmentView extends BaseView implements IAppointmentView {
 		
 		return dialogBox;
 	}
-	
-	public void setDoctor(DoctorBean doctor) {
 		
-		this.doctor = doctor;
+	public void setSchedulesAndAppointments(ScheduleAppointmentBean scheduleAppointment) {
 		
-		doctorLb.setText(doctor.getNameWithTitle());
-		specialityLb.setText(doctor.getSpeciality().getDescription());
-	}
-	
-	public void setInstitution(InstitutionBean institution) {
+		List<ScheduleBean> schedules = scheduleAppointment.getSchedules();
+		List<AppointmentBean> appointments = scheduleAppointment.getAppointments();
+		HashMap<Long, AppointmentBean> reservedTimes = new HashMap<Long, AppointmentBean>();
 		
-		this.institution = institution;
-		
-		institutionLb.setText(institution.getName());
-	}
-	
-	public void setDate(Date date) {
-		
-		apptDateDb.setValue(date);
-	}
-	
-	public void setSchedules(List<ScheduleBean> schedules) {
+		for (AppointmentBean appt : appointments) {
+			reservedTimes.put(appt.getApptDate().getTime(), appt);
+		}
 		
 		if (schedules.size() > 0) {
 			
-			ArrayList<Integer> apptTimes = new ArrayList<Integer>();
+			ArrayList<Integer> availableApptTimes = new ArrayList<Integer>();
 			int apptInterval = Constant.APPT_INTERVAL_MINUTES * Constant.MIN_SECS * Constant.MILISECS;
 			
 			for (ScheduleBean scheBean : schedules) {
 				
 				for (int i = scheBean.getOpStart(); i < scheBean.getOpEnd(); i += apptInterval) {
-					if (!apptTimes.contains(i)) {
-						apptTimes.add(i);
+					if (!availableApptTimes.contains(i)) {
+						
+						Date apptDate = new Date(scheduleAppointment.getDate().getTime());
+						apptDate.setTime(apptDate.getTime() + i);
+						
+						AppointmentBean appointment = reservedTimes.get(apptDate.getTime());
+						
+						if (appointment == null) {
+							availableApptTimes.add(i);
+						}
 					}
 				}
 			}
 			
-			Collections.sort(apptTimes);
+			Collections.sort(availableApptTimes);
 			apptTimeLb.clear();
 			
-			for (Integer apptTime : apptTimes) {
+			for (Integer apptTime : availableApptTimes) {
 				String time = ClientUtil.timeToStr(apptTime);
 				apptTimeLb.addItem(time, String.valueOf(apptTime));
 			}
@@ -130,12 +125,19 @@ public class AppointmentView extends BaseView implements IAppointmentView {
 		Date apptDate = apptDateDb.getValue();
 		apptDate.setTime(apptDate.getTime() + Long.valueOf(apptTimeLb.getValue(apptTimeLb.getSelectedIndex())));
 		
-		AppointmentBean appointment = new AppointmentBean();
-		appointment.setDoctor(doctor);
-		appointment.setInstitution(institution);
 		appointment.setApptDate(apptDate);
 		
 		return appointment;
+	}
+	
+	public void setAppointment(AppointmentBean appointment) {
+		
+		this.appointment = appointment;
+		
+		doctorLb.setText(appointment.getDoctor().getNameWithTitle());
+		specialityLb.setText(appointment.getDoctor().getSpeciality().getDescription());
+		institutionLb.setText(appointment.getInstitution().getName());
+		apptDateDb.setValue(appointment.getApptDate());
 	}
 	
 	public void setOkBtnClickHandler(ClickHandler handler) {

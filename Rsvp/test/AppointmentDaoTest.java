@@ -33,7 +33,7 @@ public class AppointmentDaoTest {
 		AppointmentSearchBean apptSearch = new AppointmentSearchBean();
 		apptSearch.setDoctorId(Long.valueOf(1));
 		apptSearch.setInstId(Long.valueOf(1));
-		//apptSearch.setApptDate(new Date());
+		apptSearch.setApptDate(new Date());
 		List<AppointmentBean> appts = apptDao.getAppointments(apptSearch);
 		System.out.println("completed");
 	}

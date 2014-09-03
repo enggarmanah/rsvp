@@ -23,10 +23,11 @@ public class StreetDAO {
 		street.setBean(streetBean, em);
 		
 		em.persist(street);
+		streetBean = street.getBean();
 
 		em.close();
 
-		return street.getBean();
+		return streetBean;
 	}
 	
 	public StreetBean updateStreet(StreetBean streetBean) {

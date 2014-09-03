@@ -14,6 +14,7 @@ public class InstitutionDaoTest {
 		instSearch.setCategory("CLI");
 		instSearch.setCityId(Long.valueOf(3));
 		instSearch.setSpecialityId(Long.valueOf(1));
+		instSearch.setInsuranceId(Long.valueOf(1));
 		
 		List<InstitutionBean> list = instDao.getInstitutions(instSearch);
 		
@@ -22,8 +23,10 @@ public class InstitutionDaoTest {
 			System.out.println("institution : " + inst.getName());
 		}
 		
-		InstitutionBean inst = instDao.getInstitution(Long.valueOf(1));
-		inst.setCommentCount(Long.valueOf(5));
-		instDao.updateInstitution(inst);
+		//InstitutionBean inst = instDao.getInstitution(Long.valueOf(1));
+		//inst.setCommentCount(Long.valueOf(5));
+		//instDao.updateInstitution(inst);
+		
+		System.out.println("Completed");
 	}
 }

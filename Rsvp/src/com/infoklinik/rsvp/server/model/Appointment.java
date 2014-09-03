@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.infoklinik.rsvp.server.ServerUtil;
 import com.infoklinik.rsvp.shared.AppointmentBean;
 
 @Entity
@@ -145,8 +146,8 @@ public class Appointment {
 		appointmentBean.setPatientMobile(patient_mobile);
 		appointmentBean.setPatientEmail(patient_email);
 		appointmentBean.setRemarks(remarks);
-		appointmentBean.setApptDate(appt_date);
-		appointmentBean.setApptCreateDate(appt_create_date);
+		appointmentBean.setApptDate(ServerUtil.toDate(appt_date));
+		appointmentBean.setApptCreateDate(ServerUtil.toDate(appt_create_date));
 		
 		return appointmentBean;
 	}

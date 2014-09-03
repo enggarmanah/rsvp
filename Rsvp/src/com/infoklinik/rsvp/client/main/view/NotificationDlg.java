@@ -91,6 +91,10 @@ public class NotificationDlg {
 	
 	public static void warning(String text) {
 		
+		if (okHandlerReg != null) {
+			okHandlerReg.removeHandler();
+		}
+		
 		init();
 		
 		fadeOut();
@@ -107,6 +111,10 @@ public class NotificationDlg {
 	}
 	
 	public static void error(List<String> messages) {
+		
+		if (okHandlerReg != null) {
+			okHandlerReg.removeHandler();
+		}
 		
 		if (messages.size() == 1) {
 			

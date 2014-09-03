@@ -1,8 +1,5 @@
 package com.infoklinik.rsvp.client.appt.presenter;
 
-import java.util.Date;
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -16,10 +13,12 @@ import com.infoklinik.rsvp.client.appt.presenter.interfaces.IAppointmentView;
 import com.infoklinik.rsvp.client.appt.view.AppointmentView;
 import com.infoklinik.rsvp.client.main.view.NotificationDlg;
 import com.infoklinik.rsvp.client.main.view.ProgressDlg;
+import com.infoklinik.rsvp.client.rpc.AppointmentServiceAsync;
 import com.infoklinik.rsvp.client.rpc.ScheduleServiceAsync;
-import com.infoklinik.rsvp.shared.DoctorBean;
-import com.infoklinik.rsvp.shared.InstitutionBean;
+import com.infoklinik.rsvp.shared.AppointmentBean;
+import com.infoklinik.rsvp.shared.ScheduleAppointmentBean;
 import com.infoklinik.rsvp.shared.ScheduleBean;
+import com.infoklinik.rsvp.shared.ScheduleSearchBean;
 import com.mvp4g.client.annotation.Presenter;
 import com.mvp4g.client.presenter.LazyPresenter;
 
@@ -30,9 +29,13 @@ public class AppointmentPresenter extends LazyPresenter<IAppointmentView, Appoin
 	@Inject
 	ScheduleServiceAsync scheduleService;
 	
-	DoctorBean doctor;
-	InstitutionBean institution;
-	Integer apptDay;
+	@Inject
+	AppointmentServiceAsync appointmentService;
+	
+	ScheduleBean schedule;
+	AppointmentBean appointment;
+	
+	boolean isSelectAnotherDate = false;
 	
 	@Override
 	public void bindView() {
@@ -47,7 +50,12 @@ public class AppointmentPresenter extends LazyPresenter<IAppointmentView, Appoin
 			@Override
 			public void onClick(ClickEvent event) {
 				view.hide();
-				eventBus.verifyPatientMobile(view.getAppointment());
+				
+				if (isSelectAnotherDate) {
+					addAppointment();
+				} else {
+					eventBus.verifyPatientMobile(view.getAppointment());
+				}
 			}
 		});
 		
@@ -62,15 +70,27 @@ public class AppointmentPresenter extends LazyPresenter<IAppointmentView, Appoin
 	
 	public void onLoadAppointment(ScheduleBean schedule) {
 		
-		this.doctor = schedule.getDoctor();
-		this.institution = schedule.getInstitutionBean();
-		this.apptDay = schedule.getDay();
+		isSelectAnotherDate = false;
+		this.schedule = schedule;
 		
-		view.setDoctor(doctor);
-		view.setInstitution(institution);
+		appointment = new AppointmentBean();
+		appointment.setDoctor(schedule.getDoctor());
+		appointment.setInstitution(schedule.getInstitutionBean());
+		appointment.setApptDate(ClientUtil.getDateOfWeek(schedule.getDay()));
 		
-		Date apptDate = ClientUtil.getDateOfWeek(apptDay); 
-		view.setDate(apptDate);
+		view.setAppointment(appointment);
+		
+		initSchedules();
+		
+		view.show();
+	}
+	
+	public void onSelectAnotherDate(AppointmentBean appointment) {
+		
+		isSelectAnotherDate = true;
+		
+		this.appointment = appointment;
+		view.setAppointment(appointment);
 		
 		initSchedules();
 		
@@ -81,11 +101,17 @@ public class AppointmentPresenter extends LazyPresenter<IAppointmentView, Appoin
 		
 		ProgressDlg.show();
 		
-		scheduleService.getSchedules(doctor.getId(), institution.getId(), apptDay, new AsyncCallback<List<ScheduleBean>>() {
+		ScheduleSearchBean scheduleSearch = new ScheduleSearchBean();
+		scheduleSearch.setDoctorId(schedule.getDoctor().getId());
+		scheduleSearch.setInstId(schedule.getInstitutionBean().getId());
+		scheduleSearch.setDay(schedule.getDay());
+		scheduleSearch.setDate(appointment.getApptDate());
+		
+		scheduleService.getSchedulesAndAppointments(scheduleSearch, new AsyncCallback<ScheduleAppointmentBean>() {
 			
 			@Override
-			public void onSuccess(List<ScheduleBean> schedules) {
-				view.setSchedules(schedules);
+			public void onSuccess(ScheduleAppointmentBean scheduleAppointment) {
+				view.setSchedulesAndAppointments(scheduleAppointment);
 				ProgressDlg.hide();
 			}
 			
@@ -93,6 +119,43 @@ public class AppointmentPresenter extends LazyPresenter<IAppointmentView, Appoin
 			public void onFailure(Throwable caught) {
 				ProgressDlg.hidePrompt();
 				NotificationDlg.warning(Message.ERR_COMMON_LOAD_FAILED);
+			}
+		});
+	}
+	
+	private void addAppointment() {
+		
+		ProgressDlg.show();
+		
+		appointmentService.addAppointment(appointment, new AsyncCallback<AppointmentBean>() {
+			
+			@Override
+			public void onSuccess(AppointmentBean result) {
+				
+				ProgressDlg.hide();
+								
+				appointment = result;
+				
+				if (appointment.getId() != null) {
+					view.hide();
+					NotificationDlg.info("Reservasi kunjungan dokter telah berhasil. \nKode reservasi \"" + 
+						appointment.getReservationCode() + "\" telah dikirim ke handphone anda.");	
+				} else {
+					NotificationDlg.warning(Message.ERR_APPT_NOT_AVAILABLE, new ClickHandler() {
+						
+						@Override
+						public void onClick(ClickEvent event) {
+							
+							view.hide();
+							eventBus.selectAnotherDate(appointment);
+						}
+					});
+				}
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				ProgressDlg.failure();
 			}
 		});
 	}

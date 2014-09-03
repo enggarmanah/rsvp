@@ -190,7 +190,6 @@ public class ClinicSearchView extends BaseView implements IClinicSearchView {
 		}
 		
 		if (specialityLb.getSelectedIndex() != 0) {
-			Window.alert("SpecialityLb selectedIndex : " + specialityLb.getSelectedIndex());
 			instSearchBean.setSpecialityId(Long.valueOf(specialityLb.getValue(specialityLb.getSelectedIndex())));
 		}
 		

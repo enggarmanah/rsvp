@@ -1,5 +1,8 @@
 package com.infoklinik.rsvp.client.appt.presenter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -28,6 +31,8 @@ public class AppointmentPatientInfoPresenter extends LazyPresenter<IAppointmentP
 	AppointmentBean appointment;
 	String verificationCode;
 	
+	List<String> errorMessages;
+	
 	@Override
 	public void bindView() {
 		
@@ -48,12 +53,17 @@ public class AppointmentPatientInfoPresenter extends LazyPresenter<IAppointmentP
 			@Override
 			public void onClick(ClickEvent event) {
 				
-				AppointmentBean appointment = view.getAppointment();
+				appointment = view.getAppointment();
 				
-				if (!ClientUtil.isEmpty(verificationCode) && !verificationCode.equals(appointment.getVerificationCode())) {
-					NotificationDlg.warning(Message.ERR_INVALID_VERIFICATION_CODE);
+				if (isValidated(appointment)) {
+					
+					if (!ClientUtil.isEmpty(verificationCode) && !verificationCode.equals(appointment.getVerificationCode())) {
+						NotificationDlg.warning(Message.ERR_INVALID_VERIFICATION_CODE);
+					} else {
+						addAppointment();
+					}
 				} else {
-					addAppointment();
+					NotificationDlg.error(errorMessages);
 				}
 			}
 		});
@@ -84,8 +94,17 @@ public class AppointmentPatientInfoPresenter extends LazyPresenter<IAppointmentP
 					view.hide();
 					NotificationDlg.info("Reservasi kunjungan dokter telah berhasil. \nKode reservasi \"" + 
 						appointment.getReservationCode() + "\" telah dikirim ke handphone anda.");
+					
 				} else {
-					NotificationDlg.warning(Message.ERR_APPT_NOT_AVAILABLE);
+					NotificationDlg.warning(Message.ERR_APPT_NOT_AVAILABLE, new ClickHandler() {
+						
+						@Override
+						public void onClick(ClickEvent event) {
+							
+							view.hide();
+							eventBus.selectAnotherDate(appointment);
+						}
+					});
 				}
 			}
 			
@@ -94,5 +113,26 @@ public class AppointmentPatientInfoPresenter extends LazyPresenter<IAppointmentP
 				ProgressDlg.failure();
 			}
 		});
+	}
+	
+	private boolean isValidated(AppointmentBean appointment) {
+		
+		boolean isValidated = true;
+		errorMessages = new ArrayList<String>();
+		
+		if (ClientUtil.isEmpty(appointment.getPatientName())) {
+			
+			isValidated = false;
+			errorMessages.add(Message.ERR_APPT_PATIENT_NAME_EMPTY);
+		}
+		
+		if (ClientUtil.isEmpty(appointment.getPatientBirthYear()) ||
+			appointment.getPatientBirthYear().trim().length() != 4) {
+			
+			isValidated = false;
+			errorMessages.add(Message.ERR_APPT_PATIENT_BIRTH_YEAR_INVALID);
+		}
+		
+		return isValidated;
 	}
 }

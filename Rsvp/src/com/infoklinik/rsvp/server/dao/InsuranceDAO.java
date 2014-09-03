@@ -23,10 +23,11 @@ public class InsuranceDAO {
 		insurance.setBean(insuranceBean);
 		
 		em.persist(insurance);
+		insuranceBean = insurance.getBean();
 
 		em.close();
 
-		return insurance.getBean();
+		return insuranceBean;
 	}
 	
 	public InsuranceBean updateInsurance(InsuranceBean insuranceBean) {

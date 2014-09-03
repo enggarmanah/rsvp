@@ -1,6 +1,7 @@
 package com.infoklinik.rsvp.server.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import com.infoklinik.rsvp.server.ServerUtil;
 import com.infoklinik.rsvp.server.model.Appointment;
 import com.infoklinik.rsvp.shared.AppointmentBean;
 import com.infoklinik.rsvp.shared.AppointmentSearchBean;
+import com.infoklinik.rsvp.shared.Constant;
 
 public class AppointmentDAO {
 	
@@ -21,12 +23,16 @@ public class AppointmentDAO {
 		
 		Appointment appointment = new Appointment();
 		appointment.setBean(appointmentBean, em);
+		appointment.setAppt_create_date(new Date());
 		
 		em.persist(appointment);
-
+		em.refresh(appointment);
+		
+		appointmentBean =  appointment.getBean();
+		
 		em.close();
 
-		return appointment.getBean();
+		return appointmentBean;
 	}
 	
 	public AppointmentBean updateAppointment(AppointmentBean appointmentBean) {
@@ -67,20 +73,21 @@ public class AppointmentDAO {
 		StringBuffer sql = new StringBuffer("SELECT a FROM Appointment a");
 		
 		if (apptSearch.getDoctorId() != null) {
-			joins.add("a.doctor d");
-			filters.add("d.id = :doctorId");
+			joins.add(", Doctor d");
+			filters.add("a.doctor = d AND d.id = :doctorId");
 			parameters.put("doctorId", apptSearch.getDoctorId());
 		}
 		
 		if (apptSearch.getInstId() != null) {
-			joins.add("a.institution i");
-			filters.add("i.id = :instId");
+			joins.add(", Institution i");
+			filters.add("a.institution = i and i.id = :instId");
 			parameters.put("instId", apptSearch.getInstId());
 		}
 		
 		if (apptSearch.getApptDate() != null) {
-			filters.add("a.appt_date = :apptDate");
-			parameters.put("apptDate", apptSearch.getApptDate());
+			filters.add("(a.appt_date BETWEEN :apptDateStart AND :apptDateEnd)");
+			parameters.put("apptDateStart", apptSearch.getApptDate());
+			parameters.put("apptDateEnd", new Date(apptSearch.getApptDate().getTime() + 24 * Constant.HOUR_SECS * Constant.MILISECS));
 		}
 		
 		ServerUtil.setJoin(sql, joins);

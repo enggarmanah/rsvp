@@ -48,6 +48,9 @@ public class Message {
 	public static String ERR_COMMON_LOAD_FAILED = "Gagal menerima data dari server."; 
 	
 	public static String ERR_INVALID_VERIFICATION_CODE = "Kode verifikasi yang anda input salah!";
-	public static String ERR_APPT_NOT_AVAILABLE = "Maaf, hari & jam yang anda pilih tidak lagi tersedia. Silahkan pilih kembali jadwal kunjungan anda.";
+	public static String ERR_APPT_NOT_AVAILABLE = "Maaf, hari & jam yang anda pilih tidak lagi tersedia. \nSilahkan pilih kembali jadwal kunjungan anda.";
+	
+	public static String ERR_APPT_PATIENT_NAME_EMPTY = "Nama tidak boleh kosong.";
+	public static String ERR_APPT_PATIENT_BIRTH_YEAR_INVALID = "Tahun lahir harus diisi dengan format YYYY, contoh: 1981";
 	
 }

@@ -113,9 +113,9 @@ public class ServerUtil {
 	
 	public static void setJoin(StringBuffer sql, ArrayList<String> joins) {
 		
-		for (String filter : joins) {
+		for (String join : joins) {
 			
-			sql.append(" LEFT JOIN " + filter);
+			sql.append(" " + join);
 		}
 	}
 	

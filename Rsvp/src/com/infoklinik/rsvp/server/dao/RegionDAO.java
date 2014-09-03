@@ -23,10 +23,11 @@ public class RegionDAO {
 		region.setBean(regionBean, em);
 		
 		em.persist(region);
+		regionBean = region.getBean(); 
 
 		em.close();
 
-		return region.getBean();
+		return regionBean;
 	}
 	
 	public RegionBean updateRegion(RegionBean regionBean) {
