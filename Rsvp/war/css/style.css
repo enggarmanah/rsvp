@@ -2684,6 +2684,20 @@ input.search-field:focus {
 	line-height: 18px;
 }
 
+#map .profile-inst-contact .inst-subinfo-image-wrapper {
+	float: left;
+	display: inline;
+	width: 213px;
+	margin-top: 7px;
+	margin-bottom: -5px;
+	border: 1px solid #888;
+	padding: 2px 2px 0px 2px;
+}
+
+#map .profile-inst-contact .inst-subinfo-image-wrapper .image {
+	max-width: 212px;
+}
+
 /* Map Overlay - End */
 
 /* Search Location - Begin */

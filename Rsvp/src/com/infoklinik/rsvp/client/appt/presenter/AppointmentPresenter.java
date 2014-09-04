@@ -1,10 +1,16 @@
 package com.infoklinik.rsvp.client.appt.presenter;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.Message;
@@ -35,26 +41,52 @@ public class AppointmentPresenter extends LazyPresenter<IAppointmentView, Appoin
 	ScheduleBean schedule;
 	AppointmentBean appointment;
 	
+	Date apptDate;
+	Integer apptDay;
+	
 	boolean isSelectAnotherDate = false;
+	
+	List<String> errorMessages;
 	
 	@Override
 	public void bindView() {
 		
+		initApptDateSelection();
 		initBtnHandler();
 	}
+	
+	private void initApptDateSelection() {
 		
+		view.setApptDateDbValueChangeHandler(new ValueChangeHandler<Date>() {
+			
+			@Override
+			public void onValueChange(ValueChangeEvent<Date> event) {
+				
+				apptDate = event.getValue();
+				apptDay = ClientUtil.dateToDayOfWeek(apptDate);
+				
+				initSchedules();
+			}
+		});
+	}
+	
 	private void initBtnHandler() {
 
 		view.setOkBtnClickHandler(new ClickHandler() {
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				view.hide();
 				
-				if (isSelectAnotherDate) {
-					addAppointment();
+				if (isValidated(view.getAppointment())) {
+					view.hide();
+					
+					if (isSelectAnotherDate) {
+						addAppointment();
+					} else {
+						eventBus.verifyPatientMobile(view.getAppointment());
+					}
 				} else {
-					eventBus.verifyPatientMobile(view.getAppointment());
+					NotificationDlg.error(errorMessages);
 				}
 			}
 		});
@@ -78,6 +110,9 @@ public class AppointmentPresenter extends LazyPresenter<IAppointmentView, Appoin
 		appointment.setInstitution(schedule.getInstitutionBean());
 		appointment.setApptDate(ClientUtil.getDateOfWeek(schedule.getDay()));
 		
+		apptDate = appointment.getApptDate();
+		apptDay = ClientUtil.dateToDayOfWeek(apptDate);
+		
 		view.setAppointment(appointment);
 		
 		initSchedules();
@@ -92,6 +127,9 @@ public class AppointmentPresenter extends LazyPresenter<IAppointmentView, Appoin
 		this.appointment = appointment;
 		view.setAppointment(appointment);
 		
+		apptDate = appointment.getApptDate();
+		apptDay = ClientUtil.dateToDayOfWeek(apptDate);
+		
 		initSchedules();
 		
 		view.show();
@@ -104,8 +142,9 @@ public class AppointmentPresenter extends LazyPresenter<IAppointmentView, Appoin
 		ScheduleSearchBean scheduleSearch = new ScheduleSearchBean();
 		scheduleSearch.setDoctorId(schedule.getDoctor().getId());
 		scheduleSearch.setInstId(schedule.getInstitutionBean().getId());
-		scheduleSearch.setDay(schedule.getDay());
-		scheduleSearch.setDate(appointment.getApptDate());
+		
+		scheduleSearch.setDate(apptDate);
+		scheduleSearch.setDay(apptDay);
 		
 		scheduleService.getSchedulesAndAppointments(scheduleSearch, new AsyncCallback<ScheduleAppointmentBean>() {
 			
@@ -158,5 +197,20 @@ public class AppointmentPresenter extends LazyPresenter<IAppointmentView, Appoin
 				ProgressDlg.failure();
 			}
 		});
+	}
+	
+	
+	private boolean isValidated(AppointmentBean appointment) {
+		
+		boolean isValidated = true;
+		errorMessages = new ArrayList<String>();
+		
+		if (appointment.getApptDate() == null) {
+			
+			isValidated = false;
+			errorMessages.add(Message.ERR_APPT_NO_SCHEDULE);
+		}
+		
+		return isValidated;
 	}
 }

@@ -62,6 +62,7 @@ public class Institution extends Base {
 	private Long like_count;
 	private Long comment_count;
 	private Long image_id;
+	private Long profile_id;
 	private Date display_date;
 	private String status;
 	
@@ -296,6 +297,14 @@ public class Institution extends Base {
 		this.image_id = image_id;
 	}
 
+	public Long getProfile_id() {
+		return profile_id;
+	}
+
+	public void setProfile_id(Long profile_id) {
+		this.profile_id = profile_id;
+	}
+
 	public Date getDisplay_date() {
 		return display_date;
 	}
@@ -496,6 +505,7 @@ public class Institution extends Base {
 		}
 		
 		image_id = instBean.getImageId();
+		profile_id = instBean.getProfileId();
 				
 		display_date = instBean.getDisplayDate();
 		status = instBean.getStatus();
@@ -543,6 +553,7 @@ public class Institution extends Base {
 		instBean.setLikeCount(like_count);
 		instBean.setCommentCount(comment_count);
 		instBean.setImageId(image_id);
+		instBean.setProfileId(profile_id);
 		instBean.setDisplayDate(ServerUtil.toDate(display_date));
 		instBean.setStatus(status);
 		

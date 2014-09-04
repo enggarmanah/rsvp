@@ -1,6 +1,7 @@
 package com.infoklinik.rsvp.client.listing.presenter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -96,6 +97,9 @@ public class SearchResultPresenter extends LazyPresenter<ISearchResultView, Sear
 			
 			HashMap<Long, HandlerManager> institutionMap = new HashMap<Long, HandlerManager>();
 			HashMap<Long, HashMap<Long, HandlerManager>> scheduleMap = new HashMap<Long, HashMap<Long, HandlerManager>>();
+			
+			List<ScheduleBean> schedules = doctor.getSchedules();
+			Collections.sort(schedules);
 			
 			for (ScheduleBean schedule : doctor.getSchedules()) {
 				

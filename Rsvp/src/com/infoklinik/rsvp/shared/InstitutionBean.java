@@ -33,6 +33,7 @@ public class InstitutionBean extends BaseBean {
 	private Long likeCount;
 	private Long commentCount;
 	private Long imageId;
+	private Long profileId;
 	private Date displayDate;
 	private String status;
 	
@@ -59,12 +60,12 @@ public class InstitutionBean extends BaseBean {
 		html.append("		</div>");
 		
 		if (distance != null) {
-			html.append("		<div class='inst-subinfo-icon'>");
-			html.append("			<img src='images/sign.png' class='contact-img'/>");
-			html.append("		</div>");
-			html.append("		<div class='inst-subinfo-content'>");
-			html.append("			" + SharedUtil.getDistanceInfo(distance));
-			html.append("		</div>");
+			html.append("	<div class='inst-subinfo-icon'>");
+			html.append("	    <img src='images/sign.png' class='contact-img'/>");
+			html.append("   </div>");
+			html.append("	<div class='inst-subinfo-content'>");
+			html.append("		" + SharedUtil.getDistanceInfo(distance));
+			html.append("   </div>");
 		}
 		
 		html.append("		<div class='inst-subinfo-icon'>");
@@ -79,6 +80,13 @@ public class InstitutionBean extends BaseBean {
 		html.append("		<div class='inst-subinfo-content'>");
 		html.append("			" + email);
 		html.append("		</div>");
+		
+		if (profileId != null) {
+			html.append("	<div class='inst-subinfo-image-wrapper'>");
+			html.append("	    <img src='" + Constant.IMAGE_URL + profileId + "' class='image'/>");
+			html.append("   </div>");
+		}
+		
 		html.append("	</div>");
 		html.append("</div>");
 		html.append("</div>");
@@ -353,6 +361,14 @@ public class InstitutionBean extends BaseBean {
 
 	public void setImageId(Long imageId) {
 		this.imageId = imageId;
+	}
+
+	public Long getProfileId() {
+		return profileId;
+	}
+
+	public void setProfileId(Long profileId) {
+		this.profileId = profileId;
 	}
 
 	public Date getDisplayDate() {

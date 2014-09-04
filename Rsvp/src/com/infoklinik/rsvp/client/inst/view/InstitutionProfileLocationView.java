@@ -5,14 +5,11 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.maps.gwt.client.GoogleMap;
-import com.google.maps.gwt.client.InfoWindow;
-import com.google.maps.gwt.client.InfoWindowOptions;
 import com.google.maps.gwt.client.LatLng;
 import com.google.maps.gwt.client.MapOptions;
 import com.google.maps.gwt.client.MapTypeId;
 import com.google.maps.gwt.client.Marker;
 import com.google.maps.gwt.client.MarkerOptions;
-import com.google.maps.gwt.client.MouseEvent;
 import com.infoklinik.rsvp.client.BaseView;
 import com.infoklinik.rsvp.shared.InstitutionBean;
 
@@ -60,20 +57,11 @@ public class InstitutionProfileLocationView extends BaseView {
 		mapOpts.setMapTypeId(MapTypeId.ROADMAP);
 		final GoogleMap map = GoogleMap.create(Document.get().getElementById("map_canvas"), mapOpts);
 
-		InfoWindowOptions infowindowOpts = InfoWindowOptions.create();
-		infowindowOpts.setContent(institution.getHtmlInfo());
-		final InfoWindow infowindow = InfoWindow.create(infowindowOpts);
-
 		MarkerOptions markerOpts = MarkerOptions.create();
 		markerOpts.setPosition(location);
 		markerOpts.setMap(map);
 		markerOpts.setTitle(institution.getName());
 		
-		final Marker marker = Marker.create(markerOpts);
-		marker.addClickListener(new Marker.ClickHandler() {
-			public void handle(MouseEvent event) {
-				infowindow.open(map, marker);
-			}
-		});
+		Marker.create(markerOpts);
 	}
 }

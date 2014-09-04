@@ -83,6 +83,7 @@ public class AdminDoctorPresenter extends LazyPresenter<IAdminDoctorView, AdminE
 			@Override
 			public void onSuccess(List<SpecialityBean> specialityBeans) {
 				view.setSpecialities(specialityBeans);
+				view.setDoctor(doctor);
 			}
 			
 			@Override

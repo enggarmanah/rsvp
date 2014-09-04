@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -20,6 +21,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.infoklinik.rsvp.client.BaseView;
 import com.infoklinik.rsvp.client.ClientUtil;
+import com.infoklinik.rsvp.client.Message;
 import com.infoklinik.rsvp.client.appt.presenter.interfaces.IAppointmentView;
 import com.infoklinik.rsvp.shared.AppointmentBean;
 import com.infoklinik.rsvp.shared.Constant;
@@ -84,6 +86,8 @@ public class AppointmentView extends BaseView implements IAppointmentView {
 		List<AppointmentBean> appointments = scheduleAppointment.getAppointments();
 		HashMap<Long, AppointmentBean> reservedTimes = new HashMap<Long, AppointmentBean>();
 		
+		apptTimeLb.clear();
+		
 		for (AppointmentBean appt : appointments) {
 			reservedTimes.put(appt.getApptDate().getTime(), appt);
 		}
@@ -111,19 +115,26 @@ public class AppointmentView extends BaseView implements IAppointmentView {
 			}
 			
 			Collections.sort(availableApptTimes);
-			apptTimeLb.clear();
 			
 			for (Integer apptTime : availableApptTimes) {
 				String time = ClientUtil.timeToStr(apptTime);
 				apptTimeLb.addItem(time, String.valueOf(apptTime));
 			}
 		}
+		
+		if (apptTimeLb.getItemCount() == 0) {
+			apptTimeLb.addItem(Message.ERR_APPT_NO_SCHEDULE, Constant.EMPTY_STRING);
+		}
 	}
 	
 	public AppointmentBean getAppointment() {
 		
-		Date apptDate = apptDateDb.getValue();
-		apptDate.setTime(apptDate.getTime() + Long.valueOf(apptTimeLb.getValue(apptTimeLb.getSelectedIndex())));
+		Date apptDate = null;
+		
+		if (apptDateDb.getValue() != null && !ClientUtil.isEmpty(apptTimeLb.getValue(apptTimeLb.getSelectedIndex()))) {
+			apptDate = apptDateDb.getValue();
+			apptDate.setTime(apptDate.getTime() + Long.valueOf(apptTimeLb.getValue(apptTimeLb.getSelectedIndex())));
+		}
 		
 		appointment.setApptDate(apptDate);
 		
@@ -138,6 +149,11 @@ public class AppointmentView extends BaseView implements IAppointmentView {
 		specialityLb.setText(appointment.getDoctor().getSpeciality().getDescription());
 		institutionLb.setText(appointment.getInstitution().getName());
 		apptDateDb.setValue(appointment.getApptDate());
+	}
+	
+	public void setApptDateDbValueChangeHandler(ValueChangeHandler<Date> handler) {
+		
+		apptDateDb.addValueChangeHandler(handler);
 	}
 	
 	public void setOkBtnClickHandler(ClickHandler handler) {

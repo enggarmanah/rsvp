@@ -14,6 +14,7 @@ import com.infoklinik.rsvp.client.BaseView;
 import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.GenericBean;
 import com.infoklinik.rsvp.client.HandlerManager;
+import com.infoklinik.rsvp.shared.Constant;
 import com.infoklinik.rsvp.shared.InstitutionBean;
 import com.infoklinik.rsvp.shared.ScheduleBean;
 
@@ -62,14 +63,23 @@ public class ResultDoctorInstitutionView extends BaseView {
 	
 	public void setSchedules(List<GenericBean<ScheduleBean>> schedules) {
 		
+		String prevDay = Constant.EMPTY_STRING;
+		
 		for (GenericBean<ScheduleBean> genSchedule : schedules) {
 			
 			ScheduleBean schedule = genSchedule.getBean();
 			HandlerManager handlerMgr = genSchedule.getHandlerMgr();
-		
+			
+			String day = ClientUtil.dayToStr(schedule.getDay());
+			
 			Label dayLb = new Label();
-			dayLb.setText(ClientUtil.dayToStr(schedule.getDay()) + " :");
 			dayLb.setStyleName(STYLE_SCHEDULE_DAY);
+			
+			if (!day.equals(prevDay)) {
+				dayLb.setText(day + " :");
+			}
+			
+			prevDay = day;
 			
 			Label timeLb = new Label();
 			String timeStr = ClientUtil.timeToStr(schedule.getOpStart()) + "-" + ClientUtil.timeToStr(schedule.getOpEnd()); 

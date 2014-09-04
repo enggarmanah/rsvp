@@ -1,7 +1,7 @@
 package com.infoklinik.rsvp.shared;
 
 @SuppressWarnings("serial")
-public class ScheduleBean extends BaseBean {
+public class ScheduleBean extends BaseBean implements Comparable<ScheduleBean> {
 
 	private InstitutionBean institution;
 	private DoctorBean doctor;
@@ -49,14 +49,29 @@ public class ScheduleBean extends BaseBean {
 		this.opEnd = opEnd;
 	}
 	
-	public void setBean(ScheduleBean scheduleBean) {
+	public void setBean(ScheduleBean schedule) {
 		
-		id = scheduleBean.getId();
-		institution = scheduleBean.getInstitutionBean();
-		doctor = scheduleBean.getDoctor();
-		day = scheduleBean.getDay();
-		opStart = scheduleBean.getOpStart();
-		opEnd = scheduleBean.getOpEnd();
+		id = schedule.getId();
+		institution = schedule.getInstitutionBean();
+		doctor = schedule.getDoctor();
+		day = schedule.getDay();
+		opStart = schedule.getOpStart();
+		opEnd = schedule.getOpEnd();
 		setAuditBean(getAuditBean());
+	}
+	
+	public int compareTo(ScheduleBean schedule) {
+		
+		int i = this.institution.getName().toLowerCase().compareTo(schedule.getInstitutionBean().getName().toLowerCase());
+		
+		if (i == 0) {
+			i = this.day - schedule.getDay();
+		}
+		
+		if (i == 0) {
+			i = this.getOpStart() - schedule.getOpStart();
+		}
+		
+		return i;
 	}
 }

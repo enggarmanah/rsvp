@@ -141,7 +141,7 @@ public class AdminDoctorView extends BaseView implements IAdminDoctorView {
 		nameTb.setValue(doctor.getName());
 		
 		if (doctor.getSpeciality() != null) {
-			ClientUtil.setSelectedIndex(specialityLb, doctor.getSpeciality().getDescription());
+			ClientUtil.setSelectedIndex(specialityLb, String.valueOf(doctor.getSpeciality().getId()));
 		}
 		
 		regNoTb.setValue(doctor.getRegNo());

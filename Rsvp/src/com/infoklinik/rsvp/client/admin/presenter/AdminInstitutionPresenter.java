@@ -1213,6 +1213,15 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 		
 		GenericBean<GalleryBean> genGallery = new GenericBean<GalleryBean>(gallery, handlerMgr);
 		
+		if (gallery.isMain()) {
+			
+			institution.setProfileId(gallery.getImageId());
+			
+			for (GalleryBean g : galleries) {
+				g.setMain(false);
+			}
+		}
+		
 		galleries.add(gallery);
 		genGalleries.add(genGallery);
 		
@@ -1220,6 +1229,15 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 	}
 	
 	public void onUpdateInstGallery(GalleryBean gallery) {
+		
+		if (gallery.isMain()) {
+			
+			institution.setProfileId(gallery.getImageId());
+			
+			for (GalleryBean g : galleries) {
+				g.setMain(false);
+			}
+		}
 		
 		int index = galleries.indexOf(gallery); 
 		GenericBean<GalleryBean> genGallery = genGalleries.get(index);
