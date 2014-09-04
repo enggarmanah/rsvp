@@ -2691,7 +2691,7 @@ input.search-field:focus {
 	margin-top: 7px;
 	margin-bottom: -5px;
 	border: 1px solid #888;
-	padding: 2px 2px 0px 2px;
+	padding: 2px 1px 0px 2px;
 }
 
 #map .profile-inst-contact .inst-subinfo-image-wrapper .image {
