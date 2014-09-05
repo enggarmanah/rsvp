@@ -152,7 +152,7 @@ public class LabSearchView extends BaseView implements ILabSearchView {
 			instSearchBean.setLocation(location);
 		}
 		
-		instSearchBean.setCityId(Long.valueOf(cityLb.getValue(cityLb.getSelectedIndex())));
+		instSearchBean.setCityId(ClientUtil.strToLong(cityLb.getValue(cityLb.getSelectedIndex())));
 		
 		if (institutionTypeLb.getSelectedIndex() != 0) {
 			instSearchBean.setType(institutionTypeLb.getValue(institutionTypeLb.getSelectedIndex()));

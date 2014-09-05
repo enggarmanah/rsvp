@@ -76,7 +76,7 @@ public class AdminInstitutionGalleryPresenter extends LazyPresenter<IAdminInstit
 					
 					String imageId = info.message;
 					
-					gallery.setImageId(Long.valueOf(imageId));
+					gallery.setImageId(ClientUtil.strToLong(imageId));
 					
 					view.setGallery(gallery);
 					

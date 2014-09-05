@@ -59,7 +59,7 @@ public class ImageUpload extends AppEngineUploadAction {
 						String imageId = request.getParameter("imageId");
 						
 						if (!ServerUtil.isEmpty(imageId)) {
-							imageBean.setId(Long.valueOf(imageId));
+							imageBean.setId(ServerUtil.strToLong(imageId));
 							imageBean = imageDao.updateImage(imageBean);
 						} else {
 							imageBean = imageDao.addImage(imageBean);

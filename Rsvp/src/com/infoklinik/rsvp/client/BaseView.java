@@ -211,7 +211,7 @@ public abstract class BaseView extends Composite {
 
 		this.page = 1;
 
-		Label pageLabel = pageLabelMap.get(Long.valueOf(this.page));
+		Label pageLabel = pageLabelMap.get(Long.valueOf(page));
 		pageLabel.setStyleName(CSS_PAGE_CURRENT);
 
 		clear();

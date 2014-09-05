@@ -20,8 +20,6 @@ import com.infoklinik.rsvp.client.rpc.InstitutionServiceAsync;
 import com.infoklinik.rsvp.client.rpc.OAuthLoginServiceAsync;
 import com.infoklinik.rsvp.shared.Constant;
 import com.infoklinik.rsvp.shared.Credential;
-import com.infoklinik.rsvp.shared.DoctorBean;
-import com.infoklinik.rsvp.shared.InstitutionBean;
 import com.infoklinik.rsvp.shared.LocationBean;
 import com.infoklinik.rsvp.shared.SocialUser;
 import com.infoklinik.rsvp.shared.UserBean;
@@ -119,31 +117,6 @@ public class MainPresenter extends BasePresenter<IMainView, MainEventBus> implem
 					eventBus.loadPartner();
 					eventBus.loadPromotion();
 				}
-			}
-			
-			@Override
-			public void onFailure(Throwable caught) {
-			}
-		});
-		
-		institutionService.getInstitution(Long.valueOf(2), new AsyncCallback<InstitutionBean>() {
-			
-			@Override
-			public void onSuccess(InstitutionBean institution) {
-				//eventBus.loadClinicProfile(institution);
-				//eventBus.updateInstitution(institution);
-			}
-			
-			@Override
-			public void onFailure(Throwable caught) {
-			}
-		});
-		
-		doctorService.getDoctor(Long.valueOf(1), new AsyncCallback<DoctorBean>() {
-			
-			@Override
-			public void onSuccess(DoctorBean doctor) {
-				//eventBus.loadDoctorProfile(doctor);
 			}
 			
 			@Override

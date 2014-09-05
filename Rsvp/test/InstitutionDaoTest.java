@@ -23,8 +23,8 @@ public class InstitutionDaoTest {
 			System.out.println("institution : " + inst.getName());
 		}
 		
-		//InstitutionBean inst = instDao.getInstitution(Long.valueOf(1));
-		//inst.setCommentCount(Long.valueOf(5));
+		//InstitutionBean inst = instDao.getInstitution(ClientUtil.strToLong(1));
+		//inst.setCommentCount(ClientUtil.strToLong(5));
 		//instDao.updateInstitution(inst);
 		
 		System.out.println("Completed");

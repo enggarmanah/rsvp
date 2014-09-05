@@ -14,6 +14,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.infoklinik.rsvp.client.ClientUtil;
+import com.infoklinik.rsvp.client.Message;
 import com.infoklinik.rsvp.client.admin.AdminEventBus;
 import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminDoctorView;
 import com.infoklinik.rsvp.client.admin.view.AdminDoctorView;
@@ -104,7 +105,7 @@ public class AdminDoctorPresenter extends LazyPresenter<IAdminDoctorView, AdminE
 					
 					String imageId = info.message;
 					
-					doctor.setImageId(Long.valueOf(imageId));
+					doctor.setImageId(ClientUtil.strToLong(imageId));
 					
 					view.setDoctor(doctor);
 					
@@ -189,6 +190,21 @@ public class AdminDoctorPresenter extends LazyPresenter<IAdminDoctorView, AdminE
 		
 		boolean isValidated = true;
 		errorMessages = new ArrayList<String>();
+		
+		if (ClientUtil.isEmpty(doctor.getName())) {
+			isValidated = false;
+			errorMessages.add(Message.ERR_DOCTOR_NAME_EMPTY);
+		}
+		
+		if (ClientUtil.isEmpty(doctor.getRegNo())) {
+			isValidated = false;
+			errorMessages.add(Message.ERR_DOCTOR_REGNO_EMPTY);
+		}
+		
+		if (ClientUtil.isEmpty(doctor.getSpeciality())) {
+			isValidated = false;
+			errorMessages.add(Message.ERR_DOCTOR_SPECIALITY_EMPTY);
+		}
 		
 		return isValidated;
 	}

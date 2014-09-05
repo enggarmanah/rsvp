@@ -23,8 +23,13 @@ public class PersistenceManager {
 			properties.put("javax.persistence.jdbc.driver", "com.mysql.jdbc.Driver");
 			properties.put("javax.persistence.jdbc.url", "jdbc:mysql://localhost/infoklinik");
 		}
-
-		emf = Persistence.createEntityManagerFactory("Demo", properties);
+		
+		
+		try {
+			emf = Persistence.createEntityManagerFactory("Demo", properties);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public static EntityManager getEntityManager() {

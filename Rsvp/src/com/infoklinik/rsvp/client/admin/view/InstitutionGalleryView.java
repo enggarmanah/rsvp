@@ -21,6 +21,7 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
+import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.CustomUploadStatus;
 import com.infoklinik.rsvp.client.GenericBean;
 import com.infoklinik.rsvp.client.HandlerManager;
@@ -149,7 +150,7 @@ public class InstitutionGalleryView extends BaseView {
 				UploadedInfo info = uploader.getServerInfo();
 				
 				String imgId = info.message;
-				imageId = Long.valueOf(imgId);
+				imageId = ClientUtil.strToLong(imgId);
 				
 				ProgressDlg.hide();
 			}

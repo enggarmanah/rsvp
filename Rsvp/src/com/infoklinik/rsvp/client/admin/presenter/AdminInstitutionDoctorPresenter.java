@@ -88,7 +88,7 @@ public class AdminInstitutionDoctorPresenter extends LazyPresenter<IAdminInstitu
 				
 				SearchSuggestion suggestion = (SearchSuggestion) event.getSelectedItem();
 				
-				doctor.setId(Long.valueOf(suggestion.getValue()));
+				doctor.setId(ClientUtil.strToLong(suggestion.getValue()));
 				doctor.setName(suggestion.getReplacementString());
 			}
 		});

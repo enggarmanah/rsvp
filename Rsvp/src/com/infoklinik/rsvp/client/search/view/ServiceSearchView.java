@@ -14,6 +14,7 @@ import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
+import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.SuggestionOracle;
 import com.infoklinik.rsvp.client.search.presenter.interfaces.IServiceSearchView;
 import com.infoklinik.rsvp.shared.CityBean;
@@ -129,10 +130,10 @@ public class ServiceSearchView extends BaseView implements IServiceSearchView {
 			docSearchBean.setLocation(location);
 		}
 		
-		docSearchBean.setCityId(Long.valueOf(cityLb.getValue(cityLb.getSelectedIndex())));
+		docSearchBean.setCityId(ClientUtil.strToLong(cityLb.getValue(cityLb.getSelectedIndex())));
 		
 		if (serviceTypeLb.getSelectedIndex() != 0) {
-			docSearchBean.setServiceTypeId(Long.valueOf(serviceTypeLb.getValue(serviceTypeLb.getSelectedIndex())));
+			docSearchBean.setServiceTypeId(ClientUtil.strToLong(serviceTypeLb.getValue(serviceTypeLb.getSelectedIndex())));
 		}
 		
 		return docSearchBean;

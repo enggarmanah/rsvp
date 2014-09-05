@@ -609,7 +609,7 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 				SearchSuggestion suggestion = (SearchSuggestion) event.getSelectedItem();
 				
 				CityBean city = new CityBean();
-				city.setId(Long.valueOf(suggestion.getValue()));
+				city.setId(ClientUtil.strToLong(suggestion.getValue()));
 				city.setName(suggestion.getReplacementString());
 				
 				institution.setCity(city);
@@ -637,7 +637,7 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 				SearchSuggestion suggestion = (SearchSuggestion) event.getSelectedItem();
 				
 				RegionBean region = new RegionBean();
-				region.setId(Long.valueOf(suggestion.getValue()));
+				region.setId(ClientUtil.strToLong(suggestion.getValue()));
 				region.setName(suggestion.getReplacementString());
 				
 				institution.setRegion(region);
@@ -657,7 +657,7 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 				SearchSuggestion suggestion = (SearchSuggestion) event.getSelectedItem();
 				
 				StreetBean street = new StreetBean();
-				street.setId(Long.valueOf(suggestion.getValue()));
+				street.setId(ClientUtil.strToLong(suggestion.getValue()));
 				street.setName(suggestion.getReplacementString());
 				
 				institution.setStreet(street);

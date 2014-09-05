@@ -89,31 +89,31 @@ public class AdminStatisticView extends BaseView implements IAdminStatisticView 
 		
 		Long count = map.get(Constant.CATEGORY_CLINIC);
 		dataClinicLb.setText(ClientUtil.numberToStr(count));
-		total += ClientUtil.getNumber(count);
+		total += count;
 		
 		count = map.get(Constant.CATEGORY_HOSPITAL);
 		dataHospitalLb.setText(ClientUtil.numberToStr(count));
-		total += ClientUtil.getNumber(count);
+		total += count;
 		
 		count = map.get(Constant.CATEGORY_LABORATORY);
 		dataLabLb.setText(ClientUtil.numberToStr(count));
-		total += ClientUtil.getNumber(count);
+		total += count;
 		
 		count = map.get(Constant.CATEGORY_PHARMACY);
 		dataPharmacyLb.setText(ClientUtil.numberToStr(count));
-		total += ClientUtil.getNumber(count);
+		total += count;
 		
 		count = map.get(Constant.CATEGORY_DOCTOR);
 		dataDoctorLb.setText(ClientUtil.numberToStr(count));
-		total += ClientUtil.getNumber(count);
+		total += count;
 		
 		count = map.get(Constant.CATEGORY_SERVICE);
 		dataServiceLb.setText(ClientUtil.numberToStr(count));
-		total += ClientUtil.getNumber(count);
+		total += count;
 		
 		count = map.get(Constant.CATEGORY_INSURANCE);
 		dataInsuranceLb.setText(ClientUtil.numberToStr(count));
-		total += ClientUtil.getNumber(count);
+		total += count;
 		
 		dataTotalLb.setText(ClientUtil.numberToStr(total));
 	}
@@ -124,27 +124,27 @@ public class AdminStatisticView extends BaseView implements IAdminStatisticView 
 		
 		Long count = map.get(Constant.SEARCH_CLINIC);
 		searchClinicLb.setText(ClientUtil.numberToStr(count));
-		total += ClientUtil.getNumber(count);
+		total += count;
 		
 		count = map.get(Constant.SEARCH_HOSPITAL);
 		searchHospitalLb.setText(ClientUtil.numberToStr(count));
-		total += ClientUtil.getNumber(count);
+		total += count;
 		
 		count = map.get(Constant.SEARCH_LAB);
 		searchLabLb.setText(ClientUtil.numberToStr(count));
-		total += ClientUtil.getNumber(count);
+		total += count;
 		
 		count = map.get(Constant.SEARCH_PHARMACY);
 		searchPharmacyLb.setText(ClientUtil.numberToStr(count));
-		total += ClientUtil.getNumber(count);
+		total += count;
 		
 		count = map.get(Constant.SEARCH_DOCTOR);
 		searchDoctorLb.setText(ClientUtil.numberToStr(count));
-		total += ClientUtil.getNumber(count);
+		total += count;
 		
 		count = map.get(Constant.SEARCH_SERVICE);
 		searchServiceLb.setText(ClientUtil.numberToStr(count));
-		total += ClientUtil.getNumber(count);
+		total += count;
 		
 		searchTotalLb.setText(ClientUtil.numberToStr(total));
 	}
@@ -155,19 +155,19 @@ public class AdminStatisticView extends BaseView implements IAdminStatisticView 
 		
 		Long count = map.get(Constant.SEARCH_BY_NAME);
 		searchMethodNameLb.setText(ClientUtil.numberToStr(count));
-		total += ClientUtil.getNumber(count);
+		total += count;
 		
 		count = map.get(Constant.SEARCH_BY_STREET);
 		searchMethodStreetLb.setText(ClientUtil.numberToStr(count));
-		total += ClientUtil.getNumber(count);
+		total += count;
 		
 		count = map.get(Constant.SEARCH_BY_REGION);
 		searchMethodRegionLb.setText(ClientUtil.numberToStr(count));
-		total += ClientUtil.getNumber(count);
+		total += count;
 		
 		count = map.get(Constant.SEARCH_BY_DISTANCE);
 		searchMethodDistanceLb.setText(ClientUtil.numberToStr(count));
-		total += ClientUtil.getNumber(count);
+		total += count;
 				
 		searchMethodTotalLb.setText(ClientUtil.numberToStr(total));
 	}

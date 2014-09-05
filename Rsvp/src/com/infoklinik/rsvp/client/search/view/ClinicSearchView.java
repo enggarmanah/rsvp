@@ -179,18 +179,18 @@ public class ClinicSearchView extends BaseView implements IClinicSearchView {
 			instSearchBean.setLocation(location);
 		}
 		
-		instSearchBean.setCityId(Long.valueOf(cityLb.getValue(cityLb.getSelectedIndex())));
+		instSearchBean.setCityId(ClientUtil.strToLong(cityLb.getValue(cityLb.getSelectedIndex())));
 		
 		if (institutionTypeLb.getSelectedIndex() != 0) {
 			instSearchBean.setType(institutionTypeLb.getValue(institutionTypeLb.getSelectedIndex()));
 		}
 		
 		if (insuranceLb.getSelectedIndex() != 0) {
-			instSearchBean.setInsuranceId(Long.valueOf(insuranceLb.getValue(insuranceLb.getSelectedIndex())));
+			instSearchBean.setInsuranceId(ClientUtil.strToLong(insuranceLb.getValue(insuranceLb.getSelectedIndex())));
 		}
 		
 		if (specialityLb.getSelectedIndex() != 0) {
-			instSearchBean.setSpecialityId(Long.valueOf(specialityLb.getValue(specialityLb.getSelectedIndex())));
+			instSearchBean.setSpecialityId(ClientUtil.strToLong(specialityLb.getValue(specialityLb.getSelectedIndex())));
 		}
 		
 		if (open24HrsLb.getSelectedIndex() != 0) {

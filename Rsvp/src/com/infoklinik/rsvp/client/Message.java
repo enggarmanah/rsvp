@@ -55,4 +55,8 @@ public class Message {
 	public static String ERR_APPT_PATIENT_BIRTH_YEAR_INVALID = "Tahun lahir harus diisi dengan format YYYY, contoh: 1981";
 	public static String ERR_APPT_NO_SCHEDULE = "Tidak terdapat jadwal praktek pada hari yang dipilih";
 	
+	public static String ERR_DOCTOR_NAME_EMPTY = "Nama tidak boleh kosong.";
+	public static String ERR_DOCTOR_SPECIALITY_EMPTY = "Spesialisasi dokter harus dipilih.";
+	public static String ERR_DOCTOR_REGNO_EMPTY = "No. registrasi IDI tidak boleh kosong.";
+	
 }

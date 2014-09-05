@@ -98,7 +98,7 @@ public class AdminInstitutionInsuranceView extends BaseView implements IAdminIns
 		
 		if (insuranceLb.getSelectedIndex() != 0) {
 			
-			insurance.setId(Long.valueOf(insuranceLb.getValue(insuranceLb.getSelectedIndex())));
+			insurance.setId(ClientUtil.strToLong(insuranceLb.getValue(insuranceLb.getSelectedIndex())));
 			insurance.setName(insuranceLb.getItemText(insuranceLb.getSelectedIndex()));
 		}
 		

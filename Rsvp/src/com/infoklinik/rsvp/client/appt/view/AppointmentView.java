@@ -133,7 +133,7 @@ public class AppointmentView extends BaseView implements IAppointmentView {
 		
 		if (apptDateDb.getValue() != null && !ClientUtil.isEmpty(apptTimeLb.getValue(apptTimeLb.getSelectedIndex()))) {
 			apptDate = apptDateDb.getValue();
-			apptDate.setTime(apptDate.getTime() + Long.valueOf(apptTimeLb.getValue(apptTimeLb.getSelectedIndex())));
+			apptDate.setTime(apptDate.getTime() + ClientUtil.strToLong(apptTimeLb.getValue(apptTimeLb.getSelectedIndex())));
 		}
 		
 		appointment.setApptDate(apptDate);

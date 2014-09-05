@@ -84,7 +84,7 @@ public class AdminInstitutionBranchPresenter extends LazyPresenter<IAdminInstitu
 				SearchSuggestion suggestion = (SearchSuggestion) event.getSelectedItem();
 				
 				InstitutionBean institution = branch.getInstitution();
-				institution.setId(Long.valueOf(suggestion.getValue()));
+				institution.setId(ClientUtil.strToLong(suggestion.getValue()));
 				institution.setName(suggestion.getReplacementString());
 				
 				branchService.getGroupId(branch.getInstitution().getId(), new AsyncCallback<Long>() {

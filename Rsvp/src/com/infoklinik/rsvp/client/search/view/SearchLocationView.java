@@ -151,7 +151,7 @@ public class SearchLocationView extends BaseView implements ISearchLocationView 
 			
 				InfoWindowOptions infowindowOpts = InfoWindowOptions.create();
 				infowindowOpts.setContent(institution.getHtmlInfo());
-				final InfoWindow infowindow = InfoWindow.create(infowindowOpts);
+				final InfoWindow infoWindow = InfoWindow.create(infowindowOpts);
 	
 				MarkerOptions markerOpts = MarkerOptions.create();
 				markerOpts.setPosition(location);
@@ -168,7 +168,7 @@ public class SearchLocationView extends BaseView implements ISearchLocationView 
 				final Marker marker = Marker.create(markerOpts);
 				marker.addClickListener(new Marker.ClickHandler() {
 					public void handle(MouseEvent event) {
-						infowindow.open(map, marker);
+						infoWindow.open(map, marker);
 					}
 				});
 			}

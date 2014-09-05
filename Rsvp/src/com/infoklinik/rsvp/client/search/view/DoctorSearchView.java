@@ -14,6 +14,7 @@ import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
+import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.SuggestionOracle;
 import com.infoklinik.rsvp.client.search.presenter.interfaces.IDoctorSearchView;
 import com.infoklinik.rsvp.shared.CityBean;
@@ -129,14 +130,14 @@ public class DoctorSearchView extends BaseView implements IDoctorSearchView {
 			docSearchBean.setLocation(location);
 		}
 		
-		docSearchBean.setCityId(Long.valueOf(cityLb.getValue(cityLb.getSelectedIndex())));
+		docSearchBean.setCityId(ClientUtil.strToLong(cityLb.getValue(cityLb.getSelectedIndex())));
 		
 		if (dayLb.getSelectedIndex() != 0) {
 			docSearchBean.setDay(Integer.valueOf(dayLb.getValue(dayLb.getSelectedIndex())));
 		}
 		
 		if (specialityLb.getSelectedIndex() != 0) {
-			docSearchBean.setSpecialityId(Long.valueOf(specialityLb.getValue(specialityLb.getSelectedIndex())));
+			docSearchBean.setSpecialityId(ClientUtil.strToLong(specialityLb.getValue(specialityLb.getSelectedIndex())));
 		}
 		
 		return docSearchBean;

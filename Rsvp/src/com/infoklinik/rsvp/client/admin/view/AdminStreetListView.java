@@ -17,6 +17,7 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
+import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.GenericBean;
 import com.infoklinik.rsvp.client.HandlerManager;
 import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminStreetListView;
@@ -213,7 +214,7 @@ public class AdminStreetListView extends BaseView implements IAdminStreetListVie
 	public StreetSearchBean getStreetSearch() {
 		
 		streetSearch.setName(nameTb.getText());
-		streetSearch.setCityId(Long.valueOf(cityLb.getValue(cityLb.getSelectedIndex())));
+		streetSearch.setCityId(ClientUtil.strToLong(cityLb.getValue(cityLb.getSelectedIndex())));
 		
 		return streetSearch;
 	}

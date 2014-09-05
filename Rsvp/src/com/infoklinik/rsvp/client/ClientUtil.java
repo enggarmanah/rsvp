@@ -195,6 +195,17 @@ public class ClientUtil {
 		return date;
 	}
 	
+	public static Long strToLong(String text) {
+		
+		Long number = null;
+		try {
+			number = ClientUtil.strToLong(text);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return number;
+	}
+	
 	public static Date strToDateTime(String text) {
 		
 		Date date = null;
@@ -339,15 +350,6 @@ public class ClientUtil {
 		}
 	}
 	
-	public static Long getNumber(Long number) {
-		
-		if (isEmpty(number)) {
-			return Long.valueOf(0);
-		} else {
-			return number;
-		}
-	}
-
 	public static void setSelectedIndex(ListBox listBox, String value) {
 		
 		for (int i = 0; i < listBox.getItemCount(); i++) {

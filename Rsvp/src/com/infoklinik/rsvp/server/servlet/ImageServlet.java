@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.infoklinik.rsvp.server.ServerUtil;
 import com.infoklinik.rsvp.server.dao.ImageDAO;
 import com.infoklinik.rsvp.shared.ImageBean;
 
@@ -30,7 +31,7 @@ public class ImageServlet extends HttpServlet {
 		}
 		
 		ImageDAO imageDao = new ImageDAO();
-		ImageBean imageBean = imageDao.getImage(Long.valueOf(id));
+		ImageBean imageBean = imageDao.getImage(ServerUtil.strToLong(id));
 		
 		byte[] bytes = imageBean.getBytes();
 		

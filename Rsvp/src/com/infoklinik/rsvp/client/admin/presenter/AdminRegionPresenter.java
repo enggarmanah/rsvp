@@ -54,7 +54,7 @@ public class AdminRegionPresenter extends LazyPresenter<IAdminRegionView, AdminE
 				SearchSuggestion suggestion = (SearchSuggestion) event.getSelectedItem();
 				
 				CityBean city = new CityBean();
-				city.setId(Long.valueOf(suggestion.getValue()));
+				city.setId(ClientUtil.strToLong(suggestion.getValue()));
 				city.setName(suggestion.getReplacementString());
 				
 				region.setCity(city);

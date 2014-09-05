@@ -7,6 +7,7 @@ import java.util.List;
 import com.google.gwt.user.client.ui.SuggestOracle;
 import com.infoklinik.rsvp.client.rpc.SuggestService;
 import com.infoklinik.rsvp.server.ReferenceUtil;
+import com.infoklinik.rsvp.server.ServerUtil;
 import com.infoklinik.rsvp.server.dao.CityDAO;
 import com.infoklinik.rsvp.server.dao.DoctorDAO;
 import com.infoklinik.rsvp.server.dao.InstitutionDAO;
@@ -140,7 +141,7 @@ public class SuggestServiceImpl extends BaseServiceServlet implements SuggestSer
 		
 		RegionSearchBean regionSearch = new RegionSearchBean();
 		regionSearch.setName(suggestParam.getName());
-		regionSearch.setCityId(Long.valueOf(suggestParam.getCityId()));
+		regionSearch.setCityId(ServerUtil.strToLong(suggestParam.getCityId()));
 		
 		String keyword = suggestParam.getName();
 		
@@ -172,7 +173,7 @@ public class SuggestServiceImpl extends BaseServiceServlet implements SuggestSer
 		
 		StreetSearchBean streetSearch = new StreetSearchBean();
 		streetSearch.setName(suggestParam.getName());
-		streetSearch.setCityId(Long.valueOf(suggestParam.getCityId()));
+		streetSearch.setCityId(ServerUtil.strToLong(suggestParam.getCityId()));
 		
 		String keyword = suggestParam.getName();
 		

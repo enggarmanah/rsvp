@@ -136,7 +136,7 @@ public class AdminServiceView extends BaseView implements IAdminServiceView {
 			
 			ServiceTypeBean serviceType = serviceBean.getServiceType();
 			serviceType = serviceType == null ? new ServiceTypeBean() : serviceType; 
-			serviceType.setId(Long.valueOf(serviceTypeLb.getValue(serviceTypeLb.getSelectedIndex())));
+			serviceType.setId(ClientUtil.strToLong(serviceTypeLb.getValue(serviceTypeLb.getSelectedIndex())));
 			serviceType.setName(serviceTypeLb.getItemText(serviceTypeLb.getSelectedIndex()));
 			serviceBean.setServiceType(serviceType);
 		}

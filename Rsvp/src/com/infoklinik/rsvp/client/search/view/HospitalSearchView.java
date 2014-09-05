@@ -158,14 +158,14 @@ public class HospitalSearchView extends BaseView implements IHospitalSearchView 
 			instSearchBean.setLocation(location);
 		}
 		
-		instSearchBean.setCityId(Long.valueOf(cityLb.getValue(cityLb.getSelectedIndex())));
+		instSearchBean.setCityId(ClientUtil.strToLong(cityLb.getValue(cityLb.getSelectedIndex())));
 		
 		if (institutionTypeLb.getSelectedIndex() != 0) {
 			instSearchBean.setType(institutionTypeLb.getValue(institutionTypeLb.getSelectedIndex()));
 		}
 		
 		if (insuranceLb.getSelectedIndex() != 0) {
-			instSearchBean.setInsuranceId(Long.valueOf(insuranceLb.getValue(insuranceLb.getSelectedIndex())));
+			instSearchBean.setInsuranceId(ClientUtil.strToLong(insuranceLb.getValue(insuranceLb.getSelectedIndex())));
 		}
 		
 		return instSearchBean;

@@ -17,6 +17,7 @@ import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
+import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.GenericBean;
 import com.infoklinik.rsvp.client.HandlerManager;
 import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminRegionListView;
@@ -213,7 +214,7 @@ public class AdminRegionListView extends BaseView implements IAdminRegionListVie
 	public RegionSearchBean getRegionSearch() {
 		
 		regionSearch.setName(nameTb.getText());
-		regionSearch.setCityId(Long.valueOf(cityLb.getValue(cityLb.getSelectedIndex())));
+		regionSearch.setCityId(ClientUtil.strToLong(cityLb.getValue(cityLb.getSelectedIndex())));
 		
 		return regionSearch;
 	}
