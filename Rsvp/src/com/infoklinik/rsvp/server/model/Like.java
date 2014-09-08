@@ -5,10 +5,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import com.infoklinik.rsvp.shared.LikeBean;
 
 @Entity
+@Table(name="like")
 public class Like extends Base {
 
 	@ManyToOne(fetch = FetchType.LAZY)

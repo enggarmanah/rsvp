@@ -32,7 +32,7 @@
 					info<span>klinik</span>
 				</h1>
 				<h1 id="logo-info">
-					Portal Informasi Layanan Kesehatan
+					<g:Label ui:field="infoLb" styleName="environment-info"/>
 				</h1>
 				<div id="header-about-us">
 				<a class="header-link" href="#">Join Us</a> | <a class="header-link" href="#">About Us</a> | <a class="header-link" href="#">Contact Us</a>

@@ -5,10 +5,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import com.infoklinik.rsvp.shared.CommentBean;
 
 @Entity
+@Table(name="comment")
 public class Comment extends Base {
 
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -6,12 +6,14 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.infoklinik.rsvp.shared.InstitutionBean;
 import com.infoklinik.rsvp.shared.InsuranceBean;
 
 @Entity
+@Table(name="insurance")
 public class Insurance extends Base {
 	
 	private String name;

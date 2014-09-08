@@ -1,10 +1,12 @@
 package com.infoklinik.rsvp.server.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import com.infoklinik.rsvp.shared.SpecialityBean;
 
 @Entity
+@Table(name="speciality")
 public class Speciality extends Base {
 	
 	private String title;

@@ -5,11 +5,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.infoklinik.rsvp.shared.ScheduleBean;
 
 @Entity
+@Table(name="schedule")
 public class Schedule extends Base {
 
 	@ManyToOne(fetch = FetchType.LAZY)

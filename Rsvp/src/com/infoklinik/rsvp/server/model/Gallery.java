@@ -5,11 +5,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import com.infoklinik.rsvp.shared.Constant;
 import com.infoklinik.rsvp.shared.GalleryBean;
 
 @Entity
+@Table(name="gallery")
 public class Gallery extends Base {
 	
 	@ManyToOne(fetch = FetchType.LAZY)

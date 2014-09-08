@@ -6,10 +6,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.infoklinik.rsvp.shared.RegionBean;
 
 @Entity
+@Table(name="region")
 public class Region extends Base {
 	
 	private String name;

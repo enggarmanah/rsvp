@@ -1,10 +1,12 @@
 package com.infoklinik.rsvp.server.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import com.infoklinik.rsvp.shared.CityBean;
 
 @Entity
+@Table(name="city")
 public class City extends Base {
 	
 	private String name;

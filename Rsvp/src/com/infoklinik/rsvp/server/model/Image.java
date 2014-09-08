@@ -1,10 +1,12 @@
 package com.infoklinik.rsvp.server.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import com.infoklinik.rsvp.shared.ImageBean;
 
 @Entity
+@Table(name="image")
 public class Image extends Base {
 	
 	private byte[] bytes;

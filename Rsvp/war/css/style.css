@@ -63,24 +63,27 @@ html, body {
 	border: 0px solid #888;
 }
 
+.environment-info {}
+
 #header h1#logo-text  span {
 	color: #80AAE8;
 }
 
 #header h1#logo-info {
 	position: relative;
-	top: 7px;
+	top: 4px;
 	left: 20px;
 	/*font-size: 11px;
 	font-weight: bold;*/
 	font: bold 13px 'Comic Sans MS';
-	line-height: 14px;
+	line-height: 20px;
 	letter-spacing: 0px;
 	color: #4D5D75;
 	text-transform: none;
 	text-decoration: none;
 	border: 0px solid #888;
 	text-shadow: -3px 0px 5px #BBB;
+	overflow: auto;
 }
 
 #header #triangle {

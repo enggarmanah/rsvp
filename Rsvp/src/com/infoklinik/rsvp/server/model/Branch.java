@@ -5,10 +5,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.infoklinik.rsvp.shared.BranchBean;
 
 @Entity
+@Table(name="branch")
 public class Branch extends Base {
 	
 	private Long group_id;

@@ -10,6 +10,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import com.google.appengine.api.utils.SystemProperty;
+import com.infoklinik.rsvp.shared.Constant;
 
 public class PersistenceManager {
 	
@@ -24,9 +25,16 @@ public class PersistenceManager {
 			Map<String, String> properties = new HashMap<String, String>();
 			
 			if (SystemProperty.environment.value() == SystemProperty.Environment.Value.Production) {
+				
 				log.info("Environment Production");
 				properties.put("javax.persistence.jdbc.driver", "com.mysql.jdbc.GoogleDriver");
-				properties.put("javax.persistence.jdbc.url", System.getProperty("cloudsql.url"));
+			
+				if (Constant.ENV_PRODUCTION.equals(Constant.ENV_CURRENT)) {
+					properties.put("javax.persistence.jdbc.url", System.getProperty("cloudsql.url.prd"));
+				} else {
+					properties.put("javax.persistence.jdbc.url", System.getProperty("cloudsql.url.stg"));
+				}
+			
 			} else {
 				log.info("Environment Development");
 				properties.put("javax.persistence.jdbc.driver", "com.mysql.jdbc.Driver");

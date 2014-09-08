@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.infoklinik.rsvp.server.ServerUtil;
@@ -25,6 +26,7 @@ import com.infoklinik.rsvp.shared.ScheduleBean;
 import com.infoklinik.rsvp.shared.ServiceBean;
 
 @Entity
+@Table(name="institution")
 public class Institution extends Base {
 
 	private String name;

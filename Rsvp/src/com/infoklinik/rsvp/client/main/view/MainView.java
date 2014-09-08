@@ -4,11 +4,16 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.main.presenter.interfaces.IMainView;
+import com.infoklinik.rsvp.shared.Constant;
 
 public class MainView extends Composite implements IMainView {
+	
+	@UiField
+	Label infoLb;
 	
 	@UiField
 	SimplePanel menuPanel;
@@ -30,6 +35,13 @@ public class MainView extends Composite implements IMainView {
 		
 		initWidget(uiBinder.createAndBindUi(this));
 		init();
+		
+		String info = "Portal Informasi Layanan Kesehatan";
+		if (Constant.ENV_CURRENT.equals(Constant.ENV_STAGING)) {
+			info += " - Testing Version";
+		}
+		
+		infoLb.setText(info);
 	}
 	
 	private void init() {

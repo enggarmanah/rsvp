@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -17,6 +18,7 @@ import com.infoklinik.rsvp.server.ServerUtil;
 import com.infoklinik.rsvp.shared.AppointmentBean;
 
 @Entity
+@Table(name="appointment")
 public class Appointment {
 	
 	@Id
