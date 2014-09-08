@@ -4,7 +4,7 @@ public class Constant {
 	
 	public static String ENV_STAGING = "Staging";
 	public static String ENV_PRODUCTION = "Production";
-	public static String ENV_CURRENT = ENV_STAGING; 
+	public static String ENV_CURRENT = ENV_PRODUCTION; 
 	
 	public static String CATEGORY_DOCTOR = "DOC";
 	public static String CATEGORY_SERVICE = "SRV";
