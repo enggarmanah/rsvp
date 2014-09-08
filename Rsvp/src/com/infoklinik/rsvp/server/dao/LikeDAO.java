@@ -87,7 +87,7 @@ public class LikeDAO {
 		
 		List<LikeBean> list = new ArrayList<LikeBean>();
 		
-		String sql = "SELECT c FROM Like c WHERE c.inst_id = :instId ORDER BY c.create_date DESC";
+		String sql = "SELECT l FROM Like l JOIN l.institution i WHERE i.id = :instId ORDER BY l.create_date DESC";
 		
 		EntityManager em = PersistenceManager.getEntityManager();
 		
@@ -108,7 +108,7 @@ public class LikeDAO {
 	
 	public Long getInstLikesCount(Long instId) {
 		
-		String sql = "SELECT COUNT(c.id) FROM Like c WHERE c.inst_id = :instId";
+		String sql = "SELECT COUNT(l.id) FROM Like l JOIN l.institution i WHERE i.id = :instId";
 		
 		EntityManager em = PersistenceManager.getEntityManager();
 		
@@ -127,7 +127,7 @@ public class LikeDAO {
 		
 		List<LikeBean> list = new ArrayList<LikeBean>();
 		
-		String sql = "SELECT c FROM Like c WHERE c.doctor_id = :doctorId ORDER BY c.create_date DESC";
+		String sql = "SELECT l FROM Like l JOIN l.doctor d WHERE d.id = :doctorId ORDER BY l.create_date DESC";
 		
 		EntityManager em = PersistenceManager.getEntityManager();
 		
@@ -148,7 +148,7 @@ public class LikeDAO {
 	
 	public Long getDoctorLikesCount(Long instId) {
 		
-		String sql = "SELECT COUNT(c.id) FROM Like c WHERE c.doctor_id = :doctorId";
+		String sql = "SELECT COUNT(l.id) FROM Like l JOIN l.doctor d WHERE d.id = :doctorId";
 		
 		EntityManager em = PersistenceManager.getEntityManager();
 		
@@ -167,7 +167,7 @@ public class LikeDAO {
 		
 		List<LikeBean> list = new ArrayList<LikeBean>();
 		
-		String sql = "SELECT c FROM Like c WHERE c.service_id = :serviceId ORDER BY c.create_date DESC";
+		String sql = "SELECT l FROM Like l JOIN l.service s WHERE s.id = :serviceId ORDER BY l.create_date DESC";
 		
 		EntityManager em = PersistenceManager.getEntityManager();
 		
@@ -188,7 +188,7 @@ public class LikeDAO {
 	
 	public Long getServiceLikesCount(Long serviceId) {
 		
-		String sql = "SELECT COUNT(c.id) FROM Like c WHERE c.service_id = :serviceId";
+		String sql = "SELECT COUNT(l.id) FROM Like l JOIN l.service s WHERE s.id = :serviceId";
 		
 		EntityManager em = PersistenceManager.getEntityManager();
 		

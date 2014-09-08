@@ -8,8 +8,6 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import com.infoklinik.rsvp.client.ClientUtil;
-
 public class ServerUtil {
 	
 	public static String redirectUri = "http://www.infoklinik.com";
@@ -117,7 +115,7 @@ public class ServerUtil {
 		
 		Long number = null;
 		try {
-			number = ClientUtil.strToLong(text);
+			number = Long.valueOf(text);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

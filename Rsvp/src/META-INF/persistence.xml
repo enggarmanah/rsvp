@@ -4,8 +4,8 @@
 	version="2.0">
 
 	<persistence-unit name="Demo">
-		
-	    <class>com.infoklinik.rsvp.server.model.Institution</class>
+		<provider>org.datanucleus.api.jpa.PersistenceProviderImpl</provider>
+		<class>com.infoklinik.rsvp.server.model.Institution</class>
 		<class>com.infoklinik.rsvp.server.model.Doctor</class>
 		<class>com.infoklinik.rsvp.server.model.Service</class>
 		<class>com.infoklinik.rsvp.server.model.Schedule</class>
@@ -29,6 +29,7 @@
 		<properties>
 		    <property name="javax.persistence.jdbc.user" value="root"/>
 			<property name="javax.persistence.jdbc.password" value="enggar"/>
+			<property name="datanucleus.autoCreateSchema" value="true"/>
 		</properties>
 
 	</persistence-unit>

@@ -199,7 +199,7 @@ public class ClientUtil {
 		
 		Long number = null;
 		try {
-			number = ClientUtil.strToLong(text);
+			number = Long.valueOf(text);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
