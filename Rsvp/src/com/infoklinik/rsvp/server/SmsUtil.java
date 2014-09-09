@@ -11,6 +11,8 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.infoklinik.rsvp.shared.Config;
+
 public class SmsUtil {
 	
 	private static final Logger log = Logger.getLogger(SmsUtil.class.getName());
@@ -26,7 +28,7 @@ public class SmsUtil {
 		
 		log.info("Recipient : " + recipient + "\nMessage : " + message);
 		
-		if (ServerUtil.isSmsActive) {
+		if (Config.SMS_ACTIVE_STATUS) {
 		
 			try {
 				
@@ -105,9 +107,9 @@ public class SmsUtil {
 		boolean isSuccess = false;
 		
 		log.info("Recipient : " + recipient + "\nMessage : \n" + message);
-		log.info("Sms Active : " + ServerUtil.isSmsActive);
+		log.info("Sms Active : " + Config.SMS_ACTIVE_STATUS);
 		
-		if (ServerUtil.isSmsActive) {
+		if (Config.SMS_ACTIVE_STATUS) {
 			
 			try {
 				

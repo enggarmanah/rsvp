@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
-	<application>info-klinik</application>
-	<version>2</version>
+	<application>info-klinik-staging</application>
+	<version>1</version>
 
 	<!-- Allows App Engine to send multiple requests to one instance in parallel: -->
 	<threadsafe>true</threadsafe>
@@ -24,7 +24,7 @@
 	<system-properties>
 		<property name="java.util.logging.config.file" value="WEB-INF/logging.properties" />
 		<property name="cloudsql.url.prd" value="jdbc:google:mysql://info-klinik:info-klinik/infoklinik?user=root" />
-		<property name="cloudsql.url.stg" value="jdbc:google:mysql://info-klinik:info-klinik/infoklinik-staging?user=root" />
+		<property name="cloudsql.url.stg" value="jdbc:google:mysql://info-klinik:info-klinik/infoklinik_staging?user=root" />
 		<property name="cloudsql.url.dev" value="jdbc:mysql://localhost/infoklinik?user=root" />
 	</system-properties>
 

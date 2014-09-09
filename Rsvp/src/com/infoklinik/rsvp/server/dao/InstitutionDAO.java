@@ -129,20 +129,23 @@ public class InstitutionDAO {
 	
 	public void updateDisplayDate(List<Long> instIds) {
 		
-		EntityManager em = PersistenceManager.getEntityManager();
-		em.getTransaction().begin();
-		
-		String sql = "UPDATE Institution i SET i.display_date = :displayDate WHERE i.id IN (" + ServerUtil.createSqlFilterIdIn(instIds) + ")";
-		
-		Query query = em.createQuery(sql, Institution.class);
-		
-		query.setParameter("displayDate", new Date());
-		ServerUtil.setSqlParamIdIn(query, instIds);
-		
-		query.executeUpdate();
-
-		em.getTransaction().commit();
-		em.close();
+		if (instIds != null && instIds.size() > 0) {
+			
+			EntityManager em = PersistenceManager.getEntityManager();
+			em.getTransaction().begin();
+			
+			String sql = "UPDATE Institution i SET i.display_date = :displayDate WHERE i.id IN (" + ServerUtil.createSqlFilterIdIn(instIds) + ")";
+			
+			Query query = em.createQuery(sql, Institution.class);
+			
+			query.setParameter("displayDate", new Date());
+			ServerUtil.setSqlParamIdIn(query, instIds);
+			
+			query.executeUpdate();
+	
+			em.getTransaction().commit();
+			em.close();
+		}
 	}
 	
 	public List<InstitutionBean> getInstitutions(InstitutionSearchBean instSearch) {

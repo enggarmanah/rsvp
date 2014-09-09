@@ -8,6 +8,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.main.presenter.interfaces.IMainView;
+import com.infoklinik.rsvp.shared.Config;
 import com.infoklinik.rsvp.shared.Constant;
 
 public class MainView extends Composite implements IMainView {
@@ -37,7 +38,7 @@ public class MainView extends Composite implements IMainView {
 		init();
 		
 		String info = "Portal Informasi Layanan Kesehatan";
-		if (Constant.ENV_CURRENT.equals(Constant.ENV_STAGING)) {
+		if (Config.ENV_CURRENT.equals(Constant.ENV_STAGING)) {
 			info += " - Testing Version";
 		}
 		

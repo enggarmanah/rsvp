@@ -14,8 +14,6 @@ public class ServerUtil {
 	
 	private static SimpleDateFormat dateTimeDtf = new SimpleDateFormat("dd/MM/yyyy kk:mm");
 	
-	public static boolean isSmsActive = false;
-
 	public static boolean isEmpty(String string) {
 
 		if (string == null || "".equals(string.trim())) {
