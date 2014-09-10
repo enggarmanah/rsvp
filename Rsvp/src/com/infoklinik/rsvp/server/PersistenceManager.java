@@ -9,7 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import com.google.appengine.api.utils.SystemProperty;
 import com.infoklinik.rsvp.shared.Config;
 import com.infoklinik.rsvp.shared.Constant;
 
@@ -25,7 +24,7 @@ public class PersistenceManager {
 			
 			Map<String, String> properties = new HashMap<String, String>();
 			
-			if (SystemProperty.environment.value() == SystemProperty.Environment.Value.Production) {
+			if (ServerUtil.isProductionEnvironment()) {
 				
 				log.info("Environment Production");
 				properties.put("javax.persistence.jdbc.driver", "com.mysql.jdbc.GoogleDriver");

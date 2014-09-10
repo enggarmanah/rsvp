@@ -4,7 +4,13 @@ public class Constant {
 	
 	public static String ENV_STAGING = "Staging";
 	public static String ENV_PRODUCTION = "Production";
-		
+	
+	public static String SMS_GW_BULKSMS = "SMS_GW_BULKSMS";
+	public static String SMS_GW_WEBSMS = "SMS_GW_WEBSMS";
+	
+	public static String SEX_MALE = "L";
+	public static String SEX_FEMALE = "P";
+	
 	public static String CATEGORY_DOCTOR = "DOC";
 	public static String CATEGORY_SERVICE = "SRV";
 	public static String CATEGORY_CLINIC = "CLI";
@@ -93,6 +99,8 @@ public class Constant {
 	public static String DAY_SUNDAY_DESC = "Minggu";
 	
 	public static int APPT_INTERVAL_MINUTES = 30;
+	
+	public static String TIMEZONE = "GMT+7:00";
 	
 	public static int HOUR_SECS = 3600;
 	public static int MIN_SECS = 60;

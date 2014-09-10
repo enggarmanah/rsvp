@@ -11,6 +11,7 @@ import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
+import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.appt.presenter.interfaces.IAppointmentPatientInfoView;
 import com.infoklinik.rsvp.shared.AppointmentBean;
 import com.infoklinik.rsvp.shared.Constant;
@@ -74,11 +75,11 @@ public class AppointmentPatientInfoView extends BaseView implements IAppointment
 	
 	public AppointmentBean getAppointment() {
 		
-		appointment.setVerificationCode(verificationCodeTb.getValue());
-		appointment.setPatientName(patientNameTb.getValue());
-		appointment.setPatientSex(patientSexMaleRb.getValue() ? "L" : "P");
-		appointment.setPatientBirthYear(patientBirthYearTb.getValue());
-		appointment.setPatientEmail(patientEmailTb.getValue());
+		appointment.setVerificationCode(ClientUtil.trim(verificationCodeTb.getValue()));
+		appointment.setPatientName(ClientUtil.trim(patientNameTb.getValue()));
+		appointment.setPatientSex(patientSexMaleRb.getValue() ? Constant.SEX_MALE : Constant.SEX_FEMALE);
+		appointment.setPatientBirthYear(ClientUtil.trim(patientBirthYearTb.getValue()));
+		appointment.setPatientEmail(ClientUtil.trim(patientEmailTb.getValue()));
 		
 		return appointment;
 	}

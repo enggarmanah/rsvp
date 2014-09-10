@@ -10,6 +10,7 @@ import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
+import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.appt.presenter.interfaces.IAppointmentPatientMobileView;
 import com.infoklinik.rsvp.shared.Constant;
 import com.infoklinik.rsvp.shared.DoctorBean;
@@ -55,7 +56,7 @@ public class AppointmentPatientMobileView extends BaseView implements IAppointme
 	
 	public String getPatientMobile() {
 		
-		return mobileTb.getValue();
+		return ClientUtil.trim(mobileTb.getValue());
 	}
 	
 	public void setOkBtnClickHandler(ClickHandler handler) {

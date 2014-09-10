@@ -8,11 +8,22 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import com.google.appengine.api.utils.SystemProperty;
+
 public class ServerUtil {
 	
 	public static String redirectUri = "http://www.infoklinik.com";
 	
 	private static SimpleDateFormat dateTimeDtf = new SimpleDateFormat("dd/MM/yyyy kk:mm");
+	
+	public static boolean isProductionEnvironment() {
+		
+		if (SystemProperty.environment.value() == SystemProperty.Environment.Value.Production) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 	public static boolean isEmpty(String string) {
 

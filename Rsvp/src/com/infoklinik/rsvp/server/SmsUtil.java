@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.infoklinik.rsvp.shared.Config;
+import com.infoklinik.rsvp.shared.Constant;
 
 public class SmsUtil {
 	
@@ -19,10 +20,17 @@ public class SmsUtil {
 	
 	public static boolean sendSms(String recipient, String message) {
 		
-		return sendSmsP1(recipient, message);
+		if (Config.SMS_GATEWAY.equals(Constant.SMS_GW_BULKSMS)) {
+			return sendSmsBulkSms(recipient, message);
+		} else if (Config.SMS_GATEWAY.equals(Constant.SMS_GW_BULKSMS)) {
+			return sendSmsWebSms(recipient, message);
+		} else {
+			return false;
+		}
+		
 	} 
 	
-	private static boolean sendSmsP1(String recipient, String message) {
+	private static boolean sendSmsBulkSms(String recipient, String message) {
 		
 		boolean isSuccess = false;
 		
@@ -102,7 +110,7 @@ public class SmsUtil {
 		return isSuccess;
 	}
 	
-	private static boolean sendSmsP2(String recipient, String message) {
+	private static boolean sendSmsWebSms(String recipient, String message) {
 		
 		boolean isSuccess = false;
 		

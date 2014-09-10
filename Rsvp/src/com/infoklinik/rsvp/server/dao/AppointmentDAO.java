@@ -59,6 +59,22 @@ public class AppointmentDAO {
 		return appointmentBean;
 	}
 	
+	public boolean isConflictWithOtherApt(AppointmentBean appointment) {
+		
+		AppointmentSearchBean apptSearch = new AppointmentSearchBean();
+		apptSearch.setDoctorId(appointment.getDoctor().getId());
+		apptSearch.setInstId(appointment.getInstitution().getId());
+		apptSearch.setApptDate(appointment.getApptDate());
+		
+		List<AppointmentBean> appointments = getAppointments(apptSearch);
+		
+		if (appointments.size() != 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	public List<AppointmentBean> getAppointments(AppointmentSearchBean apptSearch) {
 
 		List<AppointmentBean> list = new ArrayList<AppointmentBean>();
