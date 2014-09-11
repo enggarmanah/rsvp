@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.FetchType;
@@ -41,7 +42,10 @@ public class Doctor extends Base {
 	private City city;
 	
 	private String address;
+	
+	@Column(length=4000)
 	private String profile;
+	
 	private String notification_status;
 	private Long view_count;
 	private Long like_count;
