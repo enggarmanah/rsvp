@@ -32,7 +32,8 @@ public class Appointment {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "doctor_id")
 	private Doctor doctor;
-
+	
+	private String event_id;
 	private String reservation_code;
 	private String patient_name;
 	private String patient_sex;
@@ -69,6 +70,14 @@ public class Appointment {
 
 	public void setDoctor(Doctor doctor) {
 		this.doctor = doctor;
+	}
+
+	public String getEvent_id() {
+		return event_id;
+	}
+
+	public void setEvent_id(String event_id) {
+		this.event_id = event_id;
 	}
 
 	public String getReservation_code() {
@@ -141,6 +150,7 @@ public class Appointment {
 		appointmentBean.setId(id);
 		appointmentBean.setDoctor(doctor.getBean());
 		appointmentBean.setInstitution(institution.getBean());
+		appointmentBean.setEventId(event_id);
 		appointmentBean.setReservationCode(reservation_code);
 		appointmentBean.setPatientName(patient_name);
 		appointmentBean.setPatientSex(patient_sex);
@@ -166,6 +176,7 @@ public class Appointment {
 			institution = em.find(Institution.class, appointmentBean.getInstitution().getId());
 		}
 		
+		event_id = appointmentBean.getEventId();
 		reservation_code = appointmentBean.getReservationCode();
 		patient_name = appointmentBean.getPatientName();
 		patient_sex = appointmentBean.getPatientSex();

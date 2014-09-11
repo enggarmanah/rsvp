@@ -12,6 +12,8 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.infoklinik.rsvp.client.ClientUtil;
+import com.infoklinik.rsvp.client.GenericBean;
+import com.infoklinik.rsvp.client.HandlerManager;
 import com.infoklinik.rsvp.client.doctor.DoctorEventBus;
 import com.infoklinik.rsvp.client.doctor.presenter.interfaces.IDoctorProfileView;
 import com.infoklinik.rsvp.client.doctor.view.DoctorProfileView;
@@ -61,7 +63,23 @@ public class DoctorProfilePresenter extends LazyPresenter<IDoctorProfileView, Do
 				schedules = result;
 				initInstitutions(schedules);
 				
-				view.setSchedules(schedules);
+				List<GenericBean<ScheduleBean>> genSchedules = new ArrayList<GenericBean<ScheduleBean>>();
+				for (final ScheduleBean schedule : schedules) {
+					
+					HandlerManager handlerMgr = new HandlerManager();
+					GenericBean<ScheduleBean> genSchedule = new GenericBean<ScheduleBean>(schedule, handlerMgr);
+					handlerMgr.setShowHandler(new ClickHandler() {
+						
+						@Override
+						public void onClick(ClickEvent event) {
+							eventBus.loadAppointmentLv2(schedule);
+						}
+					});
+					
+					genSchedules.add(genSchedule);
+				}
+				
+				view.setSchedules(genSchedules);
 				view.showSchedule();
 				
 				ProgressDlg.hide();
@@ -152,6 +170,8 @@ public class DoctorProfilePresenter extends LazyPresenter<IDoctorProfileView, Do
 				institutions.add(schedule.getInstitutionBean());
 				instMap.put(instId, schedule.getInstitutionBean());
 			}
+			
+			schedule.setDoctor(doctor);
 		}
 	}
 	

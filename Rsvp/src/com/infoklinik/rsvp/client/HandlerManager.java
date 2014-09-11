@@ -6,6 +6,7 @@ public class HandlerManager {
 	
 	private ClickHandler addHandler;
 	private ClickHandler showHandler;
+	private ClickHandler showMoreHandler;
 	private ClickHandler updateHandler;
 	private ClickHandler deleteHandler;
 	private ClickHandler likeHandler;
@@ -17,6 +18,14 @@ public class HandlerManager {
 
 	public void setShowHandler(ClickHandler showHandler) {
 		this.showHandler = showHandler;
+	}
+
+	public ClickHandler getShowMoreHandler() {
+		return showMoreHandler;
+	}
+
+	public void setShowMoreHandler(ClickHandler showMoreHandler) {
+		this.showMoreHandler = showMoreHandler;
 	}
 
 	public ClickHandler getAddHandler() {

@@ -1026,6 +1026,8 @@ input.search-field:focus {
 }
 
 #search-result-content .service .service-dtl .service-partner .inst:hover {
+	color: #FF7E00;
+	cursor: pointer;
 }
 
 #search-result-nav-top {
@@ -1482,14 +1484,18 @@ input.search-field:focus {
 	color: #444;
 }
 
-#profile-inst-info .doctor-inst-name {
-	font: bold 13px 'Comic Sans MS';
+#profile-inst-info .doctor-inst-name-wrapper {
 	float: left;
 	display: block;
 	width: 100%;
 	padding: 3px 0px 2px 0px;
+}
+
+#profile-inst-info .doctor-inst-name {
+	font: bold 13px 'Comic Sans MS';
 	color: #444;
 	cursor: pointer;
+	display: inline;
 }
 
 #profile-inst-info .doctor-inst-name:hover {

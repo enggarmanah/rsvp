@@ -140,6 +140,9 @@ public interface MainEventBus extends EventBusWithLookup {
 	@Event(forwardToModules=AppointmentModule.class)
 	public void loadAppointment(ScheduleBean schedule);
 	
+	@Event(forwardToModules=AppointmentModule.class)
+	public void loadAppointmentLv2(ScheduleBean schedule);
+	
 	@Event(forwardToModules=AdminModule.class)
 	public void addInstitution();
 	

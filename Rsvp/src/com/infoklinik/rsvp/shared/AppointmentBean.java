@@ -9,6 +9,7 @@ public class AppointmentBean implements Serializable {
 	private Long id;
 	private DoctorBean doctor;
 	private InstitutionBean institution;
+	private String eventId;
 	private String verificationCode;
 	private String reservationCode;
 	private String patientName;
@@ -42,6 +43,14 @@ public class AppointmentBean implements Serializable {
 
 	public void setInstitution(InstitutionBean institution) {
 		this.institution = institution;
+	}
+
+	public String getEventId() {
+		return eventId;
+	}
+
+	public void setEventId(String eventId) {
+		this.eventId = eventId;
 	}
 
 	public String getVerificationCode() {

@@ -14,6 +14,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
+import com.infoklinik.rsvp.client.GenericBean;
 import com.infoklinik.rsvp.client.doctor.presenter.interfaces.IDoctorProfileView;
 import com.infoklinik.rsvp.shared.Constant;
 import com.infoklinik.rsvp.shared.DoctorBean;
@@ -92,7 +93,7 @@ public class DoctorProfileView extends BaseView implements IDoctorProfileView {
 		this.doctor = doctor;
 	}
 	
-	public void setSchedules(List<ScheduleBean> schedules) {
+	public void setSchedules(List<GenericBean<ScheduleBean>> schedules) {
 		
 		scheduleView.setSchedules(schedules);
 	}

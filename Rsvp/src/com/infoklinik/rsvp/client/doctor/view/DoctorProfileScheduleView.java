@@ -11,6 +11,7 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
+import com.infoklinik.rsvp.client.GenericBean;
 import com.infoklinik.rsvp.shared.InstitutionBean;
 import com.infoklinik.rsvp.shared.ScheduleBean;
 
@@ -33,23 +34,25 @@ public class DoctorProfileScheduleView extends BaseView {
 		initWidget(uiBinder.createAndBindUi(this));
 	}
 	
-	public void setSchedules(List<ScheduleBean> schedules) {
+	public void setSchedules(List<GenericBean<ScheduleBean>> schedules) {
 		
 		schedulesPanel.clear();
 		
-		HashMap<Long, List<ScheduleBean>> scheduleMap = new HashMap<Long, List<ScheduleBean>>();
+		HashMap<Long, List<GenericBean<ScheduleBean>>> scheduleMap = new HashMap<Long, List<GenericBean<ScheduleBean>>>();
 		HashMap<Long, InstitutionBean> instMap = new HashMap<Long, InstitutionBean>(); 
 		
-		for (ScheduleBean schedule : schedules) {
+		for (GenericBean<ScheduleBean> genSchedule : schedules) {
+			
+			ScheduleBean schedule = genSchedule.getBean();
 			
 			InstitutionBean institution = schedule.getInstitutionBean();
-			List<ScheduleBean> instSchedules =  scheduleMap.get(institution.getId());
+			List<GenericBean<ScheduleBean>> instSchedules =  scheduleMap.get(institution.getId());
 			
 			if (instSchedules == null) {
-				instSchedules = new ArrayList<ScheduleBean>();
+				instSchedules = new ArrayList<GenericBean<ScheduleBean>>();
 			}
 			
-			instSchedules.add(schedule);
+			instSchedules.add(genSchedule);
 			
 			scheduleMap.put(institution.getId(), instSchedules);
 			instMap.put(institution.getId(), institution);
@@ -57,7 +60,7 @@ public class DoctorProfileScheduleView extends BaseView {
 		
 		for (Long instId : scheduleMap.keySet()) {
 			
-			List<ScheduleBean> instSchedules = scheduleMap.get(instId);
+			List<GenericBean<ScheduleBean>> instSchedules = scheduleMap.get(instId);
 			InstitutionBean institution = instMap.get(instId);
 			
 			InstitutionView institutionView = new InstitutionView();

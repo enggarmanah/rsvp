@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.infoklinik.rsvp.client.rpc.AppointmentService;
 import com.infoklinik.rsvp.server.CalendarUtil;
+import com.infoklinik.rsvp.server.ServerUtil;
 import com.infoklinik.rsvp.server.SmsUtil;
 import com.infoklinik.rsvp.server.dao.AppointmentDAO;
 import com.infoklinik.rsvp.shared.AppointmentBean;
@@ -31,9 +32,12 @@ public class AppointmentServiceImpl extends BaseServiceServlet implements Appoin
 		AppointmentDAO appointmentDAO = new AppointmentDAO();
 		 
 		if (!appointmentDAO.isConflictWithOtherApt(appointment)) {
+			
+			appointment.setReservationCode(ServerUtil.generateReservationCode());
+			
 			String eventId = CalendarUtil.addCalendarEntry(appointment);
 			if (eventId != null) {
-				appointment.setReservationCode(eventId);
+				appointment.setEventId(eventId);
 				appointment = appointmentDAO.addAppointment(appointment);
 			}
 		}

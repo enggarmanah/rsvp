@@ -12,6 +12,9 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
 import com.infoklinik.rsvp.client.ClientUtil;
+import com.infoklinik.rsvp.client.GenericBean;
+import com.infoklinik.rsvp.client.HandlerManager;
+import com.infoklinik.rsvp.shared.Constant;
 import com.infoklinik.rsvp.shared.InstitutionBean;
 import com.infoklinik.rsvp.shared.ScheduleBean;
 
@@ -53,13 +56,24 @@ public class InstitutionView extends BaseView {
 		emailLb.setText(institution.getEmail());
 	}
 	
-	public void setSchedules(List<ScheduleBean> schedules) {
+	public void setSchedules(List<GenericBean<ScheduleBean>> schedules) {
 		
-		for (ScheduleBean schedule : schedules) {
+		String prevDay = Constant.EMPTY_STRING;
 		
+		for (GenericBean<ScheduleBean> genSchedule : schedules) {
+			
+			ScheduleBean schedule = genSchedule.getBean();
+			
 			Label dayLb = new Label();
-			dayLb.setText(ClientUtil.dayToStr(schedule.getDay()) + " :");
 			dayLb.setStyleName(STYLE_SCHEDULE_DAY);
+			
+			String day = ClientUtil.dayToStr(schedule.getDay());
+			
+			if (!day.equals(prevDay)) {
+				dayLb.setText(ClientUtil.dayToStr(schedule.getDay()) + " :");
+			}
+			
+			prevDay = day;
 			
 			Label timeLb = new Label();
 			String timeStr = ClientUtil.timeToStr(schedule.getOpStart()) + "-" + ClientUtil.timeToStr(schedule.getOpEnd()); 
@@ -71,8 +85,11 @@ public class InstitutionView extends BaseView {
 			horizontalPanel.add(dayLb);
 			horizontalPanel.add(timeLb);
 			
+			HandlerManager handlerMgr = genSchedule.getHandlerMgr();
+			
 			FocusPanel schedulePanel = new FocusPanel();
 			schedulePanel.add(horizontalPanel);
+			schedulePanel.addClickHandler(handlerMgr.getShowHandler());
 			
 			schedulesPanel.add(schedulePanel);
 		}

@@ -16,6 +16,21 @@ public class ServerUtil {
 	
 	private static SimpleDateFormat dateTimeDtf = new SimpleDateFormat("dd/MM/yyyy kk:mm");
 	
+	public static void main(String[] args) {
+		System.out.println(generateReservationCode());
+	}
+	
+	public static synchronized String generateReservationCode() {
+		
+		String code = "";
+		
+		Long time = (new Date()).getTime();
+		code = Long.toString(time, 32);
+		code = code.toUpperCase();
+		
+		return code;
+	}
+	
 	public static boolean isProductionEnvironment() {
 		
 		if (SystemProperty.environment.value() == SystemProperty.Environment.Value.Production) {

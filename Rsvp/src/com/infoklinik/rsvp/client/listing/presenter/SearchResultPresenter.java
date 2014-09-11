@@ -157,6 +157,7 @@ public class SearchResultPresenter extends LazyPresenter<ISearchResultView, Sear
 			HandlerManager handlerMgr = new HandlerManager();
 			
 			handlerMgr.setShowHandler(getShowHandler(service));
+			handlerMgr.setShowMoreHandler(getShowMoreHandler(service));
 			handlerMgr.setCommentHandler(getCommentHandler(service));
 			handlerMgr.setLikeHandler(getLikeHandler(service));
 			
@@ -313,6 +314,20 @@ public class SearchResultPresenter extends LazyPresenter<ISearchResultView, Sear
 			public void onClick(ClickEvent event) {
 				
 				eventBus.loadServiceInfo(service);
+			}
+		};
+		
+		return showHandler;
+	}
+	
+	private ClickHandler getShowMoreHandler(final ServiceBean service) {
+		
+		ClickHandler showHandler = new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				
+				eventBus.loadInstitutionProfile(service.getInstitution());
 			}
 		};
 		

@@ -24,6 +24,9 @@ public interface AppointmentEventBus extends EventBus {
 	public void loadAppointment(ScheduleBean schedule);
 	
 	@Event(handlers = AppointmentPresenter.class)
+	public void loadAppointmentLv2(ScheduleBean schedule);
+	
+	@Event(handlers = AppointmentPresenter.class)
 	public void selectAnotherDate(AppointmentBean appointment);
 	
 	@Event(handlers = AppointmentPatientMobilePresenter.class)

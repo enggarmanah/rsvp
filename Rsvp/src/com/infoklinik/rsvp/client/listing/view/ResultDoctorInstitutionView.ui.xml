@@ -4,8 +4,8 @@
 		
 		<div id="profile-inst-info">
 		<div class="inst">
-			<div class="doctor-inst-name">
-				<g:Label ui:field="nameLb"></g:Label>
+			<div class="doctor-inst-name-wrapper">
+				<g:Label ui:field="nameLb" styleName="doctor-inst-name"></g:Label>
 			</div>
 			<div class="inst-info">
 				<div class="inst-subinfo-icon">

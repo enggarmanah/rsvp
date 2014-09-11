@@ -1149,7 +1149,7 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 			@Override
 			public void onSuccess(List<BranchBean> result) {
 				
-				ProgressDlg.hide();
+				ProgressDlg.success();
 				view.hide();
 			}
 			

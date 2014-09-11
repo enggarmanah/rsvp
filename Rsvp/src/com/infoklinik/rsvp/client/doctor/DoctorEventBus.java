@@ -4,6 +4,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.infoklinik.rsvp.client.CustomLogger;
 import com.infoklinik.rsvp.client.doctor.presenter.DoctorProfilePresenter;
 import com.infoklinik.rsvp.shared.DoctorBean;
+import com.infoklinik.rsvp.shared.ScheduleBean;
 import com.mvp4g.client.annotation.Debug;
 import com.mvp4g.client.annotation.Event;
 import com.mvp4g.client.annotation.Events;
@@ -16,6 +17,9 @@ public interface DoctorEventBus extends EventBus {
 	
 	@Event(forwardToParent = true)
 	public void loadChildModuleView(IsWidget widget);
+	
+	@Event(forwardToParent = true)
+	public void loadAppointmentLv2(ScheduleBean schedule);
 	
 	@Event(handlers = DoctorProfilePresenter.class)
 	public void loadDoctorProfile(DoctorBean doctorBean);

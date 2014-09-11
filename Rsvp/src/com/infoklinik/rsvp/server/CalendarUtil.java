@@ -34,7 +34,7 @@ public class CalendarUtil {
 
 	public static String addCalendarEntry(AppointmentBean appointment) {
 		
-		String eventId = null;
+		String eventId = "[Event-ID]";
 		
 		if (ServerUtil.isProductionEnvironment()) {
 			
@@ -47,7 +47,7 @@ public class CalendarUtil {
 		        
 		        String summary = "Jadwal Kunjungan Pasien : " + patientTitle + appointment.getPatientName() + " / " + appointment.getPatientMobile();
 		        String location = appointment.getInstitution().getName() + ", " + appointment.getInstitution().getAddress();
-		        String description = "Untuk info lebih lanjut silahkan hubungi no. telepon : " + appointment.getInstitution().getTelephone();
+		        String description = "Untuk info lebih lanjut / pembatalan / perubahan jadwal silahkan hubungi no. telepon : " + appointment.getInstitution().getTelephone();
 		        
 		        event.setSummary(summary);
 		        event.setLocation(location);
@@ -105,6 +105,8 @@ public class CalendarUtil {
 		        log.info("Add events into calendar - End");
 		        
 		        eventId = event.getId();
+		        
+		        calendar.events().update("primary", event.getId(), event);
 		        
 		        log.info("Event ID = " + eventId);
 	

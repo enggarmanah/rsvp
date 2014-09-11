@@ -45,6 +45,7 @@ public class AppointmentPresenter extends LazyPresenter<IAppointmentView, Appoin
 	Integer apptDay;
 	
 	boolean isSelectAnotherDate = false;
+	boolean isWindowLv2 = false;
 	
 	List<String> errorMessages;
 	
@@ -100,7 +101,7 @@ public class AppointmentPresenter extends LazyPresenter<IAppointmentView, Appoin
 		});
 	}
 	
-	public void onLoadAppointment(ScheduleBean schedule) {
+	private void loadAppointment(ScheduleBean schedule) {
 		
 		isSelectAnotherDate = false;
 		this.schedule = schedule;
@@ -115,9 +116,26 @@ public class AppointmentPresenter extends LazyPresenter<IAppointmentView, Appoin
 		
 		view.setAppointment(appointment);
 		
-		initSchedules();
+		if (isWindowLv2) {
+			view.showLv2();
+		} else {
+			view.show();
+		}
 		
-		view.show();
+		
+		initSchedules();
+	}
+	
+	public void onLoadAppointment(ScheduleBean schedule) {
+		
+		isWindowLv2 = false;
+		loadAppointment(schedule);
+	}
+	
+	public void onLoadAppointmentLv2(ScheduleBean schedule) {
+		
+		isWindowLv2 = true;
+		loadAppointment(schedule);
 	}
 	
 	public void onSelectAnotherDate(AppointmentBean appointment) {

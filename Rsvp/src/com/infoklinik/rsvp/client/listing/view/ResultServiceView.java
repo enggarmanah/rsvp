@@ -117,6 +117,7 @@ public class ResultServiceView extends BaseView {
 		commentCountLb.setText(String.valueOf(service.getCommentCount()));
 		
 		serviceNameLb.addClickHandler(handlerMgr.getShowHandler());
+		institutionLb.addClickHandler(handlerMgr.getShowMoreHandler());
 		
 		commentCountLb.addClickHandler(handlerMgr.getCommentHandler());
 		commentCountImg.addClickHandler(handlerMgr.getCommentHandler());

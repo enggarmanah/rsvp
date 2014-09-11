@@ -5,6 +5,7 @@ import java.util.List;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
+import com.infoklinik.rsvp.client.GenericBean;
 import com.infoklinik.rsvp.shared.DoctorBean;
 import com.infoklinik.rsvp.shared.InstitutionBean;
 import com.infoklinik.rsvp.shared.ScheduleBean;
@@ -26,7 +27,7 @@ public interface IDoctorProfileView extends LazyView, IsWidget {
 	
 	void setDoctor(DoctorBean doctor);
 	
-	void setSchedules(List<ScheduleBean> schedules);
+	void setSchedules(List<GenericBean<ScheduleBean>> schedules);
 	
 	void setInstitutions(List<InstitutionBean> institutions);
 	

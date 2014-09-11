@@ -139,12 +139,11 @@ public class AdminDoctorPresenter extends LazyPresenter<IAdminDoctorView, AdminE
 							public void onSuccess(DoctorBean result) {
 								doctor = result;
 								view.hide();
-								ProgressDlg.hide();
+								ProgressDlg.success();
 							}
 							
 							@Override
 							public void onFailure(Throwable caught) {
-								view.hide();
 								ProgressDlg.failure();
 							}
 						});
@@ -158,12 +157,11 @@ public class AdminDoctorPresenter extends LazyPresenter<IAdminDoctorView, AdminE
 								doctor = result;
 								orgDoctor.setBean(doctor);
 								view.hide();
-								ProgressDlg.hide();
+								ProgressDlg.success();
 							}
 							
 							@Override
 							public void onFailure(Throwable caught) {
-								view.hide();
 								ProgressDlg.failure();
 							}
 						});

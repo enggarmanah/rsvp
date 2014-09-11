@@ -123,26 +123,50 @@ public class AdminStatisticView extends BaseView implements IAdminStatisticView 
 		Long total = Long.valueOf(0);
 		
 		Long count = map.get(Constant.SEARCH_CLINIC);
+		if (count == null) {
+			count = Long.valueOf(0);
+		}
+		
 		searchClinicLb.setText(ClientUtil.numberToStr(count));
 		total += count;
 		
 		count = map.get(Constant.SEARCH_HOSPITAL);
+		if (count == null) {
+			count = Long.valueOf(0);
+		}
+		
 		searchHospitalLb.setText(ClientUtil.numberToStr(count));
 		total += count;
 		
 		count = map.get(Constant.SEARCH_LAB);
+		if (count == null) {
+			count = Long.valueOf(0);
+		}
+		
 		searchLabLb.setText(ClientUtil.numberToStr(count));
 		total += count;
 		
 		count = map.get(Constant.SEARCH_PHARMACY);
+		if (count == null) {
+			count = Long.valueOf(0);
+		}
+		
 		searchPharmacyLb.setText(ClientUtil.numberToStr(count));
 		total += count;
 		
 		count = map.get(Constant.SEARCH_DOCTOR);
+		if (count == null) {
+			count = Long.valueOf(0);
+		}
+		
 		searchDoctorLb.setText(ClientUtil.numberToStr(count));
 		total += count;
 		
 		count = map.get(Constant.SEARCH_SERVICE);
+		if (count == null) {
+			count = Long.valueOf(0);
+		}
+		
 		searchServiceLb.setText(ClientUtil.numberToStr(count));
 		total += count;
 		

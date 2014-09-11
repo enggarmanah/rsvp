@@ -16,6 +16,8 @@ public interface IAppointmentView extends LazyView, IsWidget {
 	
 	void show();
 	
+	void showLv2();
+	
 	void hide();
 	
 	void setSchedulesAndAppointments(ScheduleAppointmentBean scheduleAppointment);

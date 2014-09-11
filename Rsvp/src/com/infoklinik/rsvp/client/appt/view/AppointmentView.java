@@ -173,7 +173,20 @@ public class AppointmentView extends BaseView implements IAppointmentView {
 		fadeOut();
 		
 		dialogBox.center();
-		dialogBox.setPopupPosition(dialogBox.getPopupLeft(), 70);
+		dialogBox.setPopupPosition(dialogBox.getPopupLeft(), Constant.POPUP_L1_TOP);
+		dialogBox.show();
+		
+		fadeIn();
+	}
+	
+	public void showLv2() {
+		
+		goToTop();
+		
+		fadeOut();
+		
+		dialogBox.center();
+		dialogBox.setPopupPosition(dialogBox.getPopupLeft() + Constant.POPUP_L2_LEFT, Constant.POPUP_L2_TOP);
 		dialogBox.show();
 		
 		fadeIn();
