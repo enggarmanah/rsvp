@@ -55,6 +55,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.infoklinik.rsvp.client.OAuthException;
 import com.infoklinik.rsvp.client.OAuthUtil;
 import com.infoklinik.rsvp.client.rpc.OAuthLoginService;
+import com.infoklinik.rsvp.server.ServerUtil;
 import com.infoklinik.rsvp.server.oauth.GithubApi;
 import com.infoklinik.rsvp.server.oauth.InstagramApi;
 import com.infoklinik.rsvp.server.oauth.InstragramToken;
@@ -149,7 +150,7 @@ public class OAuthLoginServiceImpl extends RemoteServiceServlet implements OAuth
                     .provider(FacebookApi.class)
                     .apiKey(OAuthServerUtil.FACEBOOK_APP_ID)
                     .apiSecret(OAuthServerUtil.FACEBOOK_APP_SECRET)
-                    .callback(OAuthUtil.getCallbackUrl())
+                    .callback(ServerUtil.getCallbackUrl())
                     .build();
                 break;
             }
@@ -161,7 +162,7 @@ public class OAuthLoginServiceImpl extends RemoteServiceServlet implements OAuth
                     .apiKey(OAuthServerUtil.GOOGLE_APP_ID)
                     .apiSecret(OAuthServerUtil.GOOGLE_APP_SECRET)
                     .scope(OAuthServerUtil.GOOGLE_SCOPE)
-                    .callback(OAuthUtil.getCallbackUrl())
+                    .callback(ServerUtil.getCallbackUrl())
                     .grantType(OAuthConstants.AUTHORIZATION_CODE)
                     .build();
                 
@@ -174,7 +175,7 @@ public class OAuthLoginServiceImpl extends RemoteServiceServlet implements OAuth
                     .provider(TwitterApi.class)
                     .apiKey(OAuthServerUtil.TWITTER_APP_ID)
                     .apiSecret(OAuthServerUtil.TWITTER_APP_SECRET)
-                    .callback(OAuthUtil.getCallbackUrl())
+                    .callback(ServerUtil.getCallbackUrl())
                     .build();
                 break;
             }
@@ -184,7 +185,7 @@ public class OAuthLoginServiceImpl extends RemoteServiceServlet implements OAuth
                     .provider(YahooApi.class)
                     .apiKey(OAuthServerUtil.YAHOO_APP_ID)
                     .apiSecret(OAuthServerUtil.YAHOO_APP_SECRET)
-                    .callback(OAuthUtil.getCallbackUrl())
+                    .callback(ServerUtil.getCallbackUrl())
                     .build();
                 break;
             }
@@ -195,7 +196,7 @@ public class OAuthLoginServiceImpl extends RemoteServiceServlet implements OAuth
                     .provider(LinkedInApi.class)
                     .apiKey(OAuthServerUtil.LINKEDIN_APP_ID)
                     .apiSecret(OAuthServerUtil.LINKEDIN_APP_SECRET)
-                    .callback(OAuthUtil.getCallbackUrl())
+                    .callback(ServerUtil.getCallbackUrl())
                     .build();
                 break;
             }
@@ -207,7 +208,7 @@ public class OAuthLoginServiceImpl extends RemoteServiceServlet implements OAuth
                     .apiKey(OAuthServerUtil.INSTAGRAM_APP_ID)
                     .apiSecret(OAuthServerUtil.INSTAGRAM_APP_SECRET)
                     .grantType(OAuthConstants.AUTHORIZATION_CODE)
-                    .callback(OAuthUtil.getCallbackUrl())
+                    .callback(ServerUtil.getCallbackUrl())
                     .build();
                 break;
             }
@@ -218,7 +219,7 @@ public class OAuthLoginServiceImpl extends RemoteServiceServlet implements OAuth
                 .provider(GithubApi.class)
                     .apiKey(OAuthServerUtil.GITHUB_APP_ID)
                     .apiSecret(OAuthServerUtil.GITHUB_APP_SECRET)
-                    .callback(OAuthUtil.getCallbackUrl())
+                    .callback(ServerUtil.getCallbackUrl())
                     .build();
                 break;
                 
@@ -230,7 +231,7 @@ public class OAuthLoginServiceImpl extends RemoteServiceServlet implements OAuth
                 .provider(ImgUrApi.class)
                     .apiKey(OAuthServerUtil.IMGUR_APP_ID)
                     .apiSecret(OAuthServerUtil.IMGUR_APP_SECRET)
-                    .callback(OAuthUtil.getCallbackUrl())
+                    .callback(ServerUtil.getCallbackUrl())
                     .build();
                 break;
             }
@@ -241,7 +242,7 @@ public class OAuthLoginServiceImpl extends RemoteServiceServlet implements OAuth
                 .provider(FlickrApi.class)
                     .apiKey(OAuthServerUtil.FLICKR_APP_ID)
                     .apiSecret(OAuthServerUtil.FLICKR_APP_SECRET)
-                    .callback(OAuthUtil.getCallbackUrl())
+                    .callback(ServerUtil.getCallbackUrl())
                     .build();
                 break;
             }
@@ -252,7 +253,7 @@ public class OAuthLoginServiceImpl extends RemoteServiceServlet implements OAuth
                 .provider(VimeoApi.class)
                     .apiKey(OAuthServerUtil.VIMEO_APP_ID)
                     .apiSecret(OAuthServerUtil.VIMEO_APP_SECRET)
-                    .callback(OAuthUtil.getCallbackUrl())
+                    .callback(ServerUtil.getCallbackUrl())
                     .build();
                 break;
             }
@@ -264,7 +265,7 @@ public class OAuthLoginServiceImpl extends RemoteServiceServlet implements OAuth
                 .provider(LiveApi.class)
                     .apiKey(OAuthServerUtil.WINDOWS_LIVE_APP_ID)
                     .apiSecret(OAuthServerUtil.WINDOWS_LIVE_APP_SECRET)
-                    .callback(OAuthUtil.getCallbackUrl())
+                    .callback(ServerUtil.getCallbackUrl())
                     .scope("wl.basic")
                     .build();
                 break;
@@ -276,7 +277,7 @@ public class OAuthLoginServiceImpl extends RemoteServiceServlet implements OAuth
                 .provider(TumblrApi.class)
                     .apiKey(OAuthServerUtil.TUMBLR_LIVE_APP_ID)
                     .apiSecret(OAuthServerUtil.TUMBLR_LIVE_APP_SECRET)
-                    .callback(OAuthUtil.getCallbackUrl())
+                    .callback(ServerUtil.getCallbackUrl())
                     .build();
                 break;
             }
@@ -287,7 +288,7 @@ public class OAuthLoginServiceImpl extends RemoteServiceServlet implements OAuth
                 .provider(Foursquare2Api.class)
                     .apiKey(OAuthServerUtil.FOURSQUARE_APP_ID)
                     .apiSecret(OAuthServerUtil.FOURSQUARE_APP_SECRET)
-                    .callback(OAuthUtil.getCallbackUrl())
+                    .callback(ServerUtil.getCallbackUrl())
                     .build();
                 break;
             }

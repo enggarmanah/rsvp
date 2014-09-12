@@ -52,6 +52,8 @@ public class MainPresenter extends BasePresenter<IMainView, MainEventBus> implem
 	public static Boolean isPartnerLoaded = false;
 	public static Boolean isPromotionLoaded = false;
 	
+	private String callbackUrl = Constant.APP_CALLBACK_URL_PROD;
+	
 	@Override
 	public void onSuccess(MainEventBus eventBus, final String eventName, Object[] params ) {}
 	
@@ -100,6 +102,21 @@ public class MainPresenter extends BasePresenter<IMainView, MainEventBus> implem
 				
 		eventBus.loadMenu();
 		eventBus.loadClinicSearch();
+		
+		commonService.isProductionEnvironment(new AsyncCallback<Boolean>() {
+			
+			@Override
+			public void onSuccess(Boolean result) {
+				if (result) {
+					callbackUrl = Constant.APP_CALLBACK_URL_PROD;
+				} else {
+					callbackUrl = Constant.APP_CALLBACK_URL_DEV;
+				}
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {}
+		});
 		
 		commonService.getUserInfo(new AsyncCallback<UserBean>() {
 			
@@ -197,8 +214,6 @@ public class MainPresenter extends BasePresenter<IMainView, MainEventBus> implem
 				public void onSuccess(SocialUser result) {
 					
 					ProgressDlg.hidePrompt();
-					
-					Window.alert(result.getJson());
 				}
 				
 				@Override
@@ -220,7 +235,7 @@ public class MainPresenter extends BasePresenter<IMainView, MainEventBus> implem
         String authProviderName = OAuthUtil.getAuthProviderName(authProvider);
         GWT.log("Get authorization from : " + authProviderName);
         
-        final String callbackUrl = OAuthUtil.getCallbackUrl();
+        GWT.log("Callback url : " + callbackUrl);
         GWT.log("Getting authorization url");
         
         final Credential credential = new Credential();

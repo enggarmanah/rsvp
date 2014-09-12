@@ -19,8 +19,7 @@ public class OAuthUtil {
 	// Callback URL is registered with each OAuth Provider
 	// private static final String APP_CALLBACK_URL =
 	// "http://oauthdemo2012.com:8888/GWTOAuthLoginDemo.html";
-	private static final String APP_CALLBACK_URL = "http://www.infoklinik.com:8888/verifyCredential";
-
+	
 	private static final String FACEBOOK_PROTECTED_RESOURCE_URL = "https://graph.facebook.com/me";
 
 	private static final String GOOGLE_PROTECTED_RESOURSE_URL = "https://www.googleapis.com/oauth2/v1/userinfo";
@@ -71,7 +70,7 @@ public class OAuthUtil {
 	public final static int EVERNOTE = 12;
 	public final static int TUMBLR = 13;
 	public final static int FOURSQUARE = 14;
-
+	
 	public static String[] getAuthProviders() {
 		return authProviders;
 	}
@@ -144,10 +143,6 @@ public class OAuthUtil {
 			return "foursquare";
 
 		return "Default";
-	}
-
-	public static String getCallbackUrl() {
-		return APP_CALLBACK_URL;
 	}
 
 	public static String getProctedResourceUrl(int authProvider) {

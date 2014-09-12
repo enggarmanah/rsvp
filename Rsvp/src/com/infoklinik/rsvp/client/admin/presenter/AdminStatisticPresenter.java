@@ -11,6 +11,7 @@ import com.infoklinik.rsvp.client.admin.AdminStatisticEventBus;
 import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminStatisticView;
 import com.infoklinik.rsvp.client.admin.view.AdminStatisticView;
 import com.infoklinik.rsvp.client.main.view.NotificationDlg;
+import com.infoklinik.rsvp.client.main.view.ProgressDlg;
 import com.infoklinik.rsvp.client.rpc.CommonServiceAsync;
 import com.infoklinik.rsvp.client.rpc.StatisticServiceAsync;
 import com.mvp4g.client.annotation.Presenter;
@@ -27,9 +28,19 @@ public class AdminStatisticPresenter extends LazyPresenter<IAdminStatisticView, 
 	StatisticServiceAsync statisticService;
 	
 	boolean isLoadFail = false;
+	boolean isLoadDataStatCompleted = false;
+	boolean isLoadSearchTypeStatCompleted = false;
+	boolean isLoadSearchMethodStatCompleted = false;
 	
 	@Override
 	public void bindView() {
+	}
+	
+	private void displaySuccess() {
+		
+		if (isLoadDataStatCompleted && isLoadSearchTypeStatCompleted && isLoadSearchMethodStatCompleted) {
+			ProgressDlg.hide();
+		}
 	}
 	
 	private void displayErrOnLoad() {
@@ -44,11 +55,15 @@ public class AdminStatisticPresenter extends LazyPresenter<IAdminStatisticView, 
 		
 		eventBus.setLeftPanel(view.asWidget());
 		
+		ProgressDlg.show();
+		
 		statisticService.getDataStatistic(new AsyncCallback<Map<String,Long>>() {
 			
 			@Override
 			public void onSuccess(Map<String, Long> result) {
 				view.setDataStatistic(result);
+				isLoadDataStatCompleted = true;
+				displaySuccess();
 			}
 			
 			@Override
@@ -62,6 +77,9 @@ public class AdminStatisticPresenter extends LazyPresenter<IAdminStatisticView, 
 			@Override
 			public void onSuccess(Map<String, Long> result) {
 				view.setSearchTypeStatistic(result);
+				isLoadSearchTypeStatCompleted = true;
+				displaySuccess();
+				
 			}
 			
 			@Override
@@ -75,6 +93,8 @@ public class AdminStatisticPresenter extends LazyPresenter<IAdminStatisticView, 
 			@Override
 			public void onSuccess(Map<String, Long> result) {
 				view.setSearchMethodStatistic(result);
+				isLoadSearchMethodStatCompleted = true;
+				displaySuccess();
 			}
 			
 			@Override

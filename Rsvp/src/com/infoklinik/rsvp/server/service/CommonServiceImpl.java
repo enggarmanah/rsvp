@@ -15,6 +15,11 @@ public class CommonServiceImpl extends BaseServiceServlet implements CommonServi
 	
 	private static final Logger log = Logger.getLogger(CommonServiceImpl.class.getName());
 	
+	public Boolean isProductionEnvironment() {
+		
+		return ServerUtil.isProductionEnvironment();
+	}
+	
 	public UserBean getUserInfo() {
 		
 		log.info("getUserInfo - Begin");

@@ -6,7 +6,9 @@ import com.infoklinik.rsvp.shared.UserBean;
 
 @RemoteServiceRelativePath("commonService")
 public interface CommonService extends RemoteService {
-
+	
+	Boolean isProductionEnvironment();
+	
 	UserBean getUserInfo();
 	
 	UserBean logout();

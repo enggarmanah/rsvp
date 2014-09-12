@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.Query;
 
 import com.google.appengine.api.utils.SystemProperty;
+import com.infoklinik.rsvp.shared.Constant;
 
 public class ServerUtil {
 	
@@ -18,6 +19,15 @@ public class ServerUtil {
 	
 	public static void main(String[] args) {
 		System.out.println(generateReservationCode());
+	}
+	
+	public static String getCallbackUrl() {
+		
+		if (ServerUtil.isProductionEnvironment()) {
+			return Constant.APP_CALLBACK_URL_PROD;
+		} else {
+			return Constant.APP_CALLBACK_URL_DEV;
+		}
 	}
 	
 	public static synchronized String generateReservationCode() {
