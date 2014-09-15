@@ -36,7 +36,7 @@ public class DoctorBean extends BaseBean {
 		if (Constant.DR_SPECIALITY_DENTIST == getSpeciality().getId()) {
 			return "Drg. " + name;
 		} else {
-			return "Dr. " + name;
+			return "Dr. " + name + ", " + speciality.getTitle();
 		}
 	}
 	

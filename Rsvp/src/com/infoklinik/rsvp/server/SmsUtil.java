@@ -7,7 +7,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,7 +21,7 @@ public class SmsUtil {
 		
 		if (Config.SMS_GATEWAY.equals(Constant.SMS_GW_BULKSMS)) {
 			return sendSmsBulkSms(recipient, message);
-		} else if (Config.SMS_GATEWAY.equals(Constant.SMS_GW_BULKSMS)) {
+		} else if (Config.SMS_GATEWAY.equals(Constant.SMS_GW_WEBSMS)) {
 			return sendSmsWebSms(recipient, message);
 		} else {
 			return false;
@@ -121,10 +120,10 @@ public class SmsUtil {
 			
 			try {
 				
-				message = message + "\n" + ServerUtil.dateTimeToStr(new Date());
+				//message = message + "\n" + ServerUtil.dateTimeToStr(new Date());
 				message = message.replace("\n", "~");
 				
-				String url = "http://websms.dyndns.biz:8080/sms.php?user=radixe&hpku=083865222131&kirimke="+recipient+"&isi="+ URLEncoder.encode(message, "ISO-8859-1");
+				String url = "http://web.sms-anda.com:8080/sms.php?user=radixe&hpku=083865222131&kirimke="+recipient+"&isi="+ URLEncoder.encode(message, "ISO-8859-1");
 				
 				URL obj = new URL(url);
 				HttpURLConnection con = (HttpURLConnection) obj.openConnection();

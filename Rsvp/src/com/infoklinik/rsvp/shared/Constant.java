@@ -5,8 +5,7 @@ public class Constant {
 	public static String ENV_STAGING = "Staging";
 	public static String ENV_PRODUCTION = "Production";
 	
-	//public static final String APP_CALLBACK_URL_PROD = "http://www.infoklinik.com/verifyCredential";
-	public static final String APP_CALLBACK_URL_PROD = "https://1.info-klinik.appspot.com/";
+	public static final String APP_CALLBACK_URL_PROD = "http://www.infoklinik.com/verifyCredential";
 	public static final String APP_CALLBACK_URL_DEV = "http://www.infoklinik.com:8888/verifyCredential";
 	
 	public static String SMS_GW_BULKSMS = "SMS_GW_BULKSMS";

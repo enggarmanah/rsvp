@@ -40,6 +40,14 @@ public class AppointmentServiceImpl extends BaseServiceServlet implements Appoin
 				appointment.setEventId(eventId);
 				appointment = appointmentDAO.addAppointment(appointment);
 			}
+			
+			String message = "Reservasi kunjungan dokter telah berhasil.";
+			message += "\nKode Reservasi : " + appointment.getReservationCode();
+			message += "\nDokter: " + appointment.getDoctor().getNameWithTitle();
+			message += "\nHari : " + ServerUtil.dateDayTimeToStr(appointment.getApptDate());
+			message += "\n" + appointment.getInstitution().getName() + ", " + appointment.getInstitution().getTelephone();
+					
+			SmsUtil.sendSms(appointment.getPatientMobile(), message);
 		}
 		
 		return appointment;

@@ -11,7 +11,6 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
-import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.social.presenter.interfaces.ICommentAddView;
 import com.infoklinik.rsvp.shared.CommentBean;
 import com.infoklinik.rsvp.shared.Constant;
@@ -62,7 +61,7 @@ public class CommentAddView extends BaseView implements ICommentAddView {
 		comment.setFbName(socialUser.getName());
 		comment.setText(textTa.getText());
 		
-		comment.setUpdateBy(ClientUtil.getUser().getName());
+		comment.setUpdateBy(socialUser.getName());
 		
 		return comment;
 	}
