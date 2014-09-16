@@ -101,7 +101,7 @@ public class MainPresenter extends BasePresenter<IMainView, MainEventBus> implem
 	public void onStart() {
 				
 		eventBus.loadMenu();
-		eventBus.loadClinicSearch();
+		eventBus.loadDoctorSearch();
 		
 		commonService.isProductionEnvironment(new AsyncCallback<Boolean>() {
 			

@@ -41,28 +41,37 @@
 		</div>
 		<div id="content-wrapper">
 			<div id="content">
-				<div id="search-wrapper">
-	
-					<g:SimplePanel ui:field="menuPanel">
-					</g:SimplePanel>
-					
-					<g:SimplePanel ui:field="searchPanel">
-					</g:SimplePanel>	
-				
-				</div>
-			<div id="content-bottom-wrapper">
-				<div id="content-bottom">
-					<div id="content-bottom-left">
-						<g:SimplePanel ui:field="leftPanel">
-						</g:SimplePanel>
+				<div id="content-main">
+					<div id="content-top-wrapper">
+						<div id="content-top">
+							<g:Image ui:field="mainImage" url="images/doctor-main.jpg"></g:Image>
+						</div>
+						<div id="search-wrapper">
+							<g:SimplePanel styleName="motto-wrapper">
+								<g:Image ui:field="mottoImage" url="images/doctor-motto.png" styleName="motto"></g:Image>
+							</g:SimplePanel>
+							<g:SimplePanel ui:field="menuPanel">
+							</g:SimplePanel>
+							<g:SimplePanel ui:field="searchPanel">
+							</g:SimplePanel>
+							<g:SimplePanel styleName="info-wrapper">
+								<g:Image ui:field="infoImage" url="images/doctor-info.png" styleName="info"></g:Image>
+							</g:SimplePanel>
+						</div>
 					</div>
-	
-					<div id="content-bottom-right">
-						<g:SimplePanel ui:field="rightPanel">
-						</g:SimplePanel>
+					<div id="content-bottom-wrapper">
+						<div id="content-bottom">
+							<div id="content-bottom-left">
+								<g:SimplePanel ui:field="leftPanel">
+								</g:SimplePanel>
+							</div>
+							<div id="content-bottom-right">
+								<g:SimplePanel ui:field="rightPanel">
+								</g:SimplePanel>
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
 			</div>
 		</div>
 		<div id="footer-wrapper">

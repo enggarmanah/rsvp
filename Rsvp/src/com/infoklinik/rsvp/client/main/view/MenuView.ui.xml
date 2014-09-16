@@ -4,11 +4,11 @@
 
 		<div id="menu-wrapper">
 			<div id="menu">
+			    <g:Label ui:field="doctorLb" styleName="menu">Reservasi Dokter</g:Label>
 			    <g:Label ui:field="clinicLb" styleName="menu">Klinik</g:Label>
 				<g:Label ui:field="hospitalLb" styleName="menu">Rumah Sakit</g:Label>
-				<g:Label ui:field="doctorLb" styleName="menu">Dokter</g:Label>
 				<g:Label ui:field="serviceLb" styleName="menu">Layanan</g:Label>
-				<g:Label ui:field="laboratLb" styleName="menu">Laboratorium</g:Label>
+				<g:Label ui:field="laboratLb" styleName="menu">Lab</g:Label>
 				<g:Label ui:field="pharmacyLb" styleName="menu">Apotek</g:Label>
 			</div>
 		</div>

@@ -20,9 +20,9 @@ public class MenuPresenter extends LazyPresenter<IMenuView, MenuEventBus> {
 	@Override
 	public void bindView() {
 		
-		currentMenu = Constant.MENU_CLINIC;
+		currentMenu = Constant.MENU_DOCTOR;
 		
-		view.setClinicSelected();
+		view.setDoctorSelected();
 		
 		view.setClinicLbHandler(new ClickHandler() {
 			

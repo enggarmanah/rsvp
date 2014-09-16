@@ -101,8 +101,6 @@ html, body {
 	position: relative;
 	top: -35px;
 	float: right;
-	/*font-size: 11px;
-	font-weight: bold;*/
 	font: bold 13px 'Comic Sans MS';
 	color: #4D5D75;
 	border: 0px solid #888;
@@ -119,6 +117,11 @@ html, body {
 #content {
 	margin: 0 auto;
 	width: 950px;
+}
+
+#content-main {
+	width: 950px;
+	overflow: auto;
 	min-height: 500px;
 	border: 1px solid #CCC;
 	-moz-border-radius: 5px;
@@ -187,21 +190,49 @@ html, body {
     background: none;
 }
 
-#search-wrapper {
-	margin-left: auto;
-	margin-right: auto;
-	padding: 15px 0px 15px 0px; 
+#content-top-wrapper {
+	overflow: auto;
+	float: left;
 	width: 950px;
+}
+
+#content-top {
+	float: left;
+	width: 280px;
+}
+
+#search-wrapper {
+	float: left;
+	padding: 15px 0px 15px 0px; 
+	width: 650px;
 	-moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
+}
+
+#search-wrapper .motto-wrapper {
+	width: 480px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#search-wrapper .motto-wrapper .motto {
+	padding: 0px 0px 10px 0px;
+}
+
+#search-wrapper .info-wrapper {
+	width: 100%;
+}
+
+#search-wrapper .info-wrapper .info {
+	padding: 20px 0px 0px 10px;
 }
 
 #search-content {
 	padding: 10px 0px 0px 0px;
 	margin-left: auto;
 	margin-right: auto;
-	width: 750px;
+	width: 640px;
 	border-top: 1px solid #CCC;
 }
 
@@ -211,18 +242,19 @@ html, body {
 	font: bold 11px Tahoma;
 	color: #555;
 	text-shadow: -3px 0px 8px #A5C6D9;
+	padding: 0px 0px 0px 5px;
 }
 
 #menu-wrapper {
 	margin-left: auto;
 	margin-right: auto;
-	width: 575px;
+	width: 595px;
 	border: 0px solid #888;
 }
 
 #menu {
-   width: auto;
    overflow: auto;
+   padding: 0px 10px 0px 10px;
 }
 #menu li {
    position: relative;
@@ -484,7 +516,7 @@ input.search-field {
 	padding: 7px 5px 6px 5px;
 	margin: 0px 0px 10px 0px;
 	background: #EFEFEF;
-	width: 649px;
+	width: 530px;
 }
 
 input.search-field:focus {
@@ -516,14 +548,13 @@ input.search-field:focus {
 
 #content-bottom-wrapper {
 	padding: 5px 20px 0px 20px;
-	/*background: #EEF5F9;*/
-	/*background: #FFF;*/
 	margin: 0px 0px 20px 0px;
 	overflow: auto;
+	float: left;
 }
 
 #content-bottom {
-	border-top: 1px dashed #AAA;
+	border-top: 1px solid #CCC;
 	padding: 10px 0px 0px 0px;
 }
 
@@ -553,7 +584,7 @@ input.search-field:focus {
 	font: 12px Tahoma;
 	line-height: 18px;
 	color: #333;
-	padding: 0px 0px 5px 0px;
+	padding: 0px 0px 10px 0px;
 	text-shadow: -3px 0px 8px #A5C6D9;
 }
 
