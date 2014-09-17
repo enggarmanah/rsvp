@@ -4,7 +4,7 @@
 		
 		<g:HTMLPanel>
 			<div id="profile-title">
-				Hasil Pencarian:
+				<g:Image url="images/search-result.png" styleName="image"/>
 			</div>
 			<div id="profile-info">
 				Silahkan klik pada nama klinik untuk info lebih lanjut atau menjadwalkan hari kunjungan dokter.

@@ -22,25 +22,25 @@
 				</table>
 				<table id="table-search-more">
 					<tr>
-						<td>Kota :</td>
+						<td>Kota:</td>
 						<td>
 							<g:ListBox ui:field="cityLb"></g:ListBox>
 						</td>
-						<td>Kategori :</td>
+						<td>Kategori:</td>
 						<td>
 							<g:ListBox ui:field="institutionTypeLb"></g:ListBox>
 						</td>
-						<td>Asuransi :</td>
+						<td>Asuransi:</td>
 						<td>
 							<g:ListBox ui:field="insuranceLb"></g:ListBox>
 						</td>
 					</tr>
 					<tr>
-						<td>Spesialis :</td>
+						<td>Spesialis:</td>
 						<td>
 							<g:ListBox ui:field="specialityLb"></g:ListBox>
 						</td>
-						<td>24 Jam :</td>
+						<td>24 Jam:</td>
 						<td>
 							<g:ListBox ui:field="open24HrsLb"></g:ListBox>
 						</td>

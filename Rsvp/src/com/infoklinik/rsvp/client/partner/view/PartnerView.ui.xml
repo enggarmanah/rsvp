@@ -4,7 +4,7 @@
 		
 		<g:HTMLPanel>
 			<div id="profile-title">
-				Partner Kami:
+				<g:Image url="images/partner.png" styleName="image"/>
 			</div>
 			<div id="profile-info">
 				Dapatkan pelayanan medis terbaik dari partner kami.

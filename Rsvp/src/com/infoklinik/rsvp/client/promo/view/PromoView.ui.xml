@@ -4,10 +4,10 @@
 		
 		<g:HTMLPanel>		
 			<div id="promotion-title">
-				Promosi:
+				<g:Image url="images/promo.png" styleName="image"/>
 			</div>
 			<div id="promotion-info">
-				Promosi layanan kesehatan yang disediakan oleh partner kami. Layanan berkualitas prima dengan harga yang terjangkau.
+				Promosi layanan kesehatan dari partner kami. Layanan berkualitas dengan harga yang terjangkau.
 			</div>
 		</g:HTMLPanel>
 		

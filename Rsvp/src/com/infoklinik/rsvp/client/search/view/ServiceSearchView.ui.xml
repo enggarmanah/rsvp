@@ -22,11 +22,11 @@
 				</table>
 				<table id="table-search-more">
 					<tr>
-						<td>Kota :</td>
+						<td>Kota:</td>
 						<td>
 							<g:ListBox ui:field="cityLb"></g:ListBox>
 						</td>
-						<td>Jenis Layanan :</td>
+						<td>Jenis Layanan:</td>
 						<td>
 							<g:ListBox ui:field="serviceTypeLb"></g:ListBox>
 						</td>

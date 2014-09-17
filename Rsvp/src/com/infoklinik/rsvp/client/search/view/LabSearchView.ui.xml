@@ -22,15 +22,15 @@
 				</table>
 				<table id="table-search-more">
 					<tr>
-						<td>Kota :</td>
+						<td>Kota:</td>
 						<td>
 							<g:ListBox ui:field="cityLb"></g:ListBox>
 						</td>
-						<td>Layanan :</td>
+						<td>Layanan:</td>
 						<td>
 							<g:ListBox ui:field="institutionTypeLb"></g:ListBox>
 						</td>
-						<td>Panggilan Rumah :</td>
+						<td>Panggilan Rumah:</td>
 						<td>
 							<g:ListBox ui:field="residentialServiceLb"></g:ListBox>
 						</td>

@@ -37,7 +37,8 @@ public class MainView extends Composite implements IMainView {
 		initWidget(uiBinder.createAndBindUi(this));
 		init();
 		
-		String info = "Portal Informasi Layanan Kesehatan";
+		//String info = "Portal Informasi Layanan Kesehatan";
+		String info = "";
 		if (Config.ENV_CURRENT.equals(Constant.ENV_STAGING)) {
 			info += " - Testing Version";
 		}

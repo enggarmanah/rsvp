@@ -27,15 +27,22 @@
 	<div id="body-wrapper">
 		<div id="header-wrapper">
 			<div id="header">
-				<div id="triangle">&nbsp;</div>
-				<h1 id="logo-text">
-					info<span>klinik</span>
-				</h1>
-				<h1 id="logo-info">
+				<div id="triangle-wrapper">
+					<div id="triangle">&nbsp;</div>
+				</div>
+				<div id="logo-wrapper">
+					<h1 id="logo-text">
+						info<span>klinik</span>
+					</h1>	
+				</div>
+				<div id="logo-info">
+					<g:Image url="images/logo-info.png" styleName="image"/>
 					<g:Label ui:field="infoLb" styleName="environment-info"/>
-				</h1>
-				<div id="header-about-us">
-				<a class="header-link" href="#">Join Us</a> | <a class="header-link" href="#">About Us</a> | <a class="header-link" href="#">Contact Us</a>
+					<div id="header-info">
+						<g:Label text="Bergabung Dengan Kami" ui:field="joinUsLb" styleName="header-link"></g:Label>
+						<g:Label text="Tentang Kami" ui:field="aboutUsLb" styleName="header-link"></g:Label>
+						<g:Label text="Hubungi Kami" ui:field="contactUsLb" styleName="header-link"></g:Label>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -44,7 +51,7 @@
 				<div id="content-main">
 					<div id="content-top-wrapper">
 						<div id="content-top">
-							<g:Image ui:field="mainImage" url="images/doctor-main.jpg"></g:Image>
+							<g:Image ui:field="mainImage" url="images/doctor-main.jpg" styleName="image"></g:Image>
 						</div>
 						<div id="search-wrapper">
 							<g:SimplePanel styleName="motto-wrapper">
