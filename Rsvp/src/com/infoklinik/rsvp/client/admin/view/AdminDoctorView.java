@@ -37,6 +37,9 @@ public class AdminDoctorView extends BaseView implements IAdminDoctorView {
 	Image profileImg;
 	
 	@UiField
+	SimplePanel uploadProfileImgPanel;
+	
+	@UiField
 	TextBox nameTb;
 
 	@UiField
@@ -68,9 +71,6 @@ public class AdminDoctorView extends BaseView implements IAdminDoctorView {
 	private static ModuleUiBinder uiBinder = GWT.create(ModuleUiBinder.class);
 	
 	DoctorBean doctor;
-	
-	@UiField
-	SimplePanel uploadProfileImgPanel;
 	
 	public void createView() {	
 		

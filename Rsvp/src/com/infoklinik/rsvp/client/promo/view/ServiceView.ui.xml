@@ -14,6 +14,7 @@
 				<img src="images/hospital.png" class="icon"/>
 				<g:Label ui:field="institutionLb" styleName="inst"></g:Label>
 			</div>
+			<g:Image ui:field="serviceImg" styleName="image"></g:Image>
 		</div>
 		
 	</g:HTMLPanel>

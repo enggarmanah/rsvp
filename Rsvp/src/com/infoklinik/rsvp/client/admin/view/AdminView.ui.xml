@@ -3,7 +3,7 @@
 	<g:HTMLPanel ui:field="contentPanel">
 
 		<div id="admin-title">
-			Administrasi:
+			<g:Image url="images/admin.png" styleName="image"/>
 		</div>
 		<div id="admin-info">
 			Menu administrasi portal informasi kesehatan.

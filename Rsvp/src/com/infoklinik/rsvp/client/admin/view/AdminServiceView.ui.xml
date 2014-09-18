@@ -36,6 +36,14 @@
 				<div class="info">
 					<c:DateBox ui:field="promoEndDateDb" styleName="text"></c:DateBox>
 				</div>
+				<div class="title">Gambar Promo :</div>
+				<div class="gallery-service">
+					<g:Image ui:field="serviceImg" styleName="image-service"></g:Image>
+				</div>
+				<div class="title"></div>
+				<div class="info">
+					<g:SimplePanel ui:field="uploadServiceImgPanel"/>
+				</div>
 				<div class="title">
 				</div>
 				<div class="info">

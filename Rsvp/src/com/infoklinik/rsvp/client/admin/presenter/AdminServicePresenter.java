@@ -1,5 +1,9 @@
 package com.infoklinik.rsvp.client.admin.presenter;
 
+import gwtupload.client.IUploader;
+import gwtupload.client.IUploadStatus.Status;
+import gwtupload.client.IUploader.UploadedInfo;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +21,7 @@ import com.infoklinik.rsvp.client.admin.AdminEventBus;
 import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminServiceView;
 import com.infoklinik.rsvp.client.admin.view.AdminServiceView;
 import com.infoklinik.rsvp.client.main.view.NotificationDlg;
+import com.infoklinik.rsvp.client.main.view.ProgressDlg;
 import com.infoklinik.rsvp.client.rpc.ServiceTypeServiceAsync;
 import com.infoklinik.rsvp.shared.ServiceBean;
 import com.infoklinik.rsvp.shared.ServiceTypeBean;
@@ -41,23 +46,28 @@ public class AdminServicePresenter extends LazyPresenter<IAdminServiceView, Admi
 		initServiceTypes();
 		
 		initPromoChangeHandler();
+		initServiceFinishUploaderHandler();
 		initOkBtnClickHandler();
 		initCancelBtnClickHandler();
 	}
 	
 	public void onAddService() {
 		
+		service = new ServiceBean();
+		
 		isAdd = true;
 		
-		view.setService(new ServiceBean());
+		view.setService(service);
 		view.show();
 	}
 	
-	public void onUpdateService(ServiceBean serviceBean) {
+	public void onUpdateService(ServiceBean service) {
+		
+		this.service = service;
 		
 		isAdd = false;
 		
-		view.setService(serviceBean);
+		view.setService(service);
 		view.show();
 	}
 	
@@ -72,6 +82,30 @@ public class AdminServicePresenter extends LazyPresenter<IAdminServiceView, Admi
 				view.setService(service);
 			}
 		});
+	}
+	
+	private void initServiceFinishUploaderHandler() {
+		
+		IUploader.OnFinishUploaderHandler handler = new IUploader.OnFinishUploaderHandler() {
+			
+			public void onFinish(IUploader uploader) {
+				
+				if (uploader.getStatus() == Status.SUCCESS) {
+					
+					UploadedInfo info = uploader.getServerInfo();
+					
+					String imageId = info.message;
+					
+					service.setImageId(ClientUtil.strToLong(imageId));
+					
+					view.setService(service);
+					
+					ProgressDlg.hide();
+				}
+			}
+		};
+		
+		view.setOnFinishUploadHandler(handler);
 	}
 	
 	private void initOkBtnClickHandler() {

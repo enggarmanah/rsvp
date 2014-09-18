@@ -1,5 +1,8 @@
 package com.infoklinik.rsvp.client.admin.view;
 
+import gwtupload.client.IUploader;
+import gwtupload.client.SingleUploader;
+
 import java.util.List;
 
 import com.google.gwt.core.client.GWT;
@@ -11,14 +14,18 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.datepicker.client.DateBox;
 import com.infoklinik.rsvp.client.BaseView;
 import com.infoklinik.rsvp.client.ClientUtil;
+import com.infoklinik.rsvp.client.CustomUploadStatus;
 import com.infoklinik.rsvp.client.admin.presenter.interfaces.IAdminServiceView;
+import com.infoklinik.rsvp.client.main.view.ProgressDlg;
 import com.infoklinik.rsvp.shared.Constant;
 import com.infoklinik.rsvp.shared.ServiceBean;
 import com.infoklinik.rsvp.shared.ServiceTypeBean;
@@ -28,6 +35,8 @@ public class AdminServiceView extends BaseView implements IAdminServiceView {
 	interface ModuleUiBinder extends UiBinder<Widget, AdminServiceView> {}
 	
 	private static ModuleUiBinder uiBinder = GWT.create(ModuleUiBinder.class);
+	
+	SingleUploader serviceImgUploader;
 	
 	@UiField
 	TextBox nameTb;
@@ -54,6 +63,12 @@ public class AdminServiceView extends BaseView implements IAdminServiceView {
 	DateBox promoEndDateDb;
 	
 	@UiField
+	Image serviceImg;
+	
+	@UiField
+	SimplePanel uploadServiceImgPanel;
+	
+	@UiField
 	Button okBtn;
 	
 	@UiField
@@ -78,6 +93,27 @@ public class AdminServiceView extends BaseView implements IAdminServiceView {
 		DateTimeFormat dtf = ClientUtil.getDateTime(ClientUtil.DATE_TIME_FORMAT_DATE);
 		promoStartDateDb.setFormat(new DateBox.DefaultFormat(dtf));
 		promoEndDateDb.setFormat(new DateBox.DefaultFormat(dtf));
+		
+		serviceImgUploader = new SingleUploader();
+		serviceImgUploader.getWidget().setStyleName("gallery-upload");
+		
+		uploadServiceImgPanel.add(serviceImgUploader);
+		serviceImgUploader.addOnStartUploadHandler(onStartUploaderHandler);
+	}
+	
+	private IUploader.OnStartUploaderHandler onStartUploaderHandler = new IUploader.OnStartUploaderHandler() {
+		
+		@Override
+		public void onStart(IUploader uploader) {
+			
+			uploader.setStatusWidget(new CustomUploadStatus());
+			ProgressDlg.show();
+		}
+	};
+	
+	public void setOnFinishUploadHandler(IUploader.OnFinishUploaderHandler handler) {
+		
+		serviceImgUploader.addOnFinishUploadHandler(handler);
 	}
 	
 	public Widget asWidget() {
@@ -151,22 +187,22 @@ public class AdminServiceView extends BaseView implements IAdminServiceView {
 		return serviceBean;
 	}
 	
-	public void setService(ServiceBean serviceBean) {
+	public void setService(ServiceBean service) {
 		
-		this.serviceBean = serviceBean;
-		ServiceTypeBean serviceType = serviceBean.getServiceType();
+		this.serviceBean = service;
+		ServiceTypeBean serviceType = service.getServiceType();
 		
-		nameTb.setText(serviceBean.getName());
+		nameTb.setText(service.getName());
 		
 		if (serviceType != null) {
 			ClientUtil.setSelectedIndex(serviceTypeLb, String.valueOf(serviceType.getId()));
 		}
 		
-		priceTb.setValue(serviceBean.getPrice());
-		descriptionTa.setValue(serviceBean.getDescription());
-		ClientUtil.setSelectedIndex(isPromoLb, serviceBean.isPromo() ? Constant.YES : Constant.NO);
+		priceTb.setValue(service.getPrice());
+		descriptionTa.setValue(service.getDescription());
+		ClientUtil.setSelectedIndex(isPromoLb, service.isPromo() ? Constant.YES : Constant.NO);
 		
-		if (serviceBean.isPromo()) {
+		if (service.isPromo()) {
 			promoPriceTb.setEnabled(true);
 			promoStartDateDb.setEnabled(true);
 			promoEndDateDb.setEnabled(true);
@@ -176,9 +212,11 @@ public class AdminServiceView extends BaseView implements IAdminServiceView {
 			promoEndDateDb.setEnabled(false);
 		}
 		
-		promoPriceTb.setValue(serviceBean.getPromoPrice());
-		promoStartDateDb.setValue(serviceBean.getPromoStartDate());
-		promoEndDateDb.setValue(serviceBean.getPromoEndDate());
+		promoPriceTb.setValue(service.getPromoPrice());
+		promoStartDateDb.setValue(service.getPromoStartDate());
+		promoEndDateDb.setValue(service.getPromoEndDate());
+		
+		serviceImg.setUrl(Constant.IMAGE_URL + service.getImageId());
 	}
 	
 	public void setPromoChangeHandler(ChangeHandler handler) {

@@ -3,7 +3,7 @@
 	<g:HTMLPanel ui:field="contentPanel">
 
 		<div id="statistic-title">
-			Statistik :
+			<g:Image url="images/statistic.png" styleName="image"/>
 		</div>
 		<div id="statistic-info">
 			Statistik penggunaan layanan portal informasi kesehatan.

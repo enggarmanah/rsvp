@@ -1,5 +1,7 @@
 package com.infoklinik.rsvp.client.admin.presenter.interfaces;
 
+import gwtupload.client.IUploader;
+
 import java.util.List;
 
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -25,6 +27,8 @@ public interface IAdminServiceView  extends LazyView, IsWidget {
 	void setService(ServiceBean serviceBean);
 	
 	void setPromoChangeHandler(ChangeHandler handler);
+	
+	void setOnFinishUploadHandler(IUploader.OnFinishUploaderHandler handler);
 	
 	void setOkBtnClickHandler(ClickHandler handler);
 	

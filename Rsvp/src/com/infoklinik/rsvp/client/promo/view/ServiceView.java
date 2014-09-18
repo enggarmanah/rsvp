@@ -3,10 +3,12 @@ package com.infoklinik.rsvp.client.promo.view;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
 import com.infoklinik.rsvp.client.GenericBean;
+import com.infoklinik.rsvp.shared.Constant;
 import com.infoklinik.rsvp.shared.ServiceBean;
 
 public class ServiceView extends BaseView {
@@ -20,6 +22,9 @@ public class ServiceView extends BaseView {
 	
 	@UiField
 	Label descriptionLb;
+	
+	@UiField
+	Image serviceImg;
 	
 	@UiField
 	Label priceLb;
@@ -40,6 +45,8 @@ public class ServiceView extends BaseView {
 		nameLb.addClickHandler(genService.getHandlerMgr().getShowHandler());
 		
 		descriptionLb.setText(service.getDescription());
+		serviceImg.setUrl(Constant.IMAGE_URL + service.getImageId());
+		
 		priceLb.setText("Harga Promo : " + service.getPrice() + ". Harga Normal : " + service.getPromoPrice());
 		institutionLb.setText(service.getInstitution().getName());
 	}

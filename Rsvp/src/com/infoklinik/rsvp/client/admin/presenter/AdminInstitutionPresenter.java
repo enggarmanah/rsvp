@@ -1135,7 +1135,7 @@ public class AdminInstitutionPresenter extends LazyPresenter<IAdminInstitutionVi
 		
 		if (branches == null) {
 			
-			ProgressDlg.hide();
+			ProgressDlg.success();
 			view.hide();
 			return;
 		}

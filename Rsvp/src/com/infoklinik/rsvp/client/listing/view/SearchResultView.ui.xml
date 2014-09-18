@@ -12,7 +12,7 @@
 			<div id="search-result-nav-top">
 				<div id="search-result-nav-top-count">
 					<g:Label ui:field="fromIndexLb" styleName="info" text="1"/>-<g:Label ui:field="toIndexLb" styleName="info" text="1"/>
-					dari <g:Label ui:field="countLb" styleName="info" text="1"/> record
+					dari <g:Label ui:field="countLb" styleName="info" text="1"/> record.
 				</div>
 				<div id="search-result-nav-top-location">
 					<g:Label ui:field="searchLocationLb" text="Peta Lokasi"/>
