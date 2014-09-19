@@ -51,7 +51,7 @@
 				<div id="content-main">
 					<div id="content-top-wrapper">
 						<div id="content-top">
-							<g:Image ui:field="mainImage" url="images/doctor-main.jpg" styleName="image"></g:Image>
+							<g:Image ui:field="mainImage" url="images/service-main.jpg" styleName="image"></g:Image>
 							<div class="motto-background"></div>
 							<g:Image ui:field="mainMottoImage" url="images/doctor-main-motto.png" styleName="motto-image"/>
 						</div>
