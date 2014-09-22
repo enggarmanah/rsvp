@@ -101,6 +101,9 @@ public interface MainEventBus extends EventBusWithLookup {
 	@Event(handlers = MainPresenter.class)
 	public void verifySocialUserToExecuteTask(String task);
 	
+	@Event(handlers = MainPresenter.class)
+	public void setMenuImage(String selectedMenu);
+	
 	@Event(forwardToModules=MenuModule.class) 
 	public void loadMenu();
 	

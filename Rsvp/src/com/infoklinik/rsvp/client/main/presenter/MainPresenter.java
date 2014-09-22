@@ -79,6 +79,11 @@ public class MainPresenter extends BasePresenter<IMainView, MainEventBus> implem
 		view.setMenuPanel(menuPanel.asWidget());
 	}
 	
+	public void onSetMenuImage(String selectedMenu) {
+		
+		view.setMenuImage(selectedMenu);
+	}
+	
 	public void onSetSearchPanel(IsWidget searchPanel) {
 		
 		view.setSearchPanel(searchPanel.asWidget());

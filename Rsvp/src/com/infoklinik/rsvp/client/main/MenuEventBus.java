@@ -17,6 +17,9 @@ public interface MenuEventBus extends EventBus {
 	public void setMenuPanel(Widget widget);
 	
 	@Event(forwardToParent = true)
+	public void setMenuImage(String selectedMenu);
+	
+	@Event(forwardToParent = true)
 	public void loadClinicSearch();
 	
 	@Event(forwardToParent = true)

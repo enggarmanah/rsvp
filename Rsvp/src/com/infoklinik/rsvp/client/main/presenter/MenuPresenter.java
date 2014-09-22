@@ -29,10 +29,13 @@ public class MenuPresenter extends LazyPresenter<IMenuView, MenuEventBus> {
 			@Override
 			public void onClick(ClickEvent event) {
 				
+				currentMenu = Constant.MENU_CLINIC;
+				
 				removeOldView();
 				
 				view.setClinicSelected();
 				eventBus.loadClinicSearch();
+				eventBus.setMenuImage(currentMenu);
 			}
 		});
 		
@@ -41,10 +44,13 @@ public class MenuPresenter extends LazyPresenter<IMenuView, MenuEventBus> {
 			@Override
 			public void onClick(ClickEvent event) {
 				
+				currentMenu = Constant.MENU_HOSPITAL;
+				
 				removeOldView();
 				
 				view.setHospitalSelected();
 				eventBus.loadHospitalSearch();
+				eventBus.setMenuImage(currentMenu);
 			}
 		});
 		
@@ -53,10 +59,13 @@ public class MenuPresenter extends LazyPresenter<IMenuView, MenuEventBus> {
 			@Override
 			public void onClick(ClickEvent event) {
 				
+				currentMenu = Constant.MENU_DOCTOR;
+				
 				removeOldView();
 				
 				view.setDoctorSelected();
 				eventBus.loadDoctorSearch();
+				eventBus.setMenuImage(currentMenu);
 			}
 		});
 		
@@ -65,10 +74,13 @@ public class MenuPresenter extends LazyPresenter<IMenuView, MenuEventBus> {
 			@Override
 			public void onClick(ClickEvent event) {
 				
+				currentMenu = Constant.MENU_SERVICE;
+				
 				removeOldView();
 				
 				view.setServiceSelected();
 				eventBus.loadServiceSearch();
+				eventBus.setMenuImage(currentMenu);
 			}
 		});
 		
@@ -77,10 +89,13 @@ public class MenuPresenter extends LazyPresenter<IMenuView, MenuEventBus> {
 			@Override
 			public void onClick(ClickEvent event) {
 				
+				currentMenu = Constant.MENU_LAB;
+				
 				removeOldView();
 				
 				view.setLabSelected();
 				eventBus.loadLabSearch();
+				eventBus.setMenuImage(currentMenu);
 			}
 		});
 	}

@@ -4,6 +4,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -15,6 +16,9 @@ public class MainView extends Composite implements IMainView {
 	
 	@UiField
 	Label infoLb;
+	
+	@UiField
+	Image mainImg;
 	
 	@UiField
 	SimplePanel menuPanel;
@@ -47,6 +51,23 @@ public class MainView extends Composite implements IMainView {
 	}
 	
 	private void init() {
+	}
+	
+	public void setMenuImage(String currentMenu) {
+		
+		if (Constant.MENU_DOCTOR.equals(currentMenu)) {
+			mainImg.setUrl("images/doctor-main.jpg");
+		} else if (Constant.MENU_CLINIC.equals(currentMenu)) {
+			mainImg.setUrl("images/clinic-main.jpg");
+		} else if (Constant.MENU_HOSPITAL.equals(currentMenu)) {
+			mainImg.setUrl("images/hospital-main.jpg");
+		} else if (Constant.MENU_LAB.equals(currentMenu)) {
+			mainImg.setUrl("images/lab-main.jpg");
+		} else if (Constant.MENU_PHARMACY.equals(currentMenu)) {
+			mainImg.setUrl("images/pharmacy-main.jpg");
+		} else if (Constant.MENU_SERVICE.equals(currentMenu)) {
+			mainImg.setUrl("images/service-main.jpg");
+		}
 	}
 		
 	public void setMenuPanel(Widget menuPanel) {

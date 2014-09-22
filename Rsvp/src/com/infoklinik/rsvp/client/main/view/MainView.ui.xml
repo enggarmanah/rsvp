@@ -51,13 +51,13 @@
 				<div id="content-main">
 					<div id="content-top-wrapper">
 						<div id="content-top">
-							<g:Image ui:field="mainImage" url="images/service-main.jpg" styleName="image"></g:Image>
+							<g:Image ui:field="mainImg" url="images/doctor-main.jpg" styleName="image"></g:Image>
 							<div class="motto-background"></div>
-							<g:Image ui:field="mainMottoImage" url="images/doctor-main-motto.png" styleName="motto-image"/>
+							<g:Image ui:field="mainMottoImg" url="images/doctor-main-motto.png" styleName="motto-image"/>
 						</div>
 						<div id="search-wrapper">
 							<g:SimplePanel styleName="motto-wrapper">
-								<g:Image ui:field="mottoImage" url="images/doctor-motto.png" styleName="motto"></g:Image>
+								<g:Image ui:field="upperMottoImage" url="images/doctor-motto.png" styleName="motto"></g:Image>
 							</g:SimplePanel>
 							<g:SimplePanel ui:field="menuPanel">
 							</g:SimplePanel>
