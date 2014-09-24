@@ -47,26 +47,21 @@ public class InstitutionServiceImpl extends BaseServiceServlet implements Instit
 		return institution;
 	}
 	
-	public List<InstitutionBean> getInstitutions(InstitutionSearchBean instSearch) {
+	private void trackSearch(InstitutionSearchBean instSearch) {
 		
 		SearchBean search = new SearchBean();
 		
-		InstitutionDAO institutionDao = new InstitutionDAO();
-		List<InstitutionBean> institutions = institutionDao.getInstitutions(instSearch);
-		
-		String codeType = MasterCodeBean.CLINIC_TYPE;
-		
 		if (Constant.CATEGORY_CLINIC.equals(instSearch.getCategory())) {
-			codeType = MasterCodeBean.CLINIC_TYPE;
 			search.setType(Constant.SEARCH_CLINIC);
 			
 		} else if (Constant.CATEGORY_HOSPITAL.equals(instSearch.getCategory())) {
-			codeType = MasterCodeBean.HOSPITAL_TYPE;
 			search.setType(Constant.SEARCH_HOSPITAL);
 			
 		} else if (Constant.CATEGORY_LABORATORY.equals(instSearch.getCategory())) {
-			codeType = MasterCodeBean.LAB_TYPE;
 			search.setType(Constant.SEARCH_LAB);
+			
+		} else if (Constant.CATEGORY_LABORATORY.equals(instSearch.getCategory())) {
+			search.setType(Constant.SEARCH_PHARMACY);
 		}
 		
 		search.setName(instSearch.getName());
@@ -84,6 +79,31 @@ public class InstitutionServiceImpl extends BaseServiceServlet implements Instit
 		
 		SearchDAO searchDao = new SearchDAO();
 		searchDao.addSearch(search);
+	}
+	
+	public List<InstitutionBean> getInstitutions(InstitutionSearchBean instSearch) {
+		
+		if (!isAdminUser()) {
+			trackSearch(instSearch);
+		}
+		
+		InstitutionDAO institutionDao = new InstitutionDAO();
+		List<InstitutionBean> institutions = institutionDao.getInstitutions(instSearch);
+		
+		String codeType = MasterCodeBean.CLINIC_TYPE;
+		
+		if (Constant.CATEGORY_CLINIC.equals(instSearch.getCategory())) {
+			codeType = MasterCodeBean.CLINIC_TYPE;
+			
+		} else if (Constant.CATEGORY_HOSPITAL.equals(instSearch.getCategory())) {
+			codeType = MasterCodeBean.HOSPITAL_TYPE;
+			
+		} else if (Constant.CATEGORY_LABORATORY.equals(instSearch.getCategory())) {
+			codeType = MasterCodeBean.LAB_TYPE;
+			
+		} else if (Constant.CATEGORY_LABORATORY.equals(instSearch.getCategory())) {
+			codeType = MasterCodeBean.PHARMACY_TYPE;
+		}
 		
 		MasterCodeDAO masterCodeDao = new MasterCodeDAO();
 	 	List<MasterCodeBean> masterCodes = masterCodeDao.getMasterCodes(codeType);

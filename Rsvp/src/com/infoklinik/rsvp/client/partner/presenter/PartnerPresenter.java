@@ -26,8 +26,8 @@ import com.mvp4g.client.presenter.LazyPresenter;
 @Presenter(view = PartnerView.class)
 public class PartnerPresenter extends LazyPresenter<IPartnerView, PartnerEventBus> {
 	
-	private static int PARTNER_SIZE = 5;
-	private static int PARTNER_REFRESH_RATE = 15;
+	private static int PARTNER_SIZE = 7;
+	private static int PARTNER_REFRESH_RATE = 30;
 	
 	@Inject
 	InstitutionServiceAsync instService;

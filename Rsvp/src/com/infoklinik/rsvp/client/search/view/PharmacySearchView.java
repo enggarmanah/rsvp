@@ -17,17 +17,14 @@ import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
 import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.SuggestionOracle;
-import com.infoklinik.rsvp.client.search.presenter.interfaces.IClinicSearchView;
+import com.infoklinik.rsvp.client.search.presenter.interfaces.IPharmacySearchView;
 import com.infoklinik.rsvp.shared.CityBean;
 import com.infoklinik.rsvp.shared.Constant;
 import com.infoklinik.rsvp.shared.InstitutionSearchBean;
-import com.infoklinik.rsvp.shared.InsuranceBean;
 import com.infoklinik.rsvp.shared.LocationBean;
-import com.infoklinik.rsvp.shared.MasterCodeBean;
-import com.infoklinik.rsvp.shared.SpecialityBean;
 import com.infoklinik.rsvp.shared.SuggestParameter;
 
-public class ClinicSearchView extends BaseView implements IClinicSearchView {
+public class PharmacySearchView extends BaseView implements IPharmacySearchView {
 	
 	@UiField
 	HTMLPanel contentPanel;
@@ -36,14 +33,8 @@ public class ClinicSearchView extends BaseView implements IClinicSearchView {
 	ListBox cityLb;
 	
 	@UiField
-	ListBox insuranceLb;
-	
-	@UiField
-	ListBox specialityLb;
+	ListBox residentialServiceLb;
 
-	@UiField
-	ListBox institutionTypeLb;
-	
 	@UiField
 	ListBox open24HrsLb;
 	
@@ -69,7 +60,7 @@ public class ClinicSearchView extends BaseView implements IClinicSearchView {
 	@UiField(provided = true)
 	SuggestBox searchSb = new SuggestBox(new SuggestionOracle(suggestParameter));
 	
-	interface ModuleUiBinder extends UiBinder<Widget, ClinicSearchView> {}
+	interface ModuleUiBinder extends UiBinder<Widget, PharmacySearchView> {}
 	
 	private static ModuleUiBinder uiBinder = GWT.create(ModuleUiBinder.class);
 	
@@ -82,6 +73,10 @@ public class ClinicSearchView extends BaseView implements IClinicSearchView {
 		open24HrsLb.addItem(Constant.OPTION_PLS_SELECT_CODE_DESC, Constant.OPTION_PLS_SELECT_CODE);
 		open24HrsLb.addItem(Constant.YES_DESC, Constant.YES);
 		open24HrsLb.addItem(Constant.NO_DESC, Constant.NO);
+		
+		residentialServiceLb.addItem(Constant.OPTION_PLS_SELECT_CODE_DESC, Constant.OPTION_PLS_SELECT_CODE);
+		residentialServiceLb.addItem(Constant.YES_DESC, Constant.YES);
+		residentialServiceLb.addItem(Constant.NO_DESC, Constant.NO);
 		
 		searchNameRb.setValue(true);
 	}
@@ -105,7 +100,7 @@ public class ClinicSearchView extends BaseView implements IClinicSearchView {
 	}
 	
 	public void setSearchSbHandler(ClickHandler handler) {
-		
+	
 		searchSb.getValueBox().addClickHandler(handler);
 	}
 	
@@ -132,38 +127,11 @@ public class ClinicSearchView extends BaseView implements IClinicSearchView {
 		suggestParameter.setCityId(city.getId().toString());
 	}
 	
-	public void setInsurances(List<InsuranceBean> insuranceBeans) {
-		
-		insuranceLb.addItem(Constant.OPTION_PLS_SELECT_CODE_DESC, Constant.OPTION_PLS_SELECT_CODE);
-		
-		for (InsuranceBean insuranceBean : insuranceBeans) {
-			insuranceLb.addItem(insuranceBean.getName(), String.valueOf(insuranceBean.getId()));
-		}
-	}
-	
-	public void setSpecialities(List<SpecialityBean> specialityBeans) {
-		
-		specialityLb.addItem(Constant.OPTION_PLS_SELECT_CODE_DESC, Constant.OPTION_PLS_SELECT_CODE);
-		
-		for (SpecialityBean specialityBean : specialityBeans) {
-			specialityLb.addItem(specialityBean.getDescription(), String.valueOf(specialityBean.getId()));
-		}
-	}
-	
-	public void setInstitutionTypes(List<MasterCodeBean> masterCodeBeans) {
-		
-		institutionTypeLb.addItem(Constant.OPTION_PLS_SELECT_CODE_DESC, Constant.OPTION_PLS_SELECT_CODE);
-		
-		for (MasterCodeBean masterCodeBean : masterCodeBeans) {
-			institutionTypeLb.addItem(masterCodeBean.getValue(), String.valueOf(masterCodeBean.getCode()));
-		}
-	}
-	
 	public InstitutionSearchBean getInstitutionSearch() {
 		
 		InstitutionSearchBean instSearchBean = new InstitutionSearchBean();
 		
-		instSearchBean.setCategory(Constant.CATEGORY_CLINIC);
+		instSearchBean.setCategory(Constant.CATEGORY_PHARMACY);
 		
 		if (searchNameRb.getValue()) {
 			instSearchBean.setName(searchSb.getText());
@@ -180,23 +148,15 @@ public class ClinicSearchView extends BaseView implements IClinicSearchView {
 		
 		instSearchBean.setCityId(ClientUtil.strToLong(cityLb.getValue(cityLb.getSelectedIndex())));
 		
-		if (institutionTypeLb.getSelectedIndex() != 0) {
-			instSearchBean.setType(institutionTypeLb.getValue(institutionTypeLb.getSelectedIndex()));
-		}
-		
-		if (insuranceLb.getSelectedIndex() != 0) {
-			instSearchBean.setInsuranceId(ClientUtil.strToLong(insuranceLb.getValue(insuranceLb.getSelectedIndex())));
-		}
-		
-		if (specialityLb.getSelectedIndex() != 0) {
-			instSearchBean.setSpecialityId(ClientUtil.strToLong(specialityLb.getValue(specialityLb.getSelectedIndex())));
-		}
-		
 		if (open24HrsLb.getSelectedIndex() != 0) {
-			if (open24HrsLb.getSelectedIndex() == 1) {
-				instSearchBean.setOpen24Hours(true);
+			instSearchBean.setType(open24HrsLb.getValue(open24HrsLb.getSelectedIndex()));
+		}
+		
+		if (residentialServiceLb.getSelectedIndex() != 0) {
+			if (residentialServiceLb.getSelectedIndex() == 1) {
+				instSearchBean.setResidentialService(true);
 			} else {
-				instSearchBean.setOpen24Hours(false);
+				instSearchBean.setResidentialService(false);
 			}
 		}
 		

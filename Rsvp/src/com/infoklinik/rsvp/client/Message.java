@@ -36,6 +36,9 @@ public class Message {
 	
 	public static String ERR_STREET_NAME_EMPTY = "Nama jalan tidak boleh kosong.";
 	
+	public static String ERR_USER_NAME_EMPTY = "Nama pengguna tidak boleh kosong.";
+	public static String ERR_USER_EMAIL_EMPTY = "Email pengguna tidak boleh kosong.";
+	
 	public static String ERR_FILE_UPLOAD_EXCEED_MAX_SIZE = "Ukuran file melebihi besar maksimum (500 KB)";
 	public static String ERR_FILE_UPLOAD = "Gagal melaksanakan upload file ke server";
 	

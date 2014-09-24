@@ -19,6 +19,7 @@ public abstract class BaseView extends Composite {
 	protected static String LABEL_NAME = "Nama";
 	protected static String LABEL_CATEGORY = "Kategori";
 	protected static String LABEL_CITY = "Kota";
+	protected static String LABEL_TYPE = "Tipe";
 	protected static String LABEL_MENU = "Menu";
 	
 	protected static String CSS_HEADING = "heading";

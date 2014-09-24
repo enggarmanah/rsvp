@@ -52,7 +52,7 @@ public class DoctorServiceImpl extends BaseServiceServlet implements DoctorServi
 		return doctors;
 	}
 	
-	public List<DoctorBean> getDoctors(DoctorSearchBean doctorSearch) {
+	private void trackSearch(DoctorSearchBean doctorSearch) {
 		
 		SearchBean search = new SearchBean();
 		search.setType(Constant.SEARCH_DOCTOR);
@@ -72,6 +72,13 @@ public class DoctorServiceImpl extends BaseServiceServlet implements DoctorServi
 		
 		SearchDAO searchDao = new SearchDAO();
 		searchDao.addSearch(search);
+	}
+
+	public List<DoctorBean> getDoctors(DoctorSearchBean doctorSearch) {
+		
+		if (!isAdminUser()) {
+			trackSearch(doctorSearch);
+		}
 		
 		DoctorDAO doctorDao = new DoctorDAO();
 		List<DoctorBean> doctors = doctorDao.getDoctors(doctorSearch);

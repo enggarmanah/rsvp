@@ -26,8 +26,8 @@ import com.mvp4g.client.presenter.LazyPresenter;
 @Presenter(view = PromoView.class)
 public class PromoPresenter extends LazyPresenter<IPromoView, PromoEventBus> {
 	
-	private static int PROMO_SIZE = 5;
-	private static int PROMO_REFRESH_RATE = 20;
+	private static int PROMO_SIZE = 3;
+	private static int PROMO_REFRESH_RATE = 30;
 	
 	@Inject
 	ServiceServiceAsync serviceService;

@@ -12,6 +12,18 @@ public class BaseServiceServlet extends RemoteServiceServlet {
 
 	private static final Logger log = Logger.getLogger(BaseServiceServlet.class.getName());
 	
+	protected boolean isAdminUser() {
+		
+		boolean isAdminUser = false;
+		ServerSession serverSession = getServerSession();
+		
+		if (serverSession.getUserInfo() != null) {
+			isAdminUser = serverSession.getUserInfo().isLogin();
+		}
+		
+		return isAdminUser;
+	}
+	
 	protected ServerSession getServerSession() {
 		
 		log.info("Session : " + getThreadLocalRequest().getSession());

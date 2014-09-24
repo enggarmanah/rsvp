@@ -50,7 +50,7 @@
 						</div>
 					</g:HTMLPanel>
 					<div class="inst-subinfo-icon">
-						<img src="images/case.png" class="contact-img"/>
+						<g:Image url="images/case.png" styleName="contact-img" ui:field="typeDescriptionImg"/>
 					</div>
 					<div class="inst-subinfo-content">
 						<g:Label ui:field="typeDescriptionLb"></g:Label>	

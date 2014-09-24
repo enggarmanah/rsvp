@@ -42,6 +42,14 @@ public class AdminPresenter extends LazyPresenter<IAdminView, AdminEventBus> {
 			}
 		});
 		
+		view.setUserProfileLinkClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				eventBus.loadUserProfile();
+			}
+		});		
+		
 		view.setServiceTypeLinkClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 				eventBus.loadServiceType();

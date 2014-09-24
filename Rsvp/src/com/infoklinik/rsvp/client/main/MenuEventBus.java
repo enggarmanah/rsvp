@@ -29,9 +29,6 @@ public interface MenuEventBus extends EventBus {
 	public void loadHospitalSearch();
 	
 	@Event(forwardToParent = true)
-	public void loadLabSearch();
-	
-	@Event(forwardToParent = true)
 	public void removeHospitalSearch();
 	
 	@Event(forwardToParent = true)
@@ -39,6 +36,18 @@ public interface MenuEventBus extends EventBus {
 	
 	@Event(forwardToParent = true)
 	public void removeDoctorSearch();
+	
+	@Event(forwardToParent = true)
+	public void loadLabSearch();
+	
+	@Event(forwardToParent = true)
+	public void removeLabSearch();
+	
+	@Event(forwardToParent = true)
+	public void loadPharmacySearch();
+	
+	@Event(forwardToParent = true)
+	public void removePharmacySearch();
 	
 	@Event(forwardToParent = true)
 	public void loadServiceSearch();

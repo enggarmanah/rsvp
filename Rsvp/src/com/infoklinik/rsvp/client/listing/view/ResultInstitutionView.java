@@ -14,6 +14,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
 import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.HandlerManager;
+import com.infoklinik.rsvp.shared.Constant;
 import com.infoklinik.rsvp.shared.InstitutionBean;
 import com.infoklinik.rsvp.shared.SharedUtil;
 
@@ -52,6 +53,9 @@ public class ResultInstitutionView extends BaseView {
 	
 	@UiField
 	Label emailLb;
+	
+	@UiField
+	Image typeDescriptionImg;
 	
 	@UiField
 	Label typeDescriptionLb;
@@ -113,8 +117,14 @@ public class ResultInstitutionView extends BaseView {
 		addressLb.setText(institution.getAddress());
 		telephoneLb.setText(institution.getTelephone());
 		emailLb.setText(institution.getEmail());
-		typeDescriptionLb.setText(institution.getTypeDescription());
 		
+		if (Constant.CATEGORY_PHARMACY.equals(institution.getCategory())) {
+			typeDescriptionImg.setVisible(false);
+			typeDescriptionLb.setVisible(false);
+		} else {
+			typeDescriptionLb.setText(institution.getTypeDescription());
+		}			
+						
 		opInfoLb.setHTML(new SafeHtmlBuilder().appendEscapedLines(institution.getOpInfo()).toSafeHtml());
 		
 		viewCountLb.setText(String.valueOf(institution.getViewCount()));

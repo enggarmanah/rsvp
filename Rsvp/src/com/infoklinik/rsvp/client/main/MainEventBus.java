@@ -126,6 +126,12 @@ public interface MainEventBus extends EventBusWithLookup {
 	public void removeLabSearch();
 	
 	@Event(forwardToModules=SearchModule.class) 
+	public void loadPharmacySearch();
+	
+	@Event(forwardToModules=SearchModule.class) 
+	public void removePharmacySearch();
+	
+	@Event(forwardToModules=SearchModule.class) 
 	public void loadDoctorSearch();
 	
 	@Event(forwardToModules=SearchModule.class) 

@@ -24,6 +24,8 @@ import com.infoklinik.rsvp.client.admin.presenter.AdminServiceTypeListPresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminServiceTypePresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminStreetListPresenter;
 import com.infoklinik.rsvp.client.admin.presenter.AdminStreetPresenter;
+import com.infoklinik.rsvp.client.admin.presenter.AdminUserProfileListPresenter;
+import com.infoklinik.rsvp.client.admin.presenter.AdminUserProfilePresenter;
 import com.infoklinik.rsvp.shared.BranchBean;
 import com.infoklinik.rsvp.shared.CityBean;
 import com.infoklinik.rsvp.shared.DoctorBean;
@@ -35,6 +37,7 @@ import com.infoklinik.rsvp.shared.ScheduleBean;
 import com.infoklinik.rsvp.shared.ServiceBean;
 import com.infoklinik.rsvp.shared.ServiceTypeBean;
 import com.infoklinik.rsvp.shared.StreetBean;
+import com.infoklinik.rsvp.shared.UserProfileBean;
 import com.mvp4g.client.annotation.Debug;
 import com.mvp4g.client.annotation.Event;
 import com.mvp4g.client.annotation.Events;
@@ -107,6 +110,18 @@ public interface AdminEventBus extends EventBus {
 	
 	@Event(handlers = AdminStreetPresenter.class)
 	public void updateStreet(StreetBean street);
+	
+	@Event(handlers = AdminUserProfileListPresenter.class)
+	public void loadUserProfile();
+	
+	@Event(handlers = AdminUserProfileListPresenter.class)
+	public void reloadUserProfile();
+	
+	@Event(handlers = AdminUserProfilePresenter.class)
+	public void addUserProfile();
+	
+	@Event(handlers = AdminUserProfilePresenter.class)
+	public void updateUserProfile(UserProfileBean userProfile);
 		
 	@Event(handlers = AdminPresenter.class)
 	public void loadAdmin();

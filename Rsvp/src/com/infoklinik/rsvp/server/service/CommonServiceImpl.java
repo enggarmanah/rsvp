@@ -66,7 +66,6 @@ public class CommonServiceImpl extends BaseServiceServlet implements CommonServi
 			//invalidateSession();
 		}
 		
-
 		log.info("ServerSession : " + serverSession);
 		log.info("IsLogin : " + userInfo.isLogin());
 		

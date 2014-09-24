@@ -98,6 +98,21 @@ public class MenuPresenter extends LazyPresenter<IMenuView, MenuEventBus> {
 				eventBus.setMenuImage(currentMenu);
 			}
 		});
+		
+		view.setPharmacyLbHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				
+				currentMenu = Constant.MENU_PHARMACY;
+				
+				removeOldView();
+				
+				view.setPharmacySelected();
+				eventBus.loadPharmacySearch();
+				eventBus.setMenuImage(currentMenu);
+			}
+		});
 	}
 	
 	public void onLoadMenu() {
@@ -115,6 +130,12 @@ public class MenuPresenter extends LazyPresenter<IMenuView, MenuEventBus> {
 			
 		} else if (Constant.MENU_DOCTOR.equals(currentMenu)) {
 			eventBus.removeDoctorSearch();
+			
+		} else if (Constant.MENU_LAB.equals(currentMenu)) {
+			eventBus.removeLabSearch();
+			
+		} else if (Constant.MENU_PHARMACY.equals(currentMenu)) {
+			eventBus.removePharmacySearch();
 			
 		} else if (Constant.MENU_SERVICE.equals(currentMenu)) {
 			eventBus.removeDoctorSearch();

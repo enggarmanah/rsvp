@@ -76,6 +76,18 @@ public class Constant {
 	public static final String YES_DESC = "Ya";
 	public static final String NO_DESC = "Tidak";
 	
+	public static final String ACTIVE = "A";
+	public static final String INACTIVE = "I";
+	
+	public static final String ACTIVE_DESC = "Aktif";
+	public static final String INACTIVE_DESC = "Tidak Aktif";
+	
+	public static final String SUPERUSER = "SUPERUSER";
+	public static final String OPERATION = "OPERATION";
+	
+	public static final String SUPERUSER_DESC = "Superuser";
+	public static final String OPERATION_DESC = "Operasional";
+	
 	public static final int DAY_START = 1;
 	public static final int DAY_END = 7;
 	

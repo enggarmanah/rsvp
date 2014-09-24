@@ -24,6 +24,7 @@
 		<class>com.infoklinik.rsvp.server.model.MasterCode</class>
 		<class>com.infoklinik.rsvp.server.model.Search</class>
 		<class>com.infoklinik.rsvp.server.model.Appointment</class>
+		<class>com.infoklinik.rsvp.server.model.UserProfile</class>
 		
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<properties>

@@ -9,6 +9,7 @@ import com.infoklinik.rsvp.client.search.presenter.ClinicSearchPresenter;
 import com.infoklinik.rsvp.client.search.presenter.DoctorSearchPresenter;
 import com.infoklinik.rsvp.client.search.presenter.HospitalSearchPresenter;
 import com.infoklinik.rsvp.client.search.presenter.LabSearchPresenter;
+import com.infoklinik.rsvp.client.search.presenter.PharmacySearchPresenter;
 import com.infoklinik.rsvp.client.search.presenter.SearchLocationPresenter;
 import com.infoklinik.rsvp.client.search.presenter.ServiceSearchPresenter;
 import com.infoklinik.rsvp.shared.DoctorBean;
@@ -59,6 +60,12 @@ public interface SearchEventBus extends EventBus {
 	
 	@Event(handlers = LabSearchPresenter.class)
 	public void removeLabSearch();
+	
+	@Event(handlers = PharmacySearchPresenter.class)
+	public void loadPharmacySearch();
+	
+	@Event(handlers = PharmacySearchPresenter.class)
+	public void removePharmacySearch();
 	
 	@Event(handlers = DoctorSearchPresenter.class)
 	public void loadDoctorSearch();

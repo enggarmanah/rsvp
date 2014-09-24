@@ -22,6 +22,16 @@
 					</div>
 				</div>
 			</div>
+			<g:HTMLPanel>
+				<div id="admin-content-icon">
+					<img src="images/users.png" class="admin-menu-img" />
+				</div>
+				<div id="admin-content-menu">
+				    <div class="link-wrapper">
+						<g:Label ui:field="userProfileLb" styleName="link">Manajemen Pengguna</g:Label>
+					</div>
+				</div>
+			</g:HTMLPanel>
 			<div>
 				<div id="admin-content-icon">
 					<img src="images/books.png" class="admin-menu-img" />
