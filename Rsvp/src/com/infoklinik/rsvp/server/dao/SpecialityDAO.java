@@ -17,7 +17,7 @@ public class SpecialityDAO {
 
 		EntityManager em = PersistenceManager.getEntityManager();
 		
-		List<Speciality> result = em.createQuery("SELECT s FROM Speciality s", Speciality.class).getResultList();
+		List<Speciality> result = em.createQuery("SELECT s FROM Speciality s WHERE s.status = 'A' ORDER BY s.description", Speciality.class).getResultList();
 
 		for (Speciality speciality : result) {
 			list.add(speciality.getBean());

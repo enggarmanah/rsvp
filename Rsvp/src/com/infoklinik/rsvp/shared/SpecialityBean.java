@@ -4,7 +4,25 @@ package com.infoklinik.rsvp.shared;
 public class SpecialityBean extends BaseBean {
 
 	private String title;
+	private String type;
+	private String status;
 	private String description;
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public String getTitle() {
 		return title;

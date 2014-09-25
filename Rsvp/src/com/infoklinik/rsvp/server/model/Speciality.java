@@ -11,6 +11,8 @@ public class Speciality extends Base {
 	
 	private String title;
 	private String description;
+	private String type;
+	private String status;
 
 	public String getTitle() {
 		return title;
@@ -28,11 +30,29 @@ public class Speciality extends Base {
 		this.description = description;
 	}
 	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public void setBean(SpecialityBean specialityBean) {
 		
 		id = specialityBean.getId();
 		title = specialityBean.getTitle();
 		description = specialityBean.getDescription();
+		type = specialityBean.getType();
+		status = specialityBean.getStatus();
 		
 		setAuditBean(specialityBean.getAuditBean());
 	}
@@ -44,6 +64,8 @@ public class Speciality extends Base {
 		specialityBean.setId(id);
 		specialityBean.setTitle(title);
 		specialityBean.setDescription(description);
+		specialityBean.setType(type);
+		specialityBean.setStatus(status);
 		
 		specialityBean.setAuditBean(getAuditBean());
 		

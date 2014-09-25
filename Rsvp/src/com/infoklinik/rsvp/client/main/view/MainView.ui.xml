@@ -93,10 +93,6 @@
 				<div id="footer-right">
 					<ul class="subscribe-stuff">
 					<li>
-						<a title="RSS" href="#" rel="nofollow">
-						<img alt="RSS" title="RSS" src="images/dribble.png" /></a>
-					</li>
-					<li>
 						<a title="Facebook" href="#" rel="nofollow">
 						<img alt="Facebook" title="Facebook" src="images/facebook.png" /></a>
 					</li>

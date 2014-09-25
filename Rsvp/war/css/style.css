@@ -150,7 +150,7 @@ html, body {
 	height: 100%;
 	width: 100%;
 	background: #EEF5F9;
-	padding: 0px 0px 10px 0px;
+	padding: 0px 0px 0px 0px;
 }
 
 #content {
@@ -174,12 +174,10 @@ html, body {
 }
 
 #footer-wrapper {
-    position: relative;
-    top: 0px;
-	height: 40px;
 	width: 100%;
 	border-top: 0px solid #BBB;
-	background: #EEF5F9;
+	position: relative;
+	top: 0px;
 }
 
 #footer {
@@ -188,18 +186,21 @@ html, body {
 	margin-left: auto;
 	margin-right: auto;
 	width: 950px;
-	border: 0px dashed #888;
+	border: 1px solid #444;
+	background: #344257;
+	overflow: auto;
 }
 
 #footer-left {
 	float: left;
-    margin: 0 0 10px 0;
+    margin: 0 0 10px 5px;
 	padding: 0;
     text-align: left;
 }
+
 #footer-right{
 	float: right;
-    margin: 0 0 10px 0;
+    margin: 10px 5px 10px 0;
 	padding: 0;
     text-align: right;
 }
@@ -208,10 +209,10 @@ html, body {
 	/*font-size: 11px;
 	font-weight: bold;*/
 	font: bold 13px 'Comic Sans MS';
-	color: #565656;
+	color: #FFF;
 	height: 100%;
-	text-shadow: -3px 0px 8px #A5C6D9;
-	padding: 0px 0px 0px 10px;
+	text-shadow: -3px 0px 8px #333;
+	padding: 15px 0px 0px 10px;
 }
 
 #footer ul.subscribe-stuff {
@@ -227,10 +228,14 @@ html, body {
 }
 
 #footer ul.subscribe-stuff li img {
-    padding: 0;
+    padding: 1px 1px;
     margin: 0;
     border: none;
-    background: none;
+    background: #D1DCED;
+    -moz-border-radius: 18px;
+    -webkit-border-radius: 18px;
+    border-radius: 18px;
+    width: 32px;
 }
 
 #content-top-wrapper {
@@ -277,9 +282,7 @@ html, body {
 	float: left;
 	padding: 15px 0px 15px 0px; 
 	width: 650px;
-	-moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
+	/*background: url("../images/bg-line.png") repeat-x;*/
 }
 
 #search-wrapper .motto-wrapper {
