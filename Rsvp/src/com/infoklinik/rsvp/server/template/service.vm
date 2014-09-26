@@ -1,0 +1,8 @@
+<div id="content" style="overflow: auto; width: 302px; border: 1px solid #888;">
+	<div id="logo" style="float: left; width: 300px; border: 1px solid #888;">
+		<img src="www.infoklinik.com/images/twitter.png"/>
+	</div>
+	<div id="message" style="float: left; width: 300px; border: 1px solid #888;">
+		Hello from $name in the $project project.
+	</div>
+</div>
