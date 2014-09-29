@@ -1,10 +1,13 @@
 package com.infoklinik.rsvp.server.dao;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import com.infoklinik.rsvp.server.PersistenceManager;
 import com.infoklinik.rsvp.shared.Constant;
@@ -74,6 +77,39 @@ public class StatisticDAO {
 		count = (Long) em.createQuery("SELECT COUNT(s) AS total FROM Search s WHERE s.distance IS NOT NULL").getSingleResult();
 		map.put(Constant.SEARCH_BY_DISTANCE, count);
 
+		em.close();
+		
+		return map;
+	}
+	
+	public Map<String, Long> getAppointmentStatistic() {
+
+		Map<String, Long> map = new HashMap<String, Long>();
+
+		EntityManager em = PersistenceManager.getEntityManager();
+		
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.DAY_OF_MONTH, 1);
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.clear(Calendar.MINUTE);
+		cal.clear(Calendar.SECOND);
+		cal.clear(Calendar.MILLISECOND);
+		
+		cal.add(Calendar.MONTH, 1);
+		
+		for (int i = 0; i < 12; i++) {
+			
+			Date enddate = cal.getTime();
+			cal.add(Calendar.MONTH, -1);
+			Date startdate = cal.getTime();
+			
+			@SuppressWarnings("unchecked")
+			Query query = em.createQuery("SELECT COUNT(a) AS total FROM Appointment a WHERE a.appt_create_date BETWEEN :startdate AND :enddate");
+			query.setParameter("startdate", startdate);
+			query.setParameter("enddate", enddate);
+			Long count = (Long) query.getSingleResult();
+		}
+		
 		em.close();
 		
 		return map;
