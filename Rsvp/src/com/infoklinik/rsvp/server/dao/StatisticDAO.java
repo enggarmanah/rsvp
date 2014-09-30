@@ -82,9 +82,9 @@ public class StatisticDAO {
 		return map;
 	}
 	
-	public Map<String, Long> getAppointmentStatistic() {
+	public Map<Long, Long> getApptStatistic() {
 
-		Map<String, Long> map = new HashMap<String, Long>();
+		Map<Long, Long> map = new HashMap<Long, Long>();
 
 		EntityManager em = PersistenceManager.getEntityManager();
 		
@@ -103,11 +103,11 @@ public class StatisticDAO {
 			cal.add(Calendar.MONTH, -1);
 			Date startdate = cal.getTime();
 			
-			@SuppressWarnings("unchecked")
 			Query query = em.createQuery("SELECT COUNT(a) AS total FROM Appointment a WHERE a.appt_create_date BETWEEN :startdate AND :enddate");
 			query.setParameter("startdate", startdate);
 			query.setParameter("enddate", enddate);
 			Long count = (Long) query.getSingleResult();
+			map.put(startdate.getTime(), count);
 		}
 		
 		em.close();

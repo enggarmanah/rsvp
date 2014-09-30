@@ -11,4 +11,6 @@ public interface StatisticServiceAsync {
 	public void getSearchTypeStatistic(AsyncCallback<Map<String, Long>> callback);
 	
 	public void getSearchMethodStatistic(AsyncCallback<Map<String, Long>> callback);
+	
+	public void getApptStatistic(AsyncCallback<Map<Long, Long>> callback);
 }

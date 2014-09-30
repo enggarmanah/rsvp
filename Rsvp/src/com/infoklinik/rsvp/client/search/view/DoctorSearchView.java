@@ -85,11 +85,17 @@ public class DoctorSearchView extends BaseView implements IDoctorSearchView {
 		searchBtn.addClickHandler(handler);
 	}
 	
-	public void setCities(List<CityBean> cityBeans) {
+	public void setCities(List<CityBean> cities) {
 		
-		for (CityBean cityBean : cityBeans) {
-			cityLb.addItem(cityBean.getName(), String.valueOf(cityBean.getId()));
+		for (CityBean city : cities) {
+			cityLb.addItem(city.getName(), String.valueOf(city.getId()));
 		}
+	}
+	
+	public void setCity(CityBean city) {
+		
+		ClientUtil.setSelectedIndex(cityLb, String.valueOf(city.getId()));
+		suggestParameter.setCityId(city.getId().toString());
 	}
 	
 	public void setSpecialities(List<SpecialityBean> specialityBeans) {

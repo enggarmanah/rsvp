@@ -18,7 +18,9 @@ public interface IDoctorSearchView  extends LazyView, IsWidget {
 	
 	Widget asWidget();
 	
-	public void setCities(List<CityBean> citys);
+	public void setCities(List<CityBean> cities);
+	
+	public void setCity(CityBean city);
 	
 	public void setSpecialities(List<SpecialityBean> specialities);
 	

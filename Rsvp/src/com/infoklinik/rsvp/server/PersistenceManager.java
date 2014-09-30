@@ -38,7 +38,7 @@ public class PersistenceManager {
 			} else {
 				log.info("Environment Development");
 				properties.put("javax.persistence.jdbc.driver", "com.mysql.jdbc.Driver");
-				properties.put("javax.persistence.jdbc.url", System.getProperty("cloudsql.url.dev"));
+				properties.put("javax.persistence.jdbc.url", "jdbc:mysql://localhost/infoklinik?user=root");
 			}
 		
 			emf = Persistence.createEntityManagerFactory("Demo", properties);

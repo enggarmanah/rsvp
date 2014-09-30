@@ -31,4 +31,12 @@ public class StatisticServiceImpl extends BaseServiceServlet implements Statisti
 		
 		return statistic;
 	}
+	
+	public Map<Long, Long> getApptStatistic() {
+		
+		StatisticDAO statisticDao = new StatisticDAO();
+		Map<Long, Long> statistic = statisticDao.getApptStatistic();
+		
+		return statistic;
+	}
 }

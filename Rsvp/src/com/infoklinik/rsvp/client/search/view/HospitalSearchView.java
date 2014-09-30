@@ -117,7 +117,7 @@ public class HospitalSearchView extends BaseView implements IHospitalSearchView 
 	
 	public void setCity(CityBean city) {
 		
-		ClientUtil.setSelectedIndex(cityLb, city.getName());
+		ClientUtil.setSelectedIndex(cityLb, String.valueOf(city.getId()));
 		suggestParameter.setCityId(city.getId().toString());
 	}
 	

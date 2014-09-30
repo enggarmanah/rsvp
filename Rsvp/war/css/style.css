@@ -2076,7 +2076,7 @@ input.search-field:focus {
 	border: 0px solid #999;
 }
 
-#sub-statistic-wrapper {
+.sub-statistic-wrapper {
 	float: left;
 	overflow: auto;
 	margin-top: 3px;
@@ -2084,14 +2084,14 @@ input.search-field:focus {
 	padding: 3px 0px 5px 0px;
 }
 
-#sub-statistic-wrapper .sub-statistic {
+.sub-statistic-wrapper .sub-statistic {
 	float: left;
 	border: 0px solid #999;
 	margin: 0px 0px 0px 20px;
 	overflow: auto;
 }
 
-#sub-statistic-wrapper .sub-statistic .sub-title {
+.sub-statistic-wrapper .sub-statistic .sub-title {
 	float: left;
 	width: 100px;
 	border: 0px solid #999;
@@ -2101,7 +2101,7 @@ input.search-field:focus {
 	line-height: 19px;
 }
 
-#sub-statistic-wrapper .sub-statistic .sub-info {
+.sub-statistic-wrapper .sub-statistic .sub-info {
 	float: left;
 	width: 40px;
 	border: 0px solid #999;

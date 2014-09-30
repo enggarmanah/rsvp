@@ -16,7 +16,7 @@
 			<div class="info">
 				<g:Label ui:field="searchTotalLb"/>
 			</div>
-			<div id="sub-statistic-wrapper">
+			<div class="sub-statistic-wrapper">
 				<div class="sub-statistic">
 					<div class="sub-title">Klinik :</div>
 					<div class="sub-info">
@@ -60,37 +60,10 @@
 				<img src="images/case.png" class="admin-stat-img" />
 				Total Reservasi :
 			</div>
-			<div class="info">54</div>
-			<div id="sub-statistic-wrapper">
-				<div class="sub-statistic">
-					<div class="sub-title">Klinik :</div>
-					<div class="sub-info">13</div>
-				</div>
-				<div class="sub-statistic">
-					<div class="sub-title">Rumah Sakit :</div>
-					<div class="sub-info">2</div>
-				</div>
-				<div class="sub-statistic">
-					<div class="sub-title">Dokter :</div>
-					<div class="sub-info">5</div>
-				</div>
-				<div class="sub-statistic">
-					<div class="sub-title">Layanan :</div>
-					<div class="sub-info">11</div>
-				</div>
-				<div class="sub-statistic">
-					<div class="sub-title">Laboratorium :</div>
-					<div class="sub-info">21</div>
-				</div>
-				<div class="sub-statistic">
-					<div class="sub-title">Apotek :</div>
-					<div class="sub-info">14</div>
-				</div>
-				<div class="sub-statistic">
-					<div class="sub-title">Asuransi :</div>
-					<div class="sub-info">5</div>
-				</div>
+			<div class="info">
+				<g:Label ui:field="apptTotalLb"/>
 			</div>
+			<g:FlowPanel ui:field="apptPanel" styleName="sub-statistic-wrapper"></g:FlowPanel>
 		</div>
 		<div id="statistic">
 			<div class="title">
@@ -100,7 +73,7 @@
 			<div class="info">
 				<g:Label ui:field="dataTotalLb"/>
 			</div>
-			<div id="sub-statistic-wrapper">
+			<div class="sub-statistic-wrapper">
 				<div class="sub-statistic">
 					<div class="sub-title">Klinik :</div>
 					<div class="sub-info">
@@ -153,7 +126,7 @@
 			<div class="info">
 				<g:Label ui:field="searchMethodTotalLb"/>
 			</div>
-			<div id="sub-statistic-wrapper">
+			<div class="sub-statistic-wrapper">
 				<div class="sub-statistic">
 					<div class="sub-title">Nama :</div>
 					<div class="sub-info">
@@ -173,7 +146,7 @@
 					</div>
 				</div>
 				<div class="sub-statistic">
-					<div class="sub-title">Distance :</div>
+					<div class="sub-title">Jarak :</div>
 					<div class="sub-info">
 						<g:Label ui:field="searchMethodDistanceLb"/>
 					</div>

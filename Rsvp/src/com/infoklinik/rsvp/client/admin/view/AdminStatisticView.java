@@ -1,10 +1,14 @@
 package com.infoklinik.rsvp.client.admin.view;
 
+import java.sql.Date;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
@@ -77,6 +81,12 @@ public class AdminStatisticView extends BaseView implements IAdminStatisticView 
 	
 	@UiField
 	Label searchMethodTotalLb;
+	
+	@UiField
+	FlowPanel apptPanel;
+	
+	@UiField
+	Label apptTotalLb;
 	
 	public void createView() {
 		
@@ -194,6 +204,38 @@ public class AdminStatisticView extends BaseView implements IAdminStatisticView 
 		total += count;
 				
 		searchMethodTotalLb.setText(ClientUtil.numberToStr(total));
+	}
+	
+	public void setApptStatistic(Map<Long, Long> map) {
+		
+		Long total = Long.valueOf(0);
+		
+		Object[] keys = map.keySet().toArray();
+		Arrays.sort(keys, Collections.reverseOrder());
+		
+		for (Object key : keys) {
+			
+			Date date = new Date((Long)key);
+			Long count = map.get(key);
+			total += count;
+			
+			Label titleLb = new Label();
+			titleLb.setStyleName("sub-title");
+			titleLb.setText(ClientUtil.dateToMonthYear(date) + " :");
+			
+			Label countLb = new Label();
+			countLb.setStyleName("sub-info");
+			countLb.setText(String.valueOf(count));
+			
+			FlowPanel contentPanel = new FlowPanel();
+			contentPanel.setStyleName("sub-statistic");
+			contentPanel.add(titleLb);
+			contentPanel.add(countLb);
+			
+			apptPanel.add(contentPanel);
+		}
+		
+		apptTotalLb.setText(String.valueOf(total));
 	}
 	
 	public Widget asWidget() {

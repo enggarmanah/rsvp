@@ -120,7 +120,7 @@ public class LabSearchView extends BaseView implements ILabSearchView {
 	
 	public void setCity(CityBean city) {
 		
-		ClientUtil.setSelectedIndex(cityLb, city.getName());
+		ClientUtil.setSelectedIndex(cityLb, String.valueOf(city.getId()));
 		suggestParameter.setCityId(city.getId().toString());
 	}
 	

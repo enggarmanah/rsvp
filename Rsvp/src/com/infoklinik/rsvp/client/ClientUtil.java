@@ -22,6 +22,7 @@ public class ClientUtil {
 	private static DateTimeFormat dateTimeDtf = DateTimeFormat.getFormat("dd/MM/yyyy kk:mm");
 	private static DateTimeFormat dayDateDtf = DateTimeFormat.getFormat("EEEE, dd/MM/yyyy");
 	private static DateTimeFormat monthStrDtf = DateTimeFormat.getFormat("MMMM");
+	private static DateTimeFormat monthYearDtf = DateTimeFormat.getFormat("MMM yyyy");
 	private static DateTimeFormat monthIntDtf = DateTimeFormat.getFormat("M");
 	private static DateTimeFormat yearDtf = DateTimeFormat.getFormat("yyyy");
 	private static DateTimeFormat dayDtf = DateTimeFormat.getFormat("c");
@@ -253,6 +254,13 @@ public class ClientUtil {
 	public static String dateToDay(Date date) {
 		
 		String day = dayDtf.format(date);
+			
+		return day;
+	}
+	
+	public static String dateToMonthYear(Date date) {
+		
+		String day = monthYearDtf.format(date);
 			
 		return day;
 	}

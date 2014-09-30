@@ -5,14 +5,19 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import com.google.gwt.core.client.Callback;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.geolocation.client.Geolocation;
+import com.google.gwt.geolocation.client.Position;
+import com.google.gwt.geolocation.client.PositionError;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.maps.gwt.client.LatLng;
+import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.Message;
 import com.infoklinik.rsvp.client.SuggestionOracle;
 import com.infoklinik.rsvp.client.main.presenter.LocationListener;
@@ -74,8 +79,41 @@ public class DoctorSearchPresenter extends LazyPresenter<IDoctorSearchView, Sear
 		cityService.getCities(new CitySearchBean(), new AsyncCallback<List<CityBean>>() {
 			
 			@Override
-			public void onSuccess(List<CityBean> cityBeans) {
-				view.setCities(cityBeans);
+			public void onSuccess(final List<CityBean> cities) {
+				
+				view.setCities(cities);
+				
+				CityBean nearestCity = ClientUtil.getNearestCity();
+				
+				if (nearestCity == null) {
+				
+					if (Geolocation.isSupported() && ClientUtil.isReqGeoLocation()) {
+						
+						ClientUtil.setReqGeoLocation(false);
+						
+						Geolocation.getIfSupported().getCurrentPosition(
+							new Callback<Position, PositionError>() {
+	
+								@Override
+								public void onSuccess(Position position) {
+									
+									CityBean city = ClientUtil.getNearestCity(cities, position);
+									
+									if (city != null) {
+										view.setCity(city);
+									}
+								}
+	
+								@Override
+								public void onFailure(PositionError reason) {
+								}
+							});
+					} 
+					
+				} else {
+					
+					view.setCity(nearestCity);
+				} 
 			}
 			
 			@Override

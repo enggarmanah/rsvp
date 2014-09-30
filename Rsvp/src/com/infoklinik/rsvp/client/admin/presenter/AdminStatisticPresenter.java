@@ -29,6 +29,7 @@ public class AdminStatisticPresenter extends LazyPresenter<IAdminStatisticView, 
 	
 	boolean isLoadFail = false;
 	boolean isLoadDataStatCompleted = false;
+	boolean isLoadApptStatCompleted = false;
 	boolean isLoadSearchTypeStatCompleted = false;
 	boolean isLoadSearchMethodStatCompleted = false;
 	
@@ -38,7 +39,8 @@ public class AdminStatisticPresenter extends LazyPresenter<IAdminStatisticView, 
 	
 	private void displaySuccess() {
 		
-		if (isLoadDataStatCompleted && isLoadSearchTypeStatCompleted && isLoadSearchMethodStatCompleted) {
+		if (isLoadDataStatCompleted && isLoadApptStatCompleted && 
+			isLoadSearchTypeStatCompleted && isLoadSearchMethodStatCompleted) {
 			ProgressDlg.hide();
 		}
 	}
@@ -94,6 +96,21 @@ public class AdminStatisticPresenter extends LazyPresenter<IAdminStatisticView, 
 			public void onSuccess(Map<String, Long> result) {
 				view.setSearchMethodStatistic(result);
 				isLoadSearchMethodStatCompleted = true;
+				displaySuccess();
+			}
+			
+			@Override
+			public void onFailure(Throwable caught) {
+				displayErrOnLoad();
+			}
+		});
+		
+		statisticService.getApptStatistic(new AsyncCallback<Map<Long,Long>>() {
+			
+			@Override
+			public void onSuccess(Map<Long, Long> result) {
+				view.setApptStatistic(result);
+				isLoadApptStatCompleted = true;
 				displaySuccess();
 			}
 			
