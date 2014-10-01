@@ -6,7 +6,7 @@ import java.util.Date;
 import com.google.gwt.user.client.rpc.IsSerializable;
 
 @SuppressWarnings("serial")
-public class AppointmentSearchBean implements IsSerializable, Serializable {
+public class ReservationSearchBean implements IsSerializable, Serializable {
 
 	private Long doctorId;
 	private Long instId;

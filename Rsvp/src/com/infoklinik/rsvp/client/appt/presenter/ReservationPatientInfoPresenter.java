@@ -11,24 +11,24 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.Message;
-import com.infoklinik.rsvp.client.appt.AppointmentEventBus;
-import com.infoklinik.rsvp.client.appt.presenter.interfaces.IAppointmentPatientInfoView;
-import com.infoklinik.rsvp.client.appt.view.AppointmentPatientInfoView;
+import com.infoklinik.rsvp.client.appt.ReservationEventBus;
+import com.infoklinik.rsvp.client.appt.presenter.interfaces.IReservationPatientInfoView;
+import com.infoklinik.rsvp.client.appt.view.ReservationPatientInfoView;
 import com.infoklinik.rsvp.client.main.view.NotificationDlg;
 import com.infoklinik.rsvp.client.main.view.ProgressDlg;
-import com.infoklinik.rsvp.client.rpc.AppointmentServiceAsync;
-import com.infoklinik.rsvp.shared.AppointmentBean;
+import com.infoklinik.rsvp.client.rpc.ReservationServiceAsync;
+import com.infoklinik.rsvp.shared.ReservationBean;
 import com.mvp4g.client.annotation.Presenter;
 import com.mvp4g.client.presenter.LazyPresenter;
 
 @Singleton
-@Presenter(view = AppointmentPatientInfoView.class)
-public class AppointmentPatientInfoPresenter extends LazyPresenter<IAppointmentPatientInfoView, AppointmentEventBus> {
+@Presenter(view = ReservationPatientInfoView.class)
+public class ReservationPatientInfoPresenter extends LazyPresenter<IReservationPatientInfoView, ReservationEventBus> {
 	
 	@Inject
-	AppointmentServiceAsync appointmentService;
+	ReservationServiceAsync appointmentService;
 	
-	AppointmentBean appointment;
+	ReservationBean appointment;
 	String verificationCode;
 	
 	List<String> errorMessages;
@@ -39,7 +39,7 @@ public class AppointmentPatientInfoPresenter extends LazyPresenter<IAppointmentP
 		initBtnHandler();
 	}
 	
-	public void onGetPatientInfo(AppointmentBean appointment) {
+	public void onGetPatientInfo(ReservationBean appointment) {
 		verificationCode = appointment.getVerificationCode();
 		this.appointment = appointment;
 		view.setAppointment(appointment);
@@ -81,10 +81,10 @@ public class AppointmentPatientInfoPresenter extends LazyPresenter<IAppointmentP
 		
 		ProgressDlg.show();
 		
-		appointmentService.addAppointment(appointment, new AsyncCallback<AppointmentBean>() {
+		appointmentService.addReservation(appointment, new AsyncCallback<ReservationBean>() {
 			
 			@Override
-			public void onSuccess(AppointmentBean result) {
+			public void onSuccess(ReservationBean result) {
 				
 				ProgressDlg.hide();
 								
@@ -115,7 +115,7 @@ public class AppointmentPatientInfoPresenter extends LazyPresenter<IAppointmentP
 		});
 	}
 	
-	private boolean isValidated(AppointmentBean appointment) {
+	private boolean isValidated(ReservationBean appointment) {
 		
 		boolean isValidated = true;
 		errorMessages = new ArrayList<String>();

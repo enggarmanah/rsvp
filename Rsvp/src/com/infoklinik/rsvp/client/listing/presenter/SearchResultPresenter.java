@@ -299,7 +299,7 @@ public class SearchResultPresenter extends LazyPresenter<ISearchResultView, Sear
 			@Override
 			public void onClick(ClickEvent event) {
 				
-				eventBus.loadAppointment(schedule);
+				eventBus.loadReservation(schedule);
 			}
 		};
 		

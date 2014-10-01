@@ -16,7 +16,7 @@ import com.google.api.services.calendar.Calendar.Events.Insert;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventAttendee;
 import com.google.api.services.calendar.model.EventDateTime;
-import com.infoklinik.rsvp.shared.AppointmentBean;
+import com.infoklinik.rsvp.shared.ReservationBean;
 import com.infoklinik.rsvp.shared.Constant;
 import com.infoklinik.rsvp.shared.DoctorBean;
 import com.infoklinik.rsvp.shared.InstitutionBean;
@@ -32,7 +32,7 @@ public class CalendarUtil {
 		return new Calendar.Builder(new UrlFetchTransport(), new JacksonFactory(), credential).setApplicationName("info-klinik/1.0").build();
 	}
 
-	public static String addCalendarEntry(AppointmentBean appointment) {
+	public static String addCalendarEntry(ReservationBean appointment) {
 		
 		String eventId = "[Event-ID]";
 		

@@ -22,13 +22,13 @@ import com.google.gwt.user.datepicker.client.DateBox;
 import com.infoklinik.rsvp.client.BaseView;
 import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.Message;
-import com.infoklinik.rsvp.client.appt.presenter.interfaces.IAppointmentView;
-import com.infoklinik.rsvp.shared.AppointmentBean;
+import com.infoklinik.rsvp.client.appt.presenter.interfaces.IReservationView;
+import com.infoklinik.rsvp.shared.ReservationBean;
 import com.infoklinik.rsvp.shared.Constant;
 import com.infoklinik.rsvp.shared.ScheduleAppointmentBean;
 import com.infoklinik.rsvp.shared.ScheduleBean;
 
-public class AppointmentView extends BaseView implements IAppointmentView {
+public class ReservationView extends BaseView implements IReservationView {
 	
 	private DialogBox dialogBox;
 	
@@ -53,11 +53,11 @@ public class AppointmentView extends BaseView implements IAppointmentView {
 	@UiField
 	Button cancelBtn;
 	
-	interface ModuleUiBinder extends UiBinder<Widget, AppointmentView> {}
+	interface ModuleUiBinder extends UiBinder<Widget, ReservationView> {}
 	
 	private static ModuleUiBinder uiBinder = GWT.create(ModuleUiBinder.class);
 	
-	AppointmentBean appointment;
+	ReservationBean appointment;
 	
 	public void createView() {	
 		
@@ -83,12 +83,12 @@ public class AppointmentView extends BaseView implements IAppointmentView {
 	public void setSchedulesAndAppointments(ScheduleAppointmentBean scheduleAppointment) {
 		
 		List<ScheduleBean> schedules = scheduleAppointment.getSchedules();
-		List<AppointmentBean> appointments = scheduleAppointment.getAppointments();
-		HashMap<Long, AppointmentBean> reservedTimes = new HashMap<Long, AppointmentBean>();
+		List<ReservationBean> appointments = scheduleAppointment.getAppointments();
+		HashMap<Long, ReservationBean> reservedTimes = new HashMap<Long, ReservationBean>();
 		
 		apptTimeLb.clear();
 		
-		for (AppointmentBean appt : appointments) {
+		for (ReservationBean appt : appointments) {
 			reservedTimes.put(appt.getApptDate().getTime(), appt);
 		}
 		
@@ -105,7 +105,7 @@ public class AppointmentView extends BaseView implements IAppointmentView {
 						Date apptDate = new Date(scheduleAppointment.getDate().getTime());
 						apptDate.setTime(apptDate.getTime() + i);
 						
-						AppointmentBean appointment = reservedTimes.get(apptDate.getTime());
+						ReservationBean appointment = reservedTimes.get(apptDate.getTime());
 						
 						if (appointment == null) {
 							availableApptTimes.add(i);
@@ -127,7 +127,7 @@ public class AppointmentView extends BaseView implements IAppointmentView {
 		}
 	}
 	
-	public AppointmentBean getAppointment() {
+	public ReservationBean getAppointment() {
 		
 		Date apptDate = null;
 		
@@ -141,7 +141,7 @@ public class AppointmentView extends BaseView implements IAppointmentView {
 		return appointment;
 	}
 	
-	public void setAppointment(AppointmentBean appointment) {
+	public void setAppointment(ReservationBean appointment) {
 		
 		this.appointment = appointment;
 		

@@ -3,10 +3,9 @@ package com.infoklinik.rsvp.client.appt.presenter.interfaces;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
-import com.infoklinik.rsvp.shared.AppointmentBean;
 import com.mvp4g.client.view.LazyView;
 
-public interface IAppointmentPatientInfoView extends LazyView, IsWidget {
+public interface IReservationPatientMobileView extends LazyView, IsWidget {
 	
 	Widget asWidget();
 	
@@ -14,9 +13,7 @@ public interface IAppointmentPatientInfoView extends LazyView, IsWidget {
 	
 	void hide();
 	
-	void setAppointment(AppointmentBean appointment);
-	
-	AppointmentBean getAppointment();
+	String getPatientMobile();
 	
 	void setOkBtnClickHandler(ClickHandler handler);
 	

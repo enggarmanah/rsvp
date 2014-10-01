@@ -14,14 +14,14 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.Message;
-import com.infoklinik.rsvp.client.appt.AppointmentEventBus;
-import com.infoklinik.rsvp.client.appt.presenter.interfaces.IAppointmentView;
-import com.infoklinik.rsvp.client.appt.view.AppointmentView;
+import com.infoklinik.rsvp.client.appt.ReservationEventBus;
+import com.infoklinik.rsvp.client.appt.presenter.interfaces.IReservationView;
+import com.infoklinik.rsvp.client.appt.view.ReservationView;
 import com.infoklinik.rsvp.client.main.view.NotificationDlg;
 import com.infoklinik.rsvp.client.main.view.ProgressDlg;
-import com.infoklinik.rsvp.client.rpc.AppointmentServiceAsync;
+import com.infoklinik.rsvp.client.rpc.ReservationServiceAsync;
 import com.infoklinik.rsvp.client.rpc.ScheduleServiceAsync;
-import com.infoklinik.rsvp.shared.AppointmentBean;
+import com.infoklinik.rsvp.shared.ReservationBean;
 import com.infoklinik.rsvp.shared.ScheduleAppointmentBean;
 import com.infoklinik.rsvp.shared.ScheduleBean;
 import com.infoklinik.rsvp.shared.ScheduleSearchBean;
@@ -29,17 +29,17 @@ import com.mvp4g.client.annotation.Presenter;
 import com.mvp4g.client.presenter.LazyPresenter;
 
 @Singleton
-@Presenter(view = AppointmentView.class)
-public class AppointmentPresenter extends LazyPresenter<IAppointmentView, AppointmentEventBus> {
+@Presenter(view = ReservationView.class)
+public class ReservationPresenter extends LazyPresenter<IReservationView, ReservationEventBus> {
 	
 	@Inject
 	ScheduleServiceAsync scheduleService;
 	
 	@Inject
-	AppointmentServiceAsync appointmentService;
+	ReservationServiceAsync appointmentService;
 	
 	ScheduleBean schedule;
-	AppointmentBean appointment;
+	ReservationBean appointment;
 	
 	Date apptDate;
 	Integer apptDay;
@@ -101,12 +101,12 @@ public class AppointmentPresenter extends LazyPresenter<IAppointmentView, Appoin
 		});
 	}
 	
-	private void loadAppointment(ScheduleBean schedule) {
+	private void loadReservation(ScheduleBean schedule) {
 		
 		isSelectAnotherDate = false;
 		this.schedule = schedule;
 		
-		appointment = new AppointmentBean();
+		appointment = new ReservationBean();
 		appointment.setDoctor(schedule.getDoctor());
 		appointment.setInstitution(schedule.getInstitutionBean());
 		appointment.setApptDate(ClientUtil.getDateOfWeek(schedule.getDay()));
@@ -126,19 +126,19 @@ public class AppointmentPresenter extends LazyPresenter<IAppointmentView, Appoin
 		initSchedules();
 	}
 	
-	public void onLoadAppointment(ScheduleBean schedule) {
+	public void onLoadReservation(ScheduleBean schedule) {
 		
 		isWindowLv2 = false;
-		loadAppointment(schedule);
+		loadReservation(schedule);
 	}
 	
-	public void onLoadAppointmentLv2(ScheduleBean schedule) {
+	public void onLoadReservationLv2(ScheduleBean schedule) {
 		
 		isWindowLv2 = true;
-		loadAppointment(schedule);
+		loadReservation(schedule);
 	}
 	
-	public void onSelectAnotherDate(AppointmentBean appointment) {
+	public void onSelectAnotherDate(ReservationBean appointment) {
 		
 		isSelectAnotherDate = true;
 		
@@ -184,10 +184,10 @@ public class AppointmentPresenter extends LazyPresenter<IAppointmentView, Appoin
 		
 		ProgressDlg.show();
 		
-		appointmentService.addAppointment(appointment, new AsyncCallback<AppointmentBean>() {
+		appointmentService.addReservation(appointment, new AsyncCallback<ReservationBean>() {
 			
 			@Override
-			public void onSuccess(AppointmentBean result) {
+			public void onSuccess(ReservationBean result) {
 				
 				ProgressDlg.hide();
 								
@@ -218,7 +218,7 @@ public class AppointmentPresenter extends LazyPresenter<IAppointmentView, Appoin
 	}
 	
 	
-	private boolean isValidated(AppointmentBean appointment) {
+	private boolean isValidated(ReservationBean appointment) {
 		
 		boolean isValidated = true;
 		errorMessages = new ArrayList<String>();

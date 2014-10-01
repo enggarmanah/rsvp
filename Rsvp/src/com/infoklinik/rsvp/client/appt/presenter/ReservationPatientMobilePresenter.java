@@ -11,24 +11,24 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.Message;
-import com.infoklinik.rsvp.client.appt.AppointmentEventBus;
-import com.infoklinik.rsvp.client.appt.presenter.interfaces.IAppointmentPatientMobileView;
-import com.infoklinik.rsvp.client.appt.view.AppointmentPatientMobileView;
+import com.infoklinik.rsvp.client.appt.ReservationEventBus;
+import com.infoklinik.rsvp.client.appt.presenter.interfaces.IReservationPatientMobileView;
+import com.infoklinik.rsvp.client.appt.view.ReservationPatientMobileView;
 import com.infoklinik.rsvp.client.main.view.NotificationDlg;
 import com.infoklinik.rsvp.client.main.view.ProgressDlg;
-import com.infoklinik.rsvp.client.rpc.AppointmentServiceAsync;
-import com.infoklinik.rsvp.shared.AppointmentBean;
+import com.infoklinik.rsvp.client.rpc.ReservationServiceAsync;
+import com.infoklinik.rsvp.shared.ReservationBean;
 import com.mvp4g.client.annotation.Presenter;
 import com.mvp4g.client.presenter.LazyPresenter;
 
 @Singleton
-@Presenter(view = AppointmentPatientMobileView.class)
-public class AppointmentPatientMobilePresenter extends LazyPresenter<IAppointmentPatientMobileView, AppointmentEventBus> {
+@Presenter(view = ReservationPatientMobileView.class)
+public class ReservationPatientMobilePresenter extends LazyPresenter<IReservationPatientMobileView, ReservationEventBus> {
 	
 	@Inject
-	AppointmentServiceAsync appointmentService;
+	ReservationServiceAsync appointmentService;
 	
-	AppointmentBean appointment;
+	ReservationBean appointment;
 	
 	List<String> errorMessages;
 	
@@ -83,12 +83,12 @@ public class AppointmentPatientMobilePresenter extends LazyPresenter<IAppointmen
 		});
 	}
 	
-	public void onVerifyPatientMobile(AppointmentBean appointment) {
+	public void onVerifyPatientMobile(ReservationBean appointment) {
 		this.appointment = appointment;
 		view.show();
 	}
 	
-	private boolean isValidated(AppointmentBean appointment) {
+	private boolean isValidated(ReservationBean appointment) {
 		
 		boolean isValidated = true;
 		errorMessages = new ArrayList<String>();

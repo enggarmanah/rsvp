@@ -1,9 +1,9 @@
 import java.util.Date;
 import java.util.List;
 
-import com.infoklinik.rsvp.server.dao.AppointmentDAO;
-import com.infoklinik.rsvp.shared.AppointmentBean;
-import com.infoklinik.rsvp.shared.AppointmentSearchBean;
+import com.infoklinik.rsvp.server.dao.ReservationDAO;
+import com.infoklinik.rsvp.shared.ReservationBean;
+import com.infoklinik.rsvp.shared.ReservationSearchBean;
 import com.infoklinik.rsvp.shared.DoctorBean;
 import com.infoklinik.rsvp.shared.InstitutionBean;
 
@@ -17,7 +17,7 @@ public class AppointmentDaoTest {
 		InstitutionBean institution = new InstitutionBean();
 		institution.setId(Long.valueOf(1));
 		
-		AppointmentBean appointment = new AppointmentBean();
+		ReservationBean appointment = new ReservationBean();
 		appointment.setDoctor(doctor);
 		appointment.setInstitution(institution);
 		appointment.setApptDate(new Date());
@@ -27,10 +27,10 @@ public class AppointmentDaoTest {
 		appointment.setPatientMobile("6598550250");
 		appointment.setPatientEmail("john.doe@gmail.com");
 		
-		AppointmentDAO apptDao = new AppointmentDAO();
+		ReservationDAO apptDao = new ReservationDAO();
 		//apptDao.addAppointment(appointment);
 		
-		AppointmentSearchBean apptSearch = new AppointmentSearchBean();
+		ReservationSearchBean apptSearch = new ReservationSearchBean();
 		apptSearch.setDoctorId(Long.valueOf(1));
 		apptSearch.setInstId(Long.valueOf(1));
 		apptSearch.setApptDate(new Date());

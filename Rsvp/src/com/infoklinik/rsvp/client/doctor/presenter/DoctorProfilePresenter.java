@@ -72,7 +72,7 @@ public class DoctorProfilePresenter extends LazyPresenter<IDoctorProfileView, Do
 						
 						@Override
 						public void onClick(ClickEvent event) {
-							eventBus.loadAppointmentLv2(schedule);
+							eventBus.loadReservationLv2(schedule);
 						}
 					});
 					

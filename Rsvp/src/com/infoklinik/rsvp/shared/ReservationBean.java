@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @SuppressWarnings("serial")
-public class AppointmentBean implements Serializable {
+public class ReservationBean implements Serializable {
 
 	private Long id;
 	private DoctorBean doctor;

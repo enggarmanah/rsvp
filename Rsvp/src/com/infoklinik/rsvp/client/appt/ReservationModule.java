@@ -5,6 +5,6 @@ import com.mvp4g.client.Mvp4gModule;
 import com.mvp4g.client.annotation.module.Loader;
 
 @Loader(MainPresenter.class)
-public interface AppointmentModule extends Mvp4gModule {
+public interface ReservationModule extends Mvp4gModule {
 
 }

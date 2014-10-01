@@ -7,21 +7,38 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
 import com.infoklinik.rsvp.client.ClientUtil;
-import com.infoklinik.rsvp.client.appt.presenter.interfaces.IAppointmentPatientMobileView;
+import com.infoklinik.rsvp.client.appt.presenter.interfaces.IReservationPatientInfoView;
+import com.infoklinik.rsvp.shared.ReservationBean;
 import com.infoklinik.rsvp.shared.Constant;
 import com.infoklinik.rsvp.shared.DoctorBean;
 import com.infoklinik.rsvp.shared.InstitutionBean;
 
-public class AppointmentPatientMobileView extends BaseView implements IAppointmentPatientMobileView {
+public class ReservationPatientInfoView extends BaseView implements IReservationPatientInfoView {
 	
 	private DialogBox dialogBox;
 	
 	@UiField
-	TextBox mobileTb;
+	TextBox verificationCodeTb;
+	
+	@UiField
+	TextBox patientNameTb;
+	
+	@UiField
+	RadioButton patientSexMaleRb;
+	
+	@UiField
+	RadioButton patientSexFemaleRb;
+	
+	@UiField
+	TextBox patientBirthYearTb;
+	
+	@UiField
+	TextBox patientEmailTb;
 	
 	@UiField
 	Button okBtn;
@@ -29,7 +46,9 @@ public class AppointmentPatientMobileView extends BaseView implements IAppointme
 	@UiField
 	Button cancelBtn;
 	
-	interface ModuleUiBinder extends UiBinder<Widget, AppointmentPatientMobileView> {}
+	ReservationBean appointment;
+	
+	interface ModuleUiBinder extends UiBinder<Widget, ReservationPatientInfoView> {}
 	
 	private static ModuleUiBinder uiBinder = GWT.create(ModuleUiBinder.class);
 	
@@ -54,9 +73,19 @@ public class AppointmentPatientMobileView extends BaseView implements IAppointme
 		return dialogBox;
 	}
 	
-	public String getPatientMobile() {
+	public ReservationBean getAppointment() {
 		
-		return ClientUtil.trim(mobileTb.getValue());
+		appointment.setVerificationCode(ClientUtil.trim(verificationCodeTb.getValue()));
+		appointment.setPatientName(ClientUtil.trim(patientNameTb.getValue()));
+		appointment.setPatientSex(patientSexMaleRb.getValue() ? Constant.SEX_MALE : Constant.SEX_FEMALE);
+		appointment.setPatientBirthYear(ClientUtil.trim(patientBirthYearTb.getValue()));
+		appointment.setPatientEmail(ClientUtil.trim(patientEmailTb.getValue()));
+		
+		return appointment;
+	}
+
+	public void setAppointment(ReservationBean appointment) {
+		this.appointment = appointment;
 	}
 	
 	public void setOkBtnClickHandler(ClickHandler handler) {
@@ -74,6 +103,8 @@ public class AppointmentPatientMobileView extends BaseView implements IAppointme
 		goToTop();
 		
 		fadeOut();
+		
+		patientSexMaleRb.setValue(true);
 		
 		dialogBox.center();
 		dialogBox.setPopupPosition(dialogBox.getPopupLeft(), 70);

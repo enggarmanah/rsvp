@@ -3,10 +3,10 @@ package com.infoklinik.rsvp.server.service;
 import java.util.List;
 
 import com.infoklinik.rsvp.client.rpc.ScheduleService;
-import com.infoklinik.rsvp.server.dao.AppointmentDAO;
+import com.infoklinik.rsvp.server.dao.ReservationDAO;
 import com.infoklinik.rsvp.server.dao.ScheduleDAO;
-import com.infoklinik.rsvp.shared.AppointmentBean;
-import com.infoklinik.rsvp.shared.AppointmentSearchBean;
+import com.infoklinik.rsvp.shared.ReservationBean;
+import com.infoklinik.rsvp.shared.ReservationSearchBean;
 import com.infoklinik.rsvp.shared.ScheduleAppointmentBean;
 import com.infoklinik.rsvp.shared.ScheduleBean;
 import com.infoklinik.rsvp.shared.ScheduleSearchBean;
@@ -39,13 +39,13 @@ public class ScheduleServiceImpl extends BaseServiceServlet implements ScheduleS
 		List<ScheduleBean> schedules = scheduleDao.getSchedules(scheduleSearch);
 		scheduleAppoinment.setSchedules(schedules);
 		
-		AppointmentSearchBean apptSearch = new AppointmentSearchBean();
+		ReservationSearchBean apptSearch = new ReservationSearchBean();
 		apptSearch.setDoctorId(scheduleSearch.getDoctorId());
 		apptSearch.setInstId(scheduleSearch.getInstId());
 		apptSearch.setApptDate(scheduleSearch.getDate());
 		
-		AppointmentDAO apptDao = new AppointmentDAO();
-		List<AppointmentBean> appointments = apptDao.getAppointments(apptSearch);
+		ReservationDAO apptDao = new ReservationDAO();
+		List<ReservationBean> appointments = apptDao.getReservations(apptSearch);
 		scheduleAppoinment.setAppointments(appointments);
 		
 		return scheduleAppoinment;

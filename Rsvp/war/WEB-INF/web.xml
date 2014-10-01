@@ -101,8 +101,8 @@
 		<servlet-class>com.infoklinik.rsvp.server.service.StatisticServiceImpl</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>appointmentServiceServlet</servlet-name>
-		<servlet-class>com.infoklinik.rsvp.server.service.AppointmentServiceImpl</servlet-class>
+		<servlet-name>reservationServiceServlet</servlet-name>
+		<servlet-class>com.infoklinik.rsvp.server.service.ReservationServiceImpl</servlet-class>
 	</servlet>
 	
 	<servlet>
@@ -207,8 +207,8 @@
 		<url-pattern>/rsvp/statisticService</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>appointmentServiceServlet</servlet-name>
-		<url-pattern>/rsvp/appointmentService</url-pattern>
+		<servlet-name>reservationServiceServlet</servlet-name>
+		<url-pattern>/rsvp/reservationService</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>oAuthLoginServiceServlet</servlet-name>

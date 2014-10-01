@@ -10,16 +10,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.infoklinik.rsvp.server.ServerUtil;
-import com.infoklinik.rsvp.shared.AppointmentBean;
+import com.infoklinik.rsvp.shared.ReservationBean;
 
 @Entity
-@Table(name="appointment")
-public class Appointment {
+public class Reservation {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -144,9 +142,9 @@ public class Appointment {
 		this.appt_create_date = appt_create_date;
 	}
 	
-	public AppointmentBean getBean() {
+	public ReservationBean getBean() {
 		
-		AppointmentBean appointmentBean = new AppointmentBean();
+		ReservationBean appointmentBean = new ReservationBean();
 		appointmentBean.setId(id);
 		appointmentBean.setDoctor(doctor.getBean());
 		appointmentBean.setInstitution(institution.getBean());
@@ -164,7 +162,7 @@ public class Appointment {
 		return appointmentBean;
 	}
 	
-	public void setBean(AppointmentBean appointmentBean, EntityManager em) {
+	public void setBean(ReservationBean appointmentBean, EntityManager em) {
 		
 		id = appointmentBean.getId();
 		
