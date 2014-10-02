@@ -52,6 +52,9 @@ public class ServiceInfoView extends BaseView implements IServiceInfoView {
 	Label descriptionLb;
 	
 	@UiField
+	Button bookBtn;
+	
+	@UiField
 	Button okBtn;
 	
 	interface ModuleUiBinder extends UiBinder<Widget, ServiceInfoView> {}
@@ -92,6 +95,11 @@ public class ServiceInfoView extends BaseView implements IServiceInfoView {
 	public void setService(ServiceBean service) {
 		
 		this.service = service;
+	}
+	
+	public void setBookBtnClickHandler(ClickHandler handler) {
+		
+		bookBtn.addClickHandler(handler);
 	}
 	
 	public void setOkBtnClickHandler(ClickHandler handler) {

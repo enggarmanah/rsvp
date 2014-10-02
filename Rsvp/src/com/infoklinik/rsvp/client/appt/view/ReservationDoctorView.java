@@ -22,13 +22,13 @@ import com.google.gwt.user.datepicker.client.DateBox;
 import com.infoklinik.rsvp.client.BaseView;
 import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.Message;
-import com.infoklinik.rsvp.client.appt.presenter.interfaces.IReservationView;
+import com.infoklinik.rsvp.client.appt.presenter.interfaces.IReservationDoctorView;
 import com.infoklinik.rsvp.shared.ReservationBean;
 import com.infoklinik.rsvp.shared.Constant;
-import com.infoklinik.rsvp.shared.ScheduleAppointmentBean;
+import com.infoklinik.rsvp.shared.ScheduleReservationBean;
 import com.infoklinik.rsvp.shared.ScheduleBean;
 
-public class ReservationView extends BaseView implements IReservationView {
+public class ReservationDoctorView extends BaseView implements IReservationDoctorView {
 	
 	private DialogBox dialogBox;
 	
@@ -53,11 +53,11 @@ public class ReservationView extends BaseView implements IReservationView {
 	@UiField
 	Button cancelBtn;
 	
-	interface ModuleUiBinder extends UiBinder<Widget, ReservationView> {}
+	interface ModuleUiBinder extends UiBinder<Widget, ReservationDoctorView> {}
 	
 	private static ModuleUiBinder uiBinder = GWT.create(ModuleUiBinder.class);
 	
-	ReservationBean appointment;
+	ReservationBean reservation;
 	
 	public void createView() {	
 		
@@ -80,7 +80,7 @@ public class ReservationView extends BaseView implements IReservationView {
 		return dialogBox;
 	}
 		
-	public void setSchedulesAndAppointments(ScheduleAppointmentBean scheduleAppointment) {
+	public void setSchedulesAndReservations(ScheduleReservationBean scheduleAppointment) {
 		
 		List<ScheduleBean> schedules = scheduleAppointment.getSchedules();
 		List<ReservationBean> appointments = scheduleAppointment.getAppointments();
@@ -127,7 +127,7 @@ public class ReservationView extends BaseView implements IReservationView {
 		}
 	}
 	
-	public ReservationBean getAppointment() {
+	public ReservationBean getReservation() {
 		
 		Date apptDate = null;
 		
@@ -136,22 +136,22 @@ public class ReservationView extends BaseView implements IReservationView {
 			apptDate.setTime(apptDate.getTime() + ClientUtil.strToLong(apptTimeLb.getValue(apptTimeLb.getSelectedIndex())));
 		}
 		
-		appointment.setApptDate(apptDate);
+		reservation.setApptDate(apptDate);
 		
-		return appointment;
+		return reservation;
 	}
 	
-	public void setAppointment(ReservationBean appointment) {
+	public void setReservation(ReservationBean reservation) {
 		
-		this.appointment = appointment;
+		this.reservation = reservation;
 		
-		doctorLb.setText(appointment.getDoctor().getNameWithTitle());
-		specialityLb.setText(appointment.getDoctor().getSpeciality().getDescription());
-		institutionLb.setText(appointment.getInstitution().getName());
-		apptDateDb.setValue(appointment.getApptDate());
+		doctorLb.setText(reservation.getDoctor().getNameWithTitle());
+		specialityLb.setText(reservation.getDoctor().getSpeciality().getDescription());
+		institutionLb.setText(reservation.getInstitution().getName());
+		apptDateDb.setValue(reservation.getApptDate());
 	}
 	
-	public void setApptDateDbValueChangeHandler(ValueChangeHandler<Date> handler) {
+	public void setResvDateDbValueChangeHandler(ValueChangeHandler<Date> handler) {
 		
 		apptDateDb.addValueChangeHandler(handler);
 	}

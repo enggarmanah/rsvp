@@ -19,5 +19,7 @@ public interface IServiceInfoView extends LazyView, IsWidget {
 	
 	void setService(ServiceBean service);
 	
+	void setBookBtnClickHandler(ClickHandler handler);
+	
 	void setOkBtnClickHandler(ClickHandler handler);
 }

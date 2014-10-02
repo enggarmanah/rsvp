@@ -31,6 +31,10 @@ public class Reservation {
 	@JoinColumn(name = "doctor_id")
 	private Doctor doctor;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "service_id")
+	private Service service;
+	
 	private String event_id;
 	private String reservation_code;
 	private String patient_name;
@@ -68,6 +72,14 @@ public class Reservation {
 
 	public void setDoctor(Doctor doctor) {
 		this.doctor = doctor;
+	}
+
+	public Service getService() {
+		return service;
+	}
+
+	public void setService(Service service) {
+		this.service = service;
 	}
 
 	public String getEvent_id() {
@@ -144,45 +156,57 @@ public class Reservation {
 	
 	public ReservationBean getBean() {
 		
-		ReservationBean appointmentBean = new ReservationBean();
-		appointmentBean.setId(id);
-		appointmentBean.setDoctor(doctor.getBean());
-		appointmentBean.setInstitution(institution.getBean());
-		appointmentBean.setEventId(event_id);
-		appointmentBean.setReservationCode(reservation_code);
-		appointmentBean.setPatientName(patient_name);
-		appointmentBean.setPatientSex(patient_sex);
-		appointmentBean.setPatientBirthYear(patient_birth_year);
-		appointmentBean.setPatientMobile(patient_mobile);
-		appointmentBean.setPatientEmail(patient_email);
-		appointmentBean.setRemarks(remarks);
-		appointmentBean.setApptDate(ServerUtil.toDate(appt_date));
-		appointmentBean.setApptCreateDate(ServerUtil.toDate(appt_create_date));
+		ReservationBean reservationBean = new ReservationBean();
+		reservationBean.setId(id);
 		
-		return appointmentBean;
+		if (doctor != null) {
+			reservationBean.setDoctor(doctor.getBean());
+		}
+		
+		if (service != null) {
+			reservationBean.setService(service.getBean());
+		}
+		
+		reservationBean.setInstitution(institution.getBean());
+		reservationBean.setEventId(event_id);
+		reservationBean.setReservationCode(reservation_code);
+		reservationBean.setPatientName(patient_name);
+		reservationBean.setPatientSex(patient_sex);
+		reservationBean.setPatientBirthYear(patient_birth_year);
+		reservationBean.setPatientMobile(patient_mobile);
+		reservationBean.setPatientEmail(patient_email);
+		reservationBean.setRemarks(remarks);
+		reservationBean.setApptDate(ServerUtil.toDate(appt_date));
+		reservationBean.setApptCreateDate(ServerUtil.toDate(appt_create_date));
+		
+		return reservationBean;
 	}
 	
-	public void setBean(ReservationBean appointmentBean, EntityManager em) {
+	public void setBean(ReservationBean reservationBean, EntityManager em) {
 		
-		id = appointmentBean.getId();
+		id = reservationBean.getId();
 		
-		if (appointmentBean.getDoctor() != null) {
-			doctor = em.find(Doctor.class, appointmentBean.getDoctor().getId());
+		if (reservationBean.getDoctor() != null) {
+			doctor = em.find(Doctor.class, reservationBean.getDoctor().getId());
 		}
 		
-		if (appointmentBean.getInstitution() != null) {
-			institution = em.find(Institution.class, appointmentBean.getInstitution().getId());
+		if (reservationBean.getService() != null) {
+			service = em.find(Service.class, reservationBean.getService().getId());
 		}
 		
-		event_id = appointmentBean.getEventId();
-		reservation_code = appointmentBean.getReservationCode();
-		patient_name = appointmentBean.getPatientName();
-		patient_sex = appointmentBean.getPatientSex();
-		patient_birth_year = appointmentBean.getPatientBirthYear();
-		patient_mobile = appointmentBean.getPatientMobile();
-		patient_email = appointmentBean.getPatientEmail();
-		remarks = appointmentBean.getRemarks();
-		appt_date = appointmentBean.getApptDate();
-		appt_create_date = appointmentBean.getApptCreateDate();
+		if (reservationBean.getInstitution() != null) {
+			institution = em.find(Institution.class, reservationBean.getInstitution().getId());
+		}
+		
+		event_id = reservationBean.getEventId();
+		reservation_code = reservationBean.getReservationCode();
+		patient_name = reservationBean.getPatientName();
+		patient_sex = reservationBean.getPatientSex();
+		patient_birth_year = reservationBean.getPatientBirthYear();
+		patient_mobile = reservationBean.getPatientMobile();
+		patient_email = reservationBean.getPatientEmail();
+		remarks = reservationBean.getRemarks();
+		appt_date = reservationBean.getApptDate();
+		appt_create_date = reservationBean.getApptCreateDate();
 	}
 }

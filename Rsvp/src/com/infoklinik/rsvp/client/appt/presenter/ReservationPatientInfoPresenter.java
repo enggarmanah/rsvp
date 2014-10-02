@@ -26,9 +26,9 @@ import com.mvp4g.client.presenter.LazyPresenter;
 public class ReservationPatientInfoPresenter extends LazyPresenter<IReservationPatientInfoView, ReservationEventBus> {
 	
 	@Inject
-	ReservationServiceAsync appointmentService;
+	ReservationServiceAsync reservationService;
 	
-	ReservationBean appointment;
+	ReservationBean reservation;
 	String verificationCode;
 	
 	List<String> errorMessages;
@@ -39,10 +39,10 @@ public class ReservationPatientInfoPresenter extends LazyPresenter<IReservationP
 		initBtnHandler();
 	}
 	
-	public void onGetPatientInfo(ReservationBean appointment) {
-		verificationCode = appointment.getVerificationCode();
-		this.appointment = appointment;
-		view.setAppointment(appointment);
+	public void onGetPatientInfo(ReservationBean reservation) {
+		verificationCode = reservation.getVerificationCode();
+		this.reservation = reservation;
+		view.setReservation(reservation);
 		view.show();
 	}
 	
@@ -53,14 +53,14 @@ public class ReservationPatientInfoPresenter extends LazyPresenter<IReservationP
 			@Override
 			public void onClick(ClickEvent event) {
 				
-				appointment = view.getAppointment();
+				reservation = view.getReservation();
 				
-				if (isValidated(appointment)) {
+				if (isValidated(reservation)) {
 					
-					if (!ClientUtil.isEmpty(verificationCode) && !verificationCode.equals(appointment.getVerificationCode())) {
+					if (!ClientUtil.isEmpty(verificationCode) && !verificationCode.equals(reservation.getVerificationCode())) {
 						NotificationDlg.warning(Message.ERR_INVALID_VERIFICATION_CODE);
 					} else {
-						addAppointment();
+						addReservation();
 					}
 				} else {
 					NotificationDlg.error(errorMessages);
@@ -77,23 +77,31 @@ public class ReservationPatientInfoPresenter extends LazyPresenter<IReservationP
 		});
 	}
 	
-	private void addAppointment() {
+	private void addReservation() {
 		
 		ProgressDlg.show();
 		
-		appointmentService.addReservation(appointment, new AsyncCallback<ReservationBean>() {
+		reservationService.addReservation(reservation, new AsyncCallback<ReservationBean>() {
 			
 			@Override
 			public void onSuccess(ReservationBean result) {
 				
 				ProgressDlg.hide();
 								
-				appointment = result;
+				reservation = result;
 				
-				if (appointment.getId() != null) {
+				if (reservation.getId() != null) {
 					view.hide();
-					NotificationDlg.info("Reservasi kunjungan dokter telah berhasil. \nKode reservasi \"" + 
-						appointment.getReservationCode() + "\" telah dikirim ke handphone anda.");
+					
+					
+					if (reservation.getDoctor() != null) {
+						NotificationDlg.info("Reservasi kunjungan dokter telah berhasil. \nKode Reservasi: \"" + 
+							reservation.getReservationCode() + "\" telah dikirim ke handphone anda.");
+						
+					} else if (reservation.getService() != null) {
+						NotificationDlg.info("Registrasi telah berhasil. \nKode Voucher: \"" + 
+								reservation.getReservationCode() + "\" telah dikirim ke handphone anda.");
+					}
 					
 				} else {
 					NotificationDlg.warning(Message.ERR_APPT_NOT_AVAILABLE, new ClickHandler() {
@@ -102,7 +110,7 @@ public class ReservationPatientInfoPresenter extends LazyPresenter<IReservationP
 						public void onClick(ClickEvent event) {
 							
 							view.hide();
-							eventBus.selectAnotherDate(appointment);
+							eventBus.selectAnotherDate(reservation);
 						}
 					});
 				}
@@ -115,19 +123,19 @@ public class ReservationPatientInfoPresenter extends LazyPresenter<IReservationP
 		});
 	}
 	
-	private boolean isValidated(ReservationBean appointment) {
+	private boolean isValidated(ReservationBean reservation) {
 		
 		boolean isValidated = true;
 		errorMessages = new ArrayList<String>();
 		
-		if (ClientUtil.isEmpty(appointment.getPatientName())) {
+		if (ClientUtil.isEmpty(reservation.getPatientName())) {
 			
 			isValidated = false;
 			errorMessages.add(Message.ERR_APPT_PATIENT_NAME_EMPTY);
 		}
 		
-		if (ClientUtil.isEmpty(appointment.getPatientBirthYear()) ||
-			appointment.getPatientBirthYear().trim().length() != 4) {
+		if (ClientUtil.isEmpty(reservation.getPatientBirthYear()) ||
+			reservation.getPatientBirthYear().trim().length() != 4) {
 			
 			isValidated = false;
 			errorMessages.add(Message.ERR_APPT_PATIENT_BIRTH_YEAR_INVALID);

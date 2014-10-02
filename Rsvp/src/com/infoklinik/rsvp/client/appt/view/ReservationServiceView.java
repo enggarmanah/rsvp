@@ -7,38 +7,22 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.RadioButton;
-import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
-import com.infoklinik.rsvp.client.ClientUtil;
-import com.infoklinik.rsvp.client.appt.presenter.interfaces.IReservationPatientInfoView;
+import com.infoklinik.rsvp.client.appt.presenter.interfaces.IReservationServiceView;
 import com.infoklinik.rsvp.shared.ReservationBean;
 import com.infoklinik.rsvp.shared.Constant;
-import com.infoklinik.rsvp.shared.DoctorBean;
-import com.infoklinik.rsvp.shared.InstitutionBean;
 
-public class ReservationPatientInfoView extends BaseView implements IReservationPatientInfoView {
+public class ReservationServiceView extends BaseView implements IReservationServiceView {
 	
 	private DialogBox dialogBox;
 	
 	@UiField
-	TextBox verificationCodeTb;
+	Label serviceLb;
 	
 	@UiField
-	TextBox patientNameTb;
-	
-	@UiField
-	RadioButton patientSexMaleRb;
-	
-	@UiField
-	RadioButton patientSexFemaleRb;
-	
-	@UiField
-	TextBox patientBirthYearTb;
-	
-	@UiField
-	TextBox patientEmailTb;
+	Label institutionLb;
 	
 	@UiField
 	Button okBtn;
@@ -46,21 +30,18 @@ public class ReservationPatientInfoView extends BaseView implements IReservation
 	@UiField
 	Button cancelBtn;
 	
-	ReservationBean appointment;
-	
-	interface ModuleUiBinder extends UiBinder<Widget, ReservationPatientInfoView> {}
+	interface ModuleUiBinder extends UiBinder<Widget, ReservationServiceView> {}
 	
 	private static ModuleUiBinder uiBinder = GWT.create(ModuleUiBinder.class);
 	
-	DoctorBean doctor;
-	InstitutionBean institution;
+	ReservationBean reservation;
 	
 	public void createView() {	
 		
 		dialogBox = new DialogBox();
 		dialogBox.setStyleName("formDialog");
 		dialogBox.setWidget(uiBinder.createAndBindUi(this));
-		dialogBox.setText("Verifikasi No. Handphone");
+		dialogBox.setText("Konfirmasi Layanan");
 	}
 	
 	public Widget asWidget() {
@@ -72,20 +53,18 @@ public class ReservationPatientInfoView extends BaseView implements IReservation
 		
 		return dialogBox;
 	}
-	
+		
 	public ReservationBean getReservation() {
 		
-		appointment.setVerificationCode(ClientUtil.trim(verificationCodeTb.getValue()));
-		appointment.setPatientName(ClientUtil.trim(patientNameTb.getValue()));
-		appointment.setPatientSex(patientSexMaleRb.getValue() ? Constant.SEX_MALE : Constant.SEX_FEMALE);
-		appointment.setPatientBirthYear(ClientUtil.trim(patientBirthYearTb.getValue()));
-		appointment.setPatientEmail(ClientUtil.trim(patientEmailTb.getValue()));
-		
-		return appointment;
+		return reservation;
 	}
-
-	public void setReservation(ReservationBean appointment) {
-		this.appointment = appointment;
+	
+	public void setReservation(ReservationBean reservation) {
+		
+		this.reservation = reservation;
+		
+		serviceLb.setText(reservation.getService().getName());
+		institutionLb.setText(reservation.getInstitution().getName());
 	}
 	
 	public void setOkBtnClickHandler(ClickHandler handler) {
@@ -104,10 +83,21 @@ public class ReservationPatientInfoView extends BaseView implements IReservation
 		
 		fadeOut();
 		
-		patientSexMaleRb.setValue(true);
+		dialogBox.center();
+		dialogBox.setPopupPosition(dialogBox.getPopupLeft(), Constant.POPUP_L1_TOP);
+		dialogBox.show();
+		
+		fadeIn();
+	}
+	
+	public void showLv2() {
+		
+		goToTop();
+		
+		fadeOut();
 		
 		dialogBox.center();
-		dialogBox.setPopupPosition(dialogBox.getPopupLeft(), 70);
+		dialogBox.setPopupPosition(dialogBox.getPopupLeft() + Constant.POPUP_L2_LEFT, Constant.POPUP_L2_TOP);
 		dialogBox.show();
 		
 		fadeIn();

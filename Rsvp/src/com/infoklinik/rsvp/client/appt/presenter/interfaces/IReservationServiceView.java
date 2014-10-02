@@ -6,17 +6,19 @@ import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.shared.ReservationBean;
 import com.mvp4g.client.view.LazyView;
 
-public interface IReservationPatientInfoView extends LazyView, IsWidget {
+public interface IReservationServiceView extends LazyView, IsWidget {
 	
 	Widget asWidget();
 	
 	void show();
 	
+	void showLv2();
+	
 	void hide();
 	
-	void setReservation(ReservationBean reservation);
-	
 	ReservationBean getReservation();
+	
+	void setReservation(ReservationBean reservation);
 	
 	void setOkBtnClickHandler(ClickHandler handler);
 	

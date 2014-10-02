@@ -34,6 +34,14 @@ public class ServiceInfoPresenter extends LazyPresenter<IServiceInfoView, Servic
 	}
 	
 	private void initBtnHandler() {
+		
+		view.setBookBtnClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				eventBus.loadReservationServiceLv2(service);
+			}
+		});
 
 		view.setOkBtnClickHandler(new ClickHandler() {
 			

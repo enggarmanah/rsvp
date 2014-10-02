@@ -147,10 +147,16 @@ public interface MainEventBus extends EventBusWithLookup {
 	public void loadSearchLocations(List<InstitutionBean> institutions);
 	
 	@Event(forwardToModules=ReservationModule.class)
-	public void loadReservation(ScheduleBean schedule);
+	public void loadReservationDoctor(ScheduleBean schedule);
 	
 	@Event(forwardToModules=ReservationModule.class)
-	public void loadReservationLv2(ScheduleBean schedule);
+	public void loadReservationDoctorLv2(ScheduleBean schedule);
+	
+	@Event(forwardToModules=ReservationModule.class)
+	public void loadReservationService(ServiceBean service);
+	
+	@Event(forwardToModules=ReservationModule.class)
+	public void loadReservationServiceLv2(ServiceBean service);
 	
 	@Event(forwardToModules=AdminModule.class)
 	public void addInstitution();

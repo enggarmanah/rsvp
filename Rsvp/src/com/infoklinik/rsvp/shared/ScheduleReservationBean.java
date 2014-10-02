@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 @SuppressWarnings("serial")
-public class ScheduleAppointmentBean extends BaseBean {
+public class ScheduleReservationBean extends BaseBean {
 	
 	private Date date;
 	private List<ScheduleBean> schedules;

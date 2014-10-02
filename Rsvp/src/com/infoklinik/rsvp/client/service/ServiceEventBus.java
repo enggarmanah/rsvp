@@ -15,6 +15,9 @@ import com.mvp4g.client.event.EventBus;
 public interface ServiceEventBus extends EventBus {
 	
 	@Event(forwardToParent = true)
+	public void loadReservationServiceLv2(ServiceBean service);
+	
+	@Event(forwardToParent = true)
 	public void loadChildModuleView(IsWidget widget);
 	
 	@Event(handlers = ServiceInfoPresenter.class)

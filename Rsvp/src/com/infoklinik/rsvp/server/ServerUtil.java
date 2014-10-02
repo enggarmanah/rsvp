@@ -34,7 +34,18 @@ public class ServerUtil {
 		
 		String code = "";
 		
-		Long time = (new Date()).getTime();
+		Calendar cal = Calendar.getInstance();
+		long time = cal.getTimeInMillis();		
+		
+		cal.set(Calendar.MONTH, 0);
+		cal.set(Calendar.DATE, 1);
+		cal.clear(Calendar.HOUR);
+		cal.clear(Calendar.MINUTE);
+		cal.clear(Calendar.SECOND);
+		cal.clear(Calendar.MILLISECOND);
+		
+		time = time - cal.getTimeInMillis();
+		
 		code = Long.toString(time, 32);
 		code = code.toUpperCase();
 		

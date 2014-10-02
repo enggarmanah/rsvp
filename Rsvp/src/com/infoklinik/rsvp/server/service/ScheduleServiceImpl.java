@@ -7,7 +7,7 @@ import com.infoklinik.rsvp.server.dao.ReservationDAO;
 import com.infoklinik.rsvp.server.dao.ScheduleDAO;
 import com.infoklinik.rsvp.shared.ReservationBean;
 import com.infoklinik.rsvp.shared.ReservationSearchBean;
-import com.infoklinik.rsvp.shared.ScheduleAppointmentBean;
+import com.infoklinik.rsvp.shared.ScheduleReservationBean;
 import com.infoklinik.rsvp.shared.ScheduleBean;
 import com.infoklinik.rsvp.shared.ScheduleSearchBean;
 
@@ -30,9 +30,9 @@ public class ScheduleServiceImpl extends BaseServiceServlet implements ScheduleS
 		return schedules;
 	}
 	
-	public ScheduleAppointmentBean getSchedulesAndAppointments(ScheduleSearchBean scheduleSearch) {
+	public ScheduleReservationBean getSchedulesAndAppointments(ScheduleSearchBean scheduleSearch) {
 		
-		ScheduleAppointmentBean scheduleAppoinment = new ScheduleAppointmentBean();
+		ScheduleReservationBean scheduleAppoinment = new ScheduleReservationBean();
 		scheduleAppoinment.setDate(scheduleSearch.getDate());
 		
 		ScheduleDAO scheduleDao = new ScheduleDAO();
