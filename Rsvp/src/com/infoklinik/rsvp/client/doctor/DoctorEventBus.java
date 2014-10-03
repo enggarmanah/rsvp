@@ -19,7 +19,7 @@ public interface DoctorEventBus extends EventBus {
 	public void loadChildModuleView(IsWidget widget);
 	
 	@Event(forwardToParent = true)
-	public void loadReservationLv2(ScheduleBean schedule);
+	public void loadReservationDoctorLv2(ScheduleBean schedule);
 	
 	@Event(handlers = DoctorProfilePresenter.class)
 	public void loadDoctorProfile(DoctorBean doctorBean);
