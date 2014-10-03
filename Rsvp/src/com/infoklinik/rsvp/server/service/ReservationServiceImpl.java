@@ -45,7 +45,7 @@ public class ReservationServiceImpl extends BaseServiceServlet implements Reserv
 				
 				String message = "Reservasi kunjungan dokter telah berhasil.";
 				message += "\nKode Reservasi : " + reservation.getReservationCode();
-				message += "\nDokter: " + reservation.getDoctor().getNameWithTitle();
+				message += "\nDokter : " + reservation.getDoctor().getNameWithTitle();
 				message += "\nHari : " + ServerUtil.dateDayTimeToStr(reservation.getApptDate());
 				message += "\n" + reservation.getInstitution().getName() + ", " + reservation.getInstitution().getTelephone();
 						
@@ -55,10 +55,11 @@ public class ReservationServiceImpl extends BaseServiceServlet implements Reserv
 		} else if (reservation.getService() != null) {
 			
 			reservation.setReservationCode(ServerUtil.generateReservationCode());
+			reservation = reservationDAO.addReservation(reservation);
 			
 			String message = "Registrasi telah berhasil.";
 			message += "\nKode Voucher : " + reservation.getReservationCode();
-			message += "\nLayanan: " + reservation.getService().getName();
+			message += "\nLayanan : " + reservation.getService().getName();
 			message += "\n" + reservation.getInstitution().getName() + ", " + reservation.getInstitution().getTelephone();
 					
 			SmsUtil.sendSms(reservation.getPatientMobile(), message);

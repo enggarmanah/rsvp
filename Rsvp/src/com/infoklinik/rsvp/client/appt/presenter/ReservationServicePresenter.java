@@ -76,6 +76,7 @@ public class ReservationServicePresenter extends LazyPresenter<IReservationServi
 		this.service = service;
 		
 		reservation = new ReservationBean();
+		reservation.setService(service);
 		reservation.setInstitution(service.getInstitution());
 		
 		view.setReservation(reservation);

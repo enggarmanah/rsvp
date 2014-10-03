@@ -39,7 +39,8 @@ public class ServiceInfoPresenter extends LazyPresenter<IServiceInfoView, Servic
 			
 			@Override
 			public void onClick(ClickEvent event) {
-				eventBus.loadReservationServiceLv2(service);
+				view.hide();
+				eventBus.loadReservationService(service);
 			}
 		});
 

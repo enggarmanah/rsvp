@@ -59,7 +59,7 @@ public interface SearchResultEventBus extends EventBus {
 	public void loadServiceLike(ServiceBean service);
 	
 	@Event(forwardToParent = true)
-	public void loadReservation(ScheduleBean schedule);
+	public void loadReservationDoctor(ScheduleBean schedule);
 	
 	@Event(handlers = SearchResultPresenter.class)
 	public void loadInstitutionSearchResult(List<InstitutionBean> institutions);

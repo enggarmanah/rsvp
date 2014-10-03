@@ -95,11 +95,11 @@ public class ReservationPatientInfoPresenter extends LazyPresenter<IReservationP
 					
 					
 					if (reservation.getDoctor() != null) {
-						NotificationDlg.info("Reservasi kunjungan dokter telah berhasil. \nKode Reservasi: \"" + 
+						NotificationDlg.info("Reservasi kunjungan dokter telah berhasil. \nKode Reservasi : \"" + 
 							reservation.getReservationCode() + "\" telah dikirim ke handphone anda.");
 						
 					} else if (reservation.getService() != null) {
-						NotificationDlg.info("Registrasi telah berhasil. \nKode Voucher: \"" + 
+						NotificationDlg.info("Registrasi telah berhasil. \nKode Voucher : \"" + 
 								reservation.getReservationCode() + "\" telah dikirim ke handphone anda.");
 					}
 					

@@ -84,8 +84,9 @@ public class ReservationPatientInfoView extends BaseView implements IReservation
 		return appointment;
 	}
 
-	public void setReservation(ReservationBean appointment) {
-		this.appointment = appointment;
+	public void setReservation(ReservationBean reservation) {
+		this.appointment = reservation;
+		verificationCodeTb.setText(Constant.EMPTY_STRING);
 	}
 	
 	public void setOkBtnClickHandler(ClickHandler handler) {
