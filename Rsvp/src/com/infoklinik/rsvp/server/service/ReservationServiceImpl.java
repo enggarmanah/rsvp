@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.infoklinik.rsvp.client.rpc.ReservationService;
 import com.infoklinik.rsvp.server.CalendarUtil;
+import com.infoklinik.rsvp.server.MailUtil;
 import com.infoklinik.rsvp.server.ServerUtil;
 import com.infoklinik.rsvp.server.SmsUtil;
 import com.infoklinik.rsvp.server.dao.ReservationDAO;
@@ -63,6 +64,7 @@ public class ReservationServiceImpl extends BaseServiceServlet implements Reserv
 			message += "\n" + reservation.getInstitution().getName() + ", " + reservation.getInstitution().getTelephone();
 					
 			SmsUtil.sendSms(reservation.getPatientMobile(), message);
+			MailUtil.sendReservationEmail(reservation);
 		}
 		
 		return reservation;

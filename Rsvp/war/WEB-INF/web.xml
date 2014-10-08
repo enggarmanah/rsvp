@@ -21,6 +21,10 @@
 		<servlet-class>com.infoklinik.rsvp.server.servlet.MailServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>instDirectoryServlet</servlet-name>
+		<servlet-class>com.infoklinik.rsvp.server.servlet.InstDirectoryServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>cityServiceServlet</servlet-name>
 		<servlet-class>com.infoklinik.rsvp.server.service.CityServiceImpl</servlet-class>
 	</servlet>
@@ -129,6 +133,10 @@
 	<servlet-mapping>
 		<servlet-name>mailServlet</servlet-name>
 		<url-pattern>/mail</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>instDirectoryServlet</servlet-name>
+		<url-pattern>/instDirectory</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>doctorServiceServlet</servlet-name>

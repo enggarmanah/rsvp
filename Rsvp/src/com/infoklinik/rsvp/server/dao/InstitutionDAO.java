@@ -91,6 +91,25 @@ public class InstitutionDAO {
 		return list;
 	}
 	
+	public List<InstitutionBean> getAllInstitutions() {
+
+		List<InstitutionBean> list = new ArrayList<InstitutionBean>();
+
+		EntityManager em = PersistenceManager.getEntityManager();
+		em.getTransaction().begin();
+		
+		List<Institution> result = em.createQuery("SELECT i FROM Institution i", Institution.class).getResultList();
+
+		for (Institution inst : result) {
+			list.add(inst.getBean());
+		}
+		
+		em.getTransaction().commit();
+		em.close();
+
+		return list;
+	}
+	
 	public List<InstitutionBean> getPartners() {
 
 		List<InstitutionBean> list = new ArrayList<InstitutionBean>();

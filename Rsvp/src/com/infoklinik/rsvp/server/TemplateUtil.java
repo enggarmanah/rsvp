@@ -9,6 +9,8 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
+import com.infoklinik.rsvp.shared.ReservationBean;
+
 public class TemplateUtil {
 	
 	private static final Logger log = Logger.getLogger(TemplateUtil.class.getName());
@@ -21,7 +23,7 @@ public class TemplateUtil {
     	ve.init();
 	}
 	
-	public static String getNotificationMessage() {
+	public static String getNotificationMessage(ReservationBean reservation) {
 		
 		StringWriter w = new StringWriter();
 		
@@ -29,10 +31,13 @@ public class TemplateUtil {
         {
         	VelocityContext context = new VelocityContext();
 
-            context.put("name", "Velocity");
-            context.put("project", "Jakarta");
+            context.put("voucher", reservation.getReservationCode());
+            context.put("service", reservation.getService().getName());
+            context.put("institution", reservation.getInstitution().getName());
+            context.put("telephone", reservation.getInstitution().getTelephone());
+            context.put("address", reservation.getInstitution().getAddress());
 
-            Template t = ve.getTemplate( "com/infoklinik/rsvp/server/template/service.vm" );
+            Template t = ve.getTemplate( "com/infoklinik/rsvp/server/template/reservation.vm" );
         	t.merge(context, w);
         	
         	System.out.println(" template : " + w );

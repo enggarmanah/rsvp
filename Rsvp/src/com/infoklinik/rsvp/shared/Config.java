@@ -7,4 +7,8 @@ public class Config {
 	public static boolean SMS_ACTIVE_STATUS = true;
 	
 	public static String SMS_GATEWAY = Constant.SMS_GW_WEBSMS;
+	
+	public static String ADMIN_EMAIL = "cs.infoklinik@gmail.com";
+	
+	public static String ADMIN_EMAIL_DESC = "Customer Service - Info Klinik";
 }

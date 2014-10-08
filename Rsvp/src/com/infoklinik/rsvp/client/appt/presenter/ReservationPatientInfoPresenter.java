@@ -40,6 +40,7 @@ public class ReservationPatientInfoPresenter extends LazyPresenter<IReservationP
 	}
 	
 	public void onGetPatientInfo(ReservationBean reservation) {
+		
 		verificationCode = reservation.getVerificationCode();
 		this.reservation = reservation;
 		view.setReservation(reservation);
@@ -92,7 +93,6 @@ public class ReservationPatientInfoPresenter extends LazyPresenter<IReservationP
 				
 				if (reservation.getId() != null) {
 					view.hide();
-					
 					
 					if (reservation.getDoctor() != null) {
 						NotificationDlg.info("Reservasi kunjungan dokter telah berhasil. \nKode Reservasi : \"" + 
