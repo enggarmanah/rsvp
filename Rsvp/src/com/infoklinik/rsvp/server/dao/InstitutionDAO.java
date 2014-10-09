@@ -52,7 +52,7 @@ public class InstitutionDAO {
 		institutionBean = institution.loadServices().getBean();
 		
 		em.close();
-		
+				
 		return institutionBean;
 	}
 	

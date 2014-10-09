@@ -30,6 +30,22 @@ public class ServerUtil {
 		}
 	}
 	
+	public static String getInstTypeDescription(String instType) {
+		String desc = Constant.EMPTY_STRING;
+		
+		if (Constant.CATEGORY_CLINIC.equals(instType)) {
+			desc = Constant.CATEGORY_CLINIC_DESC;
+		} else if (Constant.CATEGORY_HOSPITAL.equals(instType)) {
+			desc = Constant.CATEGORY_HOSPITAL_DESC;
+		} else if (Constant.CATEGORY_LABORATORY.equals(instType)) {
+			desc = Constant.CATEGORY_LABORATORY_DESC;
+		} else if (Constant.CATEGORY_PHARMACY.equals(instType)) {
+			desc = Constant.CATEGORY_PHARMACY_DESC;
+		}
+		
+		return desc;
+	}
+	
 	public static synchronized String generateReservationCode() {
 		
 		String code = "";

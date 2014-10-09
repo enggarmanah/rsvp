@@ -22,6 +22,14 @@ public class Constant {
 	public static final String CATEGORY_PHARMACY = "PHM";
 	public static final String CATEGORY_INSURANCE = "INS";
 	
+	public static final String CATEGORY_DOCTOR_DESC = "Dokter";
+	public static final String CATEGORY_SERVICE_DESC = "Layanan";
+	public static final String CATEGORY_CLINIC_DESC = "Klinik";
+	public static final String CATEGORY_HOSPITAL_DESC = "Rumah Sakit RS";
+	public static final String CATEGORY_LABORATORY_DESC = "Laboratorium";
+	public static final String CATEGORY_PHARMACY_DESC = "Apotek";
+	public static final String CATEGORY_INSURANCE_DESC = "Asuransi";
+	
 	public static final String IMAGE_URL = "/image?id=";
 	
 	public static final String STATUS_ACTIVE = "A";

@@ -41,7 +41,7 @@ public class PersistenceManager {
 				properties.put("javax.persistence.jdbc.url", "jdbc:mysql://localhost/infoklinik?user=root");
 			}
 		
-			emf = Persistence.createEntityManagerFactory("Demo", properties);
+			emf = Persistence.createEntityManagerFactory("Rsvp", properties);
 			
 		} catch (Exception e) {
 			

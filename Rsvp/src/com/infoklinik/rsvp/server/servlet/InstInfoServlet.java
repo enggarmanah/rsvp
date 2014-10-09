@@ -1,7 +1,6 @@
 package com.infoklinik.rsvp.server.servlet;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
@@ -10,11 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.infoklinik.rsvp.server.ServerUtil;
 import com.infoklinik.rsvp.server.dao.InstitutionDAO;
 import com.infoklinik.rsvp.shared.InstitutionBean;
 
 @SuppressWarnings("serial")
-public class InstDirectoryServlet extends HttpServlet {
+public class InstInfoServlet extends HttpServlet {
 	
 	private static final Logger log = Logger.getLogger(AdminServlet.class.getName());
 	
@@ -39,24 +39,19 @@ public class InstDirectoryServlet extends HttpServlet {
 		html.append("</head>\n");
 		html.append("<body>\n");
 		html.append("<div id=\"htmlContent\">\n");
-		html.append("Daftar Rumah Sakit / Klinik / Laboratorium / Apotek </br>\n");
+		
+		String instId = request.getParameter("id");
 		
 		InstitutionDAO instDao = new InstitutionDAO();
-		List<InstitutionBean> institutions = instDao.getAllInstitutions();
-		
+		InstitutionBean inst = instDao.getInstitution(Long.valueOf(instId)); 
+				
 		byte[] bytes = null;
 		
-		for (InstitutionBean inst : institutions) {
-			
-			html.append("<a href='/instInfo?id="+ inst.getId() +"'>");
-			html.append(inst.getName());
-			html.append("</a>\n");
-			
-			bytes = html.toString().getBytes();
-			html.setLength(0);
-			os.write(bytes);
-		}
-		
+		html.append(ServerUtil.getInstTypeDescription(inst.getCategory()) + " " + inst.getName()  + "<br/>\n");
+		html.append("Alamat : " + inst.getAddress() + "<br/>\n");
+		html.append("No. Telepon : " + inst.getTelephone() + "<br/>\n");
+		html.append("Email : " + inst.getEmail() + "<br/>\n");
+				
 		html.append("</div>\n");
 		html.append("</body>\n");
 		html.append("</html>\n");

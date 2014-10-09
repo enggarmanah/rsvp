@@ -3,7 +3,7 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 	version="2.0">
 
-	<persistence-unit name="Demo">
+	<persistence-unit name="Rsvp">
 		<provider>org.datanucleus.api.jpa.PersistenceProviderImpl</provider>
 		<class>com.infoklinik.rsvp.server.model.Institution</class>
 		<class>com.infoklinik.rsvp.server.model.Doctor</class>
@@ -31,6 +31,26 @@
 		    <property name="javax.persistence.jdbc.user" value="root"/>
 			<property name="javax.persistence.jdbc.password" value="enggar"/>
 			<property name="datanucleus.identifier.case" value="LowerCase"/>
+			
+			<!-- 
+			<property name="datanucleus.ConnectionDriverName" value="com.mysql.jdbc.Driver"/>
+			<property name="datanucleus.ConnectionURL" value="jdbc:mysql://localhost/infoklinik"/>
+			<property name="datanucleus.ConnectionUserName" value="root"/>
+			<property name="datanucleus.ConnectionPassword" value="enggar"/>
+			
+			<property name="datanucleus.connectionPoolingType" value="DBCP"/>
+			<property name="datanucleus.connectionPool.maxIdle" value="3"/>
+			<property name="datanucleus.connectionPool.minIdle" value="3"/>
+			<property name="datanucleus.connectionPool.maxActive" value="5"/>
+			<property name="datanucleus.connectionPool.maxWait" value="60"/>
+			
+			<property name="datanucleus.connectionPool.maxStatements" value="20"/>
+			<property name="datanucleus.connectionPool.testSQL" value="SELECT 1"/>
+			
+			<property name="datanucleus.connectionPool.timeBetweenEvictionRunsMillis" value="30000"/>
+			<property name="datanucleus.connectionPool.minEvictableIdleTimeMillis" value="30000"/>
+			 -->
+			
 		</properties>
 
 	</persistence-unit>

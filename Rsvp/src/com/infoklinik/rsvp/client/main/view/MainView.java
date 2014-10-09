@@ -1,6 +1,8 @@
 package com.infoklinik.rsvp.client.main.view;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
@@ -38,13 +40,17 @@ public class MainView extends Composite implements IMainView {
 	
 	public MainView() {	
 		
+		Element htmlContent = Document.get().getElementById("htmlContent");
+		if (htmlContent != null) {
+			Document.get().getElementById("htmlContent").removeFromParent();
+		}
+		
 		initWidget(uiBinder.createAndBindUi(this));
 		init();
 		
-		//String info = "Portal Informasi Layanan Kesehatan";
-		String info = "";
+		String info = Constant.EMPTY_STRING;
 		if (Config.ENV_CURRENT.equals(Constant.ENV_STAGING)) {
-			info += " - Testing Version";
+			info += " - Demo Version";
 		}
 		
 		infoLb.setText(info);

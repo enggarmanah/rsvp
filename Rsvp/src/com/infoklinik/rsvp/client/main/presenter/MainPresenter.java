@@ -104,7 +104,7 @@ public class MainPresenter extends BasePresenter<IMainView, MainEventBus> implem
 	public void onSetPopUpPanel() {}
 	
 	public void onStart() {
-				
+		
 		eventBus.loadMenu();
 		eventBus.loadDoctorSearch();
 		
