@@ -26,6 +26,7 @@ public class ServiceDAO {
 		Service service = em.find(Service.class, serviceId);
 
 		if (service != null) {
+			service.loadInstitution();
 			serviceBean = service.getBean();
 		}
 
@@ -158,6 +159,7 @@ public class ServiceDAO {
 		EntityManager em = PersistenceManager.getEntityManager();
 		
 		ArrayList<String> filters = new ArrayList<String>();
+		ArrayList<String> joins = new ArrayList<String>();
 		
 		HashMap<String, Object> parameters = new HashMap<String, Object>();
 		
@@ -209,6 +211,7 @@ public class ServiceDAO {
 			parameters.put("cityId", serviceSearch.getCityId());
 		}
 		
+		ServerUtil.setJoin(sql, joins);
 		ServerUtil.setFilter(sql, filters);
 		
 		sql.append(" ORDER BY s.name");

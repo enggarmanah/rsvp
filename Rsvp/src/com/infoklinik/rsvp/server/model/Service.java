@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
@@ -21,7 +20,6 @@ import com.infoklinik.rsvp.shared.Constant;
 import com.infoklinik.rsvp.shared.ServiceBean;
 
 @Entity
-@Table(name="service")
 public class Service extends Base {
 	
 	@ManyToOne(fetch = FetchType.LAZY)

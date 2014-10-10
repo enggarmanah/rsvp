@@ -172,6 +172,52 @@ public class ServerUtil {
 		return strDate;
 	}
 	
+	public static String dayToStr(int day) {
+		
+		String dayStr = "";
+		try {
+			
+			switch (day) {
+				case Calendar.MONDAY: dayStr = "Senin";
+			    		break;
+				case Calendar.TUESDAY: dayStr = "Selasa";
+	    				break;
+				case Calendar.WEDNESDAY: dayStr = "Rabu";
+					    break;
+				case Calendar.THURSDAY: dayStr = "Kamis";
+			    		break;
+				case Calendar.FRIDAY: dayStr = "Jumat";
+						break;
+				case Calendar.SATURDAY: dayStr = "Sabtu";
+						break;
+				case Calendar.SUNDAY: dayStr = "Minggu";
+			    		break;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dayStr;
+	}
+	
+	public static String timeToStr(int i) {
+		
+		i = i / Constant.MILISECS;
+		
+		int hour = i / Constant.HOUR_SECS;
+		int min = (i % Constant.HOUR_SECS) / Constant.MIN_SECS;
+		
+		String hh = String.valueOf(hour);
+		String mm = String.valueOf(min);
+		
+		hh = hh.length() < 2 ? "0" + hh : hh;
+		mm = mm.length() < 2 ? "0" + mm : mm;
+		
+		String time = hh + ":" + mm;
+		
+		return time;
+	}
+	
 	public static Long strToLong(String text) {
 		
 		Long number = null;

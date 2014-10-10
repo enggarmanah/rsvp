@@ -137,6 +137,14 @@ public class InstitutionBean extends BaseBean {
 	public String getTelephone() {
 		return telephone;
 	}
+	
+	public String getTelephoneMasked() {
+		if (telephone != null && telephone.length() > 2) {
+			return telephone.substring(0, telephone.length() - 2)  + "...";
+		} else {
+			return telephone;
+		}
+	}
 
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;

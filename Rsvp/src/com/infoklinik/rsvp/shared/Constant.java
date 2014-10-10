@@ -11,6 +11,10 @@ public class Constant {
 	public static final String SMS_GW_BULKSMS = "SMS_GW_BULKSMS";
 	public static final String SMS_GW_WEBSMS = "SMS_GW_WEBSMS";
 	
+	public static final String URL_INST = "/instInfo";
+	public static final String URL_DOCTOR = "/doctorInfo";
+	public static final String URL_SERVICE = "/serviceInfo";
+	
 	public static final String SEX_MALE = "L";
 	public static final String SEX_FEMALE = "P";
 	
@@ -60,6 +64,7 @@ public class Constant {
 	public static final String SYSTEM_ID = "System";
 	
 	public static final Long DR_SPECIALITY_DENTIST = Long.valueOf(1); 
+	public static final Long DR_SPECIALITY_GP = Long.valueOf(2);
 	
 	public static final String OPTION_PLS_SELECT_CODE = "";
 	public static final String OPTION_PLS_SELECT_CODE_DESC = "Silahkan Pilih";

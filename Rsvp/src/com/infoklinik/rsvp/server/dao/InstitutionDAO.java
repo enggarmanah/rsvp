@@ -35,6 +35,21 @@ public class InstitutionDAO {
 		return institutionBean;
 	}
 	
+	public InstitutionBean getInstitutionWithServices(Long id) {
+
+		InstitutionBean institutionBean = new InstitutionBean();
+
+		EntityManager em = PersistenceManager.getEntityManager();
+		
+		Institution institution = em.find(Institution.class, id);
+		institution.loadServices();
+		institutionBean = institution.getBean();
+		
+		em.close();
+
+		return institutionBean;
+	}
+	
 	public InstitutionBean addInstitution(InstitutionBean institutionBean) {
 		
 		EntityManager em = PersistenceManager.getEntityManager();

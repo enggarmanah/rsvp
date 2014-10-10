@@ -19,7 +19,7 @@ public class ScheduleDAO {
 
 		EntityManager em = PersistenceManager.getEntityManager();
 		
-		Query query = em.createQuery("SELECT s FROM Schedule s WHERE s.doctor.id = :doctorId ORDER BY s.day", Schedule.class);
+		Query query = em.createQuery("SELECT s FROM Schedule s WHERE s.doctor.id = :doctorId ORDER BY s.day, s.op_start", Schedule.class);
 		
 		query.setParameter("doctorId", doctorId);
 		

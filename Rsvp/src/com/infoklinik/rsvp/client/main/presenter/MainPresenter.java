@@ -18,9 +18,13 @@ import com.infoklinik.rsvp.client.rpc.CommonServiceAsync;
 import com.infoklinik.rsvp.client.rpc.DoctorServiceAsync;
 import com.infoklinik.rsvp.client.rpc.InstitutionServiceAsync;
 import com.infoklinik.rsvp.client.rpc.OAuthLoginServiceAsync;
+import com.infoklinik.rsvp.client.rpc.ServiceServiceAsync;
 import com.infoklinik.rsvp.shared.Constant;
 import com.infoklinik.rsvp.shared.Credential;
+import com.infoklinik.rsvp.shared.DoctorBean;
+import com.infoklinik.rsvp.shared.InstitutionBean;
 import com.infoklinik.rsvp.shared.LocationBean;
+import com.infoklinik.rsvp.shared.ServiceBean;
 import com.infoklinik.rsvp.shared.SocialUser;
 import com.infoklinik.rsvp.shared.UserBean;
 import com.mvp4g.client.Mvp4gLoader;
@@ -39,6 +43,9 @@ public class MainPresenter extends BasePresenter<IMainView, MainEventBus> implem
 	
 	@Inject
 	DoctorServiceAsync doctorService;
+	
+	@Inject
+	ServiceServiceAsync serviceService;
 	
 	@Inject
 	OAuthLoginServiceAsync oAuthLoginService;
@@ -107,6 +114,49 @@ public class MainPresenter extends BasePresenter<IMainView, MainEventBus> implem
 		
 		eventBus.loadMenu();
 		eventBus.loadDoctorSearch();
+		
+		String path = Window.Location.getPath();
+		String id = Window.Location.getParameter("id");
+		
+		if (Constant.URL_INST.equals(path)) {
+			
+			institutionService.getInstitution(Long.valueOf(id), new AsyncCallback<InstitutionBean>() {
+				
+				@Override
+				public void onSuccess(InstitutionBean institution) {
+					eventBus.loadInstitutionProfile(institution);
+				}
+				
+				@Override
+				public void onFailure(Throwable caught) {}
+			});
+			
+		} else if (Constant.URL_DOCTOR.equals(path)) {
+			
+			doctorService.getDoctor(Long.valueOf(id), new AsyncCallback<DoctorBean>() {
+				
+				@Override
+				public void onSuccess(DoctorBean doctor) {
+					eventBus.loadDoctorProfile(doctor);
+				}
+				
+				@Override
+				public void onFailure(Throwable caught) {}
+			});
+			
+		} else if (Constant.URL_SERVICE.equals(path)) {
+			 
+			serviceService.getService(Long.valueOf(id), new AsyncCallback<ServiceBean>() {
+				
+				@Override
+				public void onSuccess(ServiceBean service) {
+					eventBus.loadServiceInfo(service);
+				}
+				
+				@Override
+				public void onFailure(Throwable caught) {}
+			});
+		}
 		
 		commonService.isProductionEnvironment(new AsyncCallback<Boolean>() {
 			

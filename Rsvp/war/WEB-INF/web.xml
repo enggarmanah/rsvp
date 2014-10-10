@@ -29,6 +29,14 @@
 		<servlet-class>com.infoklinik.rsvp.server.servlet.InstInfoServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>doctorInfoServlet</servlet-name>
+		<servlet-class>com.infoklinik.rsvp.server.servlet.DoctorInfoServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>serviceInfoServlet</servlet-name>
+		<servlet-class>com.infoklinik.rsvp.server.servlet.ServiceInfoServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>cityServiceServlet</servlet-name>
 		<servlet-class>com.infoklinik.rsvp.server.service.CityServiceImpl</servlet-class>
 	</servlet>
@@ -145,6 +153,14 @@
 	<servlet-mapping>
 		<servlet-name>instInfoServlet</servlet-name>
 		<url-pattern>/instInfo</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>doctorInfoServlet</servlet-name>
+		<url-pattern>/doctorInfo</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>serviceInfoServlet</servlet-name>
+		<url-pattern>/serviceInfo</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>doctorServiceServlet</servlet-name>

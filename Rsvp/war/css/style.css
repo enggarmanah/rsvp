@@ -1554,7 +1554,7 @@ input.search-field:focus {
 	line-height: 18px;
 }
 
-#profile-inst-link {
+.profile-inst-link {
 	float: left;
 	padding: 0px 0px 10px 0px;
 	border: 0px solid #AAA;
@@ -1562,14 +1562,14 @@ input.search-field:focus {
 	line-height: 16px;
 }
 
-#profile-inst-link .icon {
+.profile-inst-link .icon {
 	min-width: 23px;
 	float: left;
 	line-height: 18px;
 	padding: 0px 0px 0px 0px;
 }
 
-#profile-inst-link .content {
+.profile-inst-link .content {
 	float: left;
 	text-align: left;
 	display: inline;
@@ -1578,7 +1578,7 @@ input.search-field:focus {
 	cursor: pointer;
 }
 
-#profile-inst-link .content:hover {
+.profile-inst-link .content:hover {
 	color: #FF7E00;
 }
 
@@ -2011,6 +2011,10 @@ input.search-field:focus {
 	display: block;
 	border: 1px dashed #AAA;
 	margin: 10px 0px 0px 0px;
+}
+
+#promo-image .gwt-Image {
+	margin: 2px 0px 0px 0px;
 }
 
 #promo-booking {

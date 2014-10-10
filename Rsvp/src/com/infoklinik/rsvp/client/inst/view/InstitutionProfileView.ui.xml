@@ -44,26 +44,29 @@
 						</div>
 					</div>
 				</div>
-				<div id="profile-inst-link">
-					<div class="icon">
-						<img src="images/laptop.png" class="contact-img"/>
-					</div>
-					<div class="content">
-						<g:Label ui:field="websiteLb"></g:Label>
-					</div>
-					<div class="icon">
-						<img src="images/facebook-small.png" class="contact-img"/>
-					</div>
-					<div class="content">
-						<g:Label ui:field="facebookLb" text="theclinic"></g:Label>
-					</div>
-					<div class="icon">
-						<img src="images/twitter-small.png" class="contact-img"/>
-					</div>
-					<div class="content">
-						<g:Label ui:field="twitterLb" text="theclinic"></g:Label>
-					</div>
-				</div>
+				
+				<g:SimplePanel ui:field="linksPanel">
+					<g:FlowPanel styleName="profile-inst-link">
+						<g:SimplePanel ui:field="websiteImg" styleName="icon">
+							<g:Image url="images/laptop.png" styleName="contact-img"></g:Image>
+						</g:SimplePanel>
+						<g:SimplePanel ui:field="websiteInfo" styleName="content">
+							<g:Label ui:field="websiteLb"></g:Label>
+						</g:SimplePanel>
+						<g:SimplePanel ui:field="facebookImg" styleName="icon">
+							<g:Image url="images/facebook-small.png" styleName="contact-img"></g:Image>
+						</g:SimplePanel>
+						<g:SimplePanel ui:field="facebookInfo" styleName="content">
+							<g:Label ui:field="facebookLb" text="theclinic"></g:Label>
+						</g:SimplePanel>
+						<g:SimplePanel ui:field="twitterImg" styleName="icon">
+							<g:Image url="images/twitter-small.png" styleName="contact-img"></g:Image>
+						</g:SimplePanel>
+						<g:SimplePanel ui:field="twitterInfo" styleName="content">
+							<g:Label ui:field="twitterLb" text="theclinic"></g:Label>
+						</g:SimplePanel>
+					</g:FlowPanel>
+				</g:SimplePanel>
 				
 				<g:SimplePanel ui:field="infoPanel" styleName="profile-inst-section"></g:SimplePanel>
 				
