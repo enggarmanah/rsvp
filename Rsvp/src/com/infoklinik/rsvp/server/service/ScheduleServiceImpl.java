@@ -30,7 +30,7 @@ public class ScheduleServiceImpl extends BaseServiceServlet implements ScheduleS
 		return schedules;
 	}
 	
-	public ScheduleReservationBean getSchedulesAndAppointments(ScheduleSearchBean scheduleSearch) {
+	public ScheduleReservationBean getSchedulesAndReservations(ScheduleSearchBean scheduleSearch) {
 		
 		ScheduleReservationBean scheduleAppoinment = new ScheduleReservationBean();
 		scheduleAppoinment.setDate(scheduleSearch.getDate());
@@ -45,8 +45,8 @@ public class ScheduleServiceImpl extends BaseServiceServlet implements ScheduleS
 		apptSearch.setApptDate(scheduleSearch.getDate());
 		
 		ReservationDAO apptDao = new ReservationDAO();
-		List<ReservationBean> appointments = apptDao.getReservations(apptSearch);
-		scheduleAppoinment.setAppointments(appointments);
+		List<ReservationBean> reservations = apptDao.getReservations(apptSearch);
+		scheduleAppoinment.setReservations(reservations);
 		
 		return scheduleAppoinment;
 	}

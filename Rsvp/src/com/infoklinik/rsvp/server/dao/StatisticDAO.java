@@ -103,7 +103,7 @@ public class StatisticDAO {
 			cal.add(Calendar.MONTH, -1);
 			Date startdate = cal.getTime();
 			
-			Query query = em.createQuery("SELECT COUNT(a) AS total FROM Appointment a WHERE a.appt_create_date BETWEEN :startdate AND :enddate");
+			Query query = em.createQuery("SELECT COUNT(a) AS total FROM Reservation a WHERE a.appt_create_date BETWEEN :startdate AND :enddate");
 			query.setParameter("startdate", startdate);
 			query.setParameter("enddate", enddate);
 			Long count = (Long) query.getSingleResult();

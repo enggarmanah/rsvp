@@ -84,7 +84,7 @@ public class Institution extends Base {
 	private List<Service> services;
 	
 	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="institution", targetEntity=Service.class)
-	private List<Reservation> appointments;
+	private List<Reservation> reservations;
 	
 	@Transient
 	private boolean isLoadInsurances = false;

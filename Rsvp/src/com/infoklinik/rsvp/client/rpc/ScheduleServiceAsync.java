@@ -13,5 +13,5 @@ public interface ScheduleServiceAsync {
 	
 	public void getSchedules(ScheduleSearchBean scheduleSearch, AsyncCallback<List<ScheduleBean>> callback);
 	
-	public void getSchedulesAndAppointments(ScheduleSearchBean scheduleSearch, AsyncCallback<ScheduleReservationBean> callback);
+	public void getSchedulesAndReservations(ScheduleSearchBean scheduleSearch, AsyncCallback<ScheduleReservationBean> callback);
 }

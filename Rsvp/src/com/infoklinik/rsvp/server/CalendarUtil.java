@@ -32,7 +32,7 @@ public class CalendarUtil {
 		return new Calendar.Builder(new UrlFetchTransport(), new JacksonFactory(), credential).setApplicationName("info-klinik/1.0").build();
 	}
 
-	public static String addCalendarEntry(ReservationBean appointment) {
+	public static String addCalendarEntry(ReservationBean reservation) {
 		
 		String eventId = "[Event-ID]";
 		
@@ -43,11 +43,11 @@ public class CalendarUtil {
 		    try {
 		        Event event = new Event();
 		        
-		        String patientTitle = (Constant.SEX_MALE.equals(appointment.getPatientSex()) ? "Tn. " : "Nn. ");
+		        String patientTitle = (Constant.SEX_MALE.equals(reservation.getPatientSex()) ? "Tn. " : "Nn. ");
 		        
-		        String summary = "Jadwal Kunjungan Pasien : " + patientTitle + appointment.getPatientName() + " / " + appointment.getPatientMobile();
-		        String location = appointment.getInstitution().getName() + ", " + appointment.getInstitution().getAddress();
-		        String description = "Untuk info lebih lanjut / pembatalan / perubahan jadwal silahkan hubungi no. telepon : " + appointment.getInstitution().getTelephone();
+		        String summary = "Jadwal Kunjungan Pasien : " + patientTitle + reservation.getPatientName() + " / " + reservation.getPatientMobile();
+		        String location = reservation.getInstitution().getName() + ", " + reservation.getInstitution().getAddress();
+		        String description = "Untuk info lebih lanjut / pembatalan / perubahan jadwal silahkan hubungi no. telepon : " + reservation.getInstitution().getTelephone();
 		        
 		        event.setSummary(summary);
 		        event.setLocation(location);
@@ -55,15 +55,15 @@ public class CalendarUtil {
 		  
 		        ArrayList<EventAttendee> attendees = new ArrayList<EventAttendee>();
 		        
-		        String patientName = patientTitle + appointment.getPatientName();
-		        String patientEmail = appointment.getPatientEmail();
+		        String patientName = patientTitle + reservation.getPatientName();
+		        String patientEmail = reservation.getPatientEmail();
 		        
 		        EventAttendee patientAtd = new EventAttendee();
 		        patientAtd.setDisplayName(patientName);
 		        patientAtd.setEmail(patientEmail);
 		        attendees.add(patientAtd);
 		        	        
-		        DoctorBean doctor = appointment.getDoctor();
+		        DoctorBean doctor = reservation.getDoctor();
 		        String doctorName = doctor.getNameWithTitle();
 		        String doctorEmail = doctor.getEmail();
 		        
@@ -72,7 +72,7 @@ public class CalendarUtil {
 		        doctorAtd.setEmail(doctorEmail);
 		        attendees.add(doctorAtd);
 		        
-		        InstitutionBean inst = appointment.getInstitution();
+		        InstitutionBean inst = reservation.getInstitution();
 		        String instName = inst.getName();
 		        String instEmail = inst.getEmail();
 		        
@@ -85,7 +85,7 @@ public class CalendarUtil {
 		        
 		        int apptInterval = Constant.APPT_INTERVAL_MINUTES * Constant.MIN_SECS * Constant.MILISECS;
 		  
-		        Date startDate = appointment.getApptDate();
+		        Date startDate = reservation.getApptDate();
 		        Date endDate = new Date(startDate.getTime() + apptInterval);
 		        
 		        DateTime start = new DateTime(startDate, TimeZone.getTimeZone(Constant.TIMEZONE));

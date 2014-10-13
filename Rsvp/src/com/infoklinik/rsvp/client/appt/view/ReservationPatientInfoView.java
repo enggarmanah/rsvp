@@ -46,7 +46,7 @@ public class ReservationPatientInfoView extends BaseView implements IReservation
 	@UiField
 	Button cancelBtn;
 	
-	ReservationBean appointment;
+	ReservationBean reservation;
 	
 	interface ModuleUiBinder extends UiBinder<Widget, ReservationPatientInfoView> {}
 	
@@ -75,17 +75,17 @@ public class ReservationPatientInfoView extends BaseView implements IReservation
 	
 	public ReservationBean getReservation() {
 		
-		appointment.setVerificationCode(ClientUtil.trim(verificationCodeTb.getValue()));
-		appointment.setPatientName(ClientUtil.trim(patientNameTb.getValue()));
-		appointment.setPatientSex(patientSexMaleRb.getValue() ? Constant.SEX_MALE : Constant.SEX_FEMALE);
-		appointment.setPatientBirthYear(ClientUtil.trim(patientBirthYearTb.getValue()));
-		appointment.setPatientEmail(ClientUtil.trim(patientEmailTb.getValue()));
+		reservation.setVerificationCode(ClientUtil.trim(verificationCodeTb.getValue()));
+		reservation.setPatientName(ClientUtil.trim(patientNameTb.getValue()));
+		reservation.setPatientSex(patientSexMaleRb.getValue() ? Constant.SEX_MALE : Constant.SEX_FEMALE);
+		reservation.setPatientBirthYear(ClientUtil.trim(patientBirthYearTb.getValue()));
+		reservation.setPatientEmail(ClientUtil.trim(patientEmailTb.getValue()));
 		
-		return appointment;
+		return reservation;
 	}
 
 	public void setReservation(ReservationBean reservation) {
-		this.appointment = reservation;
+		this.reservation = reservation;
 		verificationCodeTb.setText(Constant.EMPTY_STRING);
 	}
 	

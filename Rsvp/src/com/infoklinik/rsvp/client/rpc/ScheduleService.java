@@ -15,5 +15,5 @@ public interface ScheduleService extends RemoteService {
 	
 	List<ScheduleBean> getSchedules(ScheduleSearchBean scheduleSearch);
 	
-	ScheduleReservationBean getSchedulesAndAppointments(ScheduleSearchBean scheduleSearch);
+	ScheduleReservationBean getSchedulesAndReservations(ScheduleSearchBean scheduleSearch);
 }

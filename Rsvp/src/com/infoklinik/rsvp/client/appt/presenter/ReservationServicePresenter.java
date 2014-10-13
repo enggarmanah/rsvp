@@ -28,7 +28,7 @@ public class ReservationServicePresenter extends LazyPresenter<IReservationServi
 	ScheduleServiceAsync scheduleService;
 	
 	@Inject
-	ReservationServiceAsync appointmentService;
+	ReservationServiceAsync reservationService;
 	
 	ServiceBean service;
 	ReservationBean reservation;

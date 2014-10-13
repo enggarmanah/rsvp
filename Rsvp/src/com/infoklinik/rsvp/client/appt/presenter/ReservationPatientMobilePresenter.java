@@ -26,9 +26,9 @@ import com.mvp4g.client.presenter.LazyPresenter;
 public class ReservationPatientMobilePresenter extends LazyPresenter<IReservationPatientMobileView, ReservationEventBus> {
 	
 	@Inject
-	ReservationServiceAsync appointmentService;
+	ReservationServiceAsync reservationService;
 	
-	ReservationBean appointment;
+	ReservationBean reservation;
 	
 	List<String> errorMessages;
 	
@@ -46,19 +46,19 @@ public class ReservationPatientMobilePresenter extends LazyPresenter<IReservatio
 			public void onClick(ClickEvent event) {
 				
 				String patientMobile = view.getPatientMobile();
-				appointment.setPatientMobile(patientMobile);
+				reservation.setPatientMobile(patientMobile);
 				
-				if (isValidated(appointment)) {
+				if (isValidated(reservation)) {
 				
 					ProgressDlg.show();
 					
-					appointmentService.sendVerificationCode(patientMobile, new AsyncCallback<String>() {
+					reservationService.sendVerificationCode(patientMobile, new AsyncCallback<String>() {
 						
 						@Override
 						public void onSuccess(String verificationCode) {
 							
-							appointment.setVerificationCode(verificationCode);
-							eventBus.getPatientInfo(appointment);
+							reservation.setVerificationCode(verificationCode);
+							eventBus.getPatientInfo(reservation);
 							view.hide();
 							ProgressDlg.hide();
 						}
@@ -83,17 +83,17 @@ public class ReservationPatientMobilePresenter extends LazyPresenter<IReservatio
 		});
 	}
 	
-	public void onVerifyPatientMobile(ReservationBean appointment) {
-		this.appointment = appointment;
+	public void onVerifyPatientMobile(ReservationBean reservation) {
+		this.reservation = reservation;
 		view.show();
 	}
 	
-	private boolean isValidated(ReservationBean appointment) {
+	private boolean isValidated(ReservationBean reservation) {
 		
 		boolean isValidated = true;
 		errorMessages = new ArrayList<String>();
 		
-		if (ClientUtil.isEmpty(appointment.getPatientMobile())) {
+		if (ClientUtil.isEmpty(reservation.getPatientMobile())) {
 			
 			isValidated = false;
 			errorMessages.add(Message.ERR_APPT_PATIENT_MOBILE_EMPTY);

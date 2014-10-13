@@ -80,15 +80,15 @@ public class ReservationDoctorView extends BaseView implements IReservationDocto
 		return dialogBox;
 	}
 		
-	public void setSchedulesAndReservations(ScheduleReservationBean scheduleAppointment) {
+	public void setSchedulesAndReservations(ScheduleReservationBean scheduleReservation) {
 		
-		List<ScheduleBean> schedules = scheduleAppointment.getSchedules();
-		List<ReservationBean> appointments = scheduleAppointment.getAppointments();
+		List<ScheduleBean> schedules = scheduleReservation.getSchedules();
+		List<ReservationBean> reservations = scheduleReservation.getReservations();
 		HashMap<Long, ReservationBean> reservedTimes = new HashMap<Long, ReservationBean>();
 		
 		apptTimeLb.clear();
 		
-		for (ReservationBean appt : appointments) {
+		for (ReservationBean appt : reservations) {
 			reservedTimes.put(appt.getApptDate().getTime(), appt);
 		}
 		
@@ -102,12 +102,12 @@ public class ReservationDoctorView extends BaseView implements IReservationDocto
 				for (int i = scheBean.getOpStart(); i < scheBean.getOpEnd(); i += apptInterval) {
 					if (!availableApptTimes.contains(i)) {
 						
-						Date apptDate = new Date(scheduleAppointment.getDate().getTime());
+						Date apptDate = new Date(scheduleReservation.getDate().getTime());
 						apptDate.setTime(apptDate.getTime() + i);
 						
-						ReservationBean appointment = reservedTimes.get(apptDate.getTime());
+						ReservationBean reservation = reservedTimes.get(apptDate.getTime());
 						
-						if (appointment == null) {
+						if (reservation == null) {
 							availableApptTimes.add(i);
 						}
 					}

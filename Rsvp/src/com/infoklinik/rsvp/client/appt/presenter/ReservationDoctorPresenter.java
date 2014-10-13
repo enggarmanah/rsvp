@@ -36,10 +36,10 @@ public class ReservationDoctorPresenter extends LazyPresenter<IReservationDoctor
 	ScheduleServiceAsync scheduleService;
 	
 	@Inject
-	ReservationServiceAsync appointmentService;
+	ReservationServiceAsync reservationService;
 	
 	ScheduleBean schedule;
-	ReservationBean appointment;
+	ReservationBean reservation;
 	
 	Date apptDate;
 	Integer apptDay;
@@ -106,15 +106,15 @@ public class ReservationDoctorPresenter extends LazyPresenter<IReservationDoctor
 		isSelectAnotherDate = false;
 		this.schedule = schedule;
 		
-		appointment = new ReservationBean();
-		appointment.setDoctor(schedule.getDoctor());
-		appointment.setInstitution(schedule.getInstitutionBean());
-		appointment.setApptDate(ClientUtil.getDateOfWeek(schedule.getDay()));
+		reservation = new ReservationBean();
+		reservation.setDoctor(schedule.getDoctor());
+		reservation.setInstitution(schedule.getInstitutionBean());
+		reservation.setApptDate(ClientUtil.getDateOfWeek(schedule.getDay()));
 		
-		apptDate = appointment.getApptDate();
+		apptDate = reservation.getApptDate();
 		apptDay = ClientUtil.dateToDayOfWeek(apptDate);
 		
-		view.setReservation(appointment);
+		view.setReservation(reservation);
 		
 		if (isWindowLv2) {
 			view.showLv2();
@@ -138,14 +138,14 @@ public class ReservationDoctorPresenter extends LazyPresenter<IReservationDoctor
 		loadReservation(schedule);
 	}
 	
-	public void onSelectAnotherDate(ReservationBean appointment) {
+	public void onSelectAnotherDate(ReservationBean reservation) {
 		
 		isSelectAnotherDate = true;
 		
-		this.appointment = appointment;
-		view.setReservation(appointment);
+		this.reservation = reservation;
+		view.setReservation(reservation);
 		
-		apptDate = appointment.getApptDate();
+		apptDate = reservation.getApptDate();
 		apptDay = ClientUtil.dateToDayOfWeek(apptDate);
 		
 		initSchedules();
@@ -164,11 +164,11 @@ public class ReservationDoctorPresenter extends LazyPresenter<IReservationDoctor
 		scheduleSearch.setDate(apptDate);
 		scheduleSearch.setDay(apptDay);
 		
-		scheduleService.getSchedulesAndAppointments(scheduleSearch, new AsyncCallback<ScheduleReservationBean>() {
+		scheduleService.getSchedulesAndReservations(scheduleSearch, new AsyncCallback<ScheduleReservationBean>() {
 			
 			@Override
-			public void onSuccess(ScheduleReservationBean scheduleAppointment) {
-				view.setSchedulesAndReservations(scheduleAppointment);
+			public void onSuccess(ScheduleReservationBean scheduleReservation) {
+				view.setSchedulesAndReservations(scheduleReservation);
 				ProgressDlg.hide();
 			}
 			
@@ -184,19 +184,19 @@ public class ReservationDoctorPresenter extends LazyPresenter<IReservationDoctor
 		
 		ProgressDlg.show();
 		
-		appointmentService.addReservation(appointment, new AsyncCallback<ReservationBean>() {
+		reservationService.addReservation(reservation, new AsyncCallback<ReservationBean>() {
 			
 			@Override
 			public void onSuccess(ReservationBean result) {
 				
 				ProgressDlg.hide();
 								
-				appointment = result;
+				reservation = result;
 				
-				if (appointment.getId() != null) {
+				if (reservation.getId() != null) {
 					view.hide();
 					NotificationDlg.info("Reservasi kunjungan dokter telah berhasil. \nKode reservasi \"" + 
-						appointment.getReservationCode() + "\" telah dikirim ke handphone anda.");	
+						reservation.getReservationCode() + "\" telah dikirim ke handphone anda.");	
 				} else {
 					NotificationDlg.warning(Message.ERR_APPT_NOT_AVAILABLE, new ClickHandler() {
 						
@@ -204,7 +204,7 @@ public class ReservationDoctorPresenter extends LazyPresenter<IReservationDoctor
 						public void onClick(ClickEvent event) {
 							
 							view.hide();
-							eventBus.selectAnotherDate(appointment);
+							eventBus.selectAnotherDate(reservation);
 						}
 					});
 				}
@@ -218,12 +218,12 @@ public class ReservationDoctorPresenter extends LazyPresenter<IReservationDoctor
 	}
 	
 	
-	private boolean isValidated(ReservationBean appointment) {
+	private boolean isValidated(ReservationBean reservation) {
 		
 		boolean isValidated = true;
 		errorMessages = new ArrayList<String>();
 		
-		if (appointment.getApptDate() == null) {
+		if (reservation.getApptDate() == null) {
 			
 			isValidated = false;
 			errorMessages.add(Message.ERR_APPT_NO_SCHEDULE);

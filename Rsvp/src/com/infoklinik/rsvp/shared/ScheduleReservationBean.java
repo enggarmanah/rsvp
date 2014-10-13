@@ -8,7 +8,7 @@ public class ScheduleReservationBean extends BaseBean {
 	
 	private Date date;
 	private List<ScheduleBean> schedules;
-	private List<ReservationBean> appointments;
+	private List<ReservationBean> reservations;
 
 	public Date getDate() {
 		return date;
@@ -26,11 +26,11 @@ public class ScheduleReservationBean extends BaseBean {
 		this.schedules = schedules;
 	}
 
-	public List<ReservationBean> getAppointments() {
-		return appointments;
+	public List<ReservationBean> getReservations() {
+		return reservations;
 	}
 
-	public void setAppointments(List<ReservationBean> appointments) {
-		this.appointments = appointments;
+	public void setReservations(List<ReservationBean> reservations) {
+		this.reservations = reservations;
 	}
 }

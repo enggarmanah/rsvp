@@ -32,7 +32,7 @@ public class Doctor extends Base {
 	private List<Schedule> schedules;
 	
 	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.MERGE, mappedBy="doctor", targetEntity=Schedule.class)
-	private List<Reservation> appointments;
+	private List<Reservation> reservations;
 
 	private String mobile;
 	private String email;
