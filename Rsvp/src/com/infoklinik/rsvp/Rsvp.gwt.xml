@@ -29,8 +29,10 @@
 	<source path='shared' />
 
 	<stylesheet src='../css/style.css' />
-
+	
+	<!-- 
 	<set-property name="user.agent" value="gecko1_8" />
+	 -->
 
 	<extend-property name="locale" values="id_ID" />
 	<set-property-fallback name="locale" value="id_ID" />
