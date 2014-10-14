@@ -12,6 +12,7 @@ import com.infoklinik.rsvp.client.rpc.ServiceServiceAsync;
 import com.infoklinik.rsvp.client.service.ServiceEventBus;
 import com.infoklinik.rsvp.client.service.presenter.interfaces.IServiceInfoView;
 import com.infoklinik.rsvp.client.service.view.ServiceInfoView;
+import com.infoklinik.rsvp.shared.Constant;
 import com.infoklinik.rsvp.shared.InstitutionBean;
 import com.infoklinik.rsvp.shared.ServiceBean;
 import com.mvp4g.client.annotation.Presenter;
@@ -31,6 +32,7 @@ public class ServiceInfoPresenter extends LazyPresenter<IServiceInfoView, Servic
 	public void bindView() {
 		
 		initBtnHandler();
+		initLinksHandler();
 	}
 	
 	private void initBtnHandler() {
@@ -49,6 +51,33 @@ public class ServiceInfoPresenter extends LazyPresenter<IServiceInfoView, Servic
 			@Override
 			public void onClick(ClickEvent event) {
 				view.hide();
+			}
+		});
+	}
+	
+	private void initLinksHandler() {
+		
+		view.setWebsiteClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				Window.open(Constant.LINK_WEBSITE + institution.getWebsite(), "_blank", null);
+			}
+		});
+		
+		view.setFacebookClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				Window.open(Constant.LINK_FACEBOOK + institution.getFacebook(), "_blank", null);
+			}
+		});
+		
+		view.setTwitterClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				Window.open(Constant.LINK_TWITTER + institution.getTwitter(), "_blank", null);
 			}
 		});
 	}

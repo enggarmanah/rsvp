@@ -8,6 +8,7 @@ import javax.inject.Singleton;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.GenericBean;
@@ -23,6 +24,7 @@ import com.infoklinik.rsvp.client.rpc.InstitutionServiceAsync;
 import com.infoklinik.rsvp.client.rpc.InsuranceServiceAsync;
 import com.infoklinik.rsvp.client.rpc.ServiceServiceAsync;
 import com.infoklinik.rsvp.shared.BranchBean;
+import com.infoklinik.rsvp.shared.Constant;
 import com.infoklinik.rsvp.shared.DoctorBean;
 import com.infoklinik.rsvp.shared.GalleryBean;
 import com.infoklinik.rsvp.shared.InstitutionBean;
@@ -70,6 +72,7 @@ public class InstitutionProfilePresenter extends LazyPresenter<IInstitutionProfi
 		initDoctorHandler();
 		initGalleryHandler();
 		initBranchHandler();
+		initLinksHandler();
 		initBtnHandler();
 	}
 	
@@ -269,6 +272,33 @@ public class InstitutionProfilePresenter extends LazyPresenter<IInstitutionProfi
 				} else {
 					view.showBranch();
 				}
+			}
+		});
+	}
+	
+	private void initLinksHandler() {
+		
+		view.setWebsiteClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				Window.open(Constant.LINK_WEBSITE + institution.getWebsite(), "_blank", null);
+			}
+		});
+		
+		view.setFacebookClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				Window.open(Constant.LINK_FACEBOOK + institution.getFacebook(), "_blank", null);
+			}
+		});
+		
+		view.setTwitterClickHandler(new ClickHandler() {
+			
+			@Override
+			public void onClick(ClickEvent event) {
+				Window.open(Constant.LINK_TWITTER + institution.getTwitter(), "_blank", null);
 			}
 		});
 	}

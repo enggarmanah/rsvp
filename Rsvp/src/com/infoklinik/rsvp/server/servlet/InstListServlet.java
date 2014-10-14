@@ -14,7 +14,7 @@ import com.infoklinik.rsvp.server.dao.InstitutionDAO;
 import com.infoklinik.rsvp.shared.InstitutionBean;
 
 @SuppressWarnings("serial")
-public class InstDirectoryServlet extends HttpServlet {
+public class InstListServlet extends HttpServlet {
 	
 	private static final Logger log = Logger.getLogger(AdminServlet.class.getName());
 	

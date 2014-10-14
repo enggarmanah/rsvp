@@ -27,7 +27,7 @@ public class ImageServlet extends HttpServlet {
 		
 		String id = request.getParameter("id");
 		if (id == null || id.equals("") || id.equals("null")) {
-			throw new ServletException("File Name can't be null or empty");
+			return;
 		}
 		
 		ImageDAO imageDao = new ImageDAO();

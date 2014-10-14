@@ -12,9 +12,11 @@ import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
+import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.GenericBean;
 import com.infoklinik.rsvp.client.social.presenter.interfaces.IInstitutionCommentView;
 import com.infoklinik.rsvp.shared.CommentBean;
@@ -41,6 +43,33 @@ public class InstitutionCommentView extends BaseView implements IInstitutionComm
 	
 	@UiField
 	Label websiteLb;
+	
+	@UiField
+	Label facebookLb;
+	
+	@UiField
+	Label twitterLb;
+	
+	@UiField
+	SimplePanel linksPanel;
+	
+	@UiField
+	SimplePanel websiteImg;
+	
+	@UiField
+	SimplePanel websiteInfo;
+	
+	@UiField
+	SimplePanel facebookImg;
+	
+	@UiField
+	SimplePanel facebookInfo;
+	
+	@UiField
+	SimplePanel twitterImg;
+	
+	@UiField
+	SimplePanel twitterInfo;
 	
 	@UiField
 	Image logoImg;
@@ -136,11 +165,65 @@ public class InstitutionCommentView extends BaseView implements IInstitutionComm
 		addBtn.addClickHandler(handler);
 	}
 	
+	public void setWebsiteClickHandler(ClickHandler handler) {
+		
+		websiteLb.addClickHandler(handler);
+	}
+	
+	public void setFacebookClickHandler(ClickHandler handler) {
+		
+		facebookLb.addClickHandler(handler);
+	}
+	
+	public void setTwitterClickHandler(ClickHandler handler) {
+		
+		twitterLb.addClickHandler(handler);
+	}
+	
+	private void hideDisplayLinks() {
+		
+		if (ClientUtil.isEmpty(institution.getWebsite()) && 
+			ClientUtil.isEmpty(institution.getFacebook()) &&
+			ClientUtil.isEmpty(institution.getTwitter())) {
+			
+			linksPanel.setVisible(false);
+		} else {
+			
+			linksPanel.setVisible(true);
+			
+			if (ClientUtil.isEmpty(institution.getWebsite())) {
+				websiteImg.setVisible(false);
+				websiteInfo.setVisible(false);
+			} else {
+				websiteImg.setVisible(true);
+				websiteInfo.setVisible(true);
+			}
+			
+			if (ClientUtil.isEmpty(institution.getFacebook())) {
+				facebookImg.setVisible(false);
+				facebookInfo.setVisible(false);
+			} else {
+				facebookImg.setVisible(true);
+				facebookInfo.setVisible(true);
+			}
+			
+			if (ClientUtil.isEmpty(institution.getTwitter())) {
+				twitterImg.setVisible(false);
+				twitterInfo.setVisible(false);
+			} else {
+				twitterImg.setVisible(true);
+				twitterInfo.setVisible(true);
+			}
+		}
+	}
+	
 	public void show() {
 		
 		goToTop();
 		
 		fadeOut();
+		
+		hideDisplayLinks();
 		
 		logoImg.setUrl("/image?id=" + institution.getImageId());
 		instNameLb.setText(institution.getName());

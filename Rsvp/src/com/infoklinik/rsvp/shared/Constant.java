@@ -8,6 +8,10 @@ public class Constant {
 	public static final String APP_CALLBACK_URL_PROD = "http://www.infoklinik.com/verifyCredential";
 	public static final String APP_CALLBACK_URL_DEV = "http://www.infoklinik.com:8888/verifyCredential";
 	
+	public static final String LINK_WEBSITE = "http://";
+	public static final String LINK_FACEBOOK = "http://www.facebook.com/";
+	public static final String LINK_TWITTER = "http://www.twitter.com/";
+	
 	public static final String SMS_GW_BULKSMS = "SMS_GW_BULKSMS";
 	public static final String SMS_GW_WEBSMS = "SMS_GW_WEBSMS";
 	

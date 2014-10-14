@@ -56,5 +56,11 @@ public interface IInstitutionProfileView extends LazyView, IsWidget {
 	
 	void setBranchMenuClickHandler(ClickHandler handler);
 	
+	void setWebsiteClickHandler(ClickHandler handler);
+	
+	void setFacebookClickHandler(ClickHandler handler);
+	
+	void setTwitterClickHandler(ClickHandler handler);
+	
 	void setOkBtnClickHandler(ClickHandler handler);
 }

@@ -40,7 +40,7 @@ public class ClientUtil {
 	public static boolean isReqGeoLocation = true;
 	public static boolean isAdminUser = false;
 	public static UserBean user;
-	
+		
 	public static void setUser(UserBean userLogin) {
 		user = userLogin;
 		isAdminUser = true;

@@ -21,8 +21,8 @@
 		<servlet-class>com.infoklinik.rsvp.server.servlet.MailServlet</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>instDirectoryServlet</servlet-name>
-		<servlet-class>com.infoklinik.rsvp.server.servlet.InstDirectoryServlet</servlet-class>
+		<servlet-name>instListServlet</servlet-name>
+		<servlet-class>com.infoklinik.rsvp.server.servlet.InstListServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>instInfoServlet</servlet-name>
@@ -147,8 +147,8 @@
 		<url-pattern>/mail</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>instDirectoryServlet</servlet-name>
-		<url-pattern>/instDirectory</url-pattern>
+		<servlet-name>instListServlet</servlet-name>
+		<url-pattern>/instList</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>instInfoServlet</servlet-name>

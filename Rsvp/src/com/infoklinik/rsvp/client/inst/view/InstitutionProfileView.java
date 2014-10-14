@@ -150,8 +150,6 @@ public class InstitutionProfileView extends BaseView implements IInstitutionProf
 		}
 		
 		locationView.setInstitution(institution);
-		
-		hideDisplayLinks();
 	}
 	
 	private void hideDisplayLinks() {
@@ -231,6 +229,8 @@ public class InstitutionProfileView extends BaseView implements IInstitutionProf
 		goToTop();
 		
 		fadeOut();
+		
+		hideDisplayLinks();
 		
 		logoImg.setUrl("/image?id=" + institution.getImageId());
 		nameLb.setText(institution.getName());
@@ -317,6 +317,21 @@ public class InstitutionProfileView extends BaseView implements IInstitutionProf
 	public void setBranchMenuClickHandler(ClickHandler handler) {
 		
 		branchMenuLb.addClickHandler(handler);
+	}
+	
+	public void setWebsiteClickHandler(ClickHandler handler) {
+		
+		websiteLb.addClickHandler(handler);
+	}
+	
+	public void setFacebookClickHandler(ClickHandler handler) {
+		
+		facebookLb.addClickHandler(handler);
+	}
+	
+	public void setTwitterClickHandler(ClickHandler handler) {
+		
+		twitterLb.addClickHandler(handler);
 	}
 	
 	private void setMenu(Label menuLb) {

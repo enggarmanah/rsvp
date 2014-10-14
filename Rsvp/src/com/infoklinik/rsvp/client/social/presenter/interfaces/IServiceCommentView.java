@@ -31,5 +31,11 @@ public interface IServiceCommentView extends LazyView, IsWidget {
 	
 	void setAddBtnClickHandler(ClickHandler handler);
 	
+	void setWebsiteClickHandler(ClickHandler handler);
+	
+	void setFacebookClickHandler(ClickHandler handler);
+	
+	void setTwitterClickHandler(ClickHandler handler);
+	
 	void setOkBtnClickHandler(ClickHandler handler);
 }

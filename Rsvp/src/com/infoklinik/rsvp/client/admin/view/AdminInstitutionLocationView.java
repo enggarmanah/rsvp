@@ -3,6 +3,7 @@ package com.infoklinik.rsvp.client.admin.view;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.geolocation.client.Position;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Timer;
@@ -36,6 +37,7 @@ public class AdminInstitutionLocationView extends BaseView implements IAdminInst
 	
 	GoogleMap map;
 	Marker marker;
+	Position position;
 	
 	public void createView() {	
 		
@@ -56,7 +58,11 @@ public class AdminInstitutionLocationView extends BaseView implements IAdminInst
 		
 		this.institution = institution;
 	}
-
+	
+	public void setPosition(Position position) {
+		this.position = position;
+	}
+	
 	public Widget asWidget() {
 		
 		return dialogBox;
@@ -102,7 +108,15 @@ public class AdminInstitutionLocationView extends BaseView implements IAdminInst
 	
 	private void initMap() {
 		
-		LatLng location = LatLng.create(institution.getLocationLat(), institution.getLocationLng());
+		LatLng location = null;
+		
+		if (institution.getLocationLat() != null && institution.getLocationLng() != null) {
+			location = LatLng.create(institution.getLocationLat(), institution.getLocationLng());
+		} else if (position != null) {
+			location = LatLng.create(position.getCoordinates().getLatitude(), position.getCoordinates().getLongitude());
+		} else {
+			location = LatLng.create(Constant.MAP_DEFAULT_LAT, Constant.MAP_DEFAULT_LNG);
+		}
 		
 		MapOptions mapOpts = MapOptions.create();
 		mapOpts.setZoom(15);

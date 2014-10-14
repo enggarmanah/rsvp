@@ -13,8 +13,10 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.infoklinik.rsvp.client.BaseView;
+import com.infoklinik.rsvp.client.ClientUtil;
 import com.infoklinik.rsvp.client.GenericBean;
 import com.infoklinik.rsvp.client.social.presenter.interfaces.IInstitutionLikeView;
 import com.infoklinik.rsvp.shared.LikeBean;
@@ -43,7 +45,34 @@ public class InstitutionLikeView extends BaseView implements IInstitutionLikeVie
 	Label websiteLb;
 	
 	@UiField
+	Label facebookLb;
+	
+	@UiField
+	Label twitterLb;
+	
+	@UiField
 	Image logoImg;
+	
+	@UiField
+	SimplePanel linksPanel;
+	
+	@UiField
+	SimplePanel websiteImg;
+	
+	@UiField
+	SimplePanel websiteInfo;
+	
+	@UiField
+	SimplePanel facebookImg;
+	
+	@UiField
+	SimplePanel facebookInfo;
+	
+	@UiField
+	SimplePanel twitterImg;
+	
+	@UiField
+	SimplePanel twitterInfo;
 	
 	@UiField
 	FlowPanel likesPanel;
@@ -90,6 +119,8 @@ public class InstitutionLikeView extends BaseView implements IInstitutionLikeVie
 	public void setInstitution(InstitutionBean institution) {
 		
 		this.institution = institution;
+		
+		hideDisplayLinks();
 	}
 	
 	public void setSocialUser(SocialUser socialUser) {
@@ -121,6 +152,58 @@ public class InstitutionLikeView extends BaseView implements IInstitutionLikeVie
 		int index = likes.indexOf(like);
 		likes.remove(like);
 		likesPanel.remove(index);
+	}
+	
+	private void hideDisplayLinks() {
+		
+		if (ClientUtil.isEmpty(institution.getWebsite()) && 
+			ClientUtil.isEmpty(institution.getFacebook()) &&
+			ClientUtil.isEmpty(institution.getTwitter())) {
+			
+			linksPanel.setVisible(false);
+		} else {
+			
+			linksPanel.setVisible(true);
+			
+			if (ClientUtil.isEmpty(institution.getWebsite())) {
+				websiteImg.setVisible(false);
+				websiteInfo.setVisible(false);
+			} else {
+				websiteImg.setVisible(true);
+				websiteInfo.setVisible(true);
+			}
+			
+			if (ClientUtil.isEmpty(institution.getFacebook())) {
+				facebookImg.setVisible(false);
+				facebookInfo.setVisible(false);
+			} else {
+				facebookImg.setVisible(true);
+				facebookInfo.setVisible(true);
+			}
+			
+			if (ClientUtil.isEmpty(institution.getTwitter())) {
+				twitterImg.setVisible(false);
+				twitterInfo.setVisible(false);
+			} else {
+				twitterImg.setVisible(true);
+				twitterInfo.setVisible(true);
+			}
+		}
+	}
+	
+	public void setWebsiteClickHandler(ClickHandler handler) {
+		
+		websiteLb.addClickHandler(handler);
+	}
+	
+	public void setFacebookClickHandler(ClickHandler handler) {
+		
+		facebookLb.addClickHandler(handler);
+	}
+	
+	public void setTwitterClickHandler(ClickHandler handler) {
+		
+		twitterLb.addClickHandler(handler);
 	}
 	
 	public void setOkBtnClickHandler(ClickHandler handler) {

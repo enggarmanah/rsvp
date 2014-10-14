@@ -31,6 +31,12 @@ public interface IServiceLikeView extends LazyView, IsWidget {
 	
 	void setLikeBtnClickHandler(ClickHandler handler);
 	
+	void setWebsiteClickHandler(ClickHandler handler);
+	
+	void setFacebookClickHandler(ClickHandler handler);
+	
+	void setTwitterClickHandler(ClickHandler handler);
+	
 	void setOkBtnClickHandler(ClickHandler handler);
 	
 	void setLike(boolean isLike);

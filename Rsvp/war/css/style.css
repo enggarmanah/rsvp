@@ -1562,6 +1562,13 @@ input.search-field:focus {
 	line-height: 16px;
 }
 
+.profile-inst-link .link {
+	float: left;
+	display: inline;
+	overflow: auto;
+	padding: 3px 0px 0px 0px;
+}
+
 .profile-inst-link .icon {
 	min-width: 23px;
 	float: left;

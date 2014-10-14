@@ -39,6 +39,12 @@ public class ServiceInfoView extends BaseView implements IServiceInfoView {
 	Label websiteLb;
 	
 	@UiField
+	Label facebookLb;
+	
+	@UiField
+	Label twitterLb;
+	
+	@UiField
 	Image logoImg;
 	
 	@UiField
@@ -120,6 +126,21 @@ public class ServiceInfoView extends BaseView implements IServiceInfoView {
 	public void setService(ServiceBean service) {
 		
 		this.service = service;
+	}
+	
+	public void setWebsiteClickHandler(ClickHandler handler) {
+		
+		websiteLb.addClickHandler(handler);
+	}
+	
+	public void setFacebookClickHandler(ClickHandler handler) {
+		
+		facebookLb.addClickHandler(handler);
+	}
+	
+	public void setTwitterClickHandler(ClickHandler handler) {
+		
+		twitterLb.addClickHandler(handler);
 	}
 	
 	public void setBookBtnClickHandler(ClickHandler handler) {
