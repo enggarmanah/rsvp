@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -23,7 +23,7 @@ import com.infoklinik.rsvp.shared.ScheduleBean;
 @SuppressWarnings("serial")
 public class DoctorInfoServlet extends HttpServlet {
 	
-	private static final Logger log = Logger.getLogger(AdminServlet.class.getName());
+	private static final Logger log = Logger.getLogger(DoctorInfoServlet.class);
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
@@ -122,6 +122,6 @@ public class DoctorInfoServlet extends HttpServlet {
 		os.flush();
 		os.close();
 		
-		log.info("Sending file to recipient successfully");
+		log.info("Provide doctor info successfully");
 	}
 }

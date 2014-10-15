@@ -1,7 +1,6 @@
 import java.util.Date;
-import java.util.List;
 
-import com.infoklinik.rsvp.server.dao.ReservationDAO;
+//import com.infoklinik.rsvp.server.dao.ReservationDAO;
 import com.infoklinik.rsvp.shared.ReservationBean;
 import com.infoklinik.rsvp.shared.ReservationSearchBean;
 import com.infoklinik.rsvp.shared.DoctorBean;
@@ -27,7 +26,7 @@ public class AppointmentDaoTest {
 		appointment.setPatientMobile("6598550250");
 		appointment.setPatientEmail("john.doe@gmail.com");
 		
-		ReservationDAO apptDao = new ReservationDAO();
+		//ReservationDAO apptDao = new ReservationDAO();
 		//apptDao.addAppointment(appointment);
 		
 		ReservationSearchBean apptSearch = new ReservationSearchBean();

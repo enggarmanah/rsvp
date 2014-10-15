@@ -2,7 +2,7 @@ package com.infoklinik.rsvp.server.servlet;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -16,7 +16,7 @@ import com.infoklinik.rsvp.shared.InstitutionBean;
 @SuppressWarnings("serial")
 public class InstListServlet extends HttpServlet {
 	
-	private static final Logger log = Logger.getLogger(AdminServlet.class.getName());
+	private static final Logger log = Logger.getLogger(InstListServlet.class);
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
@@ -68,6 +68,6 @@ public class InstListServlet extends HttpServlet {
 		os.flush();
 		os.close();
 		
-		log.info("Sending file to recipient successfully");
+		log.info("Provide institution listing successfully");
 	}
 }
