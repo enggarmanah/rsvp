@@ -262,7 +262,7 @@
 	
 	<!-- Default page to serve -->
 	<welcome-file-list>
-		<welcome-file>Rsvp.html</welcome-file>
+		<welcome-file>instList</welcome-file>
 	</welcome-file-list>
 	
 	<context-param>
