@@ -89,8 +89,9 @@ html, body {
 
 #header #logo-info .image {
 	float: left;
-	padding: 5px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
 	margin-top: 0px;
+	max-width: 250px;
 }
 
 #header #logo-info .environment-info {
@@ -515,7 +516,9 @@ select {
 select option {
 	padding: 2px 5px 2px 5px;
 	vertical-align: middle;
-	border: none;
+	border-bottom: 1px solid #AAA;
+	background: #DEEDFC;
+	text-shadow: 2px 2px 2px #BBB;
 }
 
 textarea {
@@ -1400,6 +1403,8 @@ input.search-field:focus {
     border-bottom-right-radius: 10px;*/
 	
 	cursor: pointer;
+	
+	box-shadow: 5px 5px 15px #BBB;
 }
 
 .menu {
@@ -1421,6 +1426,8 @@ input.search-field:focus {
     -moz-border-top-left-radius: 10px;
     -webkit-border-top-left-radius: 10px;
     border-top-left-radius: 10px;
+    
+    box-shadow: 5px 5px 15px #BBB;
 }
 .menu:hover {
 	background: #BBE675;

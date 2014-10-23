@@ -42,7 +42,7 @@ public class MainView extends Composite implements IMainView {
 		
 		Element htmlContent = Document.get().getElementById("htmlContent");
 		if (htmlContent != null) {
-			Document.get().getElementById("htmlContent").removeFromParent();
+			//Document.get().getElementById("htmlContent").removeFromParent();
 		}
 		
 		initWidget(uiBinder.createAndBindUi(this));
